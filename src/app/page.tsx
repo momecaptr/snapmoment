@@ -6,6 +6,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.description}>
         <h1>
+          {/*sdafasdf*/}
           ХУЙ ПИЗДА ДЖИГУРДА&nbsp;
           <code className={styles.code}>src/app/page.tsx</code>
         </h1>

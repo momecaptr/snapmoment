@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:production": "pnpm run build",
     "start": "next start",
     "lint": "next lint"
   },
