@@ -1,7 +1,7 @@
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
 COPY package*.json ./
-RUN npm install -g pnpm && pnpm install
+RUN pnpm install
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
