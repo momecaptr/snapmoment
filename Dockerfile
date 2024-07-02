@@ -1,13 +1,13 @@
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
 COPY package*.json ./
-RUN pnpm install
+RUN npm install
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-RUN pnpm run build:production
+RUN npm run build:production
 
 FROM node:20.11-alpine as runner
 WORKDIR /app
@@ -19,4 +19,4 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
