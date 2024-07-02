@@ -1,14 +1,13 @@
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
 COPY package*.json ./
-RUN npm install -g pnpm && pnpm install
+RUN npm install
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-RUN npm install -g pnpm # Установите pnpm здесь тоже
-RUN pnpm run build:production
+RUN npm run build:production
 
 FROM node:20.11-alpine as runner
 WORKDIR /app
