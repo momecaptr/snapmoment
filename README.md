@@ -2,6 +2,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+vercel deployments:
+[production (master branch)](https://snapmoment.vercel.app/)
+[development](https://snapmoment-dev.vercel.app/)
+[UI kit (storybook)](https://storybook-snapmoment.vercel.app/)
+
 First, run the development server:
 
 ```bash
