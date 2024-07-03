@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '🏗️👷 Styling, testing and building your project before committing'
+
+pnpm run check-format ||
+(
+    echo '❌ Prettier Check Failed. Run pnpm run format,  Problem pnpm run check-format , add changes and try commit again. ❌';
+    false;
+)
+
+pnpm run check-lint ||
+(
+        echo '❌ ESLint Check Failed. Problem pnpm run check-lint, add changes and try to commit again. ❌'
+        false;
+)
+
+pnpm run check-types ||
+(
+    echo '❌ Are you seriously trying to write that? Problem pnpm run check-types . Make the changes required above. ❌'
+    false;
+)
+
+echo '🤔🤔🤔🤔... Alright.... Code looks good to me... Trying to build now. 🤔🤔🤔🤔'
+
+
+
+echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'

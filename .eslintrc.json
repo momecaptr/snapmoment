@@ -1,6 +1,57 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:storybook/recommended"
-  ]
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier", "@typescript-eslint", "unused-imports", "perfectionist"],
+  "rules": {
+    "no-unused-vars": "error",
+    "prettier/prettier": "error",
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
+    ],
+    "quotes": ["error", "single"],
+    "perfectionist/sort-interfaces": "error",
+    "perfectionist/sort-named-imports": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc"
+      }
+    ],
+    "perfectionist/sort-jsx-props": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": ["multiline", "unknown", "shorthand"]
+      }
+    ],
+    "perfectionist/sort-named-exports": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc"
+      }
+    ],
+    "perfectionist/sort-svelte-attributes": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": ["multiline", "unknown", ["shorthand", "svelte-shorthand"]]
+      }
+    ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  }
 }
