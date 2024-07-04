@@ -25,4 +25,4 @@ echo '🤔🤔🤔🤔... Alright.... Code looks good to me... Trying to build n
 
 
 
-echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'
+echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅' npx stylelint '**/*.scss'
