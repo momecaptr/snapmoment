@@ -14,7 +14,8 @@
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
-    "format": "prettier --write .",
+    "lint:scss": "pnpm stylelint \"**/*.scss\" --fix",
+    "format": "pnpm run lint:scss && prettier --write .",
     "test-all": "pnpm run check-format && pnpm run check-lint && pnpm run check-types"
   },
   "dependencies": {
