@@ -3,7 +3,6 @@
   "plugins": ["prettier", "@typescript-eslint", "unused-imports", "perfectionist"],
   "rules": {
     "no-unused-vars": "error",
-    "prettier/prettier": "error",
     "import/no-unresolved": "error",
     "import/named": "error",
     "comma-dangle": ["error", "always-multiline"],
