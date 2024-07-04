@@ -6,6 +6,8 @@ export default function Home() {
       <h1 style={{ fontFamily: 'Roboto', color: 'red' }}>ДА ВОЗЬМИ ТЫ СВЕТ, СВИНЬЯ</h1>
       <p>Алло, полиция?! Чаю будьте любезны</p>
       <p>Добавлен eslint pretter and husky</p>
+      <p>fix deployments</p>
+      <p>CRLF побежден</p>
     </main>
   );
 }
