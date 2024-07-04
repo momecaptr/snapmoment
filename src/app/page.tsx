@@ -3,11 +3,7 @@ import '@fontsource/roboto/700.css';
 export default function Home() {
   return (
     <main>
-      <h1 style={{ fontFamily: 'Roboto', color: 'red' }}>ДА ВОЗЬМИ ТЫ СВЕТ, СВИНЬЯ</h1>
-      <p>Алло, полиция?! Чаю будьте любезны</p>
-      <p>Добавлен eslint pretter and husky</p>
-      <p>fix deployments</p>
-      <p>CRLF побежден</p>
+      <h1 style={{ fontFamily: 'Roboto', color: 'blue' }}>Production</h1>
     </main>
   );
 }
