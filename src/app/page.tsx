@@ -7,6 +7,7 @@ export default function Home() {
       <p>Алло, полиция?! Чаю будьте любезны</p>
       <p>Добавлен eslint pretter and husky</p>
       <p>fix deployments</p>
+      <p>CRLF побежден</p>
     </main>
   );
 }
