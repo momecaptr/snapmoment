@@ -1,0 +1,20 @@
+.lastText {
+  margin-left: 1rem;
+}
+
+.firstText {
+  margin-right: 1rem;
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxItem {
+  display: flex;
+  align-items: center;
+}
