@@ -25,28 +25,16 @@ export const PaginationWithSelect = ({
   currentPage,
   disabled,
   itemsPerPage,
-  // placeholder,
   selectOptions,
   setCurrentPage,
   setItemsPerPage,
   totalItems,
 }: Props) => {
   disabled = totalItems <= Number(selectOptions[0].value);
-  // const [currentPage, setCurrentPage] = useState<number>(1)
-  // const [itemsPerPage, setItemsPerPage] = useState<number>(10)
-  // const placeholderText = placeholder || selectOptions[0].text
   const { currentPageSearchParam } = useQueryParams();
 
   const totalPages =
     currentPageSearchParam === null && totalItems <= itemsPerPage ? 1 : Math.ceil(totalItems / itemsPerPage);
-  // const totalPages = Math.ceil(totalItems / itemsPerPage)
-  // disabled =
-  // const totalPages: number = Math.ceil(totalItems / itemsPerPage) // Is this comes from, server???
-  // const {} = useGetDecksQuery({
-  //   currentPage,
-  //   itemsPerPage,
-  // })
-  // const totalPages: number | undefined = data?.pagination.totalPages // Is this comes from, server???
   const onValueChange = (count: string) => {
     setItemsPerPage(+count);
   };
