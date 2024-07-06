@@ -2,8 +2,7 @@
   "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:prettier/recommended"],
   "plugins": ["prettier", "@typescript-eslint", "unused-imports", "perfectionist"],
   "rules": {
-    "no-unused-vars": "error",
-    "prettier/prettier": 0,
+    "no-unused-vars": "warn",
     "import/no-unresolved": "error",
     "import/named": "error",
     "comma-dangle": ["error", "always-multiline"],
