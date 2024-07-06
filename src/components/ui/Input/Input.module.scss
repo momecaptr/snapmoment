@@ -1,0 +1,146 @@
+.boxInput {
+  box-sizing: border-box;
+  height: 36px;
+  padding: 0 3%;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--color-dark-300);
+
+  &[type='search'] {
+    padding: 0 30px 0 34px;
+
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+  }
+
+  &[name='password'],
+  &[name='confirmPassword'] {
+    padding-right: 30px;
+  }
+
+  &:hover {
+    background-color: rgb(128 128 128 / 20%);
+  }
+
+  &:focus {
+    color: var(--color-light-100);
+    background-color: transparent;
+    border: none;
+    outline: 2px solid var(--color-success-100);
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.placeholder {
+  padding-left: 0;
+  text-indent: 12px;
+}
+
+.box {
+  width: 200px;
+}
+
+.boxImg {
+  position: relative;
+  transform: translate(1000%, 20%);
+}
+
+.active {
+  background-color: transparent;
+  border: none;
+  outline: 2px solid var(--color-light-100);
+}
+
+.hover {
+  text-indent: 12px;
+  background-color: transparent;
+  outline: 2px solid var(--color-dark-100);
+}
+
+.errorSeach {
+  background-color: transparent;
+  border: none;
+  outline: 2px solid var(--color-danger-300);
+}
+
+.errorSeach.boxInput {
+  color: var(--color-danger-300);
+}
+
+.errorTextAndPassword {
+  text-indent: 12px;
+  background-color: transparent;
+  border: none;
+  outline: 2px solid var(--color-danger-300);
+}
+
+.errorText {
+  font-size: 12px;
+  color: var(--color-danger-300);
+}
+
+.search {
+  position: relative;
+  transform: translate(250%, 20%);
+}
+
+.close {
+  position: relative;
+  transform: translate(1000%, 0);
+}
+
+.Eye,
+.Close {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+
+  width: 16px;
+  height: 16px;
+  padding: 0;
+
+  background-color: transparent;
+  box-shadow: none;
+
+  &:hover,
+  &:focus-visible {
+    background: transparent;
+  }
+}
+
+.Search {
+  cursor: pointer;
+
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+
+  width: 16px;
+  height: 16px;
+}
+
+.searchClose {
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+}
+
+.label {
+  font-size: 14px;
+  color: var(--color-dark-100);
+}

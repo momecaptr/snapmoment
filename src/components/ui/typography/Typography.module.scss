@@ -1,0 +1,77 @@
+.large,
+.h1,
+.h2,
+.h3,
+.subtitle2,
+.subtitle1 {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-light-100);
+}
+
+.large {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-l);
+}
+
+.body1,
+.body2,
+.caption,
+.link1,
+.link1:visited,
+.error {
+  margin: 0;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-light-100);
+}
+
+.link1,
+.link2,
+.link2:visited {
+  margin: 0;
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+  color: var(--color-info-500);
+  text-decoration: underline;
+}
+
+.h1 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-l);
+}
+
+.h2 {
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-m);
+}
+
+.h3,
+.subtitle1 {
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+}
+
+.body1,
+.body2,
+.link1,
+.subtitle2,
+.link1:visited {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-m);
+}
+
+.overline,
+.caption,
+.link2,
+.link2:visited {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-s);
+}
+
+.error {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-m);
+  color: var(--color-danger-300);
+}

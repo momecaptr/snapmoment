@@ -1,6 +1,7 @@
 module.exports = {
   extends: ['stylelint-config-standard-scss', 'stylelint-config-clean-order'],
   rules: {
+    'no-descending-specificity': null,
     'custom-property-pattern': null,
     'property-no-unknown': [
       true,
