@@ -1,11 +1,10 @@
 import CloseOutline from '@/common/assets/components/CloseOutline';
 import { AlertProps } from '@/components/ui/alert/types/types';
+import { Button } from '@/components/ui/button/Button';
 import { Typography } from '@/components/ui/typography/Typography';
 import { clsx } from 'clsx';
 
 import s from './Alert.module.scss';
-
-import { Button } from '../../button/Button';
 type Props = {
   alerts: AlertProps[];
   removeAlert: (id: string) => void;

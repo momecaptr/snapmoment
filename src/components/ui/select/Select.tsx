@@ -4,7 +4,7 @@ import { Typography } from '@/components/ui/typography/Typography';
 import * as Select from '@radix-ui/react-select';
 import clsx from 'clsx';
 
-import s from './Select.module.scss';
+import s from '@/components/ui/select/Select.module.scss';
 
 type Props = {
   className?: string;

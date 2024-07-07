@@ -2,11 +2,10 @@
 import React, { ReactNode, memo } from 'react';
 
 import ArrowBackOutline from '@/common/assets/components/ArrowBackOutline';
+import { Button } from '@/components/ui/button/Button';
 import Link from 'next/link';
 
 import s from './BackBtn.module.scss';
-
-import { Button } from '../button/Button';
 
 type Props = {
   children: ReactNode;
