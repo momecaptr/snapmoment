@@ -23,6 +23,11 @@
     background-color: transparent;
   }
 
+  &:active {
+    color: var(--accent-100);
+    background-color: transparent;
+  }
+
   .text {
     display: flex;
     flex-flow: row nowrap;

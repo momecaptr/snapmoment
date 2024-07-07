@@ -1,15 +1,16 @@
 import { useState } from 'react';
 
 import { TabSwitcher } from '@/components/ui/tabs/TabSwitcher';
-import { Meta } from '@storybook/react';
+import { Meta, type StoryObj } from '@storybook/react';
 
-const meta = {
+const meta: Meta<typeof TabSwitcher> = {
   component: TabSwitcher,
   tags: ['autodocs'],
-  title: 'Components/Tab Switcher1'
-} satisfies Meta<typeof TabSwitcher>;
+  title: 'Components/Tab Switcher'
+};
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
 const tabsDefault = [
   { locale: 'Select1', text: 'Select1', value: 'Select1' },
@@ -25,18 +26,21 @@ const tabsDisabled = [
   { disabled: true, locale: 'Select4', text: 'Select4', value: 'Select4' }
 ];
 
-export const Default = {
-  render: () => {
-    const [value, setValue] = useState('Select1');
+const Template = (args: any) => {
+  const [value, setValue] = useState('Select1');
 
-    return <TabSwitcher onValueChange={(value) => setValue(value)} tabs={tabsDefault} value={value} />;
-  }
+  return <TabSwitcher {...args} onValueChange={(value) => setValue(value)} value={value} />;
 };
 
-export const Disabled = {
-  render: () => {
-    const [value, setValue] = useState('Select1');
-
-    return <TabSwitcher onValueChange={(value) => setValue(value)} tabs={tabsDisabled} value={value} />;
-  }
+export const Default: Story = {
+  args: {
+    tabs: tabsDefault
+  },
+  render: (args) => <Template {...args} />
+};
+export const Disabled: Story = {
+  args: {
+    tabs: tabsDisabled
+  },
+  render: (args) => <Template {...args} />
 };
