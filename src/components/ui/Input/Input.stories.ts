@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Input from '../input/Input';
-
+import { Input } from './Input';
 const meta = {
   component: Input,
   tags: ['autodocs'],
