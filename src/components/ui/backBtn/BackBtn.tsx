@@ -9,13 +9,13 @@ import s from './BackBtn.module.scss';
 
 type Props = {
   children: ReactNode;
+  href: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  to: string;
 };
 
-export const BackBtn = memo(({ children, onClick, to }: Props) => {
+export const BackBtn = memo(({ children, href, onClick }: Props) => {
   return (
-    <Button as={Link} className={s.backBtn} href={to} onClick={onClick}>
+    <Button as={Link} className={s.backBtn} href={href} onClick={onClick}>
       <ArrowBackOutline className={s.backArrow} />
       {children}
     </Button>

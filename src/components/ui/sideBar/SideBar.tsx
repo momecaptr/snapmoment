@@ -8,13 +8,12 @@ import Person from '@/common/assets/components/Person';
 import PlusSquare from '@/common/assets/components/PlusSquare';
 import SearchOutline from '@/common/assets/components/SearchOutline';
 import TrendingUp from '@/common/assets/components/TrendingUp';
+import { Button } from '@/components/ui/button/Button';
+import { Typography } from '@/components/ui/typography/Typography';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 import s from './SideBar.module.scss';
-
-import { Button } from '../button/Button';
-
 type MainLinksProps = {
   IconComponent: ElementType;
   name: MainLinksName;
@@ -51,8 +50,9 @@ export const SideBar = () => {
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
-            {/*заменить span на Typography*/}
-            <span>{name}</span>
+            <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
+              {name}
+            </Typography>
           </Button>
         ))}
       </div>
