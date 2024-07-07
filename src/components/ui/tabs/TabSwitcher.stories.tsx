@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Meta } from '@storybook/react';
 import { TabSwitcher } from '@/components/ui/tabs/TabSwitcher';
+import { Meta } from '@storybook/react';
 
 const meta = {
   component: TabSwitcher,

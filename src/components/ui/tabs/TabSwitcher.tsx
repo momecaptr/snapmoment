@@ -1,4 +1,4 @@
-import Typography from '@/components/ui/typography/Typography';
+import { Typography } from '@/components/ui/typography/Typography';
 import * as Tabs from '@radix-ui/react-tabs';
 import { clsx } from 'clsx';
 
@@ -33,7 +33,7 @@ export const TabSwitcher = ({ className, onValueChange, tabs, value }: Props) =>
               value={tab.value}
               // value={tab.locale}
             >
-              <Typography className={s.tabName} variant={'subtitle2'}>
+              <Typography className={s.tabName} variant={'regular_text_16'}>
                 {tab.value}
               </Typography>
               {/*<Typography variant={'subtitle2'}>{t(`${tab.locale}`)}</Typography>*/}

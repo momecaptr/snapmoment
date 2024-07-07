@@ -1,7 +1,9 @@
 'use client';
 
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { useState } from 'react';
+
 import { PaginationWithSelect, selectOptionsType } from '@/components/ui/pagination/PaginationWithSelect';
 
 const meta = {
