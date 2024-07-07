@@ -7,11 +7,11 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
-    '@storybook/addon-interactions',
+    '@storybook/addon-interactions'
   ],
   framework: {
     name: '@storybook/nextjs',
-    options: {},
+    options: {}
   },
   webpackFinal: async (config) => {
     if (!config.module || !config.module.rules) {
@@ -36,13 +36,13 @@ const config: StorybookConfig = {
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/ // *.svg?url
       },
       // Convert all other *.svg imports to React components
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        use: ['@svgr/webpack'],
+        use: ['@svgr/webpack']
       }
     );
 
@@ -50,6 +50,6 @@ const config: StorybookConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
-  },
+  }
 };
 export default config;

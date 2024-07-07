@@ -6,15 +6,16 @@ module.exports = {
     'property-no-unknown': [
       true,
       {
-        ignoreProperties: ['composes'],
-      },
+        ignoreProperties: ['composes']
+      }
     ],
     'selector-class-pattern': null,
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global'],
-      },
+        ignorePseudoClasses: ['global']
+      }
     ],
-  },
+    'keyframes-name-pattern': null
+  }
 };

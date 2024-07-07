@@ -5,6 +5,7 @@ import MessageCircle from '@/common/assets/components/MessageCircle';
 import Person from '@/common/assets/components/Person';
 import PlusSquare from '@/common/assets/components/PlusSquare';
 import SearchOutline from '@/common/assets/components/SearchOutline';
+import { Button } from '@/components/ui/button/Button';
 import { MobileMenu } from '@/components/ui/mobileMenu/MobileMenu';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
@@ -12,15 +13,13 @@ import { clsx } from 'clsx';
 
 import s from './MobileMenu.module.scss';
 
-import { Button } from '../button/Button';
-
 const meta = {
   component: MobileMenu,
   parameters: {
-    layout: 'center',
+    layout: 'center'
   },
   tags: ['autodocs'],
-  title: 'Components/MobileMenu',
+  title: 'Components/MobileMenu'
 } satisfies Meta<typeof MobileMenu>;
 
 export default meta;
@@ -33,7 +32,7 @@ export const Default: StoryFn<StoryProps> = () => {
     { IconComponent: PlusSquare, path: 'add', value: 'plus' },
     { IconComponent: MessageCircle, path: 'messages', value: 'message' },
     { IconComponent: SearchOutline, path: 'search', value: 'search' },
-    { IconComponent: Person, path: 'profile', value: 'person' },
+    { IconComponent: Person, path: 'profile', value: 'person' }
   ];
 
   return (

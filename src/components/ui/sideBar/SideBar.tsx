@@ -37,10 +37,10 @@ export const SideBar = () => {
       IconComponent: TrendingUp,
       name: 'Statistics',
       path: 'statistics',
-      value: 'statistics',
+      value: 'statistics'
     },
     { IconComponent: Bookmark, name: 'Favorites', path: 'favorites', value: 'favorites' },
-    { IconComponent: LogOutOutline, name: 'Log Out', path: 'logout', value: 'logout' },
+    { IconComponent: LogOutOutline, name: 'Log Out', path: 'logout', value: 'logout' }
   ];
 
   return (

@@ -6,7 +6,7 @@ type UsePaginationArgs = {
 };
 export const usePagination = ({
   currentPage = 1,
-  totalPages, // 100
+  totalPages // 100
 }: UsePaginationArgs) => {
   return useMemo(() => {
     const paginationLength = 7; // length of pagination

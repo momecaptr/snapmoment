@@ -10,7 +10,7 @@ const meta = {
   argTypes: {},
   component: PaginationWithSelect,
   tags: ['autodocs'],
-  title: 'Components/PaginationWithSelect',
+  title: 'Components/PaginationWithSelect'
 } satisfies Meta<typeof PaginationWithSelect>;
 
 export default meta;
@@ -43,11 +43,11 @@ export const Default: Story = {
       { text: '20', value: '20' },
       { text: '30', value: '30' },
       { text: '50', value: '50' },
-      { text: '100', value: '100' },
+      { text: '100', value: '100' }
     ] as selectOptionsType[],
     setCurrentPage: () => {},
     setItemsPerPage: () => {},
-    totalItems: 300,
+    totalItems: 300
   },
-  render: (args) => <Template {...args} />,
+  render: (args) => <Template {...args} />
 };
