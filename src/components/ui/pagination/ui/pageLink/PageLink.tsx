@@ -15,7 +15,7 @@ type Props = {
 export const PageLink = ({ active, children, className, disabled, ...props }: Props) => {
   const customClassName = clsx(s.pageLink, className, {
     [s.active]: active,
-    [s.disabled]: disabled,
+    [s.disabled]: disabled
   });
 
   return (

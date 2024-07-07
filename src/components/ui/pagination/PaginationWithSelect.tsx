@@ -28,7 +28,7 @@ export const PaginationWithSelect = ({
   selectOptions,
   setCurrentPage,
   setItemsPerPage,
-  totalItems,
+  totalItems
 }: Props) => {
   disabled = totalItems <= Number(selectOptions[0].value);
   const { currentPageSearchParam } = useQueryParams();

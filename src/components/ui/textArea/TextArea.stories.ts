@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import TextArea from './TextArea';
+import TextArea from '@/components/ui/textArea/TextArea';
 
 const meta = {
   component: TextArea,
   tags: ['autodocs'],
-  title: 'Components/textArea',
+  title: 'Components/textArea'
 } satisfies Meta<typeof TextArea>;
 
 export default meta;
@@ -15,16 +15,16 @@ export const Default: Story = {
   args: {
     disabled: false,
     label: 'TextArea',
-    placeholder: 'TextArea',
-  },
+    placeholder: 'TextArea'
+  }
 };
 export const Error: Story = {
   args: {
     disabled: false,
     error: 'Error!',
     label: 'TextArea',
-    placeholder: 'TextArea',
-  },
+    placeholder: 'TextArea'
+  }
 };
 
 export const NotResize: Story = {
@@ -32,14 +32,14 @@ export const NotResize: Story = {
     disabled: false,
     label: 'TextArea',
     placeholder: 'TextArea',
-    resize: true,
-  },
+    resize: true
+  }
 };
 
 export const Disable: Story = {
   args: {
     disabled: true,
     label: 'TextArea',
-    placeholder: 'TextArea',
-  },
+    placeholder: 'TextArea'
+  }
 };

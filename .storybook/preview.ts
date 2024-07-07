@@ -6,28 +6,28 @@ import { themes } from '@storybook/theming';
 const preview: Preview = {
   parameters: {
     docs: {
-      theme: themes.dark,
+      theme: themes.dark
     },
     backgrounds: {
       default: 'dark',
       values: [
         {
           name: 'dark',
-          value: '#000',
+          value: '#000'
         },
         {
           name: 'white',
-          value: '#ffffff',
-        },
-      ],
+          value: '#ffffff'
+        }
+      ]
     },
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-  },
+        date: /Date$/i
+      }
+    }
+  }
 };
 
 export default preview;

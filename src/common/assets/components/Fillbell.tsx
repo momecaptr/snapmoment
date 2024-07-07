@@ -20,7 +20,7 @@ const SvgFillbell = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =>
     />
     <mask
       style={{
-        maskType: 'luminance',
+        maskType: 'luminance'
       }}
       height={21}
       id={'fillbell_svg__a'}

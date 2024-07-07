@@ -81,6 +81,6 @@ export const useQueryParams = () => {
     setCurrentPageQuery,
     setItemsPerPageQuery,
     setSearchQuery,
-    setSortByQuery,
+    setSortByQuery
   };
 };
