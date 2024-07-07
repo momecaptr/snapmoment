@@ -1,6 +1,6 @@
 'use client';
-import { Button } from '@/components/ui/button/Button';
-import { Typography } from '@/components/ui/typography/Typography';
+
+import { MobileMenu } from '@/components/ui/mobileMenu/MobileMenu';
 
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/700.css';
@@ -11,10 +11,7 @@ export default function Home() {
   return (
     <main>
       <h1 style={{ color: 'green', fontFamily: 'Roboto' }}>DEVELOPMENT</h1>
-      <Typography as={'span'} variant={'large'}>
-        Hello, World!
-      </Typography>
-      <Button>Здарова</Button>
+      <MobileMenu />
     </main>
   );
 }
