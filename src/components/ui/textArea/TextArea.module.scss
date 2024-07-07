@@ -2,24 +2,24 @@
   padding: 8px;
   font-size: 16px;
   background-color: transparent;
-  border: 1.1px solid var(--color-light-900);
+  border: 1.1px solid var(--light-900);
 
   &:active {
-    border: 1.4px solid var(--color-light-100);
+    border: 1.4px solid var(--light-100);
   }
 
   &:focus {
-    border-color: var(--color-light-100);
+    border-color: var(--light-100);
   }
 
   &:hover {
-    border-color: var(--color-info-300);
+    border-color: var(--info-300);
   }
 
   &.error {
     font-size: 14px;
-    color: var(--color-danger-500);
-    border-color: var(--color-danger-500);
+    color: var(--danger-500);
+    border-color: var(--danger-500);
   }
 
   &:disabled {
@@ -35,5 +35,5 @@
 
 .label {
   font-size: 14px;
-  color: var(--color-dark-100);
+  color: var(--dark-100);
 }

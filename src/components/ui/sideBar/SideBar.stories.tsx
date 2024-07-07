@@ -1,19 +1,20 @@
 import { useState } from 'react';
 
+import Bookmark from '@/common/assets/components/Bookmark';
+import Home from '@/common/assets/components/Home';
+import LogOutOutline from '@/common/assets/components/LogOutOutline';
+import MessageCircle from '@/common/assets/components/MessageCircle';
+import Person from '@/common/assets/components/Person';
+import PlusSquare from '@/common/assets/components/PlusSquare';
+import SearchOutline from '@/common/assets/components/SearchOutline';
+import TrendingUp from '@/common/assets/components/TrendingUp';
+import { SideBar } from '@/components/ui/sideBar/SideBar';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import clsx from 'clsx';
 
 import s from './SideBar.module.scss';
-import { SideBar } from '@/components/ui/sideBar/SideBar';
-import Home from '@/common/assets/components/Home';
-import PlusSquare from '@/common/assets/components/PlusSquare';
-import Person from '@/common/assets/components/Person';
-import MessageCircle from '@/common/assets/components/MessageCircle';
-import SearchOutline from '@/common/assets/components/SearchOutline';
-import TrendingUp from '@/common/assets/components/TrendingUp';
-import Bookmark from '@/common/assets/components/Bookmark';
-import LogOutOutline from '@/common/assets/components/LogOutOutline';
+
 import { Button } from '../button/Button';
 
 const meta = {

@@ -1,17 +1,18 @@
 import { ElementType, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import clsx from 'clsx';
-
-import s from './SideBar.module.scss';
+import Bookmark from '@/common/assets/components/Bookmark';
 import Home from '@/common/assets/components/Home';
-import PlusSquare from '@/common/assets/components/PlusSquare';
-import Person from '@/common/assets/components/Person';
+import LogOutOutline from '@/common/assets/components/LogOutOutline';
 import MessageCircle from '@/common/assets/components/MessageCircle';
+import Person from '@/common/assets/components/Person';
+import PlusSquare from '@/common/assets/components/PlusSquare';
 import SearchOutline from '@/common/assets/components/SearchOutline';
 import TrendingUp from '@/common/assets/components/TrendingUp';
-import Bookmark from '@/common/assets/components/Bookmark';
-import LogOutOutline from '@/common/assets/components/LogOutOutline';
+import clsx from 'clsx';
+import Link from 'next/link';
+
+import s from './SideBar.module.scss';
+
 import { Button } from '../button/Button';
 
 type MainLinksProps = {
@@ -46,7 +47,7 @@ export const SideBar = () => {
     <div className={s.container}>
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Button as={Link} className={s.btn} key={value} onClick={() => setActiveIcon(value)} to={`${path}`}>
+          <Button as={Link} className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />

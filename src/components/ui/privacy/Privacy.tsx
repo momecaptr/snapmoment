@@ -2,12 +2,14 @@ import React from 'react';
 
 import ArrowForwardOutline from '@/common/assets/components/ArrowBackOutline';
 import { Typography } from '@/components/ui/typography/Typography';
+
 import s from './Privacy.module.scss';
 type PrivacyProps = {
   title: string;
 };
 const Privacy = (props: PrivacyProps) => {
   const { title } = props;
+
   return (
     <div className={s.wrapper}>
       <Typography as={'button'} className={s.button}>

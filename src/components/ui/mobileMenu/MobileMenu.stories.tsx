@@ -1,17 +1,18 @@
 import { useState } from 'react';
 
+import Home from '@/common/assets/components/Home';
+import MessageCircle from '@/common/assets/components/MessageCircle';
+import Person from '@/common/assets/components/Person';
+import PlusSquare from '@/common/assets/components/PlusSquare';
+import SearchOutline from '@/common/assets/components/SearchOutline';
+import { MobileMenu } from '@/components/ui/mobileMenu/MobileMenu';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
+import { clsx } from 'clsx';
 
 import s from './MobileMenu.module.scss';
-import { MobileMenu } from '@/components/ui/mobileMenu/MobileMenu';
-import Home from '@/common/assets/components/Home';
-import PlusSquare from '@/common/assets/components/PlusSquare';
-import MessageCircle from '@/common/assets/components/MessageCircle';
-import SearchOutline from '@/common/assets/components/SearchOutline';
-import Person from '@/common/assets/components/Person';
+
 import { Button } from '../button/Button';
-import { clsx } from 'clsx';
 
 const meta = {
   component: MobileMenu,
