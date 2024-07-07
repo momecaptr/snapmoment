@@ -1,9 +1,9 @@
 .selectRoot {
   margin-right: 10px;
-  color: var(--color-dark-100);
+  color: var(--dark-100);
 
   &.rootDisabled {
-    color: var(--color-dark-300);
+    color: var(--dark-300);
   }
 }
 
@@ -19,10 +19,10 @@
   height: 35px;
   padding: 6px 12px;
 
-  color: var(--color-light-100);
+  color: var(--light-100);
 
-  background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-100);
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-100);
   border-radius: 2px;
 
   &.className {
@@ -32,7 +32,7 @@
   }
 
   &[data-state='open'] {
-    border-color: var(--color-dark-100);
+    border-color: var(--dark-100);
     border-radius: 2px 2px 0 0;
 
     .selectIcon {
@@ -41,34 +41,34 @@
   }
 
   &:focus:not([data-disabled]) {
-    border-color: var(--color-success-100);
-    outline: 1px solid var(--color-success-100);
+    border-color: var(--success-100);
+    outline: 1px solid var(--success-100);
   }
 
   &:hover:not([data-disabled]) {
     cursor: pointer;
-    background-color: var(--color-dark-700);
+    background-color: var(--dark-700);
   }
 
   &[data-disabled] {
     cursor: initial;
-    color: var(--color-dark-300);
-    border-color: var(--color-dark-300);
+    color: var(--dark-300);
+    border-color: var(--dark-300);
   }
 }
 
 .selectTriggerDisabled {
   cursor: auto;
-  border: 1px solid var(--color-dark-300);
+  border: 1px solid var(--dark-300);
 
   .selectIconDisabled {
-    color: var(--color-dark-100);
-    fill: var(--color-dark-300);
+    color: var(--dark-100);
+    fill: var(--dark-300);
   }
 }
 
 .selectIcon {
-  fill: var(--color-light-100);
+  fill: var(--light-100);
   transition: 0.2s;
 }
 
@@ -78,8 +78,8 @@
 
   width: var(--radix-select-trigger-width);
 
-  background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-100);
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-100);
   border-radius: 0 0 2px 2px;
 
   .selectItem {
@@ -94,14 +94,14 @@
     }
 
     &:hover {
-      background-color: var(--color-dark-300);
+      background-color: var(--dark-300);
     }
 
     // &:hover,
     &:focus,
     &[data-state='checked'] {
-      color: var(--color-info-500);
-      background-color: var(--color-dark-500);
+      color: var(--info-500);
+      background-color: var(--dark-500);
     }
   }
 }

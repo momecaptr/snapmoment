@@ -20,7 +20,7 @@
   padding: 8px;
 
   font-size: 14px;
-  color: var(--color-light-100);
+  color: var(--light-100);
   text-decoration: none;
 
   background-color: transparent;
@@ -33,7 +33,7 @@
     border-color 0.15s ease-in-out;
 
   &:hover {
-    background-color: var(--color-dark-500);
+    background-color: var(--dark-500);
   }
 
   &:focus {
@@ -42,13 +42,13 @@
 
   &.active {
     z-index: 2;
-    color: var(--color-dark-900);
-    background-color: var(--color-light-100);
+    color: var(--dark-900);
+    background-color: var(--light-100);
   }
 
   &.disabled {
     pointer-events: none;
-    color: var(--color-dark-100);
+    color: var(--dark-100);
   }
 }
 
@@ -61,5 +61,5 @@
   height: 16px;
   padding: 0;
 
-  fill: var(--color-light-900);
+  fill: var(--light-900);
 }
