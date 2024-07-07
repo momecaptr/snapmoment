@@ -11,10 +11,10 @@ const meta = {
       <div style={{ padding: '20px' }}>
         <Story />
       </div>
-    ),
+    )
   ],
   tags: ['autodocs'],
-  title: 'Components/SelectUI',
+  title: 'Components/SelectUI'
 } satisfies Meta<typeof SelectUI>;
 
 export default meta;
@@ -40,9 +40,9 @@ export const Default: Story = {
       { text: 'Apple', value: 'apple' },
       { text: 'Banana', value: 'banana' },
       { text: 'Smetana', value: 'smetana' },
-      { text: 'Nirvana', value: 'nirvana' },
+      { text: 'Nirvana', value: 'nirvana' }
     ],
-    value: 'apple',
+    value: 'apple'
   },
-  render: (args) => <Template {...args} />,
+  render: (args) => <Template {...args} />
 };

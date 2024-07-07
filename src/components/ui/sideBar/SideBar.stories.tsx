@@ -20,10 +20,10 @@ import { Button } from '../button/Button';
 const meta = {
   component: SideBar,
   parameters: {
-    layout: 'center',
+    layout: 'center'
   },
   tags: ['autodocs'],
-  title: 'Components/SideBar',
+  title: 'Components/SideBar'
 } satisfies Meta<typeof SideBar>;
 
 export default meta;
@@ -41,10 +41,10 @@ export const Default: StoryFn<StoryProps> = () => {
       IconComponent: TrendingUp,
       name: 'Statistics',
       path: 'statistics',
-      value: 'statistics',
+      value: 'statistics'
     },
     { IconComponent: Bookmark, name: 'Favorites', path: 'favorites', value: 'favorites' },
-    { IconComponent: LogOutOutline, name: 'Log Out', path: 'logout', value: 'logout' },
+    { IconComponent: LogOutOutline, name: 'Log Out', path: 'logout', value: 'logout' }
   ];
 
   return (

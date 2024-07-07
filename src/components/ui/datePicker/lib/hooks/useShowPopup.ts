@@ -18,6 +18,6 @@ export const useShowPopup = () => {
   return {
     elementRef,
     handleInputClick,
-    showPopup,
+    showPopup
   };
 };

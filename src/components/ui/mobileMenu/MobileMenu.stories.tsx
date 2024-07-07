@@ -16,10 +16,10 @@ import s from './MobileMenu.module.scss';
 const meta = {
   component: MobileMenu,
   parameters: {
-    layout: 'center',
+    layout: 'center'
   },
   tags: ['autodocs'],
-  title: 'Components/MobileMenu',
+  title: 'Components/MobileMenu'
 } satisfies Meta<typeof MobileMenu>;
 
 export default meta;
@@ -32,7 +32,7 @@ export const Default: StoryFn<StoryProps> = () => {
     { IconComponent: PlusSquare, path: 'add', value: 'plus' },
     { IconComponent: MessageCircle, path: 'messages', value: 'message' },
     { IconComponent: SearchOutline, path: 'search', value: 'search' },
-    { IconComponent: Person, path: 'profile', value: 'person' },
+    { IconComponent: Person, path: 'profile', value: 'person' }
   ];
 
   return (

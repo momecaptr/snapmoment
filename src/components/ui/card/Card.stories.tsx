@@ -11,10 +11,10 @@ const meta = {
   argTypes: {},
   component: Card,
   parameters: {
-    laout: 'center',
+    laout: 'center'
   },
   tags: ['autodocs'],
-  title: 'Components/Card',
+  title: 'Components/Card'
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -31,7 +31,7 @@ export const WithContent: StoryFn<StoryProps> = (_: StoryProps) => {
         flexDirection: 'column',
         gap: '24px',
         padding: '35px 24px',
-        width: '420px',
+        width: '420px'
       }}
     >
       <Typography as={'h2'} variant={'h2'}>

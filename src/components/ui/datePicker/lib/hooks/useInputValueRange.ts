@@ -38,6 +38,6 @@ export const useInputValueRange = ({ max, min, value }: Props) => {
     inputValueDate,
     isValidInputValue,
     onInputValueChange,
-    setInputValue,
+    setInputValue
   };
 };

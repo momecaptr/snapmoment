@@ -12,7 +12,7 @@ const meta: Meta<StoryProps> = {
   argTypes: {},
   component: DatePicker,
   tags: ['autodocs'],
-  title: 'Components/DatePicker',
+  title: 'Components/DatePicker'
 };
 
 export default meta;
@@ -20,7 +20,7 @@ export default meta;
 const Defoult: StoryFn<StoryProps> = (args: StoryProps) => {
   const [date, setDate] = useState<RangeDate>({
     endDate: addNumberDay({ date: new Date(), day: 2 }),
-    startDate: new Date(),
+    startDate: new Date()
   });
 
   return (

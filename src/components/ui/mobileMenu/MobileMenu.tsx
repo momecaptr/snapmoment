@@ -26,7 +26,7 @@ export const MobileMenu = () => {
     { IconComponent: PlusSquare, path: 'add', value: 'plus' },
     { IconComponent: MessageCircle, path: 'messages', value: 'message' },
     { IconComponent: SearchOutline, path: 'search', value: 'search' },
-    { IconComponent: Person, path: 'profile', value: 'person' },
+    { IconComponent: Person, path: 'profile', value: 'person' }
   ];
 
   return (

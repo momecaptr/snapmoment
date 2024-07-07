@@ -21,7 +21,7 @@ export const SelectUI = ({ className, disabled, onValueChange, selectOptions, va
     root: s.selectRoot,
     selectItem: clsx(s.selectItem, className && s.className),
     trigger: clsx(s.selectTrigger, { [s.className]: className }, disabled && s.selectTriggerDisabled),
-    viewport: clsx(s.selectViewport),
+    viewport: clsx(s.selectViewport)
   };
 
   return (

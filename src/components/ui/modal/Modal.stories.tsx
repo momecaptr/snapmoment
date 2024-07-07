@@ -18,11 +18,11 @@ type StoryProps = CustomArgs & ModalProps;
 const meta: Meta<StoryProps> = {
   argTypes: {
     open: { control: { type: 'boolean' } },
-    title: { control: { type: 'text' } },
+    title: { control: { type: 'text' } }
   },
   component: Modal,
   tags: ['autodocs'],
-  title: 'Components/Modal',
+  title: 'Components/Modal'
 };
 
 export default meta;

@@ -13,7 +13,7 @@ export const months = [
   'September',
   'October',
   'November',
-  'December',
+  'December'
 ];
 
 const VISIBLE_CELLS_AMOUNT = 7 * 6;
@@ -24,7 +24,7 @@ const sundayWeekToMondayWeekDayMap: Record<number, number> = {
   3: 2,
   4: 3,
   5: 4,
-  6: 5,
+  6: 5
 };
 
 export interface DateCellItem {
@@ -63,7 +63,7 @@ export const getPreviousMonthDays = (year: number, month: number) => {
       date: daysAmountInPrevMonth - i,
       month: cellMonth,
       type: 'prev',
-      year: cellYear,
+      year: cellYear
     });
   }
 
@@ -87,7 +87,7 @@ export const getNextMonthDays = (year: number, month: number) => {
       date: i,
       month: cellMonth,
       type: 'next',
-      year: cellYear,
+      year: cellYear
     });
   }
 
@@ -102,7 +102,7 @@ export const getCurrentMothDays = (year: number, month: number, numberOfDays: nu
       date: i,
       month,
       type: 'current',
-      year,
+      year
     });
   }
 

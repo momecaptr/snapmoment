@@ -32,7 +32,7 @@ export const DatePicker = ({ max, min, onChange, value }: DatePickerProps) => {
   const { inputValue, inputValueDate, isValidInputValue, onInputValueChange, setInputValue } = useInputValueRange({
     max,
     min,
-    value,
+    value
   });
 
   const onKeyDown = (e: React.KeyboardEvent) => {
