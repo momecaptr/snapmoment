@@ -34,7 +34,24 @@ body {
 
   font-family: var(--font-family-primary), sans-serif;
   line-height: var(--line-height-m);
-  color: var(--color-light-100);
+  color: var(--light-100);
 
-  background-color: var(--color-dark-900);
+  background-color: var(--dark-900);
 }
+
+// ↓↓↓ Scroll ↓↓↓ //
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-300);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--light-900);
+  }
+}
+
+// ↑↑↑ Scroll ↑↑↑ //
