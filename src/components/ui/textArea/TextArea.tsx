@@ -39,6 +39,7 @@ const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: TextAreaPro
 
   const generatedId = useId();
   let classNameForTextArea = '';
+
   if (error) {
     classNameForTextArea = clsx(s.boxTextArea, s.error);
   } else {

@@ -1,14 +1,15 @@
 import { ElementType, useState } from 'react';
 
-import s from './MobileMenu.module.scss';
-
-import { clsx } from 'clsx';
 import Home from '@/common/assets/components/Home';
-import PlusSquare from '@/common/assets/components/PlusSquare';
 import MessageCircle from '@/common/assets/components/MessageCircle';
-import SearchOutline from '@/common/assets/components/SearchOutline';
 import Person from '@/common/assets/components/Person';
+import PlusSquare from '@/common/assets/components/PlusSquare';
+import SearchOutline from '@/common/assets/components/SearchOutline';
 import { Button } from '@/components/ui/button/Button';
+import { clsx } from 'clsx';
+import Link from 'next/link';
+
+import s from './MobileMenu.module.scss';
 
 type IconIconComponentProps = {
   IconComponent: ElementType;
@@ -32,7 +33,7 @@ export const MobileMenu = () => {
     <div className={s.container}>
       <div className={s.btns}>
         {links.map(({ IconComponent, path, value }) => (
-          <Button as={'a'} className={s.btn} key={value} onClick={() => setActiveIcon(value)} to={`${path}`}>
+          <Button as={Link} className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />

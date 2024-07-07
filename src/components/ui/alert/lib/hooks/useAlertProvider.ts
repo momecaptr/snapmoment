@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import { AlertFnProps, AlertProps } from '@/components/ui/alert/types/types';
 
 export const useAlertProvider = () => {

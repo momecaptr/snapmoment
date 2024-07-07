@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { AlertContext } from './AlertContext';
+
 import { useAlertProvider } from '@/components/ui/alert/lib/hooks/useAlertProvider';
 import { Alert } from '@/components/ui/alert/ui/Alert';
+
+import { AlertContext } from './AlertContext';
 
 type Props = {
   children: ReactNode;
