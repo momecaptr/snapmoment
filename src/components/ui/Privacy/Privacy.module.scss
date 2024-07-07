@@ -1,0 +1,49 @@
+.wrapper {
+  width: 1160px;
+  margin: 0 auto;
+}
+
+.box {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 958px;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 23px 0 20px;
+  text-align: center;
+}
+
+.subtitle {
+  margin-bottom: 227px;
+  text-align: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 150px;
+  margin-top: 24px;
+
+  background-color: transparent;
+  border: none;
+}
+
+.buttonImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.buttonImg svg {
+  width: 24px;
+  height: 24px;
+}
+
+.buttonText {
+  font-size: 14px;
+}
