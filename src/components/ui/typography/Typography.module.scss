@@ -1,33 +1,37 @@
-.large,
 .h1,
 .h2,
 .h3,
-.subtitle2,
-.subtitle1 {
+.bold_text_16,
+.bold_text_14,
+.semi-bold_small_text {
   margin: 0;
   font-weight: var(--font-weight-bold);
   color: var(--color-light-100);
 }
 
 .large {
-  font-size: var(--font-size-xl);
-  line-height: var(--line-height-l);
+  margin: 0;
+
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-xl);
+  color: var(--color-light-100);
 }
 
-.body1,
-.body2,
-.caption,
-.link1,
-.link1:visited,
+.regular_text_16,
+.medium_text_14,
+.small_text,
+.regular_link,
+.regular_link:visited,
 .error {
   margin: 0;
   font-weight: var(--font-weight-regular);
   color: var(--color-light-100);
 }
 
-.link1,
-.link2,
-.link2:visited {
+.regular_link,
+.small_link,
+.small_link:visited {
   margin: 0;
 
   font-size: var(--font-size-xs);
@@ -39,7 +43,7 @@
 
 .h1 {
   font-size: var(--font-size-xl);
-  line-height: var(--line-height-l);
+  line-height: var(--line-height-xl);
 }
 
 .h2 {
@@ -47,31 +51,45 @@
   line-height: var(--line-height-m);
 }
 
-.h3,
-.subtitle1 {
+.h3 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-m);
+}
+
+.bold_text_16 {
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
 }
 
-.body1,
-.body2,
-.link1,
-.subtitle2,
-.link1:visited {
+.regular_text_16 {
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+}
+
+.medium_text_14 {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-m);
+}
+
+.regular_text_14,
+.regular_link,
+.bold_text_14,
+.regular_link:visited {
   font-size: var(--font-size-s);
   line-height: var(--line-height-m);
 }
 
-.overline,
-.caption,
-.link2,
-.link2:visited {
+.semi_bold_small_text {
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
   line-height: var(--line-height-s);
 }
 
-.error {
+.small_text,
+.small_link,
+.small_link:visited {
   font-size: var(--font-size-xs);
-  line-height: var(--line-height-m);
-  color: var(--color-danger-300);
+  line-height: var(--line-height-s);
 }
