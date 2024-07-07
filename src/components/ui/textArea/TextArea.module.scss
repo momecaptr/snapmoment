@@ -1,0 +1,39 @@
+.boxTextArea {
+  padding: 8px;
+  font-size: 16px;
+  background-color: transparent;
+  border: 1px solid var(--color-light-900);
+
+  &:active {
+    border: 1.4px solid var(--color-light-100);
+  }
+
+  &:focus {
+    border-color: var(--color-light-100);
+  }
+
+  &:hover {
+    border-color: var(--color-info-300);
+  }
+
+  &.error {
+    font-size: 14px;
+    color: var(--color-danger-500);
+    border-color: var(--color-danger-500);
+  }
+
+  &:disabled {
+    color: #808080;
+    background-color: #171717;
+    border-color: #171717;
+  }
+}
+
+.resize {
+  resize: none;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--color-dark-100);
+}

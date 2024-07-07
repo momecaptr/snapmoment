@@ -71,7 +71,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
 
   return (
     <div className={clsx(s.box, className)}>
-      <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'body2'}>
+      <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
         {type !== 'search' && label}
       </Typography>
       <div className={s.searchClose}>
