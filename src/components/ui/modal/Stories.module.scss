@@ -1,0 +1,34 @@
+.body {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 34px;
+}
+
+.uploadImg {
+  gap: 5px;
+  margin-bottom: 24px;
+}
+
+.checkbox {
+  margin-left: 5px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.customClass {
+  width: 420px;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

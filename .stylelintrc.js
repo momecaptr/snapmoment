@@ -16,5 +16,6 @@ module.exports = {
         ignorePseudoClasses: ['global'],
       },
     ],
+    'keyframes-name-pattern': null,
   },
 };
