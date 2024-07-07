@@ -19,7 +19,7 @@ export type InputProps = {
   label?: string;
 } & ComponentPropsWithoutRef<'input'>;
 
-export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
   const { callback, className, currentValue, error, id, label, placeholder, type, ...restProps } = props;
   const [isShow, setIsShow] = useState(false);
   const [inputValue, setInputValue] = useState(currentValue || '');
@@ -110,3 +110,5 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
 });
 
 Input.displayName = 'Input';
+
+export default Input;
