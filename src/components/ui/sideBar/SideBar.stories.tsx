@@ -8,14 +8,15 @@ import Person from '@/common/assets/components/Person';
 import PlusSquare from '@/common/assets/components/PlusSquare';
 import SearchOutline from '@/common/assets/components/SearchOutline';
 import TrendingUp from '@/common/assets/components/TrendingUp';
+import { Button } from '@/components/ui/button/Button';
 import { SideBar } from '@/components/ui/sideBar/SideBar';
+import { Typography } from '@/components/ui/typography/Typography';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 import s from './SideBar.module.scss';
-
-import { Button } from '../button/Button';
 
 const meta = {
   component: SideBar,
@@ -50,19 +51,14 @@ export const Default: StoryFn<StoryProps> = () => {
   return (
     <div className={s.container}>
       <div className={s.btns}>
-        {mainLinks.map(({ IconComponent, name, value /*path*/ }) => (
-          <Button
-            // добавить  as={Link}
-            className={s.btn}
-            key={value}
-            onClick={() => setActiveIcon(value)}
-            // to={`${path}`}
-          >
+        {mainLinks.map(({ IconComponent, name, path, value }) => (
+          <Button as={Link} className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
-            {/*заменить span на Typography*/}
-            <span>{name}</span>
+            <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
+              {name}
+            </Typography>
           </Button>
         ))}
       </div>

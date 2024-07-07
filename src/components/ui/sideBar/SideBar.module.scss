@@ -21,24 +21,6 @@
   padding: 60px 0 36px 60px;
 }
 
-.icon {
-  width: 24px;
-  height: 24px;
-
-  // color: transparent;
-  // stroke: var(--light-100);
-
-  &.active {
-    color: var(--accent-500);
-    stroke: transparent;
-  }
-}
-
-// .searchIcon {
-//  color: var(--light-100);
-//  stroke: none;
-// }
-
 .btn {
   display: flex;
   flex-flow: row nowrap;
@@ -54,14 +36,23 @@
   background-color: transparent;
   box-shadow: none;
 
-  &:active span,
-  &:active .icon {
-    color: var(--accent-500);
-    stroke: transparent;
+  &:active,
+  &:hover {
+    background-color: transparent;
+
+    .icon,
+    span {
+      color: var(--accent-100);
+      stroke: transparent;
+    }
   }
 
   &:active {
-    background-color: transparent;
+    .icon,
+    span {
+      color: var(--accent-500);
+      stroke: transparent;
+    }
   }
 
   &:hover {
@@ -71,6 +62,12 @@
 
   &:focus-visible {
     background-color: transparent;
+
+    .icon,
+    span {
+      color: var(--accent-100);
+      stroke: transparent;
+    }
   }
 
   &:nth-child(5) {
@@ -81,3 +78,18 @@
     margin-bottom: 180px;
   }
 }
+
+.icon {
+  width: 24px;
+  height: 24px;
+
+  &.active {
+    color: var(--accent-500);
+    stroke: transparent;
+  }
+}
+
+// .searchIcon {
+//  color: var(--light-100);
+//  stroke: none;
+// }
