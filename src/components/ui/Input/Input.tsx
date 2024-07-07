@@ -2,15 +2,15 @@
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useId, useState } from 'react';
 
 import EyeOff from '../../../common/assets/components/EyeOff'; //'@/assets/icons/svg/EyeOff'
-import Typography from '@/components/ui/typography/Typography';
 import { Button } from '../button/Button';
-import clsx from 'clsx';
 
 import s from './Input.module.scss';
 
 import Close from '../../../common/assets/components/Close';
 import Eye from '../../../common/assets/components/Eye';
 import Search from '../../../common/assets/components/Search';
+import { Typography } from '@/components/ui';
+import clsx from 'clsx';
 
 export type InputProps = {
   callback?: (text: string) => void;
@@ -71,7 +71,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
 
   return (
     <div className={clsx(s.box, className)}>
-      <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'body2'}>
+      <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
         {type !== 'search' && label}
       </Typography>
       <div className={s.searchClose}>

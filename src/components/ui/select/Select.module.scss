@@ -21,7 +21,7 @@
 
   color: var(--color-light-100);
 
-  background-color: var(--color-dark-500);
+  background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
 
@@ -47,7 +47,7 @@
 
   &:hover:not([data-disabled]) {
     cursor: pointer;
-    background-color: var(--color-dark-500);
+    background-color: var(--color-dark-700);
   }
 
   &[data-disabled] {
@@ -78,7 +78,7 @@
 
   width: var(--radix-select-trigger-width);
 
-  background-color: var(--color-dark-500);
+  background-color: var(--color-dark-700);
   border: 1px solid var(--color-dark-100);
   border-radius: 0 0 2px 2px;
 
@@ -93,11 +93,15 @@
       padding: 0 0 0 6px;
     }
 
-    &:hover,
+    &:hover {
+      background-color: var(--color-dark-300);
+    }
+
+    // &:hover,
     &:focus,
     &[data-state='checked'] {
-      color: var(--color-accent-300);
-      background-color: var(--color-accent-300);
+      color: var(--color-info-500);
+      background-color: var(--color-dark-500);
     }
   }
 }
