@@ -69,3 +69,15 @@
 
   text-align: center;
 }
+
+.outlined {
+  background-color: transparent;
+
+  &:focus-visible {
+    border: 1px solid var(--accent-500);
+  }
+
+  &:hover {
+    color: var(--accent-500);
+  }
+}
