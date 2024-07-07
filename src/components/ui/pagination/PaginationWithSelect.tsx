@@ -2,9 +2,10 @@ import { useTranslation } from 'react-i18next';
 
 import { useQueryParams } from '@/common/hooks/useQueryParams';
 import { Pagination } from '@/components/ui/pagination/ui/Pagination';
+import { SelectUI } from '@/components/ui/select/Select';
+import { Typography } from '@/components/ui/typography/Typography';
 
 import s from './PaginationWithSelect.module.scss';
-import { SelectUI, Typography } from '@/components/ui';
 
 export type selectOptionsType = {
   text: string;

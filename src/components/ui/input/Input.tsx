@@ -2,15 +2,15 @@
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useId, useState } from 'react';
 
 import EyeOff from '../../../common/assets/components/EyeOff'; //'@/assets/icons/svg/EyeOff'
-import { Button } from '../button/Button';
+import { Typography } from '@/components/ui/typography/Typography';
+import clsx from 'clsx';
 
 import s from './Input.module.scss';
 
 import Close from '../../../common/assets/components/Close';
 import Eye from '../../../common/assets/components/Eye';
 import Search from '../../../common/assets/components/Search';
-import clsx from 'clsx';
-import { Typography } from '@/components/ui/typography/Typography';
+import { Button } from '../button/Button';
 
 export type InputProps = {
   callback?: (text: string) => void;

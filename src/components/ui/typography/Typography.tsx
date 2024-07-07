@@ -5,19 +5,19 @@ import clsx from 'clsx';
 import s from './Typography.module.scss';
 
 type TypographyVariant =
-  | 'large'
+  | 'bold_text_14'
+  | 'bold_text_16'
   | 'h1'
   | 'h2'
   | 'h3'
-  | 'regular_text_16'
-  | 'bold_text_16'
-  | 'regular_text_14'
+  | 'large'
   | 'medium_text_14'
-  | 'bold_text_14'
-  | 'small_text'
-  | 'semi_bold_small_text'
   | 'regular_link'
-  | 'small_link';
+  | 'regular_text_14'
+  | 'regular_text_16'
+  | 'semi_bold_small_text'
+  | 'small_link'
+  | 'small_text';
 
 type TextOwnProps<E extends ElementType = ElementType> = {
   as?: E;

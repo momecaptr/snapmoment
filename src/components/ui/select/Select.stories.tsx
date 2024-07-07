@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
-import { SelectUI } from '@/components/ui';
+
+import { SelectUI } from '@/components/ui/select/Select';
 
 const meta = {
   component: SelectUI,
@@ -21,6 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 const Template = (args: any) => {
   const [value, setValue] = useState(args.value);
+
   return (
     <SelectUI
       {...args}
