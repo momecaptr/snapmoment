@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from './Button';
+import { Button } from '@/components/ui/button/Button';
 
 const meta = {
   argTypes: {
     variant: {
       control: { type: 'radio' },
-      options: ['primary', 'secondary'],
-    },
+      options: ['primary', 'secondary']
+    }
   },
   component: Button,
   tags: ['autodocs'],
-  title: 'Components/Button',
+  title: 'Components/Button'
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -21,16 +21,16 @@ export const Primary: Story = {
   args: {
     children: 'Primary',
     disabled: false,
-    variant: 'primary',
-  },
+    variant: 'primary'
+  }
 };
 
 export const Secondary: Story = {
   args: {
     children: 'Secondary',
     disabled: false,
-    variant: 'secondary',
-  },
+    variant: 'secondary'
+  }
 };
 
 export const FullWidth: Story = {
@@ -38,13 +38,13 @@ export const FullWidth: Story = {
     children: 'Full Width Primary Button',
     disabled: false,
     fullWidth: true,
-    variant: 'primary',
-  },
+    variant: 'primary'
+  }
 };
 export const AsLink: Story = {
   args: {
     as: 'a',
     children: 'Link that looks like a button',
-    variant: 'primary',
-  },
+    variant: 'primary'
+  }
 };

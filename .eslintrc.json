@@ -89,7 +89,8 @@
     "react/jsx-fragments": ["error"],
     "react/prop-types": "off",
     "react/void-dom-elements-no-children": ["error"],
-    "comma-dangle": ["error", "always-multiline"],
+    "prettier/prettier": "off",
+    "comma-dangle": ["off", "always-multiline"],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Input from './Input';
+import Input from '@/components/ui/input/Input';
 
 const meta = {
   component: Input,
   tags: ['autodocs'],
-  title: 'Components/input',
+  title: 'Components/input'
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -16,8 +16,8 @@ export const Default: Story = {
     disabled: false,
     label: 'Text',
     placeholder: 'Input',
-    type: 'text',
-  },
+    type: 'text'
+  }
 };
 
 export const DefaultPassword: Story = {
@@ -25,8 +25,8 @@ export const DefaultPassword: Story = {
     disabled: false,
     label: 'Text',
     placeholder: 'Input',
-    type: 'password',
-  },
+    type: 'password'
+  }
 };
 
 export const DefaultSearch: Story = {
@@ -34,8 +34,8 @@ export const DefaultSearch: Story = {
     disabled: false,
     label: 'Text',
     placeholder: 'Input',
-    type: 'search',
-  },
+    type: 'search'
+  }
 };
 
 export const Error: Story = {
@@ -44,8 +44,8 @@ export const Error: Story = {
     error: 'Error!',
     label: 'Text',
     placeholder: 'Input',
-    type: 'text',
-  },
+    type: 'text'
+  }
 };
 
 export const ErrorPassword: Story = {
@@ -54,8 +54,8 @@ export const ErrorPassword: Story = {
     error: 'Error!',
     label: 'Text',
     placeholder: 'Input',
-    type: 'password',
-  },
+    type: 'password'
+  }
 };
 
 export const ErrorSearch: Story = {
@@ -64,8 +64,8 @@ export const ErrorSearch: Story = {
     error: 'Error!',
     label: 'Text',
     placeholder: 'Input',
-    type: 'search',
-  },
+    type: 'search'
+  }
 };
 
 export const Disable: Story = {
@@ -73,8 +73,8 @@ export const Disable: Story = {
     disabled: true,
     label: 'Text',
     placeholder: 'Input',
-    type: 'text',
-  },
+    type: 'text'
+  }
 };
 
 export const DisablePassword: Story = {
@@ -82,8 +82,8 @@ export const DisablePassword: Story = {
     disabled: true,
     label: 'Text',
     placeholder: 'Input',
-    type: 'password',
-  },
+    type: 'password'
+  }
 };
 
 export const DisableSearch: Story = {
@@ -91,8 +91,8 @@ export const DisableSearch: Story = {
     disabled: true,
     label: 'Text',
     placeholder: 'Input',
-    type: 'search',
-  },
+    type: 'search'
+  }
 };
 
 export const DisableError: Story = {
@@ -101,8 +101,8 @@ export const DisableError: Story = {
     error: 'Error!',
     label: 'Text',
     placeholder: 'Input',
-    type: 'text',
-  },
+    type: 'text'
+  }
 };
 
 export const DisableErrorPassword: Story = {
@@ -111,8 +111,8 @@ export const DisableErrorPassword: Story = {
     error: 'Error!',
     label: 'Text',
     placeholder: 'Input',
-    type: 'password',
-  },
+    type: 'password'
+  }
 };
 
 export const DisableErrorSearch: Story = {
@@ -121,6 +121,6 @@ export const DisableErrorSearch: Story = {
     error: 'Error!',
     label: 'Text',
     placeholder: 'Input',
-    type: 'search',
-  },
+    type: 'search'
+  }
 };
