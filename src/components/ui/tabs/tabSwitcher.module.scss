@@ -1,0 +1,84 @@
+.container {
+  width: 100%;
+
+  .root {
+    display: flex;
+    width: 100%;
+
+    .tabList {
+      display: flex;
+      width: 100%;
+    }
+
+    .trigger {
+      cursor: pointer;
+
+      flex-grow: 1;
+
+      width: 100%;
+      min-width: max-content;
+      padding: 6px 24px;
+
+      text-align: center;
+      white-space: nowrap;
+
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--dark-100);
+
+      transition: all 0.2s;
+
+      .tabName {
+        color: var(--dark-100);
+      }
+
+      &:hover .tabName {
+        color: var(--accent-500);
+      }
+
+      &:hover {
+        color: var(--accent-500);
+        background-color: var(--accent-900) 26;
+        border-color: var(--accent-500);
+      }
+
+      &:active {
+        color: var(--dark-100);
+        background: var(--accent-300) 26;
+        border-color: var(--dark-100);
+      }
+
+      &:focus-visible {
+        border-radius: 2px;
+        outline: 2px solid var(--accent-7500);
+      }
+
+      &[data-state='active'],
+      &[data-state='active'] .tabName {
+        color: var(--accent-500);
+        border-color: var(--accent-500);
+      }
+
+      &[data-disabled] {
+        cursor: default;
+        opacity: 0.5;
+
+        &[data-state='active'] {
+          pointer-events: none;
+        }
+
+        &:hover {
+          border-color: var(--dark-100);
+        }
+
+        &:hover .tabName {
+          color: var(--dark-100);
+        }
+
+        &:active {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
