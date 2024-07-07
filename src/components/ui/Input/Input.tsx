@@ -9,8 +9,8 @@ import s from './Input.module.scss';
 import Close from '../../../common/assets/components/Close';
 import Eye from '../../../common/assets/components/Eye';
 import Search from '../../../common/assets/components/Search';
-import { Typography } from '@/components/ui';
 import clsx from 'clsx';
+import { Typography } from '@/components/ui/typography/Typography';
 
 export type InputProps = {
   callback?: (text: string) => void;
