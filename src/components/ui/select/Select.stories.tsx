@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
-
-import SelectUI from '@/components/ui/select/Select';
+import { SelectUI } from '@/components/ui';
 
 const meta = {
   component: SelectUI,

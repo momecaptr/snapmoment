@@ -30,7 +30,7 @@ type TextProps<E extends ElementType> = Omit<ComponentProps<E>, keyof TextOwnPro
 
 const defaultElement = 'div';
 
-const Typography = <E extends ElementType = typeof defaultElement>({
+const TypographyBasic = <E extends ElementType = typeof defaultElement>({
   as,
   children,
   className,
@@ -47,4 +47,4 @@ const Typography = <E extends ElementType = typeof defaultElement>({
   );
 };
 
-export default memo(Typography);
+export const Typography = memo(TypographyBasic);

@@ -1,8 +1,8 @@
-import type { Preview } from '@storybook/react'
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/700.css";
-import "../src/styles/index.scss";
-import {themes} from "@storybook/theming";
+import type { Preview } from '@storybook/react';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/700.css';
+import '../src/styles/index.scss';
+import { themes } from '@storybook/theming';
 const preview: Preview = {
   parameters: {
     docs: {
@@ -28,6 +28,6 @@ const preview: Preview = {
       },
     },
   },
-}
+};
 
-export default preview
+export default preview;
