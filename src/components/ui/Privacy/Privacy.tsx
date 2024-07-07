@@ -1,7 +1,7 @@
 import React from 'react';
-import Typography from '@/components/Typography/Typography';
 import s from './Privacy.module.scss';
 import ArrowForwardOutline from '@/common/assets/components/ArrowBackOutline';
+import { Typography } from '@/components/ui';
 
 type PrivacyProps = {
   title: string;
