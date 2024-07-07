@@ -6,7 +6,7 @@
 .semi-bold_small_text {
   margin: 0;
   font-weight: var(--font-weight-bold);
-  color: var(--color-light-100);
+  color: var(--light-100);
 }
 
 .large {
@@ -15,7 +15,7 @@
   font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-xl);
-  color: var(--color-light-100);
+  color: var(--light-100);
 }
 
 .regular_text_16,
@@ -26,7 +26,7 @@
 .error {
   margin: 0;
   font-weight: var(--font-weight-regular);
-  color: var(--color-light-100);
+  color: var(--light-100);
 }
 
 .regular_link,
@@ -37,7 +37,7 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-s);
-  color: var(--color-info-500);
+  color: var(--info-500);
   text-decoration: underline;
 }
 
