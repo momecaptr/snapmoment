@@ -1,3 +1,4 @@
+'use client';
 import { ElementType, useState } from 'react';
 
 import Bookmark from '@/common/assets/components/Bookmark';
@@ -21,16 +22,46 @@ type MainLinksProps = {
   value: LinksValue;
 };
 
-type LinksValue = '' | 'favorites' | 'home' | 'logout' | 'message' | 'person' | 'plus' | 'search' | 'statistics';
-type MainLinksName = 'Create' | 'Favorites' | 'Home' | 'Log Out' | 'Messenger' | 'My Profile' | 'Search' | 'Statistics';
+// type LinksValue = '' | 'favorites' | 'home' | 'logout' | 'message' | 'person' | 'plus' | 'search' | 'statistics';
+type LinksValue =
+  | ''
+  | 'favorites'
+  | 'forgot-password'
+  | 'home'
+  | 'logout'
+  | 'message'
+  | 'person'
+  | 'plus'
+  | 'search'
+  | 'sign-in'
+  | 'sign-up'
+  | 'statistics';
+// type MainLinksName = 'Create' | 'Favorites' | 'Home' | 'Log Out' | 'Messenger' | 'My Profile' | 'Search' | 'Statistics';
+type MainLinksName =
+  | 'Create'
+  | 'Favorites'
+  | 'Forgot Password'
+  | 'Home'
+  | 'Log Out'
+  | 'Messenger'
+  | 'My Profile'
+  | 'Search'
+  | 'Sign Up'
+  | 'Sign in'
+  | 'Statistics';
 export const SideBar = () => {
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
   // path заменить на реальные пути
   const mainLinks: MainLinksProps[] = [
-    { IconComponent: Home, name: 'Home', path: 'home', value: 'home' },
-    { IconComponent: PlusSquare, name: 'Create', path: 'add', value: 'plus' },
-    { IconComponent: Person, name: 'My Profile', path: 'profile', value: 'person' },
-    { IconComponent: MessageCircle, name: 'Messenger', path: 'messages', value: 'message' },
+    // { IconComponent: Home, name: 'Home', path: 'home', value: 'home' },
+    // { IconComponent: PlusSquare, name: 'Create', path: 'add', value: 'plus' },
+    // { IconComponent: Person, name: 'My Profile', path: 'profile', value: 'person' },
+    // { IconComponent: MessageCircle, name: 'Messenger', path: 'messages', value: 'message' },
+    // { IconComponent: SearchOutline, name: 'Search', path: 'search', value: 'search' },
+    { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
+    { IconComponent: PlusSquare, name: 'Sign in', path: 'sign-in', value: 'plus' },
+    { IconComponent: Person, name: 'Forgot Password', path: 'forgot-password', value: 'person' },
+    { IconComponent: MessageCircle, name: 'Sign Up', path: 'sign-up', value: 'message' },
     { IconComponent: SearchOutline, name: 'Search', path: 'search', value: 'search' },
     {
       IconComponent: TrendingUp,

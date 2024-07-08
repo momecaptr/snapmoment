@@ -3,9 +3,13 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import { AlertProvider } from '@/components/ui/alert/model/AlertProvider';
+import { SideBar } from '@/components/ui/sideBar/SideBar';
+import Header from '@/header/Header';
 import { Inter } from 'next/font/google';
 
 import '../styles/index.scss';
+
+import s from './layout.module.scss';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +26,17 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <body className={inter.className}>
-        <AlertProvider>{children}</AlertProvider>
+        <AlertProvider>
+          <div className={s.layout}>
+            <div className={s.header}>
+              <Header isAuthorized />
+            </div>
+            <div className={s.sidebar}>
+              <SideBar />
+            </div>
+            <div className={s.content}>{children}</div>
+          </div>
+        </AlertProvider>
       </body>
     </html>
   );
