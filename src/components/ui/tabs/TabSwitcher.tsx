@@ -23,7 +23,7 @@ export const TabSwitcher = ({ className, onValueChange, tabs, value }: Props) =>
 
   return (
     <div className={clsx(s.container, className)}>
-      <Tabs.Root activationMode={'manual'} className={s.root} onValueChange={onValueChange} value={value}>
+      <Tabs.Root activationMode={'automatic'} className={s.root} onValueChange={onValueChange} value={value}>
         <Tabs.List className={s.tabList}>
           {tabs.map((tab) => (
             <Tabs.Trigger
