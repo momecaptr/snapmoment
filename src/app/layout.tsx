@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import React from 'react';
 
+import { AlertProvider } from '@/components/ui/alert/model/AlertProvider';
 import { Inter } from 'next/font/google';
 
 import '../styles/index.scss';
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AlertProvider>{children}</AlertProvider>
+      </body>
     </html>
   );
 }
