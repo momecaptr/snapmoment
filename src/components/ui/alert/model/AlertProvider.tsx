@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+'use client';
+import { ReactNode, useContext } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useAlertProvider } from '@/components/ui/alert/lib/hooks/useAlertProvider';
@@ -18,4 +19,13 @@ export const AlertProvider = ({ children }: Props) => {
       {createPortal(<Alert alerts={alerts} removeAlert={removeAlert} />, document.body)}
     </AlertContext.Provider>
   );
+};
+export const useAlert = () => {
+  const context = useContext(AlertContext);
+
+  if (context === undefined) {
+    throw new Error('useAlert must be used within an AlertProvider');
+  }
+
+  return context;
 };
