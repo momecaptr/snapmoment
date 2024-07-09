@@ -19,6 +19,8 @@ import {
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { clsx } from 'clsx';
 
+import s from './DatePicker.module.scss';
+
 const currentDate = new Date().getDate();
 const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
@@ -132,27 +134,27 @@ export const DatePickerPopupContent = ({
   }
 
   return (
-    <div className={'CalendarPanel'}>
-      <div className={'CalendarPanel__header'}>
-        <div className={'CalendarPanel__date'} data-testid={'date-picker-popup-month'}>
+    <div className={s.calendarPanel}>
+      <div className={s.calendarPanelHeader}>
+        <div className={s.calendarPanelDate}>
           {months[panelMonth]} {panelYear}
         </div>
-        <div className={'CalendarPanel__buttons'}>
-          <div className={'CalendarPanel__buttons-left'}>
-            <button className={'popup-btn-month popup-prev-month'} onClick={prevMonth}>
+        <div className={s.calendarPanelButtons}>
+          <div className={s.calendarPanelButtonsLeft}>
+            <button className={s.popupBtnMonth} onClick={prevMonth}>
               <ChevronLeftIcon />
             </button>
           </div>
-          <div className={'CalendarPanel__buttons-right'}>
-            <button className={'popup-btn-month popup-next-month'} onClick={nextMonth}>
+          <div className={s.calendarPanelButtonsRight}>
+            <button className={s.popupBtnMonth} onClick={nextMonth}>
               <ChevronRightIcon />
             </button>
           </div>
         </div>
       </div>
-      <div className={'CalendarPanel__content'}>
+      <div className={s.calendarPanelContent}>
         {daysOfTheWeek.map((weekDay) => (
-          <div className={'CalendarPanelItem CalendarPanelItem--weekDay'} key={weekDay}>
+          <div className={clsx(s.calendarPanelItem, s.calendarPanelItemWeekDay)} key={weekDay}>
             {weekDay}
           </div>
         ))}
@@ -181,23 +183,23 @@ export const DatePickerPopupContent = ({
           return (
             <div
               className={clsx(
-                'CalendarPanelItem',
-                isCurrentDate && 'CalendarPanelItem--currentDate',
-                isTodayDate && 'CalendarPanelItem--today',
-                isNotCurrent && 'CalendarPanelItem--not-current',
-                !isDateInRange && 'CalendarPanelItem--not-in-range',
-                daysOff && 'CalendarPanelItem--daysOff',
-                isSelectedStartDate && 'CalendarPanelItem--selectedStartDate',
-                isSelectedEndDate && 'CalendarPanelItem--selectedEndDate',
-                isSelectedDate && 'CalendarPanelItem--selectedDate',
-                isSelectedStartAndEndDate && 'CalendarPanelItem--selectedStartAndEndDate'
+                s.calendarPanelItem,
+                isCurrentDate && s.calendarPanelItemCurrentDate,
+                isTodayDate && s.calendarPanelItemToday,
+                isNotCurrent && s.calendarPanelItemNotCurrent,
+                !isDateInRange && s.calendarPanelItemNotInRange,
+                daysOff && s.calendarPanelItemDaysOff,
+                isSelectedStartDate && s.calendarPanelItemSelectedStartDate,
+                isSelectedEndDate && s.calendarPanelItemSelectedEndDate,
+                isSelectedDate && s.calendarPanelItemSelectedDate,
+                isSelectedStartAndEndDate && s.calendarPanelItemSelectedStartAndEndDate
               )}
-              data-testid={'date-picker-popup-cell'}
               key={`${cell.date}-${cell.month}-${cell.year}`}
               onClick={() => isDateInRange && onDateSelect(cell)}
               onDoubleClick={() => isDateInRange && onDateSelectOne(cell)}
+              onKeyDown={(e) => e.key === 'Enter' && isDateInRange && onDateSelect(cell)}
             >
-              <span className={'CalendarPanelItem__date'} tabIndex={0}>
+              <span className={s.calendarPanelItemDate} tabIndex={0}>
                 {cell.date}
               </span>
             </div>
