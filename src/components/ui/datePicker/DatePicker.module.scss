@@ -1,14 +1,6 @@
 @import 'src/styles/mixins';
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 12px;
-}
-
-.DatePicker {
+.datePicker {
   position: relative;
   display: inline-block;
 
@@ -24,7 +16,7 @@ body {
   }
 }
 
-.DatePicker__input {
+.datePickerInput {
   cursor: pointer;
 
   padding: 6px 60px 6px 12px;
@@ -39,16 +31,16 @@ body {
   }
 }
 
-.showPopup .DatePicker__input {
+.showPopup .datePickerInput {
   cursor: text;
 }
 
-.DatePicker__input--invalid {
+.datePickerInputInvalid {
   color: red;
   border-color: red;
 }
 
-.DatePicker__popup {
+.datePickerPopup {
   position: absolute;
   top: 105%;
   left: 0;
@@ -60,18 +52,18 @@ body {
   border-radius: 2px;
 }
 
-.CalendarPanel__header {
+.calendarPanelHeader {
   display: flex;
   justify-content: space-between;
   border-bottom: none;
 }
 
-.CalendarPanel__date {
+.calendarPanelDate {
   margin-top: 8px;
   text-align: center;
 }
 
-.CalendarPanel__content {
+.calendarPanelContent {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(7, 1fr);
@@ -80,13 +72,13 @@ body {
   margin-bottom: 12px;
 }
 
-.CalendarPanel__buttons {
+.calendarPanelButtons {
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
 }
 
-.popup-btn-month {
+.popupBtnMonth {
   cursor: pointer;
 
   display: flex;
@@ -114,18 +106,18 @@ body {
   }
 
   &:focus {
-    border: 1px solid #4c8dff !important;
+    border: 1px solid var(--accent-300) !important;
     border-radius: 50%;
-    outline: 1px solid #4c8dff !important;
+    outline: 1px solid var(--accent-300) !important;
   }
 }
 
-.CalendarPanel__buttons-right,
-.CalendarPanel__buttons-left {
+.calendarPanelButtonsRight,
+.calendarPanelButtonsLeft {
   display: flex;
 }
 
-.CalendarPanelItem {
+.calendarPanelItem {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -136,16 +128,16 @@ body {
   }
 }
 
-.CalendarPanelItem--weekDay {
+.calendarPanelItemWeekDay {
   margin-bottom: 12px;
   color: var(--dark-300);
 }
 
-.CalendarPanelItem--today {
+.calendarPanelItemToday {
   color: red;
 }
 
-.CalendarPanelItem__date {
+.calendarPanelItemDate {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,47 +154,47 @@ body {
   }
 
   &:focus {
-    border: 1px solid #4c8dff !important;
+    border: 1px solid var(--accent-300) !important;
     border-radius: 50%;
-    outline: 1px solid #4c8dff !important;
+    outline: 1px solid var(--accent-300) !important;
   }
 }
 
-.CalendarPanelItem--currentDate .CalendarPanelItem__date {
+.calendarPanelItemCurrentDate .calendarPanelItemDate {
   color: var(--info-500);
 }
 
-.CalendarPanelItem--not-current .CalendarPanelItem__date {
-  color: #8d9094;
+.calendarPanelItemNotCurrent .calendarPanelItemDate {
+  color: var(--light-900);
 }
 
-.CalendarPanelItem--not-in-range {
+.calendarPanelItemNotInRange {
   cursor: not-allowed;
 }
 
-.CalendarPanelItem--not-in-range .CalendarPanelItem__date {
-  color: #8d9094;
+.calendarPanelItemNotInRange .calendarPanelItemDate {
+  color: var(--light-900);
 }
 
-.CalendarPanelItem--daysOff {
+.calendarPanelItemDaysOff {
   color: var(--danger-300);
 }
 
-.CalendarPanelItem--selectedStartDate .CalendarPanelItem__date {
-  background-color: var(--info-900);
+.calendarPanelItemSelectedStartDate .calendarPanelItemDate {
+  background-color: var(--accent-900);
   border-radius: 50% 0 0 50%;
 }
 
-.CalendarPanelItem--selectedEndDate .CalendarPanelItem__date {
-  background-color: var(--info-900);
+.calendarPanelItemSelectedEndDate .calendarPanelItemDate {
+  background-color: var(--accent-900);
   border-radius: 0 50% 50% 0;
 }
 
-.CalendarPanelItem--selectedDate .CalendarPanelItem__date {
-  background-color: var(--info-900);
+.calendarPanelItemSelectedDate .calendarPanelItemDate {
+  background-color: var(--accent-900);
   border-radius: 0;
 }
 
-.CalendarPanelItem--selectedStartAndEndDate .CalendarPanelItem__date {
+.calendarPanelItemSelectedStartAndEndDate .calendarPanelItemDate {
   border-radius: 50%;
 }

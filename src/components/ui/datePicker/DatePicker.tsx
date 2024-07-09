@@ -8,7 +8,7 @@ import { useInputValueRange } from '@/components/ui/datePicker/lib/hooks/useInpu
 import { useShowPopup } from '@/components/ui/datePicker/lib/hooks/useShowPopup';
 import { clsx } from 'clsx';
 
-import './DatePicker.scss';
+import s from './DatePicker.module.scss';
 
 export type RangeDate = {
   endDate: Date;
@@ -44,9 +44,9 @@ export const DatePicker = ({ max, min, onChange, value }: DatePickerProps) => {
   };
 
   return (
-    <div className={`DatePicker ${showPopup && 'showPopup'}`} ref={elementRef}>
+    <div className={clsx(s.datePicker, showPopup && s.showPopup)} ref={elementRef}>
       <input
-        className={clsx('DatePicker__input', !isValidInputValue && 'DatePicker__input--invalid')}
+        className={clsx(s.datePickerInput, !isValidInputValue && s.datePickerInputInvalid)}
         onChange={onInputValueChange}
         onClick={handleInputClick}
         onKeyDown={onKeyDown}
@@ -56,7 +56,7 @@ export const DatePicker = ({ max, min, onChange, value }: DatePickerProps) => {
       <CalendarOutline />
 
       {showPopup && (
-        <div className={'DatePicker__popup'}>
+        <div className={s.datePickerPopup}>
           <DatePickerPopupContent
             inputValueDate={inputValueDate}
             max={max}
