@@ -18,7 +18,6 @@
 
 .primary {
   background-color: var(--accent-500);
-  box-shadow: 0 4px 18px rgb(140 97 255 / 35%);
 
   &:focus-visible {
     background: var(--accent-300);
@@ -40,7 +39,6 @@
 
 .secondary {
   background-color: var(--dark-500);
-  box-shadow: 0 2px 10px 0 rgb(109 109 109 / 25%);
 
   &:focus-visible {
     background: var(--dark-100);
