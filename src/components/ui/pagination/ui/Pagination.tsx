@@ -15,7 +15,7 @@ type Props = {
 export const Pagination = ({ currentPage, setCurrentPage, totalPages }: Props) => {
   const pageNumbers = usePagination({
     currentPage,
-    totalPages,
+    totalPages
   });
 
   return (

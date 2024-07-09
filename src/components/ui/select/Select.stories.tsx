@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
 
-import SelectUI from '@/components/ui/select/Select';
+import { SelectUI } from '@/components/ui/select/Select';
 
 const meta = {
   component: SelectUI,
@@ -11,10 +11,10 @@ const meta = {
       <div style={{ padding: '20px' }}>
         <Story />
       </div>
-    ),
+    )
   ],
   tags: ['autodocs'],
-  title: 'Components/SelectUI',
+  title: 'Components/SelectUI'
 } satisfies Meta<typeof SelectUI>;
 
 export default meta;
@@ -22,6 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 const Template = (args: any) => {
   const [value, setValue] = useState(args.value);
+
   return (
     <SelectUI
       {...args}
@@ -39,9 +40,9 @@ export const Default: Story = {
       { text: 'Apple', value: 'apple' },
       { text: 'Banana', value: 'banana' },
       { text: 'Smetana', value: 'smetana' },
-      { text: 'Nirvana', value: 'nirvana' },
+      { text: 'Nirvana', value: 'nirvana' }
     ],
-    value: 'apple',
+    value: 'apple'
   },
-  render: (args) => <Template {...args} />,
+  render: (args) => <Template {...args} />
 };

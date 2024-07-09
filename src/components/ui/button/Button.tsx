@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, ReactN
 
 import clsx from 'clsx';
 
-import s from './button.module.scss';
+import s from './Button.module.scss';
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T;

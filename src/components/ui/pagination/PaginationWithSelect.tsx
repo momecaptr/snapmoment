@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 
 import { useQueryParams } from '@/common/hooks/useQueryParams';
 import { Pagination } from '@/components/ui/pagination/ui/Pagination';
-import SelectUI from '@/components/ui/select/Select';
-import Typography from '@/components/ui/typography/Typography';
+import { SelectUI } from '@/components/ui/select/Select';
+import { Typography } from '@/components/ui/typography/Typography';
 
 import s from './PaginationWithSelect.module.scss';
 
@@ -28,7 +28,7 @@ export const PaginationWithSelect = ({
   selectOptions,
   setCurrentPage,
   setItemsPerPage,
-  totalItems,
+  totalItems
 }: Props) => {
   disabled = totalItems <= Number(selectOptions[0].value);
   const { currentPageSearchParam } = useQueryParams();
@@ -44,7 +44,8 @@ export const PaginationWithSelect = ({
     <div className={s.box}>
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
       <div className={s.boxItem}>
-        <Typography className={s.firstText}>{t('paginationWithSelect.show')} </Typography>
+        {/*<Typography className={s.firstText}>{t('paginationWithSelect.show')} </Typography>*/}
+        <Typography className={s.firstText}>Show </Typography>
         <SelectUI
           className={'select'}
           disabled={disabled}
@@ -52,7 +53,8 @@ export const PaginationWithSelect = ({
           selectOptions={selectOptions}
           value={itemsPerPage.toString()}
         />
-        <Typography className={s.lastText}>{t('paginationWithSelect.onPage')}</Typography>
+        {/*<Typography className={s.lastText}>{t('paginationWithSelect.onPage')}</Typography>*/}
+        <Typography className={s.lastText}>on page</Typography>
       </div>
     </div>
   );

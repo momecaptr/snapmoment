@@ -1,5 +1,5 @@
-import { useDebounce } from '@/common/hooks/useDebounce';
 import { initCurrentPage, selectOptionPagination } from '@/common/consts/globalVariables';
+import { useDebounce } from '@/common/hooks/useDebounce';
 import { useRouter } from 'next/router';
 
 export const useQueryParams = () => {
@@ -17,11 +17,13 @@ export const useQueryParams = () => {
 
   const setSearchQuery = (searchQuery: string) => {
     const newQuery = { ...query };
+
     searchQuery === '' ? delete newQuery.search : (newQuery.search = searchQuery);
     router.push({ pathname: router.pathname, query: newQuery });
   };
   const setCurrentPageQuery = (currentPageQuery: number) => {
     const newQuery = { ...query };
+
     currentPageQuery === Number(initCurrentPage)
       ? delete newQuery.currentPage
       : (newQuery.currentPage = currentPageQuery.toString());
@@ -30,6 +32,7 @@ export const useQueryParams = () => {
 
   const setItemsPerPageQuery = (itemsPerPageQuery: number) => {
     const newQuery = { ...query };
+
     itemsPerPageQuery === Number(selectOptionPagination[0].value)
       ? delete newQuery.itemsPerPage
       : (newQuery.itemsPerPage = itemsPerPageQuery.toString());
@@ -52,6 +55,7 @@ export const useQueryParams = () => {
     }
 
     const newQuery = { ...query };
+
     newOrderBy ? (newQuery.orderBy = newOrderBy) : delete newQuery.orderBy;
     router.push({ pathname: router.pathname, query: newQuery });
   };
@@ -77,6 +81,6 @@ export const useQueryParams = () => {
     setCurrentPageQuery,
     setItemsPerPageQuery,
     setSearchQuery,
-    setSortByQuery,
+    setSortByQuery
   };
 };

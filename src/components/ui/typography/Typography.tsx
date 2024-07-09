@@ -5,19 +5,19 @@ import clsx from 'clsx';
 import s from './Typography.module.scss';
 
 type TypographyVariant =
-  | 'body1'
-  | 'body2'
-  | 'caption'
-  | 'error'
+  | 'bold_text_14'
+  | 'bold_text_16'
   | 'h1'
   | 'h2'
   | 'h3'
   | 'large'
-  | 'link1'
-  | 'link2'
-  | 'overline'
-  | 'subtitle1'
-  | 'subtitle2';
+  | 'medium_text_14'
+  | 'regular_link'
+  | 'regular_text_14'
+  | 'regular_text_16'
+  | 'semi_bold_small_text'
+  | 'small_link'
+  | 'small_text';
 
 type TextOwnProps<E extends ElementType = ElementType> = {
   as?: E;
@@ -30,11 +30,11 @@ type TextProps<E extends ElementType> = Omit<ComponentProps<E>, keyof TextOwnPro
 
 const defaultElement = 'div';
 
-const Typography = <E extends ElementType = typeof defaultElement>({
+const TypographyBasic = <E extends ElementType = typeof defaultElement>({
   as,
   children,
   className,
-  variant = 'body1',
+  variant = 'regular_text_16',
   ...otherProps
 }: TextProps<E>) => {
   const classNames = clsx(s[variant], className);
@@ -47,4 +47,4 @@ const Typography = <E extends ElementType = typeof defaultElement>({
   );
 };
 
-export default memo(Typography);
+export const Typography = memo(TypographyBasic);

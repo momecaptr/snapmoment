@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Typography from './Typography';
+import { Typography } from '@/components/ui/typography/Typography';
 
 const meta = {
   argTypes: {
@@ -11,113 +11,113 @@ const meta = {
         'h1',
         'h2',
         'h3',
-        'body1',
-        'body2',
-        'subtitle1',
-        'subtitle2',
-        'caption',
-        'overline',
-        'link1',
-        'link2',
-        'error',
-      ],
-    },
+        'regular_text_16',
+        'bold_text_16',
+        'regular_text_14',
+        'medium_text_14',
+        'bold_text_14',
+        'small_text',
+        'semi_bold_small_text',
+        'regular_link',
+        'small_link'
+      ]
+    }
   },
   component: Typography,
   tags: ['autodocs'],
-  title: 'Components/typography',
+  title: 'Components/Typography'
 } satisfies Meta<typeof Typography>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Large: Story = {
+export const MyLarge: Story = {
   args: {
     children: 'Card content',
-    variant: 'large',
-  },
+    variant: 'large'
+  }
 };
 
-export const H1: Story = {
+export const MyH1: Story = {
   args: {
     children: 'Card content',
-    variant: 'h1',
-  },
+    variant: 'h1'
+  }
 };
 
-export const H2: Story = {
+export const MyH2: Story = {
   args: {
     children: 'Card content',
-    variant: 'h2',
-  },
+    variant: 'h2'
+  }
 };
 
-export const H3: Story = {
+export const MyH3: Story = {
   args: {
     children: 'Card content',
-    variant: 'h3',
-  },
+    variant: 'h3'
+  }
 };
 
-export const Body1: Story = {
+export const Regular_text_16: Story = {
   args: {
     children: 'Card content',
-    variant: 'body1',
-  },
+    variant: 'regular_text_16'
+  }
 };
 
-export const Body2: Story = {
+export const Bold_text_16: Story = {
   args: {
     children: 'Card content',
-    variant: 'body2',
-  },
+    variant: 'bold_text_16'
+  }
 };
 
-export const Subtitle1: Story = {
+export const Regular_text_14: Story = {
   args: {
     children: 'Card content',
-    variant: 'subtitle1',
-  },
+    variant: 'regular_text_14'
+  }
 };
 
-export const Subtitle2: Story = {
+export const Medium_text_14: Story = {
   args: {
     children: 'Card content',
-    variant: 'subtitle2',
-  },
+    variant: 'medium_text_14'
+  }
 };
 
-export const Caption: Story = {
+export const Bold_text_14: Story = {
   args: {
     children: 'Card content',
-    variant: 'caption',
-  },
+    variant: 'bold_text_14'
+  }
 };
 
-export const Overline: Story = {
+export const Small_text: Story = {
   args: {
     children: 'Card content',
-    variant: 'overline',
-  },
+    variant: 'small_text'
+  }
 };
 
-export const Link1: Story = {
+export const Semi_bold_small_text: Story = {
   args: {
     children: 'Card content',
-    variant: 'link1',
-  },
+    variant: 'semi_bold_small_text'
+  }
 };
 
-export const Link2: Story = {
+export const Regular_link: Story = {
   args: {
     children: 'Card content',
-    variant: 'link2',
-  },
+    variant: 'regular_link'
+  }
 };
 
-export const Error: Story = {
+export const Small_link: Story = {
   args: {
     children: 'Card content',
-    variant: 'error',
-  },
+    variant: 'small_link'
+  }
 };

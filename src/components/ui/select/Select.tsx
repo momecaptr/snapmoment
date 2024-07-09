@@ -1,10 +1,10 @@
 import { ArrowIosDownOutline } from '@/common/assets/components';
 import { selectOptionsType } from '@/components/ui/pagination/PaginationWithSelect';
-import Typography from '@/components/ui/typography/Typography';
+import { Typography } from '@/components/ui/typography/Typography';
 import * as Select from '@radix-ui/react-select';
 import clsx from 'clsx';
 
-import s from './Select.module.scss';
+import s from '@/components/ui/select/Select.module.scss';
 
 type Props = {
   className?: string;
@@ -13,7 +13,7 @@ type Props = {
   selectOptions: selectOptionsType[];
   value?: string;
 };
-const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: Props) => {
+export const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: Props) => {
   const selectClasses = {
     button: clsx(className && s.button, s.className),
     content: clsx(s.selectContent),
@@ -21,7 +21,7 @@ const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: 
     root: s.selectRoot,
     selectItem: clsx(s.selectItem, className && s.className),
     trigger: clsx(s.selectTrigger, { [s.className]: className }, disabled && s.selectTriggerDisabled),
-    viewport: clsx(s.selectViewport),
+    viewport: clsx(s.selectViewport)
   };
 
   return (
@@ -29,7 +29,7 @@ const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: 
       <Select.Root disabled={disabled} onValueChange={onValueChange}>
         <Select.Trigger aria-label={'select'} className={selectClasses.trigger} asChild>
           <button>
-            <Typography className={s.selectVariant} variant={'body2'}>
+            <Typography className={s.selectVariant} variant={'regular_text_14'}>
               {selectOptions.find((el) => el.value === value)?.text || selectOptions[0].text}
             </Typography>
             <ArrowIosDownOutline className={selectClasses.icon} />
@@ -42,7 +42,7 @@ const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: 
                 return (
                   <Select.Item className={selectClasses.selectItem} key={option.value} value={option.value}>
                     <Select.ItemText className={s.selectText}>
-                      <Typography variant={'body2'}>{option.text}</Typography>
+                      <Typography variant={'regular_text_14'}>{option.text}</Typography>
                     </Select.ItemText>
                   </Select.Item>
                 );
@@ -54,5 +54,3 @@ const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: 
     </div>
   );
 };
-
-export default SelectUI;
