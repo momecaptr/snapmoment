@@ -1,9 +1,9 @@
 import { CSSProperties, ComponentPropsWithoutRef } from 'react';
 
+import CloseOutline from '@/common/assets/components/CloseOutline';
 import { Card } from '@/components/ui/card/Card';
 import { Typography } from '@/components/ui/typography/Typography';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import { clsx } from 'clsx';
 
 import s from './Modal.module.scss';
@@ -28,7 +28,7 @@ export const Modal = ({ children, className, style, title, ...props }: Props) =>
             </Typography>
             <Dialog.Close asChild>
               <button aria-label={'Close'} className={s.closeBtn}>
-                <Cross2Icon />
+                <CloseOutline />
               </button>
             </Dialog.Close>
           </div>

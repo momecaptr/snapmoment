@@ -1,43 +1,55 @@
 import type { Meta } from '@storybook/react';
 
-import { useState } from 'react';
+import StoreProvider from '@/app/StoreProvider';
+import useAlert from '@/components/ui/alert/lib/hooks/useAlert';
+import Alert from '@/components/ui/alert/ui/Alert';
 
-import { AlertProvider } from '@/components/ui/alert/model/AlertProvider';
-import { AlertProps } from '@/components/ui/alert/types/types';
-import { Alert } from '@/components/ui/alert/ui/Alert';
-
-export default {
+const meta = {
   component: Alert,
   decorators: [
-    (Story) => (
-      <AlertProvider>
+    (Story: any) => (
+      <StoreProvider>
         <Story />
-      </AlertProvider>
+      </StoreProvider>
     )
   ],
   tags: ['autodocs'],
   title: 'Components/Alert'
-} as Meta;
+} satisfies Meta<typeof Alert>;
+
+export default meta;
 
 const Template = (args: any) => {
-  const [alerts, setAlerts] = useState<AlertProps[]>(args.alerts);
+  const { errorAlert, successAlert } = useAlert();
 
-  const removeAlert = (id: string) => {
-    setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
+  const alertVariant = () => {
+    if (args.type === 'success') {
+      successAlert({ message: 'Now you see the success message!' });
+    } else {
+      errorAlert({ message: 'Now you see the error message!' });
+    }
   };
 
-  return <Alert alerts={alerts} removeAlert={removeAlert} />;
+  return (
+    <>
+      <button onClick={alertVariant} style={{ backgroundColor: '#397df6' }}>
+        Сlick to see the alerts{' '}
+      </button>
+      <Alert />
+    </>
+  );
 };
 
 export const Success = {
   args: {
-    alerts: [{ id: '1', message: 'Now you see the success message!', type: 'success' }]
+    type: 'success'
   },
   render: (args: any) => <Template {...args} />
 };
+
 export const Error = {
   args: {
-    alerts: [{ id: '2', message: 'Now you see the error message!', type: 'error' }]
+    type: 'error'
   },
   render: (args: any) => <Template {...args} />
 };
