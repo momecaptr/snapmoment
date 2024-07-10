@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 // eslint-disable-next-line import/no-named-as-default
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -8,8 +9,8 @@ import { Button } from '@/components/ui/button/Button';
 import { Card } from '@/components/ui/card/Card';
 import { FormTextfield } from '@/components/ui/forms/FormTextfield';
 import { Typography } from '@/components/ui/typography/Typography';
-import useForgotPassword from '@/pages/auth/forgotPassword/lib/hooks/useForgotPassword';
-import SentEmailModal from '@/pages/auth/forgotPassword/ui/sentEmailModal/SentEmailModal';
+import useForgotPassword from '@/pagesComponents/auth/forgotPassword/lib/hooks/useForgotPassword';
+import SentEmailModal from '@/pagesComponents/auth/forgotPassword/ui/sentEmailModal/SentEmailModal';
 import Link from 'next/link';
 
 import s from './ForgotPassword.module.scss';
