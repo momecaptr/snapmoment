@@ -4,8 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/common/hooks/useAppDispatch';
 import { ModalKey } from '@/common/hooks/useModal';
 import { appSlice } from '@/lib/features/app/model/appSlice';
-import ForgotPasswordSchema, {
-  ForgotPasswordFormValues
+import {
+  ForgotPasswordFormValues,
+  ForgotPasswordSchema
 } from '@/pages/auth/forgotPassword/model/forgotPassword.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
