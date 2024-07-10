@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 
 import { Typography } from '@/components/ui/typography/Typography';

@@ -33,17 +33,18 @@
   color: var(--light-100);
   text-decoration: none;
 
-  background-color: transparent;
-  box-shadow: none;
+  // background-color: transparent;
+  // box-shadow: none;
 
   &:active,
   &:hover {
-    background-color: transparent;
+    // background-color: transparent;
 
     .icon,
     span {
       color: var(--accent-100);
-      stroke: transparent;
+
+      // stroke: transparent;
     }
   }
 

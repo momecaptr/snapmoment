@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 import React from 'react';
 
-import { AlertProvider } from '@/components/ui/alert/model/AlertProvider';
+import StoreProvider from '@/app/StoreProvider';
+import Alert from '@/components/ui/alert/ui/Alert';
 import { SideBar } from '@/components/ui/sideBar/SideBar';
 import Header from '@/header/Header';
 import { Inter } from 'next/font/google';
@@ -26,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <body className={inter.className}>
-        <AlertProvider>
+        <StoreProvider>
           <div className={s.layout}>
             <div className={s.header}>
               <Header isAuthorized />
@@ -36,7 +37,8 @@ export default function RootLayout({
             </div>
             <div className={s.content}>{children}</div>
           </div>
-        </AlertProvider>
+          <Alert />
+        </StoreProvider>
       </body>
     </html>
   );

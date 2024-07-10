@@ -1,12 +1,13 @@
-'use client';
 import React from 'react';
 
-import SignIn from '@/components/auth/sign-in/SignIn';
+import EmailVerification from '@/components/auth/emailVerification/EmailVerification';
 
-export default function Page() {
+const Page = () => {
   return (
     <div>
-      <SignIn />
+      <EmailVerification />
     </div>
   );
-}
+};
+
+export default Page;
