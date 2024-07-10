@@ -1,27 +1,46 @@
 .header {
+  display: flex;
+  justify-content: center;
+
   width: 100%;
   height: auto;
-  padding: 12px 60px;
-  border-bottom: 1px solid var(--dark-500);
+
+  background-color: var(--dark-700);
+  border-bottom: 1px solid var(--dark-300);
 }
 
 .wrapper {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  width: 100%;
+  margin: 0 60px;
 }
 
-.items {
+.logoWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 35%;
+  margin: 6px 0;
+}
+
+.itemsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.item:nth-child(n) {
+  display: flex;
+  margin-right: 48px;
+}
+
+.item:last-child {
+  margin-right: 0;
 }
 
 .logo {
   display: flex;
   justify-content: flex-start;
-  width: 210px;
+  width: 200px;
   height: auto;
 }
 
@@ -35,5 +54,6 @@
 }
 
 .bell {
-  margin-right: 48px;
+  width: 24px;
+  height: 24px;
 }
