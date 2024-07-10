@@ -4,13 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@/common/hooks/useAppDispatch';
 import { ModalKey } from '@/common/hooks/useModal';
 import { appSlice } from '@/lib/features/app/model/appSlice';
-import {
-  ForgotPasswordFormValues,
-  ForgotPasswordSchema
+import ForgotPasswordSchema, {
+  ForgotPasswordFormValues
 } from '@/pages/auth/forgotPassword/model/forgotPassword.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export const useForgotPassword = () => {
+const useForgotPassword = () => {
   const {
     control,
     formState: { isValid },
@@ -36,3 +35,5 @@ export const useForgotPassword = () => {
     t
   };
 };
+
+export default useForgotPassword;

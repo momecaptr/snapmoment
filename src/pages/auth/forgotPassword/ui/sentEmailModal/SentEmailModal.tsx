@@ -12,7 +12,7 @@ type Props = {
   setOpen: (value: boolean) => void;
 };
 
-export const SentEmailModal = memo(({ open, setOpen }: Props) => {
+const SentEmailModal = memo(({ open, setOpen }: Props) => {
   const handleOnClose = () => {
     // router.navigate(path.login)
     setOpen(false);
@@ -39,3 +39,5 @@ export const SentEmailModal = memo(({ open, setOpen }: Props) => {
     </>
   );
 });
+
+export default SentEmailModal;

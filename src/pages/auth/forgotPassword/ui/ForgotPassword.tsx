@@ -4,29 +4,19 @@
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import { ModalKey, useModal } from '@/common/hooks/useModal';
-import useAlert from '@/components/ui/alert/lib/hooks/useAlert';
 import { Button } from '@/components/ui/button/Button';
 import { Card } from '@/components/ui/card/Card';
 import { FormTextfield } from '@/components/ui/forms/FormTextfield';
 import { Typography } from '@/components/ui/typography/Typography';
-import { useForgotPassword } from '@/pages/auth/forgotPassword/lib/hooks/useForgotPassword';
-import { SentEmailModal } from '@/pages/auth/forgotPassword/ui/SentEmailModal/SentEmailModal';
+import useForgotPassword from '@/pages/auth/forgotPassword/lib/hooks/useForgotPassword';
+import SentEmailModal from '@/pages/auth/forgotPassword/ui/sentEmailModal/SentEmailModal';
 import Link from 'next/link';
 
 import s from './ForgotPassword.module.scss';
 
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
   const { control, handleSubmit, isValid, onSubmit } = useForgotPassword();
   const { isOpen, setOpen } = useModal(ModalKey.Success);
-  const { errorAlert, successAlert } = useAlert();
-
-  const handleSuccess = () => {
-    successAlert({ autoClose: 113000, message: 'Successfully done!' });
-  };
-
-  const handleError = () => {
-    errorAlert({ autoClose: 3000, message: 'Successfully error!' });
-  };
 
   return (
     <>
@@ -65,3 +55,5 @@ export const ForgotPassword = () => {
     </>
   );
 };
+
+export default ForgotPassword;
