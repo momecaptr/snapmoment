@@ -4,7 +4,7 @@ import Boy from '@/common/assets/components/BoyDefault';
 import { Button } from '@/components/ui/button/Button';
 import { Typography } from '@/components/ui/typography/Typography';
 
-import s from './emailVerification.module.scss';
+import s from './EmailVerification.module.scss';
 const EmailVerification = () => {
   return (
     <div className={s.boxTitle}>
