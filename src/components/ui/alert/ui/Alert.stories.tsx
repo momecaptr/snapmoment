@@ -3,6 +3,7 @@ import type { Meta } from '@storybook/react';
 import StoreProvider from '@/app/StoreProvider';
 import useAlert from '@/components/ui/alert/lib/hooks/useAlert';
 import Alert from '@/components/ui/alert/ui/Alert';
+import { Button } from '@/components/ui/button/Button';
 
 const meta = {
   component: Alert,
@@ -32,9 +33,7 @@ const Template = (args: any) => {
 
   return (
     <>
-      <button onClick={alertVariant} style={{ backgroundColor: '#397df6' }}>
-        Сlick to see the alerts{' '}
-      </button>
+      <Button onClick={alertVariant}>Сlick to see the alerts </Button>
       <Alert />
     </>
   );
