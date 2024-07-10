@@ -1,3 +1,13 @@
-import SignIn from '@/components/auth/signIn/SignIn';
+import React from 'react';
 
-export default SignIn;
+import EmailVerification from '@/components/auth/emailVerification/EmailVerification';
+
+const Page = () => {
+  return (
+    <div>
+      <EmailVerification />
+    </div>
+  );
+};
+
+export default Page;
