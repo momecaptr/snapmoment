@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { SchemaType, schema } from '@/common/ZodSchema/ZodSchema';
+import { SchemaType, schema } from '@/common/zodSchema/zodSchema';
 import HeadSignInAndSignUp from '@/components/auth/headSignInAndSignUp/HeadSignInAndSignUp';
 import { Button } from '@/components/ui/button/Button';
 import { Card } from '@/components/ui/card/Card';
