@@ -7,7 +7,7 @@ import { Typography } from '@/components/ui/typography/Typography';
 import s from './emailVerification.module.scss';
 const EmailVerification = () => {
   return (
-    <div>
+    <div className={s.boxTitle}>
       <Typography as={'h1'} className={s.title} variant={'h1'}>
         Email verification link expired
       </Typography>
