@@ -1,10 +1,3 @@
-'use client';
-import { Typography } from '@/components/ui/typography/Typography';
+import ForgotPassword from '@/pagesComponents/auth/forgotPassword/ui/ForgotPassword';
 
-export default function ForgotPassword() {
-  return (
-    <div>
-      <Typography variant={'large'}>Forgot Password</Typography>
-    </div>
-  );
-}
+export default ForgotPassword;

@@ -1,9 +1,12 @@
+export type AlertTypeProps = 'error' | 'success';
 export type AlertProps = {
   id: string;
   message: string;
-  type: 'error' | 'success';
+  type: AlertTypeProps;
 };
-
+export type AlertState = {
+  alerts: AlertProps[];
+};
 export type AlertFnProps = {
   autoClose?: number;
   message: string;

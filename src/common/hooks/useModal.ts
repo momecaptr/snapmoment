@@ -10,7 +10,8 @@ export enum ModalKey {
   DeleteDeck = 'DeleteDeck',
   EditCard = 'EditCard',
   EditDeck = 'EditDeck',
-  Empty = 'Empty'
+  Empty = 'Empty',
+  Success = 'Success'
 }
 
 export const useModal = (modalKey: ModalKey) => {
