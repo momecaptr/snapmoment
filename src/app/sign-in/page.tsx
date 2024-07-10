@@ -1,10 +1,12 @@
 'use client';
-import { Typography } from '@/components/ui/typography/Typography';
+import React from 'react';
 
-export default function SignIn() {
+import SignIn from '@/components/auth/sign-in/SignIn';
+
+export default function Page() {
   return (
     <div>
-      <Typography variant={'large'}>Sign In</Typography>
+      <SignIn />
     </div>
   );
 }
