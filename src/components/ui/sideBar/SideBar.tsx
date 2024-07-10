@@ -9,7 +9,6 @@ import Person from '@/common/assets/components/Person';
 import PlusSquare from '@/common/assets/components/PlusSquare';
 import SearchOutline from '@/common/assets/components/SearchOutline';
 import TrendingUp from '@/common/assets/components/TrendingUp';
-import { Button } from '@/components/ui/button/Button';
 import { Typography } from '@/components/ui/typography/Typography';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -68,14 +67,14 @@ export const SideBar = () => {
     <div className={s.container}>
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Button as={Link} className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)}>
+          <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
             <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
               {name}
             </Typography>
-          </Button>
+          </Link>
         ))}
       </div>
     </div>

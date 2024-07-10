@@ -1,17 +1,12 @@
 'use client';
 import React from 'react';
 
-import { Button } from '@/components/ui/button/Button';
-import { SideBar } from '@/components/ui/sideBar/SideBar';
-import { Typography } from '@/components/ui/typography/Typography';
+import SignIn from '@/components/auth/sign-in/SignIn';
 
-export default function SignIn() {
+export default function Page() {
   return (
     <div>
-      <SideBar />
-      <Typography variant={'large'}>
-        <Button>Sign In</Button>
-      </Typography>
+      <SignIn />
     </div>
   );
 }
