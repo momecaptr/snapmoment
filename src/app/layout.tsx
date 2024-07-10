@@ -30,7 +30,7 @@ export default function RootLayout({
         <StoreProvider>
           <div className={s.layout}>
             <div className={s.header}>
-              <Header isAuthorized />
+              <Header isAuthorized={false} />
             </div>
             <div className={s.sidebar}>
               <SideBar />
