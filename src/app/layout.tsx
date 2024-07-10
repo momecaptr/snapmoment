@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import React from 'react';
 
+import StoreProvider from '@/app/StoreProvider';
 import { AlertProvider } from '@/components/ui/alert/model/AlertProvider';
 import { SideBar } from '@/components/ui/sideBar/SideBar';
 import Header from '@/header/Header';
@@ -26,17 +27,19 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <body className={inter.className}>
-        <AlertProvider>
-          <div className={s.layout}>
-            <div className={s.header}>
-              <Header isAuthorized />
+        <StoreProvider>
+          <AlertProvider>
+            <div className={s.layout}>
+              <div className={s.header}>
+                <Header isAuthorized />
+              </div>
+              <div className={s.sidebar}>
+                <SideBar />
+              </div>
+              <div className={s.content}>{children}</div>
             </div>
-            <div className={s.sidebar}>
-              <SideBar />
-            </div>
-            <div className={s.content}>{children}</div>
-          </div>
-        </AlertProvider>
+          </AlertProvider>
+        </StoreProvider>
       </body>
     </html>
   );

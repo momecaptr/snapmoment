@@ -1,10 +1,3 @@
-'use client';
-import { Typography } from '@/components/ui/typography/Typography';
+import SignIn from '@/components/auth/signIn/SignIn';
 
-export default function SignIn() {
-  return (
-    <div>
-      <Typography variant={'large'}>Sign In</Typography>
-    </div>
-  );
-}
+export default SignIn;

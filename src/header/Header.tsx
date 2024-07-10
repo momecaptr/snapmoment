@@ -3,7 +3,7 @@ import React from 'react';
 import { Outlinebell } from '@/common/assets/components';
 import SnapMomentLogo from '@/common/assets/components/SnapMomentLogo';
 import { Button } from '@/components/ui/button/Button';
-import LocaleSwitcher from '@/localeSwitcher/ui/LocaleSwitcher';
+import LocaleSwitcher from '@/lib/features/localeSwitcher/ui/LocaleSwitcher';
 
 import s from './Header.module.scss';
 
