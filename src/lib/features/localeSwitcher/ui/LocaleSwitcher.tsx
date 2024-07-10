@@ -1,11 +1,11 @@
 'use client';
 
 import { ArrowIosDownOutline } from '@/common/assets/components';
-import { useLangData } from '@/localeSwitcher/lib/hooks/useLangData';
-import LocaleMenuItem from '@/localeSwitcher/ui/localeMenuItem/LocaleMenuItem';
+import { useLangData } from '@/lib/features/localeSwitcher/lib/hooks/useLangData';
+import LocaleMenuItem from '@/lib/features/localeSwitcher/ui/localeMenuItem/LocaleMenuItem';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import s from '@/localeSwitcher/ui/LocaleSwitcher.module.scss';
+import s from '@/lib/features/localeSwitcher/ui/LocaleSwitcher.module.scss';
 
 const LocaleSwitcherDrop = () => {
   const { changeLanguage, currentLang, iconFlag, langData } = useLangData();
