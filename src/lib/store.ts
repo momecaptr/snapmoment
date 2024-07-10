@@ -1,9 +1,11 @@
+import { alertSlice } from '@/components/ui/alert/model/alertSlice';
 import { appSlice } from '@/lib/features/app/model/appSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      alertSlice,
       app: appSlice.reducer
     }
   });
