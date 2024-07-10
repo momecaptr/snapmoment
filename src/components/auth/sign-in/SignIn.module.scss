@@ -1,0 +1,41 @@
+.card {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  width: 378px;
+  padding: 24px;
+}
+
+.box_Input {
+  margin: 24px 0 36px;
+}
+
+.input {
+  width: 330px;
+}
+
+.input:first-child {
+  margin-bottom: 24px;
+}
+
+.forgot {
+  width: 100%;
+  margin-bottom: 24px;
+  color: var(--light-900);
+  text-align: end;
+}
+
+.button {
+  margin-bottom: 18px;
+}
+
+.question {
+  margin-bottom: 6px;
+}
+
+.signUp {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--accent-500);
+}
