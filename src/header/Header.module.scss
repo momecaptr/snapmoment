@@ -24,17 +24,11 @@
 
 .itemsWrapper {
   display: flex;
+  gap: 0 48px;
   align-items: center;
   justify-content: flex-end;
-}
 
-.item:nth-child(n) {
-  display: flex;
-  margin-right: 48px;
-}
-
-.item:last-child {
-  margin-right: 0;
+  width: 100%;
 }
 
 .logo {
