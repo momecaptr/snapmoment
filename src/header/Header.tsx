@@ -16,16 +16,24 @@ const Header = (props: HeaderProps) => {
   return (
     <div className={s.header}>
       <div className={s.wrapper}>
-        <SnapMomentLogo className={s.logo} />
-        <div className={s.items}>
+        <div className={s.logoWrapper}>
+          <SnapMomentLogo className={s.logo} />
+        </div>
+        <div className={s.itemsWrapper}>
           {isAuthorized && (
-            <div className={s.bell}>
-              <Outlinebell />
+            <div className={s.item}>
+              <Outlinebell className={s.bell} />
             </div>
           )}
-          <LocaleSwitcher />
-          {!isAuthorized && <Button variant={'outlined'}>Log in</Button>}
-          {!isAuthorized && <Button>Sign up</Button>}
+          <div className={s.item}>
+            <LocaleSwitcher />
+          </div>
+          {!isAuthorized && (
+            <Button className={s.item} variant={'outlined'}>
+              Log in
+            </Button>
+          )}
+          {!isAuthorized && <Button className={s.item}>Sign up</Button>}
         </div>
       </div>
     </div>
