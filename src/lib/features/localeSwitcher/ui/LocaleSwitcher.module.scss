@@ -15,8 +15,8 @@
   height: 36px;
   padding: 6px 12px;
 
-  background-color: transparent;
-  border: 1px solid var(--dark-500);
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-300);
 
   &[data-state='open'] {
     .iconArrowDown {
@@ -98,7 +98,7 @@
 
   padding: 10px;
 
-  background-color: var(--dark-900);
-  border: 1px solid var(--dark-500);
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-300);
   border-radius: 6px;
 }
