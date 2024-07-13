@@ -2,15 +2,16 @@ import type { Metadata } from 'next';
 
 import React from 'react';
 
-import StoreProvider from '@/app/StoreProvider';
 import Alert from '@/components/ui/alert/ui/Alert';
 import { SideBar } from '@/components/ui/sideBar/SideBar';
 import Header from '@/header/Header';
 import { Inter } from 'next/font/google';
 
-import '../styles/index.scss';
+import '@/styles/index.scss';
 
 import s from './layout.module.scss';
+
+import StoreProvider from './StoreProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
