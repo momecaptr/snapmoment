@@ -1,4 +1,4 @@
-import { Typography } from '@/components/ui/typography/Typography';
+import { Typography } from '@/shared/typography/Typography';
 
 export default function NotFound() {
   // Через function expression

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Typography } from '@/components/ui/typography/Typography';
+import { Typography } from '@/shared/typography/Typography';
 
 export default function SignUp() {
   return (

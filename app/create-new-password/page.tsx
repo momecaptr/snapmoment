@@ -1,3 +1,3 @@
-import CreateNewPassword from '@/pagesComponents/auth/createNewPassword/ui/CreateNewPassword';
+import CreateNewPassword from '@/pages/createNewPassword/ui/CreateNewPassword';
 
 export default CreateNewPassword;
