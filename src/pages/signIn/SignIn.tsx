@@ -30,9 +30,7 @@ const SignIn = () => {
         <HeadSignInAndSignUp title={'Sign In'} />
         <div className={s.box_Input}>
           <FormTextfield className={s.input} control={control} label={'Email'} name={'email'} type={'email'} />
-          {errors.email && <p>{errors.email.message}</p>}
           <FormTextfield className={s.input} control={control} label={'Password'} name={'password'} type={'password'} />
-          {errors.password && <p>{errors.password.message}</p>}
         </div>
         <Typography as={'p'} className={s.forgot} variant={'regular_text_14'}>
           Forgot Password
