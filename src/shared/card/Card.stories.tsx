@@ -10,7 +10,7 @@ const meta = {
   argTypes: {},
   component: Card,
   parameters: {
-    laout: 'center'
+    layout: 'center'
   },
   tags: ['autodocs'],
   title: 'Components/Card'
