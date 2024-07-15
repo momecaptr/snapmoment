@@ -75,7 +75,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
   const generatedId = useId();
 
   return (
-    <div className={clsx(s.box, className)}>
+    <div className={clsx(className, s.box)}>
       <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
         {type !== 'search' && label}
       </Typography>
