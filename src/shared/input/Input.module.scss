@@ -46,10 +46,6 @@
   text-indent: 12px;
 }
 
-.box {
-  width: 200px;
-}
-
 .boxImg {
   position: relative;
   transform: translate(1000%, 20%);
@@ -85,6 +81,7 @@
 }
 
 .errorText {
+  margin-top: 6px;
   font-size: 12px;
   color: var(--danger-300);
 }

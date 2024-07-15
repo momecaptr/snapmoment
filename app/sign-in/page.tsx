@@ -1,11 +1,11 @@
 import React from 'react';
 
-import EmailVerification from '@/pages/emailVerification/EmailVerification';
+import SignIn from '@/pages/signIn/SignIn';
 
 const Page = () => {
   return (
     <div>
-      <EmailVerification />
+      <SignIn />
     </div>
   );
 };

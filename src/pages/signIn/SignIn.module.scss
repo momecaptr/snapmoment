@@ -8,11 +8,10 @@
 }
 
 .box_Input {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
   margin: 24px 0 36px;
-}
-
-.input {
-  width: 330px;
 }
 
 .input:first-child {

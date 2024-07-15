@@ -55,7 +55,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
     case 'search':
       classNameForInput = error ? clsx(s.boxInput, s.errorSeach) : clsx(s.boxInput, s.boxPadding);
       break;
-    case 'text':
+    case 'email': {
+      classNameForInput = error
+        ? clsx(s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInput, inputValue.length === 0 && s.placeholder);
+      break;
+    }
     case 'password':
       classNameForInput = error
         ? clsx(s.boxInput, s.errorTextAndPassword)
@@ -70,7 +75,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
   const generatedId = useId();
 
   return (
-    <div className={clsx(s.box, className)}>
+    <div className={clsx(className, s.box)}>
       <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
         {type !== 'search' && label}
       </Typography>
