@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SignIn from '@/pages/signIn/SignIn';
+import SignIn from '@/pages/signIn/ui/SignIn';
 
 const Page = () => {
   return (

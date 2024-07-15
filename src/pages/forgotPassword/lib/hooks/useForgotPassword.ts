@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { appSlice } from '@/app/model/appSlice';
-import { ForgotPasswordFormValues, ForgotPasswordSchema } from '@/features/schemas/forgotPassword.schema';
+import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features/schemas/authSchema/authShema';
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
 import { ModalKey } from '@/shared/hooks/useModal';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +14,7 @@ const useForgotPassword = () => {
     handleSubmit
   } = useForm<ForgotPasswordFormValues>({
     defaultValues: { email: '' },
-    resolver: zodResolver(ForgotPasswordSchema)
+    resolver: zodResolver(forgotPasswordSchema)
   });
   const dispatch = useAppDispatch();
 

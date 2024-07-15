@@ -1,3 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0 0;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 35px;
+
+  .form {
+    margin: 37px 0 24px;
+  }
+}
+
 .card {
   display: flex;
   flex-flow: column nowrap;
@@ -19,8 +33,11 @@
 }
 
 .forgot {
+  cursor: pointer;
+
   width: 100%;
   margin-bottom: 24px;
+
   color: var(--light-900);
   text-align: end;
 }
@@ -34,7 +51,19 @@
 }
 
 .signUp {
+  cursor: pointer;
   margin-bottom: 6px;
   font-weight: 600;
+}
+
+.btnsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.btnsWrapper .link {
   color: var(--accent-500);
+  text-decoration: none;
 }

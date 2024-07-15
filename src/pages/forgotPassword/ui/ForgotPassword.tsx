@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-// eslint-disable-next-line import/no-named-as-default
 import ReCAPTCHA from 'react-google-recaptcha';
 
 import useForgotPassword from '@/pages/forgotPassword/lib/hooks/useForgotPassword';
