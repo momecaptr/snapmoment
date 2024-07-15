@@ -1,0 +1,10 @@
+.root {
+  position: relative;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+  box-shadow:
+    1px 1px 2px rgb(0 0 0 / 10%),
+    -1px -1px 2px rgb(0 0 0 / 10%);
+}
