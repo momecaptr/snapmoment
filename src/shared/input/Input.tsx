@@ -55,7 +55,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
     case 'search':
       classNameForInput = error ? clsx(s.boxInput, s.errorSeach) : clsx(s.boxInput, s.boxPadding);
       break;
-    case 'text':
+    case 'email': {
+      classNameForInput = error
+        ? clsx(s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInput, inputValue.length === 0 && s.placeholder);
+      break;
+    }
     case 'password':
       classNameForInput = error
         ? clsx(s.boxInput, s.errorTextAndPassword)
