@@ -61,17 +61,15 @@ const SignUp = () => {
             name={'rememberMe'}
           />
 
-          <div className={s.btnsWrapper}>
-            <Button className={s.button} type={'submit'} fullWidth>
-              Sign Up
-            </Button>
-            <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
-              Don’t have an account?
-            </Typography>
-            <Typography as={Link} className={`${s.signUp} ${s.link}`} href={'/sign-in'} variant={'regular_text_16'}>
-              Sign In
-            </Typography>
-          </div>
+          <Button className={s.button} type={'submit'} fullWidth>
+            Sign Up
+          </Button>
+          <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
+            Don’t have an account?
+          </Typography>
+          <Typography as={Link} className={s.signIn} href={'/sign-in'} variant={'regular_link'}>
+            Sign In
+          </Typography>
         </Card>
       </form>
     </div>

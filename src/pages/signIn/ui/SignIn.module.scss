@@ -52,18 +52,10 @@
 
 .signUp {
   cursor: pointer;
+
   margin-bottom: 6px;
+
   font-weight: 600;
-}
-
-.btnsWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.btnsWrapper .link {
   color: var(--accent-500);
   text-decoration: none;
 }

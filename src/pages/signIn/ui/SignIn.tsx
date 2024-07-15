@@ -32,17 +32,15 @@ const SignIn = () => {
           <Typography as={'p'} className={s.forgot} variant={'regular_text_14'}>
             Forgot Password
           </Typography>
-          <div className={s.btnsWrapper}>
-            <Button className={s.button} type={'submit'} fullWidth>
-              Sign In
-            </Button>
-            <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
-              Don’t have an account?
-            </Typography>
-            <Typography as={Link} className={`${s.signUp} ${s.link}`} href={'/sign-up'} variant={'regular_text_16'}>
-              Sign Up
-            </Typography>
-          </div>
+          <Button className={s.button} type={'submit'} fullWidth>
+            Sign In
+          </Button>
+          <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
+            Don’t have an account?
+          </Typography>
+          <Typography as={Link} className={s.signUp} href={'/sign-up'} variant={'regular_link'}>
+            Sign Up
+          </Typography>
         </Card>
       </form>
     </div>
