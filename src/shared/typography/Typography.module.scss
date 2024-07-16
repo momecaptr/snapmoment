@@ -18,11 +18,15 @@
 .regular_text_16,
 .medium_text_14,
 .small_text,
-.regular_link,
-.regular_link:visited,
 .error {
   font-weight: var(--font-weight-regular);
   color: var(--light-100);
+}
+
+.regular_link,
+.regular_link:visited {
+  font-weight: var(--font-weight-regular);
+  color: var(--accent-500);
 }
 
 .regular_link,
@@ -31,7 +35,7 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-s);
-  color: var(--info-500);
+  color: var(--accent-500);
   text-decoration: underline;
 }
 
