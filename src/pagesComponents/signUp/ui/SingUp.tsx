@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import useSignUpForm from '@/pages/signUp/lib/hooks/useSignUpForm';
+import useSignUpForm from '@/pagesComponents/signUp/lib/hook/useSignUpForm';
 import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
 import FormCheckbox from '@/shared/forms/FormCheckbox';
@@ -10,7 +10,7 @@ import { Typography } from '@/shared/typography/Typography';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 
-import s from '@/pages/signUp/ui/SignUp.module.scss';
+import s from '@/pagesComponents/signUp/ui/SignUp.module.scss';
 
 const SignUp = () => {
   const { control, errors, handleSubmit, isValid, onSubmit } = useSignUpForm();
@@ -67,9 +67,12 @@ const SignUp = () => {
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          <Typography as={Link} className={s.signIn} href={'/sign-in'} variant={'regular_link'}>
+          {/*<Typography as={Link} className={s.signIn} href={'/sign-in'} variant={'regular_link'}>
             Sign In
-          </Typography>
+          </Typography>*/}
+          <Link className={s.signIn} href={'/sign-in'}>
+            Sign In
+          </Link>
         </Card>
       </form>
     </div>

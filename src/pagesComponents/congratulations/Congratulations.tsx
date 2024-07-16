@@ -4,7 +4,7 @@ import Girl from '@/../public/assets/components/GirlDefault';
 import { Button } from '@/shared/button/Button';
 import { Typography } from '@/shared/typography/Typography';
 
-import s from './Congratulation.module.scss';
+import s from '@/pagesComponents/congratulations/Congratulation.module.scss';
 const Congratulations = () => {
   return (
     <div>

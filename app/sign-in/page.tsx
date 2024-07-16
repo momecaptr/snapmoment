@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SignIn from '@/pages/signIn/ui/SignIn';
+import SignIn from '@/pagesComponents/signIn/ui/SignIn';
 
 const Page = () => {
   return (

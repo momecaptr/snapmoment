@@ -11,7 +11,7 @@ import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { Typography } from '@/shared/typography/Typography';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import s from './CreateNewPassword.module.scss';
+import s from '@/pagesComponents/createNewPassword/ui/CreateNewPassword.module.scss';
 
 const CreateNewPassword = () => {
   const {

@@ -3,8 +3,8 @@
 import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import useForgotPassword from '@/pages/forgotPassword/lib/hooks/useForgotPassword';
-import SentEmailModal from '@/pages/forgotPassword/ui/sentEmailModal/SentEmailModal';
+import useForgotPassword from '@/pagesComponents/forgotPassword/lib/hooks/useForgotPassword';
+import SentEmailModal from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal';
 import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
 import { FormTextfield } from '@/shared/forms/FormTextfield';
@@ -12,7 +12,7 @@ import { ModalKey, useModal } from '@/shared/hooks/useModal';
 import { Typography } from '@/shared/typography/Typography';
 import Link from 'next/link';
 
-import s from './ForgotPassword.module.scss';
+import s from '@/pagesComponents/forgotPassword/ui/ForgotPassword.module.scss';
 
 const ForgotPassword = () => {
   const { control, handleSubmit, isValid, onSubmit } = useForgotPassword();
