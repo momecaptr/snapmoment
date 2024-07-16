@@ -1,11 +1,14 @@
+'use client';
 import { initCurrentPage, selectOptionPagination } from '@/shared/consts/globalVariables';
 import { useDebounce } from '@/shared/hooks/useDebounce';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useQueryParams = () => {
   const router = useRouter();
-  const query = router.query;
-  // ddsdf
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const query = Object.fromEntries(searchParams.entries());
 
   const itemsPerPage = Number(query.itemsPerPage) ?? Number(selectOptionPagination[0].value);
   const currentPage = Number(query.currentPage) ?? Number(initCurrentPage);
@@ -16,27 +19,28 @@ export const useQueryParams = () => {
   const debouncedSearchValue = useDebounce(search);
 
   const setSearchQuery = (searchQuery: string) => {
-    const newQuery = { ...query };
+    const newQuery = new URLSearchParams(searchParams);
 
-    searchQuery === '' ? delete newQuery.search : (newQuery.search = searchQuery);
-    router.push({ pathname: router.pathname, query: newQuery });
+    searchQuery === '' ? newQuery.delete('search') : newQuery.set('search', searchQuery);
+    router.push(`${pathname}?${newQuery.toString()}`);
   };
+
   const setCurrentPageQuery = (currentPageQuery: number) => {
-    const newQuery = { ...query };
+    const newQuery = new URLSearchParams(searchParams);
 
     currentPageQuery === Number(initCurrentPage)
-      ? delete newQuery.currentPage
-      : (newQuery.currentPage = currentPageQuery.toString());
-    router.push({ pathname: router.pathname, query: newQuery });
+      ? newQuery.delete('currentPage')
+      : newQuery.set('currentPage', currentPageQuery.toString());
+    router.push(`${pathname}?${newQuery.toString()}`);
   };
 
   const setItemsPerPageQuery = (itemsPerPageQuery: number) => {
-    const newQuery = { ...query };
+    const newQuery = new URLSearchParams(searchParams);
 
     itemsPerPageQuery === Number(selectOptionPagination[0].value)
-      ? delete newQuery.itemsPerPage
-      : (newQuery.itemsPerPage = itemsPerPageQuery.toString());
-    router.push({ pathname: router.pathname, query: newQuery });
+      ? newQuery.delete('itemsPerPage')
+      : newQuery.set('itemsPerPage', itemsPerPageQuery.toString());
+    router.push(`${pathname}?${newQuery.toString()}`);
   };
 
   const setSortByQuery = (sortByQuery: string) => {
@@ -54,20 +58,22 @@ export const useQueryParams = () => {
         break;
     }
 
-    const newQuery = { ...query };
+    const newQuery = new URLSearchParams(searchParams);
 
-    newOrderBy ? (newQuery.orderBy = newOrderBy) : delete newQuery.orderBy;
-    router.push({ pathname: router.pathname, query: newQuery });
+    newOrderBy ? newQuery.set('orderBy', newOrderBy) : newQuery.delete('orderBy');
+    router.push(`${pathname}?${newQuery.toString()}`);
   };
 
   const clearQuery = () => {
     const itemsPerPageValue = query.itemsPerPage;
-    const newQuery: { itemsPerPage?: string | string[] } = {};
+    const newQuery = new URLSearchParams(searchParams);
 
     if (itemsPerPageValue) {
-      newQuery.itemsPerPage = Array.isArray(itemsPerPageValue) ? itemsPerPageValue : itemsPerPageValue;
+      newQuery.set('itemsPerPage', Array.isArray(itemsPerPageValue) ? itemsPerPageValue.join(',') : itemsPerPageValue);
+    } else {
+      newQuery.delete('itemsPerPage');
     }
-    router.push({ pathname: router.pathname, query: newQuery });
+    router.push(`${pathname}?${newQuery.toString()}`);
   };
 
   return {
