@@ -1,3 +1,4 @@
+'use client';
 import { useMemo } from 'react';
 
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';

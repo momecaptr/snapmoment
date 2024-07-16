@@ -1,3 +1,4 @@
+'use client';
 export function useThrottle<F extends (...args: any[]) => void>(func: F, waitMilliseconds: number): F {
   let lastCallTime: null | number = null;
 

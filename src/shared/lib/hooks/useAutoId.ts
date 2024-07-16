@@ -1,3 +1,4 @@
+'use client';
 import { useId } from 'react';
 
 export const useAutoId = (id?: string) => {
