@@ -5,11 +5,11 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import useForgotPassword from '@/pagesComponents/forgotPassword/lib/hooks/useForgotPassword';
 import SentEmailModal from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal';
-import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
 import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { ModalKey, useModal } from '@/shared/hooks/useModal';
 import { Typography } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import Link from 'next/link';
 
 import s from '@/pagesComponents/forgotPassword/ui/ForgotPassword.module.scss';

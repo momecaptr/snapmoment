@@ -2,10 +2,10 @@
 import React from 'react';
 
 import useSignInForm from '@/pagesComponents/signIn/lib/hooks/useSignInForm';
-import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
 import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { Typography } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 

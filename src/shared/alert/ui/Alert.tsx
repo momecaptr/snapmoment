@@ -2,10 +2,10 @@
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { alertSelectors } from '@/shared/alert/model/alertSlice';
-import { Button } from '@/shared/button/Button';
 import { useActions } from '@/shared/hooks/useActions';
 import { useAppSelector } from '@/shared/hooks/useAppSelector';
 import { Typography } from '@/shared/ui';
+import { Button } from '@/shared/ui';
 import { clsx } from 'clsx';
 
 import s from './Alert.module.scss';
