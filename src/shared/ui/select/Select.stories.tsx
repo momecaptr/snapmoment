@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
 
-import { SelectUI } from '@/shared/select/Select';
+import { SelectUI } from '@/shared/ui';
 
 const meta = {
   component: SelectUI,

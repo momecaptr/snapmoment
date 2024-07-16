@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ImageOutline from '@/../public/assets/components/ImageOutline';
 import { Button } from '@/shared/button/Button';
 import Input from '@/shared/input/Input';
-import { Modal, Props as ModalProps } from '@/shared/modal/Modal';
+import { Modal, Props as ModalProps } from '@/shared/ui';
 import { Checkbox } from '@radix-ui/react-checkbox';
 import { Meta, StoryFn } from '@storybook/react';
 

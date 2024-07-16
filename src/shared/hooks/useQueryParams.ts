@@ -1,5 +1,5 @@
-import { initCurrentPage, selectOptionPagination } from '@/shared/consts/globalVariables';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { initCurrentPage, selectOptionPagination } from '@/shared/ui';
 import { useRouter } from 'next/router';
 
 export const useQueryParams = () => {

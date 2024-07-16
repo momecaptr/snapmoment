@@ -1,6 +1,6 @@
 /*import Typography from '@/components/ui/Typography/Typography';*/
 import { FullName } from '@/features/localeSwitcher/lib/hooks/useLangData';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import s from '@/features/localeSwitcher/ui/LocaleSwitcher.module.scss';

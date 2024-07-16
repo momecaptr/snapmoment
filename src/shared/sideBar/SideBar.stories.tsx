@@ -10,7 +10,7 @@ import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
 import { Button } from '@/shared/button/Button';
 import { SideBar } from '@/shared/sideBar/SideBar';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import clsx from 'clsx';
