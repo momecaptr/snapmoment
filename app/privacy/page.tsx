@@ -1,11 +1,11 @@
 import React from 'react';
 
-import SignUp from '@/pagesComponents/signUp/ui/SingUp';
+import Privacy from '@/shared/privacy/Privacy';
 
 export default function Page() {
   return (
     <div>
-      <SignUp />
+      <Privacy title={'Privacy Policy'} />
     </div>
   );
 }

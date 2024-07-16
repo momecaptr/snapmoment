@@ -1,11 +1,12 @@
 'use client';
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useId, useState } from 'react';
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react';
 
 import EyeOff from '@/../public/assets/components/EyeOff'; //'@/assets/icons/svg/EyeOff'
 import Close from '@/../public/assets/components/Close';
 import Eye from '@/../public/assets/components/Eye';
 import Search from '@/../public/assets/components/Search';
 import { Button } from '@/shared/button/Button';
+import { useAutoId } from '@/shared/hooks/useAutoId';
 import { Typography } from '@/shared/typography/Typography';
 import clsx from 'clsx';
 
@@ -20,6 +21,7 @@ export type InputProps = {
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
   const { callback, className, currentValue, error, id, label, placeholder, type, ...restProps } = props;
+  const generatedId = useAutoId(id);
   const [isShow, setIsShow] = useState(false);
   const [inputValue, setInputValue] = useState(currentValue || '');
 
@@ -72,8 +74,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
 
   const styleForType = isShow ? 'text' : 'password';
 
-  const generatedId = useId();
-
   return (
     <div className={clsx(className, s.box)}>
       <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
@@ -88,7 +88,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
         <input
           {...restProps}
           className={classNameForInput}
-          id={id ?? generatedId}
+          id={generatedId}
           onChange={handleChange}
           placeholder={placeholder}
           ref={ref}

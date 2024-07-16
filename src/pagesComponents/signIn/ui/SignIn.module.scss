@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0 0;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 35px;
+
+  .form {
+    margin: 37px 0 24px;
+  }
+}
+
+.card {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
+  width: 378px;
+  padding: 24px;
+}
+
+.box_Input {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  margin: 24px 0 36px;
+}
+
+.input:first-child {
+  margin-bottom: 24px;
+}
+
+.forgot {
+  cursor: pointer;
+
+  width: 100%;
+  margin-bottom: 24px;
+
+  color: var(--light-900);
+  text-align: end;
+}
+
+.button {
+  margin-bottom: 18px;
+}
+
+.question {
+  margin-bottom: 6px;
+}
+
+.signUp {
+  cursor: pointer;
+
+  margin-bottom: 6px;
+
+  font-weight: 600;
+  color: var(--accent-500);
+  text-decoration: none;
+}

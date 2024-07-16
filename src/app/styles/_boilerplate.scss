@@ -154,7 +154,7 @@ option {
 }
 
 a:visited {
-  color: inherit;
+  /* color: inherit; */
 }
 
 body {
@@ -180,3 +180,37 @@ body {
 }
 
 // ↑↑↑ Scroll ↑↑↑ //
+
+// ↓↓↓ Autofill ↓↓↓ //
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  border: 1px solid var(--dark-300) !important;
+  box-shadow: 0 0 0 1px var(--dark-300) inset !important;
+  transition: background-color 50000s ease-in-out 0s;
+
+  -webkit-text-fill-color: var(--light-900) !important;
+}
+
+input:-webkit-autofill:hover {
+  /* border: 1px solid var(--dark-100) !important; */
+  box-shadow: 0 0 0 1px var(--dark-100) inset !important;
+  transition: background-color 50000s ease-in-out 0s;
+}
+
+input:-webkit-autofill {
+  caret-color: var(--light-900);
+}
+
+// ↑↑↑ Autofill ↑↑↑ //
+
+// ↓↓↓ button ↓↓↓ //
+button {
+  all: unset;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+// ↑↑↑ button ↑↑↑ //
