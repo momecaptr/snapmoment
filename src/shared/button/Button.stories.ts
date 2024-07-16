@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '@/shared/ui';
+import { Button } from '@/shared/button/Button';
 
 const meta = {
   argTypes: {

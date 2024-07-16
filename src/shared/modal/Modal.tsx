@@ -2,7 +2,7 @@ import { CSSProperties, ComponentPropsWithoutRef } from 'react';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Card } from '@/shared/card/Card';
-import { Typography } from '@/shared/ui';
+import { Typography } from '@/shared/typography/Typography';
 import * as Dialog from '@radix-ui/react-dialog';
 import { clsx } from 'clsx';
 

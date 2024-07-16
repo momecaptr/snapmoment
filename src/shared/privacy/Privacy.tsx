@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ArrowForwardOutline from '@/../public/assets/components/ArrowBackOutline';
-import { Typography } from '@/shared/ui';
+import { Typography } from '@/shared/typography/Typography';
 import Link from 'next/link';
 
 import s from './Privacy.module.scss';

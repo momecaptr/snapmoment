@@ -9,7 +9,7 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
-import { Typography } from '@/shared/ui';
+import { Typography } from '@/shared/typography/Typography';
 import clsx from 'clsx';
 import Link from 'next/link';
 

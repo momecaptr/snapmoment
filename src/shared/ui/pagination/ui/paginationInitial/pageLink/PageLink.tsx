@@ -1,6 +1,5 @@
 import { ComponentProps, ReactNode } from 'react';
 
-import { Button } from '@/shared/ui';
 import clsx from 'clsx';
 
 type Props = {
@@ -9,6 +8,8 @@ type Props = {
   className?: string;
   disabled?: boolean;
 } & ComponentProps<typeof Button>;
+
+import { Button } from '@/shared/button/Button';
 
 import s from '../Pagination.module.scss';
 

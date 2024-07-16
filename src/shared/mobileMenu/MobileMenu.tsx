@@ -5,7 +5,7 @@ import MessageCircle from '@/../public/assets/components/MessageCircle';
 import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
-import { Button } from '@/shared/ui';
+import { Button } from '@/shared/button/Button';
 import { clsx } from 'clsx';
 import Link from 'next/link';
 
