@@ -1,10 +1,10 @@
 import { ArrowIosDownOutline } from '@/../public/assets/components';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 import { selectOptionsType } from '@/shared/ui/pagination/ui/PaginationWithSelect';
 import * as Select from '@radix-ui/react-select';
 import clsx from 'clsx';
 
-import s from '@/shared/select/Select.module.scss';
+import s from './Select.module.scss';
 
 type Props = {
   className?: string;

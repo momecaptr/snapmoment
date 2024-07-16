@@ -6,7 +6,7 @@ import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
 import FormCheckbox from '@/shared/forms/FormCheckbox';
 import { FormTextfield } from '@/shared/forms/FormTextfield';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 
