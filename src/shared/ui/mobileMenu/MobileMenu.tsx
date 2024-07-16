@@ -1,3 +1,4 @@
+'use client';
 import { ElementType, useState } from 'react';
 
 import Home from '@/../public/assets/components/Home';
