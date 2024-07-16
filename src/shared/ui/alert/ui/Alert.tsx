@@ -1,12 +1,12 @@
 'use client';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
-import { Button } from '@/shared/button/Button';
 import { useActions } from '@/shared/lib/hooks/useActions';
 import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
 // import CloseOutline from 'public/assets/components/CloseOutline';
 import { Typography } from '@/shared/ui';
 import { alertSelectors } from '@/shared/ui/alert/model/alertSlice';
+import { Button } from '@/shared/ui/button/Button';
 import { clsx } from 'clsx';
 
 //

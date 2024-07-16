@@ -4,7 +4,7 @@ import CheckIcon from '@/../public/assets/components/CheckboxIcon';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
 import clsx from 'clsx';
 
-import s from '@/shared/checkbox/Checkbox.module.scss';
+import s from './Checkbox.module.scss';
 
 export type CheckboxPropsProps = {
   label?: ReactNode;

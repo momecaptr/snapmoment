@@ -5,9 +5,9 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import useForgotPassword from '@/pagesComponents/forgotPassword/lib/hooks/useForgotPassword';
 import SentEmailModal from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal';
-import { Button } from '@/shared/button/Button';
 import { ModalKey, useModal } from '@/shared/lib/hooks/useModal';
 import { Card, Typography } from '@/shared/ui';
+import { Button } from '@/shared/ui/button/Button';
 import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
 import Link from 'next/link';
 

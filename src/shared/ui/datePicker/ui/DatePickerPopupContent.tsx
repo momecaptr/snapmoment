@@ -1,6 +1,7 @@
 'use client';
 import { useLayoutEffect, useMemo, useState } from 'react';
 
+import { RangeDate } from '@/shared/ui';
 import {
   DateCellItem,
   addDay,
@@ -14,8 +15,7 @@ import {
   isToday,
   months,
   removeOneDay
-} from '@/shared/datePicker/lib/utils';
-import { RangeDate } from '@/shared/datePicker/ui/DatePicker';
+} from '@/shared/ui/datePicker/lib/utils';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { clsx } from 'clsx';
 

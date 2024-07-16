@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Checkbox from '@/shared/checkbox/Checkbox';
+import { Checkbox } from '@radix-ui/react-checkbox';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta = {

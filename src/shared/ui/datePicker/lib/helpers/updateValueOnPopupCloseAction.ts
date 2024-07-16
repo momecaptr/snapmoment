@@ -1,6 +1,6 @@
-import { getInputValueDate } from '@/shared/datePicker/lib/helpers/getInputValueDate';
-import { getDateFromInputValue, isInRange } from '@/shared/datePicker/lib/utils';
-import { RangeDate } from '@/shared/datePicker/ui/DatePicker';
+import { getInputValueDate } from '@/shared/ui/datePicker/lib/helpers/getInputValueDate';
+import { getDateFromInputValue, isInRange } from '@/shared/ui/datePicker/lib/utils';
+import { RangeDate } from '@/shared/ui/datePicker/ui/DatePicker';
 
 interface Props {
   inputValue: string;

@@ -1,4 +1,4 @@
-import { RangeDate } from '@/shared/datePicker/ui/DatePicker';
+import { RangeDate } from '@/shared/ui/datePicker/ui/DatePicker';
 
 export const daysOfTheWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 export const months = [

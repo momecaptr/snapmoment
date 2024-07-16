@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from 'react';
 
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui/button/Button';
 import clsx from 'clsx';
 
 type Props = {
