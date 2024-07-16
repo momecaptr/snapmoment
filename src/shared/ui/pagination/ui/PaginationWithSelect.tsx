@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 
 import { useQueryParams } from '@/shared/hooks/useQueryParams';
-import { Pagination } from '@/shared/pagination/ui/paginationInitial/Pagination';
 import { SelectUI } from '@/shared/select/Select';
 import { Typography } from '@/shared/ui';
+import { Pagination } from '@/shared/ui/pagination/ui/paginationInitial/Pagination';
 
 import s from './PaginationWithSelect.module.scss';
 

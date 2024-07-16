@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
 
-import { PaginationWithSelect, selectOptionsType } from '@/shared/pagination/ui/PaginationWithSelect';
+import { PaginationWithSelect, selectOptionsType } from '@/shared/ui/pagination/ui/PaginationWithSelect';
 
 const meta = {
   argTypes: {},
