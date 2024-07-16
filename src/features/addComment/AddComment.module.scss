@@ -1,0 +1,14 @@
+.createComment {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 12px 24px 12px 14px;
+
+  .text {
+    width: 100%;
+  }
+
+  .publishBtn {
+    padding: 6px 12px;
+  }
+}
