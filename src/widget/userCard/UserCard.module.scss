@@ -1,0 +1,75 @@
+.card {
+  width: 234px;
+
+  .photo {
+    cursor: pointer;
+    height: 240px;
+    margin-bottom: 12px;
+    background-color: var(--light-900);
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .author {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 12px;
+    align-items: center;
+
+    margin-bottom: 12px;
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+
+    .blockBtn {
+      margin-left: auto;
+      padding: 0;
+      background-color: transparent;
+
+      .blockIcon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .timeAgo {
+    color: var(--light-900);
+  }
+
+  .descriptionBlock {
+    .description {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+
+      text-overflow: ellipsis;
+    }
+
+    .showBtn {
+      cursor: pointer;
+
+      align-self: flex-start;
+
+      color: var(--accent-500);
+
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        color: var(--accent-300);
+      }
+
+      &:active {
+        color: var(--accent-700);
+      }
+    }
+  }
+}

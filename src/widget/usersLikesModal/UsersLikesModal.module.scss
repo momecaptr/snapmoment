@@ -1,0 +1,29 @@
+.modal {
+  width: 644px;
+
+  [data-content='content'] {
+    padding: 24px;
+  }
+
+  .search {
+    width: 100%;
+    margin-bottom: 24px;
+    border: 1px solid #4c4c4c;
+  }
+
+  .userLikesList {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 24px;
+
+    .userLikes {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      div {
+        padding: 0;
+      }
+    }
+  }
+}
