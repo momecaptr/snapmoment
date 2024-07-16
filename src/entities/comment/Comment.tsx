@@ -33,7 +33,7 @@ export const Comment = ({ children, isViewComments, setIsViewComments }: Props) 
               dolore magna aliqua.
             </Typography>
           </div>
-          <div>{children}</div>
+          {children}
         </div>
         <div className={s.commentInfo}>
           <Typography className={s.timeAgo} variant={'small_text'}>
