@@ -1,8 +1,6 @@
 @import 'src/app/styles/mixins';
 
 .button {
-  @include focus-visible-default;
-
   cursor: pointer;
 
   box-sizing: border-box;
@@ -75,48 +73,33 @@
 
 .outlined {
   color: var(--accent-500);
-  background-color: var(--dark-700);
+  background-color: transparent;
   border: 1px solid var(--accent-500);
 
-  &:active {
-    color: var(--accent-700);
-    border: 1px solid var(--accent-700);
+  &:focus-visible {
+    border: 2px solid var(--accent-700);
   }
 
   &:hover {
     color: var(--accent-100);
     border: 1px solid var(--accent-100);
   }
-
-  &:focus-visible {
-    border: 1px solid var(--accent-700);
-  }
-
-  &:disabled {
-    color: var(--accent-900);
-    border: 1px solid var(--accent-900);
-  }
 }
 
 .text {
-  padding: 6.24px;
   color: var(--accent-500);
-  background-color: var(--dark-700);
-  border: 1px solid transparent;
+  background-color: transparent;
+
+  &:hover {
+    color: var(--accent-100);
+    background-color: transparent;
+  }
 
   &:active {
     color: var(--accent-700);
   }
 
-  &:hover {
-    color: var(--accent-100);
-  }
-
-  &:focus-visible {
-    border: 1px solid var(--accent-700);
-  }
-
   &:disabled {
-    color: var(--accent-900);
+    opacity: 0.5;
   }
 }
