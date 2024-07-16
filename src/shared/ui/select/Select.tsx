@@ -1,5 +1,5 @@
 import { ArrowIosDownOutline } from '@/../public/assets/components';
-import { selectOptionsType } from '@/shared/pagination/ui/PaginationWithSelect';
+import { selectOptionsType } from '@/shared/ui';
 import { Typography } from '@/shared/ui';
 import * as Select from '@radix-ui/react-select';
 import clsx from 'clsx';
