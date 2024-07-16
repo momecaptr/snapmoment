@@ -1,3 +1,4 @@
+'use client';
 import React, { useLayoutEffect, useMemo, useState } from 'react';
 
 import { getInputValueDate } from '@/shared/datePicker/lib/helpers/getInputValueDate';
