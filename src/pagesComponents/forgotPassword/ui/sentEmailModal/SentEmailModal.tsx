@@ -5,7 +5,7 @@ import { Button } from '@/shared/button/Button';
 import { Modal } from '@/shared/modal/Modal';
 import { Typography } from '@/shared/typography/Typography';
 
-import s from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal.module.scss';
+import s from './SentEmailModal.module.scss';
 
 type Props = {
   open: boolean;

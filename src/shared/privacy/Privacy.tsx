@@ -18,12 +18,12 @@ const Privacy = (props: PrivacyProps) => {
           <ArrowForwardOutline />
         </div>
         <Typography as={Link} className={s.buttonText} href={'/sign-in'} variant={'small_text'}>
-          Back to Sing in
+          Back to Sign in
         </Typography>
       </Typography>
 
       {/*↑↑↑ Это нужно заменить на BackBtn ↓↓↓ и подкорректировать ArrowForwardOutline под неообходий размер*/}
-      {/*<BackBtn href={'/sign-in'}>Back to Sing in</BackBtn>*/}
+      {/*<BackBtn href={'/sign-in'}>Back to Sign in</BackBtn>*/}
 
       <div className={s.box}>
         <Typography as={'h1'} className={s.title} variant={'h1'}>
