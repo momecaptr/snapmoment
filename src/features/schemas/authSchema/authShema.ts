@@ -46,7 +46,8 @@ export const createNewPasswordSchema = z
   });
 
 export const forgotPasswordSchema = z.object({
-  email: commonEmailRules
+  email: z.string().min(1, { message: 'Required' }).email()
+  // recaptcha: z.string().min(1, { message: 'Required' })
 });
 
 export const signInSchema = z.object({
