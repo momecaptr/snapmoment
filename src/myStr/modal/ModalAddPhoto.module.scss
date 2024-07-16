@@ -1,0 +1,87 @@
+.box {
+  position: relative;
+  width: 492px;
+  background-color: var(--dark-300);
+}
+
+.line {
+  display: flex;
+  width: 100%;
+  height: 2px;
+  background-color: var(--dark-100);
+}
+
+.boxTitleAndButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.boxContent {
+  position: relative; /* Add this to allow absolute positioning within */
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  padding: 72px 135px 108px;
+}
+
+.topButton {
+  background-color: transparent;
+}
+
+.butoon {
+  margin-top: 60px;
+}
+
+.photo {
+  width: 222px;
+  height: 228px;
+}
+
+.customFileUpload {
+  display: none;
+}
+
+.lable {
+  padding: 6px 24px;
+  background-color: var(--accent-500);
+}
+
+.errorMessage {
+  margin-top: 24px;
+  padding: 6px 24px;
+
+  color: var(--light-100);
+  text-align: center;
+
+  background-color: var(--danger-500);
+}
+
+.boxErrorMessage {
+  margin: 0 24px;
+}
+
+.changeMargin {
+  padding: 24px 135px 108px;
+}
+
+.buttonSave {
+  position: absolute;
+  right: 24px;
+  bottom: 36px;
+}
+
+.photoContainer {
+  position: relative;
+  width: 332px;
+  height: 340px;
+}
+
+.photoProfileWithCircle {
+  width: 100%;
+  height: 100%;
+}

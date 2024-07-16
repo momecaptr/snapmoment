@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Typography } from '@/shared/typography/Typography';
+import ModalAddPhoto from '@/myStr/modal/ModalAddPhoto';
 
 export default function SignUp() {
   return (
     <div>
-      <Typography variant={'large'}>Sign Up</Typography>
+      <ModalAddPhoto />
     </div>
   );
 }
