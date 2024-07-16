@@ -1,0 +1,12 @@
+.author {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 12px;
+  align-items: center;
+
+  .authorPhoto {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+}
