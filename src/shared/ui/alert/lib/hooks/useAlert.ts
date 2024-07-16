@@ -1,4 +1,4 @@
-import { useActions } from '@/shared/hooks/useActions';
+import { useActions } from '@/shared/lib/hooks/useActions';
 import { AlertFnProps } from '@/shared/ui/alert/types/types';
 
 const useAlert = () => {

@@ -1,11 +1,11 @@
 'use client';
 import { initReactI18next } from 'react-i18next';
 
-import byTranslation from '@/shared/locales/languages/by/translation.json';
-import enTranslation from '@/shared/locales/languages/en/translation.json';
-import kzTranslation from '@/shared/locales/languages/kz/translation.json';
-import ruTranslation from '@/shared/locales/languages/ru/translation.json';
-import uaTranslation from '@/shared/locales/languages/ua/translation.json';
+import byTranslation from '@/shared/lib/locales/languages/by/translation.json';
+import enTranslation from '@/shared/lib/locales/languages/en/translation.json';
+import kzTranslation from '@/shared/lib/locales/languages/kz/translation.json';
+import ruTranslation from '@/shared/lib/locales/languages/ru/translation.json';
+import uaTranslation from '@/shared/lib/locales/languages/ua/translation.json';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 

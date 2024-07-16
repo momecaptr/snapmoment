@@ -1,7 +1,7 @@
 import SvgArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import SvgArrowIosForward from '@/../public/assets/components/ArrowIosForward';
-import { usePagination } from '@/shared/pagination/lib/paginationLogic';
-import { PageLink } from '@/shared/pagination/ui/paginationInitial/pageLink/PageLink';
+import { usePagination } from '@/shared/ui/pagination/lib/paginationLogic';
+import { PageLink } from '@/shared/ui/pagination/ui/paginationInitial/pageLink/PageLink';
 
 import s from './Pagination.module.scss';
 

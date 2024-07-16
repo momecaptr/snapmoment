@@ -3,9 +3,7 @@ import React from 'react';
 
 import useSignUpForm from '@/pagesComponents/signUp/lib/hook/useSignUpForm';
 import { Button } from '@/shared/button/Button';
-import FormCheckbox from '@/shared/forms/FormCheckbox';
-import { FormTextfield } from '@/shared/forms/FormTextfield';
-import { Card, Typography } from '@/shared/ui';
+import { Card, FormCheckbox, FormTextfield, Typography } from '@/shared/ui';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 

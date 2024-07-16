@@ -2,15 +2,15 @@
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Button } from '@/shared/button/Button';
-import { useActions } from '@/shared/hooks/useActions';
-import { useAppSelector } from '@/shared/hooks/useAppSelector';
+import { useActions } from '@/shared/lib/hooks/useActions';
+import { useAppSelector } from '@/shared/lib/hooks/useAppSelector';
 // import CloseOutline from 'public/assets/components/CloseOutline';
 import { Typography } from '@/shared/ui';
 import { alertSelectors } from '@/shared/ui/alert/model/alertSlice';
 import { clsx } from 'clsx';
 
 //
-import s from '@/shared/ui/alert/ui/Alert.module.scss';
+import s from './Alert.module.scss';
 
 export const Alert = () => {
   const alerts = useAppSelector(alertSelectors.selectAlerts);

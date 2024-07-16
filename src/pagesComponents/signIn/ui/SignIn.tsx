@@ -3,8 +3,8 @@ import React from 'react';
 
 import useSignInForm from '@/pagesComponents/signIn/lib/hooks/useSignInForm';
 import { Button } from '@/shared/button/Button';
-import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { Card, Typography } from '@/shared/ui';
+import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 

@@ -1,5 +1,4 @@
-import Input from '@/shared/input/Input';
-import { Card, Typography } from '@/shared/ui';
+import { Card, Input, Typography } from '@/shared/ui';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 

@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features/schemas/authSchema/authShema';
 import { Button } from '@/shared/button/Button';
-import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { Card, Typography } from '@/shared/ui';
+import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import s from '@/pagesComponents/createNewPassword/ui/CreateNewPassword.module.scss';

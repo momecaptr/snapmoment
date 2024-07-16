@@ -1,6 +1,6 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
 
-import Input, { InputProps } from '@/shared/input/Input';
+import { Input, InputProps } from '@/shared/ui';
 
 export type ControlledInputProps<TFieldValues extends FieldValues> = {
   className?: string;

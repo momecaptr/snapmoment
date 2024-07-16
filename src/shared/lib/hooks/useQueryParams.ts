@@ -1,4 +1,4 @@
-import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useDebounce } from '@/shared/lib/hooks/useDebounce';
 import { initCurrentPage, selectOptionPagination } from '@/shared/ui';
 import { useRouter } from 'next/router';
 

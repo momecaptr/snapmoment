@@ -5,7 +5,7 @@ import Checkbox, { CheckboxPropsProps } from '@/shared/checkbox/Checkbox';
 type Props<T extends FieldValues> = Omit<CheckboxPropsProps, 'checked' | 'name' | 'onBlur' | 'onCheckedChange'> &
   UseControllerProps<T>;
 
-function FormCheckbox<T extends FieldValues>({ control, name, ...rest }: Props<T>) {
+export function FormCheckbox<T extends FieldValues>({ control, name, ...rest }: Props<T>) {
   const {
     field: { onChange, value = rest.defaultChecked, ...field }
   } = useController({
@@ -15,5 +15,3 @@ function FormCheckbox<T extends FieldValues>({ control, name, ...rest }: Props<T
 
   return <Checkbox {...rest} {...field} checked={value} onCheckedChange={onChange} />;
 }
-
-export default FormCheckbox;

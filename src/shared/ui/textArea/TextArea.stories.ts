@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import TextArea from '@/shared/textArea/TextArea';
+import { TextArea } from '@/shared/ui';
+
 
 const meta = {
   component: TextArea,

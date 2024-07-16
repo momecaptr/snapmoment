@@ -13,7 +13,7 @@ export type TextAreaProps = {
   resize?: boolean;
 } & ComponentPropsWithoutRef<'textarea'>;
 
-const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: TextAreaProps, ref) => {
+export const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: TextAreaProps, ref) => {
   const { callback, className, currentValue, error, id, label, placeholder, resize, ...restProps } = props;
   const [inputValue, setInputValue] = useState(currentValue || '');
 
@@ -65,5 +65,3 @@ const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: TextAreaPro
 });
 
 TextArea.displayName = 'TextArea';
-
-export default TextArea;
