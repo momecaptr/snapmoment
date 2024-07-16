@@ -7,7 +7,7 @@ import Eye from '@/../public/assets/components/Eye';
 import Search from '@/../public/assets/components/Search';
 import { Button } from '@/shared/button/Button';
 import { useAutoId } from '@/shared/hooks/useAutoId';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 import clsx from 'clsx';
 
 import s from './Input.module.scss';
