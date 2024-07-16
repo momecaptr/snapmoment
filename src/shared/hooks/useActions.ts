@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { AlertActions } from '@/shared/alert/model/alertSlice';
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
+import { AlertActions } from '@/shared/ui/alert/model/alertSlice';
 import { bindActionCreators } from 'redux';
 
 const actionsAll = {

@@ -1,5 +1,5 @@
-import { AlertFnProps } from '@/shared/alert/types/types';
 import { useActions } from '@/shared/hooks/useActions';
+import { AlertFnProps } from '@/shared/ui/alert/types/types';
 
 const useAlert = () => {
   const { addErrorAlert, addSuccessAlert } = useActions();

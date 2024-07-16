@@ -1,16 +1,18 @@
 'use client';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
-import { alertSelectors } from '@/shared/alert/model/alertSlice';
 import { Button } from '@/shared/button/Button';
 import { useActions } from '@/shared/hooks/useActions';
 import { useAppSelector } from '@/shared/hooks/useAppSelector';
-import { Typography } from '@/shared/typography/Typography';
+// import CloseOutline from 'public/assets/components/CloseOutline';
+import { Typography } from '@/shared/ui';
+import { alertSelectors } from '@/shared/ui/alert/model/alertSlice';
 import { clsx } from 'clsx';
 
-import s from './Alert.module.scss';
+//
+import s from '@/shared/ui/alert/ui/Alert.module.scss';
 
-const Alert = () => {
+export const Alert = () => {
   const alerts = useAppSelector(alertSelectors.selectAlerts);
   const { removeAlert } = useActions();
 
@@ -33,5 +35,3 @@ const Alert = () => {
     </div>
   );
 };
-
-export default Alert;
