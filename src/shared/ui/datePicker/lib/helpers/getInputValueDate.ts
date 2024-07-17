@@ -1,5 +1,5 @@
-import { getInputValueFromDate } from '@/shared/datePicker/lib/utils';
-import { RangeDate } from '@/shared/datePicker/ui/DatePicker';
+import { RangeDate } from '@/shared/ui';
+import { getInputValueFromDate } from '@/shared/ui/datePicker/lib/utils';
 
 export const getInputValueDate = (value: RangeDate): string => {
   return `${getInputValueFromDate(value.startDate)} - ${getInputValueFromDate(value.endDate)}`;

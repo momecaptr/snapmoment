@@ -1,3 +1,4 @@
+export * from './datePicker/ui/DatePicker';
 export * from './input/Input';
 export * from './mobileMenu/MobileMenu';
 export * from './modal/Modal';

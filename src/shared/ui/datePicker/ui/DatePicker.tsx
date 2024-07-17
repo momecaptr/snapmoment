@@ -2,10 +2,10 @@
 import React from 'react';
 
 import CalendarOutline from '@/../public/assets/components/CalendarOutline';
-import { updateValueOnPopupCloseAction } from '@/shared/datePicker/lib/helpers/updateValueOnPopupCloseAction';
-import { useInputValueRange } from '@/shared/datePicker/lib/hooks/useInputValueRange';
-import { useShowPopup } from '@/shared/datePicker/lib/hooks/useShowPopup';
-import { DatePickerPopupContent } from '@/shared/datePicker/ui/DatePickerPopupContent';
+import { updateValueOnPopupCloseAction } from '@/shared/ui/datePicker/lib/helpers/updateValueOnPopupCloseAction';
+import { useInputValueRange } from '@/shared/ui/datePicker/lib/hooks/useInputValueRange';
+import { useShowPopup } from '@/shared/ui/datePicker/lib/hooks/useShowPopup';
+import { DatePickerPopupContent } from '@/shared/ui/datePicker/ui/DatePickerPopupContent';
 import { clsx } from 'clsx';
 
 import s from './DatePicker.module.scss';
