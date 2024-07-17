@@ -9,7 +9,7 @@ type Props = {
   disabled?: boolean;
 } & ComponentProps<typeof Button>;
 
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 import s from '../Pagination.module.scss';
 

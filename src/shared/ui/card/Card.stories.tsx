@@ -1,6 +1,4 @@
-import { Card } from '@/shared/card/Card';
-import { Input } from '@/shared/ui';
-import { Typography } from '@/shared/ui';
+import { Card, Input, Typography } from '@/shared/ui';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 

@@ -2,7 +2,7 @@
 import React, { ReactNode, memo } from 'react';
 
 import ArrowBackOutline from '@/../public/assets/components/ArrowBackOutline';
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 import Link from 'next/link';
 
 import s from './BackBtn.module.scss';

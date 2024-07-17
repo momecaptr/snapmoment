@@ -1,3 +1,7 @@
+export * from './backBtn/BackBtn';
+export * from './button/Button';
+export * from './card/Card';
+export * from './checkbox/Checkbox';
 export * from './datePicker/ui/DatePicker';
 export * from './input/Input';
 export * from './mobileMenu/MobileMenu';

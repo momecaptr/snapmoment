@@ -4,13 +4,13 @@ import CheckIcon from '@/../public/assets/components/CheckboxIcon';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
 import clsx from 'clsx';
 
-import s from '@/shared/checkbox/Checkbox.module.scss';
+import s from './Checkbox.module.scss';
 
 export type CheckboxPropsProps = {
   label?: ReactNode;
 } & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>;
 
-const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxPropsProps>(
+export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxPropsProps>(
   (props: CheckboxPropsProps, ref) => {
     const { checked, className, disabled, id, label, onCheckedChange, ...rest } = props;
     const generatedId = useId();
@@ -57,5 +57,3 @@ const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps
     );
   }
 );
-
-export default Checkbox;

@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features/schemas/authSchema/authShema';
-import { Button } from '@/shared/button/Button';
-import { Card } from '@/shared/card/Card';
 import { Typography } from '@/shared/ui';
+import { Button } from '@/shared/ui';
+import { Card } from '@/shared/ui';
 import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
 import { zodResolver } from '@hookform/resolvers/zod';
 

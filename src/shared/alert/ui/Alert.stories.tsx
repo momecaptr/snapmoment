@@ -3,7 +3,7 @@ import type { Meta } from '@storybook/react';
 import StoreProvider from '@/app/StoreProvider';
 import useAlert from '@/shared/alert/lib/hooks/useAlert';
 import Alert from '@/shared/alert/ui/Alert';
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 const meta = {
   component: Alert,
