@@ -5,14 +5,9 @@ import { useAppDispatch } from '@/shared/utils';
 import { useAppSelector } from '@/shared/utils';
 
 export enum ModalKey {
-  AddCard = 'AddCard',
-  AddDeck = 'AddDeck',
-  DeleteCard = 'DeleteCard',
-  DeleteDeck = 'DeleteDeck',
-  EditCard = 'EditCard',
-  EditDeck = 'EditDeck',
-  Empty = 'Empty',
-  Success = 'Success'
+  Success = 'Success',
+  ViewLikes = 'ViewLikes',
+  ViewPhoto = 'ViewPhoto'
 }
 
 export const useModal = (modalKey: ModalKey) => {

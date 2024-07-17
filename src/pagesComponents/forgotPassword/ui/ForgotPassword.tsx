@@ -6,14 +6,13 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import useForgotPassword from '@/pagesComponents/forgotPassword/lib/hooks/useForgotPassword';
 import SentEmailModal from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
-import { ModalKey, useModal } from '@/shared/utils';
+// import { ModalKey, useModal } from '@/shared/utils';
 import Link from 'next/link';
 
 import s from '@/pagesComponents/forgotPassword/ui/ForgotPassword.module.scss';
 
 const ForgotPassword = () => {
-  const { control, handleSubmit, isValid, onSubmit } = useForgotPassword();
-  const { isOpen, setOpen } = useModal(ModalKey.Success);
+  const { control, handleCaptchaChange, handleSubmit, isOpen, isValid, onSubmit, setOpen } = useForgotPassword();
 
   return (
     <>
@@ -44,8 +43,28 @@ const ForgotPassword = () => {
             <Typography as={Link} className={s.backSignIn} href={'/sign-in'} variant={'h3'}>
               Back to Sign In
             </Typography>
-            {/*ключ от гугла тестовый */}
-            <ReCAPTCHA sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'} theme={'dark'} />
+            {/*<Controller*/}
+            {/*  render={({ onChange }: FieldValues) => (*/}
+            {/*    <ReCAPTCHA*/}
+            {/*      onChange={(value) => {*/}
+            {/*        handleCaptchaChange(value);*/}
+            {/*        onChange(value);*/}
+            {/*      }}*/}
+            {/*      sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}*/}
+            {/*      theme={'dark'}*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*  control={control}*/}
+            {/*  name={'recaptcha'}*/}
+            {/*/>*/}
+
+            <ReCAPTCHA
+              onChange={(value) => {
+                handleCaptchaChange(value);
+              }}
+              sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
+              theme={'dark'}
+            />
           </section>
         </Card>
       </div>{' '}
