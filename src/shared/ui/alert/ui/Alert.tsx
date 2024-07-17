@@ -5,7 +5,7 @@ import { Typography } from '@/shared/ui';
 import { Button } from '@/shared/ui';
 import { alertSelectors } from '@/shared/ui/alert/model/alertSlice';
 import { useActions } from '@/shared/utils';
-import { useAppSelector } from '@/shared/utils/hooks/useAppSelector';
+import { useAppSelector } from '@/shared/utils';
 import { clsx } from 'clsx';
 
 import s from './Alert.module.scss';

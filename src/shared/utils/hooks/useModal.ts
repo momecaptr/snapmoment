@@ -1,8 +1,8 @@
 'use client';
 import { selectIsOpen, selectModalKey } from '@/app/model/appSelectors';
 import { toggleModal } from '@/app/model/appSlice';
-import { useAppDispatch } from '@/shared/utils/hooks/useAppDispatch';
-import { useAppSelector } from '@/shared/utils/hooks/useAppSelector';
+import { useAppDispatch } from '@/shared/utils';
+import { useAppSelector } from '@/shared/utils';
 
 export enum ModalKey {
   AddCard = 'AddCard',
