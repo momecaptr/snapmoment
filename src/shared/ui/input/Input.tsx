@@ -5,8 +5,7 @@ import EyeOff from '@/../public/assets/components/EyeOff'; //'@/assets/icons/svg
 import Close from '@/../public/assets/components/Close';
 import Eye from '@/../public/assets/components/Eye';
 import Search from '@/../public/assets/components/Search';
-import { Typography } from '@/shared/ui';
-import { Button } from '@/shared/ui';
+import { Button, Typography } from '@/shared/ui';
 import { useAutoId } from '@/shared/utils';
 import clsx from 'clsx';
 

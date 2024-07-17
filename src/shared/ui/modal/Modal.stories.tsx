@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import ImageOutline from '@/../public/assets/components/ImageOutline';
-import { Input, Modal, Props as ModalProps } from '@/shared/ui';
-import { Button } from '@/shared/ui';
+import { Button, Input, Modal, Props as ModalProps } from '@/shared/ui';
 import { Checkbox } from '@radix-ui/react-checkbox';
 import { Meta, StoryFn } from '@storybook/react';
 

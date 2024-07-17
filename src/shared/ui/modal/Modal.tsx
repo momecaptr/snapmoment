@@ -1,8 +1,7 @@
 import { CSSProperties, ComponentPropsWithoutRef } from 'react';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
-import { Typography } from '@/shared/ui';
-import { Card } from '@/shared/ui';
+import { Card, Typography } from '@/shared/ui';
 import * as Dialog from '@radix-ui/react-dialog';
 import { clsx } from 'clsx';
 
