@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react';
+import React, { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useId } from 'react';
 
 import CheckIcon from '@/../public/assets/components/CheckboxIcon';
 import * as CheckboxRadix from '@radix-ui/react-checkbox';
@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import s from '@/shared/checkbox/Checkbox.module.scss';
 
 export type CheckboxPropsProps = {
-  label?: string;
+  label?: ReactNode;
 } & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>;
 
 const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxPropsProps>(

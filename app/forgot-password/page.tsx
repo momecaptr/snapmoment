@@ -1,3 +1,3 @@
-import ForgotPassword from '@/pages/forgotPassword/ui/ForgotPassword';
+import ForgotPassword from '@/pagesComponents/forgotPassword/ui/ForgotPassword';
 
 export default ForgotPassword;

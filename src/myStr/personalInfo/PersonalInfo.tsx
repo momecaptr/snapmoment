@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { SchemaType, schema } from '@/features/schemas/signInSignUpSchema';
 import { addNumberDay } from '@/shared/datePicker/lib/helpers/addNumberDay';
 import { DatePicker, RangeDate } from '@/shared/datePicker/ui/DatePicker';
 import { FormTextfieldArea } from '@/shared/forms/FormTextFieldArea';
 import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { SelectUI } from '@/shared/select/Select';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import s from './PersonalInfo.module.scss';
 
@@ -22,11 +20,9 @@ const PersonalInfo = () => {
     formState: { errors },
     handleSubmit,
     register
-  } = useForm<SchemaType>({
-    resolver: zodResolver(schema)
-  });
+  } = useForm();
 
-  const onSubmit = (data: SchemaType) => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

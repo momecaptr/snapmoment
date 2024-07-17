@@ -21,7 +21,7 @@ const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
         <div className={s.google}>
           <Google height={36} width={36} />
         </div>
-        <div>
+        <div className={s.github}>
           <GitHub height={36} width={36} />
         </div>
       </div>

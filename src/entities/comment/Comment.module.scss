@@ -1,0 +1,102 @@
+.comment {
+  display: flex;
+  gap: 12px;
+
+  .commentUserPhoto {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+
+  .commentBody {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 12px;
+    margin-bottom: 5px;
+
+    .commentTextBlock {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+
+      .commentText {
+        width: 100%;
+        word-break: break-word;
+
+        .commentUserName {
+          font-weight: 700;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .commentInfo {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 12px;
+      align-items: center;
+
+      .timeAgo {
+        color: var(--light-900);
+      }
+
+      .likeCounts {
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--light-900);
+      }
+
+      .answerBtn {
+        cursor: pointer;
+
+        padding: 0;
+
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--light-900);
+
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+        &:hover {
+          color: var(--light-700);
+        }
+
+        &:active {
+          color: var(--light-900);
+        }
+      }
+    }
+
+    .answers {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 15px;
+
+      .viewAnswerBtn {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        padding: 0;
+
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--light-900);
+
+        &:hover {
+          color: var(--light-700);
+        }
+
+        &:active {
+          color: var(--light-900);
+        }
+
+        .rectangle {
+          width: 24px;
+          height: 1px;
+          background: var(--light-900);
+        }
+      }
+    }
+  }
+}

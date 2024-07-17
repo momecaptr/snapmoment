@@ -1,3 +1,5 @@
+@import 'src/app/styles/mixins';
+
 .container {
   position: fixed;
 
@@ -24,6 +26,8 @@
 }
 
 .btn {
+  @include focus-visible-default;
+
   display: flex;
   flex-flow: row nowrap;
   gap: 12px;
