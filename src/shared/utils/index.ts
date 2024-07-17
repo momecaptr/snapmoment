@@ -1,1 +1,1 @@
-export * from './locales/i18nConfiguration'
+export * from './locales/i18nConfiguration';
