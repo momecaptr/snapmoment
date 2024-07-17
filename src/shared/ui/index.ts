@@ -11,6 +11,7 @@ export * from './mobileMenu/MobileMenu';
 export * from './modal/Modal';
 export * from './pagination/ui/PaginationWithSelect';
 export * from './pagination/ui/paginationInitial/Pagination';
+export * from './privacy/Privacy';
 export * from './radio/Radio';
 export * from './select/Select';
 export * from './tabs/TabSwitcher';

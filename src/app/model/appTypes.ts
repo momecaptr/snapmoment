@@ -1,4 +1,4 @@
-import { ModalKey } from '@/shared/hooks/useModal';
+import { ModalKey } from '@/shared/utils/hooks/useModal';
 
 export interface AppSettings {
   modal: Modal;

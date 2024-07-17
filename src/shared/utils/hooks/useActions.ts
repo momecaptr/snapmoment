@@ -1,7 +1,7 @@
-'use client'
+'use client';
 import { useMemo } from 'react';
 
-import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
+import { useAppDispatch } from '@/shared/utils/hooks/useAppDispatch';
 // import { AlertActions } from '@/shared/ui';
 // Импорт сверху ломает билд
 // import { AlertActions } from '@/shared/ui/alert';

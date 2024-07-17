@@ -1,6 +1,6 @@
-'use client'
-import { useActions } from '@/shared/hooks/useActions';
+'use client';
 import { AlertFnProps } from '@/shared/ui/alert/types/types';
+import { useActions } from '@/shared/utils/hooks/useActions';
 
 export const useAlert = () => {
   const { addErrorAlert, addSuccessAlert } = useActions();

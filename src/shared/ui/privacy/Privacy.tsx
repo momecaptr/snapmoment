@@ -8,7 +8,7 @@ import s from './Privacy.module.scss';
 type PrivacyProps = {
   title: string;
 };
-const Privacy = (props: PrivacyProps) => {
+export const Privacy = (props: PrivacyProps) => {
   const { title } = props;
 
   return (
@@ -83,5 +83,3 @@ const Privacy = (props: PrivacyProps) => {
     </div>
   );
 };
-
-export default Privacy;

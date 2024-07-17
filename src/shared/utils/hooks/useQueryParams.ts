@@ -1,6 +1,6 @@
 'use client';
 import { initCurrentPage, selectOptionPagination } from '@/shared/consts/globalVariables';
-import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useDebounce } from '@/shared/utils/hooks/useDebounce';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useQueryParams = () => {
