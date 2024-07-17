@@ -1,9 +1,7 @@
 'use client';
 import { memo } from 'react';
 
-import { Typography } from '@/shared/ui';
-import { Modal } from '@/shared/ui';
-import { Button } from '@/shared/ui';
+import { Button, Modal, Typography } from '@/shared/ui';
 
 import s from './SentEmailModal.module.scss';
 

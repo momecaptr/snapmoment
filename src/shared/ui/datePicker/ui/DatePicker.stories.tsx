@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { DatePicker, RangeDate } from '@/shared/ui';
-import { addNumberDay } from '@/shared/ui/datePicker/lib/helpers/addNumberDay';
+import { DatePicker, RangeDate, addNumberDay } from '@/shared/ui';
 import { Meta, StoryFn } from '@storybook/react';
 
 interface CustomArgs {}

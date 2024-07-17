@@ -2,10 +2,7 @@
 import React from 'react';
 
 import useSignUpForm from '@/pagesComponents/signUp/lib/hook/useSignUpForm';
-import { Typography } from '@/shared/ui';
-import { Button } from '@/shared/ui';
-import { Card } from '@/shared/ui';
-import { FormCheckbox, FormTextfield } from '@/shared/ui';
+import { Button, Card, FormCheckbox, FormTextfield, Typography } from '@/shared/ui';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 

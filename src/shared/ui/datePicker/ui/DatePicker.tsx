@@ -2,10 +2,7 @@
 import React from 'react';
 
 import CalendarOutline from '@/../public/assets/components/CalendarOutline';
-import { updateValueOnPopupCloseAction } from '@/shared/ui/datePicker/lib/helpers/updateValueOnPopupCloseAction';
-import { useInputValueRange } from '@/shared/ui/datePicker/lib/hooks/useInputValueRange';
-import { useShowPopup } from '@/shared/ui/datePicker/lib/hooks/useShowPopup';
-import { DatePickerPopupContent } from '@/shared/ui/datePicker/ui/DatePickerPopupContent';
+import { DatePickerPopupContent, updateValueOnPopupCloseAction, useInputValueRange, useShowPopup } from '@/shared/ui';
 import { clsx } from 'clsx';
 
 import s from './DatePicker.module.scss';

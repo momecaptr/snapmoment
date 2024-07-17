@@ -1,8 +1,7 @@
 import React from 'react';
 
 import Girl from '@/../public/assets/components/GirlDefault';
-import { Typography } from '@/shared/ui';
-import { Button } from '@/shared/ui';
+import { Button, Typography } from '@/shared/ui';
 
 import s from '@/pagesComponents/congratulations/Congratulation.module.scss';
 const Congratulations = () => {

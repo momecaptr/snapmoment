@@ -1,9 +1,7 @@
 'use client';
 import React, { useLayoutEffect, useMemo, useState } from 'react';
 
-import { RangeDate } from '@/shared/ui';
-import { getInputValueDate } from '@/shared/ui/datePicker/lib/helpers/getInputValueDate';
-import { getDateFromInputValue, isInRange } from '@/shared/ui/datePicker/lib/utils';
+import { RangeDate, getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui';
 
 interface Props {
   max?: Date;

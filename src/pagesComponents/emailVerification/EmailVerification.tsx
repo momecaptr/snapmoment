@@ -1,8 +1,7 @@
 import React from 'react';
 
 import Boy from '@/../public/assets/components/BoyDefault';
-import { Typography } from '@/shared/ui';
-import { Button } from '@/shared/ui';
+import { Button, Typography } from '@/shared/ui';
 
 import s from './EmailVerification.module.scss';
 const EmailVerification = () => {
