@@ -9,7 +9,7 @@ import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
 import { SideBar } from '@/shared/sideBar/SideBar';
-import { Button, Typography } from '@/shared/ui';
+import { Typography } from '@/shared/ui';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import clsx from 'clsx';
@@ -51,14 +51,14 @@ export const Default: StoryFn<StoryProps> = () => {
     <div className={s.container}>
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Button as={Link} className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
+          <Link className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
             <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
               {name}
             </Typography>
-          </Button>
+          </Link>
         ))}
       </div>
     </div>
