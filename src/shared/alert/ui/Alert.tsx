@@ -10,7 +10,7 @@ import { clsx } from 'clsx';
 
 import s from './Alert.module.scss';
 
-const Alert = () => {
+export const Alert = () => {
   const alerts = useAppSelector(alertSelectors.selectAlerts);
   const { removeAlert } = useActions();
 
@@ -33,5 +33,3 @@ const Alert = () => {
     </div>
   );
 };
-
-export default Alert;
