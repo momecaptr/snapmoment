@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TabSwitcher } from '@/shared/ui/tabs/TabSwitcher';
+import { TabSwitcher } from '@/shared/ui';
 import { Meta, type StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof TabSwitcher> = {

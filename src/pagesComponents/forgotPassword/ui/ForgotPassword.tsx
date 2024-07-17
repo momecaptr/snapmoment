@@ -7,9 +7,9 @@ import useForgotPassword from '@/pagesComponents/forgotPassword/lib/hooks/useFor
 import SentEmailModal from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal';
 import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
-import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { ModalKey, useModal } from '@/shared/hooks/useModal';
 import { Typography } from '@/shared/ui';
+import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
 import Link from 'next/link';
 
 import s from '@/pagesComponents/forgotPassword/ui/ForgotPassword.module.scss';

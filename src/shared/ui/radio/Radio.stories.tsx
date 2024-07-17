@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 
-import { Radio } from '@/shared/ui/radio/Radio';
+import { Radio } from '@/shared/ui';
 
 const meta = {
   component: Radio,

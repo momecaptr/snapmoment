@@ -1,4 +1,4 @@
-import { Typography } from '@/shared/ui/typography/Typography';
+import { Typography } from '@/shared/ui';
 import * as Tabs from '@radix-ui/react-tabs';
 import { clsx } from 'clsx';
 

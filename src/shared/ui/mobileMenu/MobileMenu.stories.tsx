@@ -6,7 +6,7 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import { Button } from '@/shared/button/Button';
-import { MobileMenu } from '@/shared/ui/mobileMenu/MobileMenu';
+import { MobileMenu } from '@/shared/ui';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import { clsx } from 'clsx';
