@@ -1,3 +1,4 @@
+'use client'
 import { selectIsOpen, selectModalKey } from '@/app/model/appSelectors';
 import { toggleModal } from '@/app/model/appSlice';
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch';

@@ -1,4 +1,5 @@
-export function useThrottle<F extends (...args: any[]) => void>(func: F, waitMilliseconds: number): F {
+'use client'
+export const useThrottle = <F extends (...args: any[]) => void>(func: F, waitMilliseconds: number): F => {
   let lastCallTime: null | number = null;
 
   return function (this: ThisParameterType<F>, ...args: Parameters<F>) {

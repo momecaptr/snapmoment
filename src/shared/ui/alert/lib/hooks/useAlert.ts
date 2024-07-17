@@ -1,7 +1,8 @@
-import { AlertFnProps } from '@/shared/alert/types/types';
+'use client'
 import { useActions } from '@/shared/hooks/useActions';
+import { AlertFnProps } from '@/shared/ui/alert/types/types';
 
-const useAlert = () => {
+export const useAlert = () => {
   const { addErrorAlert, addSuccessAlert } = useActions();
 
   const successAlert = ({ autoClose = 3000, message }: AlertFnProps) => {
@@ -14,5 +15,3 @@ const useAlert = () => {
 
   return { errorAlert, successAlert };
 };
-
-export default useAlert;

@@ -1,7 +1,13 @@
+'use client'
 import { useMemo } from 'react';
 
-import { AlertActions } from '@/shared/alert/model/alertSlice';
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
+// import { AlertActions } from '@/shared/ui';
+// Импорт сверху ломает билд
+// import { AlertActions } from '@/shared/ui/alert';
+// Этот импорт сверху тоже ломает билд
+import { AlertActions } from '@/shared/ui/alert/model/alertSlice';
+// А вот этот работает
 import { bindActionCreators } from 'redux';
 
 const actionsAll = {
