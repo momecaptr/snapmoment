@@ -4,7 +4,7 @@ import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Typography } from '@/shared/ui';
 import { Button } from '@/shared/ui';
 import { alertSelectors } from '@/shared/ui/alert/model/alertSlice';
-import { useActions } from '@/shared/utils/hooks/useActions';
+import { useActions } from '@/shared/utils';
 import { useAppSelector } from '@/shared/utils/hooks/useAppSelector';
 import { clsx } from 'clsx';
 
