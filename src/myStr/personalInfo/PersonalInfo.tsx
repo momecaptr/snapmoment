@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { SchemaType, schema } from '@/features/schemas/signInSignUpSchema';
-import { DatePicker } from '@/shared/datePicker/ui/DatePicker';
+import { addNumberDay } from '@/shared/datePicker/lib/helpers/addNumberDay';
+import { DatePicker, RangeDate } from '@/shared/datePicker/ui/DatePicker';
 import { FormTextfieldArea } from '@/shared/forms/FormTextFieldArea';
 import { FormTextfield } from '@/shared/forms/FormTextfield';
+import { SelectUI } from '@/shared/select/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Select } from '@radix-ui/react-select';
 
 import s from './PersonalInfo.module.scss';
 
 const PersonalInfo = () => {
+  const [date, setDate] = useState<RangeDate>({
+    endDate: addNumberDay({ date: new Date(), day: 2 }),
+    startDate: new Date()
+  });
+
   const {
     control,
     formState: { errors },
@@ -28,16 +34,30 @@ const PersonalInfo = () => {
         <FormTextfield className={s.input} control={control} label={'Username*'} name={'email'} type={'email'} />
         <FormTextfield className={s.input} control={control} label={'First Name'} name={'password'} type={'password'} />
         <FormTextfield className={s.input} control={control} label={'Last Name'} name={'email'} type={'email'} />
-        <FormTextfield className={s.input} control={control} label={'Last Name'} name={'email'} type={'email'} />
-        <DatePicker
-          value={{
-            endDate: new Date('2024-07-17T18:55:17.030Z'),
-            startDate: new Date('2024-07-15T18:55:17.030Z')
-          }}
-          onChange={() => {}}
-        />
-        <Select />
-        <Select />
+        <div className={s.datePickerBox}>
+          <DatePicker onChange={setDate} value={date} />
+        </div>
+        <div className={s.selectBox}>
+          <SelectUI
+            selectOptions={[
+              { text: 'Apple', value: 'apple' },
+              { text: 'Banana', value: 'banana' },
+              { text: 'Smetana', value: 'smetana' },
+              { text: 'Nirvana', value: 'nirvana' }
+            ]}
+            value={'apple'}
+          />
+          <SelectUI
+            selectOptions={[
+              { text: 'Apple', value: 'apple' },
+              { text: 'Banana', value: 'banana' },
+              { text: 'Smetana', value: 'smetana' },
+              { text: 'Nirvana', value: 'nirvana' }
+            ]}
+            value={'apple'}
+          />
+        </div>
+
         <FormTextfieldArea label={'About Me'} name={'text'} rows={5} resize />
       </div>
     </form>

@@ -19,7 +19,7 @@
 }
 
 .boxContent {
-  position: relative; /* Add this to allow absolute positioning within */
+  position: relative;
 
   display: flex;
   flex-flow: column nowrap;
@@ -79,9 +79,24 @@
   position: relative;
   width: 332px;
   height: 340px;
+  background-color: rgb(0 0 0 / 65%);
 }
 
 .photoProfileWithCircle {
   width: 100%;
   height: 100%;
+
+  mask-image: radial-gradient(circle, black 65%, rgb(0 0 0 / 50%) 20%);
+}
+
+.photoProfileWithCircle::before {
+  content: '';
+
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.5;
+  background-color: black;
 }

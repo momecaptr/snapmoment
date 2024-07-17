@@ -141,12 +141,12 @@ export const DatePickerPopupContent = ({
         </div>
         <div className={s.calendarPanelButtons}>
           <div className={s.calendarPanelButtonsLeft}>
-            <button className={s.popupBtnMonth} onClick={prevMonth}>
+            <button className={s.popupBtnMonth} onClick={prevMonth} type={'button'}>
               <ChevronLeftIcon />
             </button>
           </div>
           <div className={s.calendarPanelButtonsRight}>
-            <button className={s.popupBtnMonth} onClick={nextMonth}>
+            <button className={s.popupBtnMonth} onClick={nextMonth} type={'button'}>
               <ChevronRightIcon />
             </button>
           </div>
