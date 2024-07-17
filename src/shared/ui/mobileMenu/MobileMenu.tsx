@@ -1,4 +1,5 @@
-import { useState } from 'react';
+'use client';
+import { ElementType, useState } from 'react';
 
 import Home from '@/../public/assets/components/Home';
 import MessageCircle from '@/../public/assets/components/MessageCircle';
@@ -6,28 +7,22 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import { Button } from '@/shared/button/Button';
-import { MobileMenu } from '@/shared/mobileMenu/MobileMenu';
-import { StoryProps } from '@storybook/blocks';
-import { Meta, StoryFn } from '@storybook/react';
 import { clsx } from 'clsx';
+import Link from 'next/link';
 
 import s from './MobileMenu.module.scss';
 
-const meta = {
-  component: MobileMenu,
-  parameters: {
-    layout: 'center'
-  },
-  tags: ['autodocs'],
-  title: 'Components/MobileMenu'
-} satisfies Meta<typeof MobileMenu>;
+type IconIconComponentProps = {
+  IconComponent: ElementType;
+  path: string;
+  value: LinksValue;
+};
+type LinksValue = '' | 'home' | 'message' | 'person' | 'plus' | 'search';
 
-export default meta;
-
-export const Default: StoryFn<StoryProps> = () => {
-  const [activeIcon, setActiveIcon] = useState('');
-
-  const links = [
+export const MobileMenu = () => {
+  const [activeIcon, setActiveIcon] = useState<LinksValue>('');
+  // path заменить на реальные пути
+  const links: IconIconComponentProps[] = [
     { IconComponent: Home, path: 'home', value: 'home' },
     { IconComponent: PlusSquare, path: 'add', value: 'plus' },
     { IconComponent: MessageCircle, path: 'messages', value: 'message' },
@@ -38,14 +33,8 @@ export const Default: StoryFn<StoryProps> = () => {
   return (
     <div className={s.container}>
       <div className={s.btns}>
-        {links.map(({ IconComponent, value /*path*/ }) => (
-          <Button
-            // добавить  as={Link}
-            className={s.btn}
-            key={value}
-            onClick={() => setActiveIcon(value)}
-            // to={`${path}`}
-          >
+        {links.map(({ IconComponent, path, value }) => (
+          <Button as={Link} className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />

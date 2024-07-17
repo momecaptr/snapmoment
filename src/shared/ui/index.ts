@@ -1,3 +1,6 @@
+export * from './input/Input';
+export * from './mobileMenu/MobileMenu';
+export * from './modal/Modal';
 export * from './pagination/ui/PaginationWithSelect';
 export * from './pagination/ui/paginationInitial/Pagination';
 export * from './radio/Radio';
