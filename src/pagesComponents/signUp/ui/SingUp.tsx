@@ -5,8 +5,7 @@ import useSignUpForm from '@/pagesComponents/signUp/lib/hook/useSignUpForm';
 import { Typography } from '@/shared/ui';
 import { Button } from '@/shared/ui';
 import { Card } from '@/shared/ui';
-import FormCheckbox from '@/shared/ui/forms/FormCheckbox';
-import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
+import { FormCheckbox, FormTextfield } from '@/shared/ui';
 import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
 import Link from 'next/link';
 

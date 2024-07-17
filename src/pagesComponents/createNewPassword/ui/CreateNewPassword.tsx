@@ -5,10 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features/schemas/authSchema/authShema';
-import { Typography } from '@/shared/ui';
-import { Button } from '@/shared/ui';
-import { Card } from '@/shared/ui';
-import { FormTextfield } from '@/shared/ui/forms/FormTextfield';
+import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import s from '@/pagesComponents/createNewPassword/ui/CreateNewPassword.module.scss';
