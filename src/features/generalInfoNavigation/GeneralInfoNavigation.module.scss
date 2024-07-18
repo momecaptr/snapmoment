@@ -1,0 +1,36 @@
+.wrapper {
+  margin: 36px 45px 24px 24px;
+}
+
+.boxAllLine {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+}
+
+.boxLinkLine {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.link {
+  padding: 6px 45px;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+
+  &.activeLink {
+    color: var(--accent-500);
+  }
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  margin-top: 4px;
+  background-color: var(--dark-100);
+
+  &.activeLine {
+    background-color: var(--accent-500);
+  }
+}

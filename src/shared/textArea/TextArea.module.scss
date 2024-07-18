@@ -1,5 +1,5 @@
 .boxTextArea {
-  padding: 8px;
+  width: 100%;
   font-size: 16px;
   background-color: transparent;
   border: 1.1px solid var(--light-900);
@@ -34,6 +34,7 @@
 }
 
 .label {
+  margin-bottom: 7px;
   font-size: 14px;
   color: var(--dark-100);
 }

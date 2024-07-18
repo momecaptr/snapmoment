@@ -8,7 +8,7 @@ import { Button } from '@/shared/button/Button';
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
 import { ModalKey, useModal } from '@/shared/hooks/useModal';
 import { Typography } from '@/shared/typography/Typography';
-import { ViewPhotoModal } from '@/widget/viewPhotoModal/ViewPhotoModal';
+import { ViewPostModal } from '@/widget/modal/viewPostModal/ViewPostModal';
 import Image from 'next/image';
 
 import s from './UserCard.module.scss';
@@ -25,7 +25,7 @@ export const UserCard = ({}: Props) => {
 
   return (
     <>
-      <ViewPhotoModal openViewPhoto={isOpen} setOpenViewPhoto={setOpen} />
+      <ViewPostModal openViewPhoto={isOpen} setOpenViewPhoto={setOpen} />
       <div className={s.card}>
         <div className={s.photo} onClick={showViewPhotoHandler}>
           <Image alt={'avatarMock'} src={avatarMock} />

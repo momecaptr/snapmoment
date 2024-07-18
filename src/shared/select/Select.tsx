@@ -15,12 +15,12 @@ type Props = {
 };
 export const SelectUI = ({ className, disabled, onValueChange, selectOptions, value }: Props) => {
   const selectClasses = {
-    button: clsx(className && s.button, s.className),
+    button: clsx(s.button, s.className),
     content: clsx(s.selectContent),
     icon: clsx(s.selectIcon, className && s.className),
-    root: s.selectRoot,
-    selectItem: clsx(s.selectItem, className && s.className),
-    trigger: clsx(s.selectTrigger, { [s.className]: className }, disabled && s.selectTriggerDisabled),
+    root: clsx(s.selectRoot),
+    selectItem: clsx(s.selectItem, s.className),
+    trigger: clsx(className, s.selectTrigger, disabled && s.selectTriggerDisabled),
     viewport: clsx(s.selectViewport)
   };
 

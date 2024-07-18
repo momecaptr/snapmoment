@@ -1,19 +1,20 @@
 'use client';
 import { ElementType, useState } from 'react';
 
-import Bookmark from '@/../public/assets/components/Bookmark';
-import Home from '@/../public/assets/components/Home';
-import LogOutOutline from '@/../public/assets/components/LogOutOutline';
-import MessageCircle from '@/../public/assets/components/MessageCircle';
-import Person from '@/../public/assets/components/Person';
-import PlusSquare from '@/../public/assets/components/PlusSquare';
-import SearchOutline from '@/../public/assets/components/SearchOutline';
-import TrendingUp from '@/../public/assets/components/TrendingUp';
 import { Typography } from '@/shared/typography/Typography';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 import s from './SideBar.module.scss';
+
+import Bookmark from '../../../public/assets/components/Bookmark';
+import Home from '../../../public/assets/components/Home';
+import LogOutOutline from '../../../public/assets/components/LogOutOutline';
+import MessageCircle from '../../../public/assets/components/MessageCircle';
+import Person from '../../../public/assets/components/Person';
+import PlusSquare from '../../../public/assets/components/PlusSquare';
+import SearchOutline from '../../../public/assets/components/SearchOutline';
+import TrendingUp from '../../../public/assets/components/TrendingUp';
 
 type MainLinksProps = {
   IconComponent: ElementType;

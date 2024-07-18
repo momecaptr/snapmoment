@@ -1,6 +1,8 @@
-@import '@/app/styles/mixins';
+@import 'src/app/styles/mixins';
 
 .container {
+  position: fixed;
+
   display: flex;
   flex-flow: column nowrap;
   gap: 60px;
