@@ -1,15 +1,15 @@
 import React from 'react';
 
 import ChangePhoto from '@/features/changePhotoProfile/ChangePhoto';
+import GeneralInfoNavigation from '@/features/generalInfoNavigation/GeneralInfoNavigation';
 import SaveGeneralInfo from '@/features/saveGeneralInfo/SaveGeneralInfo';
-import SettingNavigation from '@/features/settingNavigation/SettingNavigation';
 import PersonalInfo from '@/widget/generalInfoForms/PersonalInfo';
 
 import s from './GeneralInfo.module.scss';
 const GeneralInfo = () => {
   return (
     <div className={s.wrapper}>
-      <SettingNavigation />
+      <GeneralInfoNavigation />
       <div className={s.photoAndInfo}>
         <ChangePhoto />
         <PersonalInfo />

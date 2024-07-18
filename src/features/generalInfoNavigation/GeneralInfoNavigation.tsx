@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import Link from 'next/link';
 
-import s from './SettingNavigation.module.scss';
+import s from './GeneralInfoNavigation.module.scss';
 
-const SettingNavigation = () => {
+const GeneralInfoNavigation = () => {
   const [activeLink, setActiveLink] = useState('');
 
   const handleClick = (link: string) => {
@@ -33,4 +33,4 @@ const SettingNavigation = () => {
   );
 };
 
-export default SettingNavigation;
+export default GeneralInfoNavigation;
