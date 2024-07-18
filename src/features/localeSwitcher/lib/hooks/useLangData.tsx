@@ -1,3 +1,4 @@
+'use client';
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
