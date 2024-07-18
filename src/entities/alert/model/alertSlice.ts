@@ -1,4 +1,4 @@
-import { AlertFnProps, AlertProps, AlertState } from '@/entities/alert/types/types';
+import { AlertFnProps, AlertProps, AlertState } from '@/entities';
 import { PayloadAction, asyncThunkCreator, buildCreateSlice } from '@reduxjs/toolkit';
 
 const createAppSlice = buildCreateSlice({

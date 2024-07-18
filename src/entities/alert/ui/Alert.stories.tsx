@@ -1,8 +1,7 @@
 import type { Meta } from '@storybook/react';
 
 import StoreProvider from '@/app/StoreProvider';
-import { useAlert } from '@/entities/alert/lib/hooks/useAlert';
-import { Alert } from '@/entities/alert/ui/Alert';
+import { Alert, useAlert } from '@/entities';
 import { Button } from '@/shared/ui';
 
 const meta = {
