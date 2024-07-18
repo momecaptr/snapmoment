@@ -1,6 +1,4 @@
-import { ReSendPost } from '@/features/reSendPost/ReSendPost';
-import { ToggleFavorites } from '@/features/toggleFavorites/ToggleFavorites';
-import { ToggleLike } from '@/features/toggleLike/ToggleLike';
+import { ReSendPost, ToggleFavorites, ToggleLike } from '@/features';
 
 import s from './PostInteractionBar.module.scss';
 

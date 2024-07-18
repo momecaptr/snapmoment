@@ -1,5 +1,5 @@
 import MoreHorizontalOutline from '@/../public/assets/components/MoreHorizontalOutline';
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 import s from './MoreActions.module.scss';
 type Props = {};

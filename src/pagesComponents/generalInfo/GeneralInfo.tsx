@@ -1,13 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import ChangePhoto from '@/features/changePhotoProfile/ChangePhoto';
-import GeneralInfoNavigation from '@/features/generalInfoNavigation/GeneralInfoNavigation';
-import SaveGeneralInfo from '@/features/saveGeneralInfo/SaveGeneralInfo';
-import { PersonalInfo } from '@/widget/generalInfoForms/PersonalInfo';
+import { ChangePhoto, GeneralInfoNavigation, SaveGeneralInfo } from '@/features';
+import { GeneralInfoForms } from '@/widget';
 
 import s from './GeneralInfo.module.scss';
-const GeneralInfo = () => {
+export const GeneralInfo = () => {
   const {
     control,
     formState: { errors },
@@ -23,7 +21,7 @@ const GeneralInfo = () => {
         <GeneralInfoNavigation />
         <div className={s.photoAndInfo}>
           <ChangePhoto />
-          <PersonalInfo control={control} />
+          <GeneralInfoForms control={control} />
         </div>
         <span className={s.line} />
         <SaveGeneralInfo />
@@ -31,5 +29,3 @@ const GeneralInfo = () => {
     </form>
   );
 };
-
-export default GeneralInfo;

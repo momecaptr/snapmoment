@@ -1,5 +1,5 @@
 import PaperPlaneOutline from '@/../public/assets/components/PaperPlaneOutline';
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 import s from './ReSendPost.module.scss';
 

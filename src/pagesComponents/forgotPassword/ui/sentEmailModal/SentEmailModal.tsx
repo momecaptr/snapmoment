@@ -1,9 +1,7 @@
 'use client';
 import { memo } from 'react';
 
-import { Button } from '@/shared/button/Button';
-import { Modal } from '@/shared/modal/Modal';
-import { Typography } from '@/shared/typography/Typography';
+import { Button, Modal, Typography } from '@/shared/ui';
 
 import s from './SentEmailModal.module.scss';
 
@@ -12,7 +10,7 @@ type Props = {
   setOpen: (value: boolean) => void;
 };
 
-const SentEmailModal = memo(({ open, setOpen }: Props) => {
+export const SentEmailModal = memo(({ open, setOpen }: Props) => {
   const handleOnClose = () => {
     // router.navigate(path.login)
     setOpen(false);
@@ -39,5 +37,3 @@ const SentEmailModal = memo(({ open, setOpen }: Props) => {
     </>
   );
 });
-
-export default SentEmailModal;
