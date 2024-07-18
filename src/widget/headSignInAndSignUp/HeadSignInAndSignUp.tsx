@@ -8,7 +8,7 @@ import s from './HeadSignInAndSignUp.module.scss';
 type HeadSignInAndSignUpProps = {
   title: string;
 };
-const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
+export const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
   const { title } = props;
 
   return (
@@ -28,5 +28,3 @@ const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
     </>
   );
 };
-
-export default HeadSignInAndSignUp;

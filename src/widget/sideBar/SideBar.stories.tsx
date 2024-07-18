@@ -9,7 +9,7 @@ import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
 import { Typography } from '@/shared/ui';
-import { SideBar } from '@/widget/sideBar/SideBar';
+import { SideBar } from '@/widget';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import clsx from 'clsx';

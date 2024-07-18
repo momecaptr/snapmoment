@@ -1,14 +1,16 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Control } from 'react-hook-form';
 
 import { DatePicker, FormTextfield, RangeDate, SelectUI, addNumberDay } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
 
-import s from './PersonalInfo.module.scss';
+import s from './GeneralInfoForms.module.scss';
 type PersonalInfoProps = {
   control: Control;
 };
-export const PersonalInfo = (props: PersonalInfoProps) => {
+export const GeneralInfoForms = (props: PersonalInfoProps) => {
   const { control } = props;
   const [date, setDate] = useState<RangeDate>({
     endDate: addNumberDay({ date: new Date(), day: 2 }),

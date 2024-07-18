@@ -10,7 +10,7 @@ import s from './Header.module.scss';
 type HeaderProps = {
   isAuthorized: boolean;
 };
-const Header = (props: HeaderProps) => {
+export const Header = (props: HeaderProps) => {
   const { isAuthorized } = props;
 
   return (
@@ -35,5 +35,3 @@ const Header = (props: HeaderProps) => {
     </div>
   );
 };
-
-export default Header;

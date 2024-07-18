@@ -4,8 +4,8 @@ import { Author, Comment } from '@/entities';
 import { AddComment, MoreActions, ShowLikers, ToggleLike } from '@/features';
 import { ModalKey, useModal } from '@/shared/lib';
 import { Modal } from '@/shared/ui';
+import { PostInteractionBar } from '@/widget';
 import { UsersLikesModal } from '@/widget/modal/usersLikesModal/UsersLikesModal';
-import { PostInteractionBar } from '@/widget/postInteractionBar/PostInteractionBar';
 import Image from 'next/image';
 
 import s from './ViewPostModal.module.scss';

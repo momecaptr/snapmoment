@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ChangePhoto, GeneralInfoNavigation, SaveGeneralInfo } from '@/features';
-import { PersonalInfo } from '@/widget/generalInfoForms/PersonalInfo';
+import { GeneralInfoForms } from '@/widget';
 
 import s from './GeneralInfo.module.scss';
 const GeneralInfo = () => {
@@ -21,7 +21,7 @@ const GeneralInfo = () => {
         <GeneralInfoNavigation />
         <div className={s.photoAndInfo}>
           <ChangePhoto />
-          <PersonalInfo control={control} />
+          <GeneralInfoForms control={control} />
         </div>
         <span className={s.line} />
         <SaveGeneralInfo />

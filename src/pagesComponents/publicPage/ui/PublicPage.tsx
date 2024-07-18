@@ -1,5 +1,5 @@
 import { Typography } from '@/shared/ui';
-import { UserCard } from '@/widget/userCard/UserCard';
+import { UserCard } from '@/widget';
 
 import s from './PublicPage.module.scss';
 type Props = {};
