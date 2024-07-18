@@ -5,3 +5,6 @@ export * from './emailVerification/EmailVerification';
 export * from './forgotPassword/lib/hooks/useForgotPassword';
 export * from './forgotPassword/ui/ForgotPassword';
 export * from './forgotPassword/ui/sentEmailModal/SentEmailModal';
+export * from './generalInfo/GeneralInfo';
+export * from './publicPage/ui/PublicPage';
+export * from './statistics/ui/Statistics';
