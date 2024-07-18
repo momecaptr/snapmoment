@@ -1,7 +1,7 @@
 import avatarMock from '@/../public/avatar-mock.jpg';
 import { appSlice } from '@/app/model/appSlice';
+import { ModalKey, useAppDispatch } from '@/shared/lib';
 import { Typography } from '@/shared/ui';
-import { ModalKey, useAppDispatch } from '@/shared/utils';
 import Image from 'next/image';
 
 import s from './ShowLikers.module.scss';

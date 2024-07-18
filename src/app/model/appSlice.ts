@@ -1,5 +1,5 @@
 import { AppSettings, Theme } from '@/app/model/appTypes';
-import { ModalKey } from '@/shared/utils';
+import { ModalKey } from '@/shared/lib';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: AppSettings = {

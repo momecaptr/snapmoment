@@ -1,8 +1,8 @@
 'use client';
 import { useTranslation } from 'react-i18next';
 
+import { useQueryParams } from '@/shared/lib';
 import { Pagination, SelectUI, Typography } from '@/shared/ui';
-import { useQueryParams } from '@/shared/utils';
 
 import s from './PaginationWithSelect.module.scss';
 

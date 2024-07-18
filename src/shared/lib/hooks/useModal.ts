@@ -1,7 +1,7 @@
 'use client';
 import { selectIsOpen, selectModalKey } from '@/app/model/appSelectors';
 import { toggleModal } from '@/app/model/appSlice';
-import { useAppDispatch, useAppSelector } from '@/shared/utils';
+import { useAppDispatch, useAppSelector } from '@/shared/lib';
 
 export enum ModalKey {
   Success = 'Success',

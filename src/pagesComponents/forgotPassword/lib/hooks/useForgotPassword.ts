@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { appSlice } from '@/app/model/appSlice';
 import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features/schemas/authSchema/authShema';
-import { ModalKey, useAppDispatch, useModal } from '@/shared/utils';
+import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const useForgotPassword = () => {
