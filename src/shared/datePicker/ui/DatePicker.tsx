@@ -23,7 +23,7 @@ export interface DatePickerProps {
 }
 
 export const DatePicker = ({ max, min, onChange, value }: DatePickerProps) => {
-  const { elementRef, handleInputClick, setShowPopup, showPopup } = useShowPopup();
+  const { elementRef, handleInputClick, showPopup } = useShowPopup();
 
   const handleChange = (value: RangeDate) => {
     onChange({ ...value });
