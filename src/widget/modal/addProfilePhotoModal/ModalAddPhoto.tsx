@@ -55,7 +55,7 @@ const ModalAddPhoto = () => {
         <Typography as={'h1'} variant={'h1'}>
           Add a Profile Photo
         </Typography>
-        <Button className={s.topButton}>
+        <Button className={s.topButton} variant={'text'}>
           <Close height={24} width={24} />
         </Button>
       </div>
@@ -76,7 +76,7 @@ const ModalAddPhoto = () => {
             <div className={s.blackFone} />
           </div>
         ) : (
-          <PhotoProfile />
+          <PhotoProfile className={s.photoProfile} />
         )}
         {!imagePreview ? (
           <div className={s.butoon}>

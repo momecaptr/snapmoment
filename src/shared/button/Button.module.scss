@@ -87,19 +87,5 @@
 }
 
 .text {
-  color: var(--accent-500);
   background-color: transparent;
-
-  &:hover {
-    color: var(--accent-100);
-    background-color: transparent;
-  }
-
-  &:active {
-    color: var(--accent-700);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
 }

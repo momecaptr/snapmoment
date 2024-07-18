@@ -37,17 +37,14 @@
   margin-top: 60px;
 }
 
-.photo {
-  width: 222px;
-  height: 228px;
-}
-
 .customFileUpload {
   display: none;
 }
 
 .lable {
   padding: 6px 24px;
+  font-size: 16px;
+  line-height: 24px;
   background-color: var(--accent-500);
 }
 
@@ -71,7 +68,6 @@
 
 .buttonSave {
   position: absolute;
-  right: 24px;
   bottom: 36px;
 }
 
@@ -99,4 +95,11 @@
 
   opacity: 0.5;
   background-color: black;
+}
+
+.photoProfile {
+  width: 222px;
+  height: 228px;
+  background-color: var(--dark-500);
+  border-radius: 0;
 }

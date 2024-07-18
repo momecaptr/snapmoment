@@ -13,7 +13,7 @@ export type CardProps<T extends ElementType = 'div'> = {
 const CardPolymorph = <T extends ElementType = 'div'>(props: CardProps<T>, ref: any) => {
   const { as: Component = 'div', className, ...rest } = props;
 
-  return <Component className={clsx(s.root, className)} {...rest} ref={ref} />;
+  return <Component className={clsx(className, s.root)} {...rest} ref={ref} />;
 };
 
 export const Card = forwardRef(CardPolymorph) as <T extends ElementType = 'div'>(
