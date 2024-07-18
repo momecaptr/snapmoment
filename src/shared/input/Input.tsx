@@ -101,7 +101,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
           value={inputValue}
         />
         {type === 'password' && inputValue.length > 0 && (
-          <Button className={s.Eye} onClick={isShowChangeHandler} type={'button'}>
+          <Button className={s.Eye} onClick={isShowChangeHandler} type={'button'} variant={'text'}>
             <EyeIcon viewBox={'0 0 24 24'} />
           </Button>
         )}

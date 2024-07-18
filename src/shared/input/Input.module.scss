@@ -100,20 +100,26 @@
 .Eye,
 .Close {
   position: absolute;
-  top: 50%;
   right: 10px;
-  transform: translateY(-50%);
+  transform: translateY(25%);
 
   width: 16px;
   height: 16px;
-  padding: 0;
 
-  background-color: transparent;
   box-shadow: none;
 
   &:hover,
   &:focus-visible {
     background: transparent;
+  }
+}
+
+.searchClose button {
+  color: var(--light-100);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--light-100);
   }
 }
 
