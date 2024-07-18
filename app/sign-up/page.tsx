@@ -1,11 +1,11 @@
 import React from 'react';
 
-import SignUp from '@/pagesComponents/signUp/ui/SingUp';
+import ModalAddPhoto from '@/widget/modal/addProfilePhotoModal/ModalAddPhoto';
 
-export default function Page() {
+export default function SignUp() {
   return (
     <div>
-      <SignUp />
+      <ModalAddPhoto />
     </div>
   );
 }

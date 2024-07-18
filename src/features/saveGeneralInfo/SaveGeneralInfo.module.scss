@@ -1,0 +1,11 @@
+.box {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: end;
+}
+
+.button {
+  padding: 6px 24px;
+  font-size: 16px;
+  line-height: 24px;
+}

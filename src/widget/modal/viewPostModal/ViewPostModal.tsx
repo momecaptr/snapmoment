@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import CloseOutline from '@/../public/assets/components/CloseOutline';
-import avatarMock from '@/../public/avatar-mock.jpg';
 import { Author } from '@/entities/author/Author';
 import { Comment } from '@/entities/comment/Comment';
 import { AddComment } from '@/features/addComment/AddComment';
@@ -10,18 +8,21 @@ import { ShowLikers } from '@/features/showLikers/ShowLikers';
 import { ToggleLike } from '@/features/toggleLike/ToggleLike';
 import { ModalKey, useModal } from '@/shared/hooks/useModal';
 import { Modal } from '@/shared/modal/Modal';
+import { UsersLikesModal } from '@/widget/modal/usersLikesModal/UsersLikesModal';
 import { PostInteractionBar } from '@/widget/postInteractionBar/PostInteractionBar';
-import { UsersLikesModal } from '@/widget/usersLikesModal/UsersLikesModal';
 import Image from 'next/image';
 
-import s from './ViewPhotoModal.module.scss';
+import s from './ViewPostModal.module.scss';
+
+import CloseOutline from '../../../../public/assets/components/CloseOutline';
+import avatarMock from '../../../../public/avatar-mock.jpg';
 
 type Props = {
   openViewPhoto: boolean;
   setOpenViewPhoto: (value: boolean) => void;
 };
 
-export const ViewPhotoModal = ({ openViewPhoto, setOpenViewPhoto }: Props) => {
+export const ViewPostModal = ({ openViewPhoto, setOpenViewPhoto }: Props) => {
   const [isViewComments, setIsViewComments] = useState(false);
   const handleOnClose = () => {
     setOpenViewPhoto(false);

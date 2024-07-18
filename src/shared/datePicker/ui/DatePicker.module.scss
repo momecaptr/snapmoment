@@ -3,6 +3,7 @@
 .datePicker {
   position: relative;
   display: inline-block;
+  width: 100%;
 
   & > svg {
     pointer-events: none;
@@ -19,6 +20,7 @@
 .datePickerInput {
   cursor: pointer;
 
+  width: 100%;
   padding: 6px 60px 6px 12px;
 
   background-color: var(--dark-700);
