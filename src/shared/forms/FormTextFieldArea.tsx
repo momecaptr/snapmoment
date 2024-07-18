@@ -5,7 +5,6 @@ import TextArea, { TextAreaProps } from '@/shared/textArea/TextArea';
 
 export type ControlledInputProps<TFieldValues extends FieldValues> = {
   className?: string;
-  control: any;
   currentValue?: string;
   resize?: boolean;
 } & {
