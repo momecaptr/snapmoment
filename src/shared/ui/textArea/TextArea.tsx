@@ -47,7 +47,7 @@ export const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: Text
   }
 
   return (
-    <div className={clsx(s.box, className)}>
+    <div className={clsx(className, s.box)}>
       {label && <div className={error ? s.error : s.label}>{label}</div>}
       <div>
         <textarea

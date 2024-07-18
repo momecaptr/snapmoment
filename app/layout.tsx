@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import StoreProvider from '@/app/StoreProvider';
-import { SideBar } from '@/shared/sideBar/SideBar';
 import { Alert } from '@/shared/ui/alert/ui/Alert';
 import Header from '@/widget/header/Header';
+import { SideBar } from '@/widget/sideBar/SideBar';
 import { Inter } from 'next/font/google';
 
 import '@/app/styles/index.scss';

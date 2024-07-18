@@ -6,7 +6,7 @@ import avatarMock from '@/../public/avatar-mock.jpg';
 import { appSlice } from '@/app/model/appSlice';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
-import { ViewPhotoModal } from '@/widget/viewPhotoModal/ViewPhotoModal';
+import { ViewPostModal } from '@/widget/modal/viewPostModal/ViewPostModal';
 import Image from 'next/image';
 
 import s from './UserCard.module.scss';
@@ -23,7 +23,7 @@ export const UserCard = ({}: Props) => {
 
   return (
     <>
-      <ViewPhotoModal openViewPhoto={isOpen} setOpenViewPhoto={setOpen} />
+      <ViewPostModal openViewPhoto={isOpen} setOpenViewPhoto={setOpen} />
       <div className={s.card}>
         <div className={s.photo} onClick={showViewPhotoHandler}>
           <Image alt={'avatarMock'} src={avatarMock} />
