@@ -8,7 +8,7 @@ const ChangePhoto = () => {
   return (
     <div className={s.box}>
       <PhotoProfile />
-      <Button className={s.butoon} variant={'outlined'}>
+      <Button className={s.button} variant={'outlined'}>
         Add a Profile Photo
       </Button>
     </div>
