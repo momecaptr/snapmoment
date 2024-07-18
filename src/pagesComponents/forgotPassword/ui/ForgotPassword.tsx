@@ -3,8 +3,7 @@
 import React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import { useForgotPassword } from '@/pagesComponents/forgotPassword/lib/hooks/useForgotPassword';
-import { SentEmailModal } from '@/pagesComponents/forgotPassword/ui/sentEmailModal/SentEmailModal';
+import { SentEmailModal, useForgotPassword } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 // import { ModalKey, useModal } from '@/shared/utils';
 import Link from 'next/link';
