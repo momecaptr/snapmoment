@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef, useState } from 'react';
 
 export const useShowPopup = () => {
@@ -17,7 +18,6 @@ export const useShowPopup = () => {
       document.removeEventListener('click', handleDocumentClick);
     }
 
-    // Очистка обработчика при размонтировании компонента
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
