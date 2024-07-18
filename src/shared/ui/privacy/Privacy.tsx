@@ -1,8 +1,6 @@
 import React from 'react';
 
-import ArrowForwardOutline from '@/../public/assets/components/ArrowBackOutline';
 import { BackBtn, Typography } from '@/shared/ui';
-import Link from 'next/link';
 
 import s from './Privacy.module.scss';
 type PrivacyProps = {
@@ -13,18 +11,7 @@ export const Privacy = (props: PrivacyProps) => {
 
   return (
     <div className={s.wrapper}>
-      <Typography as={'button'} className={s.button}>
-        <div className={s.buttonImg}>
-          <ArrowForwardOutline />
-        </div>
-        <Typography as={Link} className={s.buttonText} href={'/sign-in'} variant={'small_text'}>
-          Back to Sign in
-        </Typography>
-      </Typography>
-      <BackBtn href={'/sign-in'}>
-        <ArrowForwardOutline />
-        Back to Sign in
-      </BackBtn>
+      <BackBtn href={'/sign-in'}>Back to Sign in</BackBtn>
 
       {/*↑↑↑ Это нужно заменить на BackBtn ↓↓↓ и подкорректировать ArrowForwardOutline под неообходий размер*/}
       {/*<BackBtn href={'/sign-in'}>Back to Sign in</BackBtn>*/}
