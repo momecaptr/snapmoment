@@ -41,6 +41,7 @@ const PersonalInfo = () => {
               { text: 'Smetana', value: 'smetana' },
               { text: 'Nirvana', value: 'nirvana' }
             ]}
+            className={s.select}
             value={'apple'}
           />
           <SelectUI
@@ -50,6 +51,7 @@ const PersonalInfo = () => {
               { text: 'Smetana', value: 'smetana' },
               { text: 'Nirvana', value: 'nirvana' }
             ]}
+            className={s.select}
             value={'apple'}
           />
         </div>

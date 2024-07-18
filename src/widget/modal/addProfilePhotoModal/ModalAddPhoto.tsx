@@ -1,16 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 
-import PhotoProfile from '@/shared/PhotoProfile/PhotoProfile';
 import { Button } from '@/shared/button/Button';
 import { Card } from '@/shared/card/Card';
+import PhotoProfile from '@/shared/photoProfile/PhotoProfile';
 import { Typography } from '@/shared/typography/Typography';
 import clsx from 'clsx';
 import Image from 'next/image';
 
 import s from './ModalAddPhoto.module.scss';
 
-import Close from '../../../../../public/assets/components/Close';
+import Close from '../../../../public/assets/components/Close';
 
 const ModalAddPhoto = () => {
   const [imagePreview, setImagePreview] = useState<null | string>(null);
@@ -76,9 +76,8 @@ const ModalAddPhoto = () => {
             <div className={s.blackFone} />
           </div>
         ) : (
-          <PhotoProfile className={s.photo} photo={imagePreview} />
+          <PhotoProfile />
         )}
-
         {!imagePreview ? (
           <div className={s.butoon}>
             <input className={s.customFileUpload} id={'fileInput'} onChange={handleFileChange} type={'file'} />

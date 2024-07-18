@@ -1,7 +1,10 @@
-.box {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: end;
+.wrapper {
+  padding: 0 64px 0 24px;
+}
+
+.photoAndInfo {
+  display: grid;
+  grid-template-columns: 235px 1fr;
 }
 
 .line {

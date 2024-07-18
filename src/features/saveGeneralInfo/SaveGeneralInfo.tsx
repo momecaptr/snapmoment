@@ -2,17 +2,16 @@ import React from 'react';
 
 import { Button } from '@/shared/button/Button';
 
-import s from './LineWithButton.module.scss';
+import s from './SaveGeneralInfo.module.scss';
 
-const LineWithButton = () => {
+const SaveGeneralInfo = () => {
   return (
     <>
       <div className={s.box}>
-        <span className={s.line} />
         <Button className={s.button}>Save Changes</Button>
       </div>
     </>
   );
 };
 
-export default LineWithButton;
+export default SaveGeneralInfo;

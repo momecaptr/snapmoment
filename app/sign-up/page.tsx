@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ModalAddPhoto from '@/myStr/modal/ui/addProfilePhoto/ModalAddPhoto';
+import ModalAddPhoto from '@/widget/modal/addProfilePhotoModal/ModalAddPhoto';
 
 export default function SignUp() {
   return (

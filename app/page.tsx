@@ -1,12 +1,12 @@
 'use client';
 
-import Conect from '@/myStr/conect/Conect';
+import GeneralInfo from '@/pagesComponents/generalInfo/GeneralInfo';
 
 export default function Home() {
   return (
     <main>
       {/*<h1 style={{ color: 'green', fontFamily: 'Roboto' }}>DEVELOPMENT</h1>*/}
-      <Conect />
+      <GeneralInfo />
     </main>
   );
 }
