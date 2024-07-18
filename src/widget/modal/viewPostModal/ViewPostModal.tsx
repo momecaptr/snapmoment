@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { Author, Comment } from '@/entities';
-import { AddComment } from '@/features/addComment/AddComment';
-import { MoreActions } from '@/features/moreActions/MoreActions';
+import { AddComment } from '@/features';
+import { MoreActions } from '@/features';
 import { ShowLikers } from '@/features/showLikers/ShowLikers';
 import { ToggleLike } from '@/features/toggleLike/ToggleLike';
 import { ModalKey, useModal } from '@/shared/lib';

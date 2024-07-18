@@ -1,4 +1,4 @@
-import { ReSendPost } from '@/features/reSendPost/ReSendPost';
+import { ReSendPost } from '@/features';
 import { ToggleFavorites } from '@/features/toggleFavorites/ToggleFavorites';
 import { ToggleLike } from '@/features/toggleLike/ToggleLike';
 

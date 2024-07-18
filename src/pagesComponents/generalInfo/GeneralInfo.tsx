@@ -1,9 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import ChangePhoto from '@/features/changePhotoProfile/ChangePhoto';
-import GeneralInfoNavigation from '@/features/generalInfoNavigation/GeneralInfoNavigation';
-import SaveGeneralInfo from '@/features/saveGeneralInfo/SaveGeneralInfo';
+import { ChangePhoto, GeneralInfoNavigation, SaveGeneralInfo } from '@/features';
 import { PersonalInfo } from '@/widget/generalInfoForms/PersonalInfo';
 
 import s from './GeneralInfo.module.scss';

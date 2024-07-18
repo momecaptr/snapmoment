@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import s from './GeneralInfoNavigation.module.scss';
 
-const GeneralInfoNavigation = () => {
+export const GeneralInfoNavigation = () => {
   const [activeLink, setActiveLink] = useState('');
 
   const handleClick = (link: string) => {
@@ -32,5 +32,3 @@ const GeneralInfoNavigation = () => {
     </div>
   );
 };
-
-export default GeneralInfoNavigation;
