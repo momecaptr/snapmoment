@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { SignInSchemaType, signInSchema } from '@/features';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const useSignInForm = () => {
+export const useSignInForm = () => {
   const {
     control,
     formState: { errors, isValid },
@@ -23,5 +23,3 @@ const useSignInForm = () => {
     onSubmit
   };
 };
-
-export default useSignInForm;

@@ -5,7 +5,7 @@ import { ChangePhoto, GeneralInfoNavigation, SaveGeneralInfo } from '@/features'
 import { GeneralInfoForms } from '@/widget';
 
 import s from './GeneralInfo.module.scss';
-const GeneralInfo = () => {
+export const GeneralInfo = () => {
   const {
     control,
     formState: { errors },
@@ -29,5 +29,3 @@ const GeneralInfo = () => {
     </form>
   );
 };
-
-export default GeneralInfo;

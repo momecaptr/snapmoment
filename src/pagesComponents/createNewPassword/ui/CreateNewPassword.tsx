@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import s from '@/pagesComponents/createNewPassword/ui/CreateNewPassword.module.scss';
 
-const CreateNewPassword = () => {
+export const CreateNewPassword = () => {
   const {
     control,
     formState: { errors, isValid },
@@ -63,5 +63,3 @@ const CreateNewPassword = () => {
     </>
   );
 };
-
-export default CreateNewPassword;

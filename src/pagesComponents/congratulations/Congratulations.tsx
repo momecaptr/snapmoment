@@ -4,7 +4,7 @@ import Girl from '@/../public/assets/components/GirlDefault';
 import { Button, Typography } from '@/shared/ui';
 
 import s from '@/pagesComponents/congratulations/Congratulation.module.scss';
-const Congratulations = () => {
+export const Congratulations = () => {
   return (
     <div>
       <Typography as={'h1'} className={s.title} variant={'h1'}>
@@ -22,5 +22,3 @@ const Congratulations = () => {
     </div>
   );
 };
-
-export default Congratulations;

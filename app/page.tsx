@@ -1,6 +1,6 @@
 'use client';
 
-import GeneralInfo from '@/pagesComponents/generalInfo/GeneralInfo';
+import { GeneralInfo } from '@/pagesComponents/generalInfo/GeneralInfo';
 
 export default function Home() {
   return (

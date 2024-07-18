@@ -1,14 +1,14 @@
 'use client';
 import React from 'react';
 
-import useSignInForm from '@/pagesComponents/signIn/lib/hooks/useSignInForm';
+import { useSignInForm } from '@/pagesComponents/signIn/lib/hooks/useSignInForm';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { HeadSignInAndSignUp } from '@/widget';
 import Link from 'next/link';
 
 import s from '@/pagesComponents/signIn/ui/SignIn.module.scss';
 
-const SignIn = () => {
+export const SignIn = () => {
   const { control, errors, handleSubmit, isValid, onSubmit } = useSignInForm();
 
   return (
@@ -46,5 +46,3 @@ const SignIn = () => {
     </div>
   );
 };
-
-export default SignIn;

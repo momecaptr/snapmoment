@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const useCreateNewPassword = () => {
+export const useCreateNewPassword = () => {
   const {
     control,
     formState: { errors, isValid },
@@ -29,5 +29,3 @@ const useCreateNewPassword = () => {
     t
   };
 };
-
-export default useCreateNewPassword;

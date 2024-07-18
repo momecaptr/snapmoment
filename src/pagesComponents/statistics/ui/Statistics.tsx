@@ -6,7 +6,7 @@ import { Typography } from '@/shared/ui';
 
 import s from './Statistics.module.scss';
 
-const Statistics = () => {
+export const Statistics = () => {
   return (
     <div>
       <Typography as={'h1'} className={s.title} variant={'h1'}>
@@ -16,5 +16,3 @@ const Statistics = () => {
     </div>
   );
 };
-
-export default Statistics;

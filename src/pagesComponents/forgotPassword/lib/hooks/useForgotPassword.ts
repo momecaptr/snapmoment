@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +8,7 @@ import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const useForgotPassword = () => {
+export const useForgotPassword = () => {
   const {
     control,
     // formState: { isValid },
@@ -36,5 +37,3 @@ const useForgotPassword = () => {
 
   return { captchaValue, control, handleCaptchaChange, handleSubmit, isOpen, isValid, onSubmit, setOpen };
 };
-
-export default useForgotPassword;
