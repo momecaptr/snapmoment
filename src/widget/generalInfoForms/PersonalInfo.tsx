@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Control } from 'react-hook-form';
 
 import { addNumberDay } from '@/shared/datePicker/lib/helpers/addNumberDay';
 import { DatePicker, RangeDate } from '@/shared/datePicker/ui/DatePicker';
@@ -8,58 +8,48 @@ import { FormTextfield } from '@/shared/forms/FormTextfield';
 import { SelectUI } from '@/shared/select/Select';
 
 import s from './PersonalInfo.module.scss';
-
-const PersonalInfo = () => {
+type PersonalInfoProps = {
+  control: Control;
+};
+export const PersonalInfo = (props: PersonalInfoProps) => {
+  const { control } = props;
   const [date, setDate] = useState<RangeDate>({
     endDate: addNumberDay({ date: new Date(), day: 2 }),
     startDate: new Date()
   });
 
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register
-  } = useForm();
-
-  const onSubmit = (data: any) => console.log(data);
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={s.wrapper}>
-        <FormTextfield className={s.input} control={control} label={'Username*'} name={'email'} type={'email'} />
-        <FormTextfield className={s.input} control={control} label={'First Name'} name={'password'} type={'password'} />
-        <FormTextfield className={s.input} control={control} label={'Last Name'} name={'email'} type={'email'} />
-        <div className={s.datePickerBox}>
-          <DatePicker onChange={setDate} value={date} />
-        </div>
-        <div className={s.selectBox}>
-          <SelectUI
-            selectOptions={[
-              { text: 'Apple', value: 'apple' },
-              { text: 'Banana', value: 'banana' },
-              { text: 'Smetana', value: 'smetana' },
-              { text: 'Nirvana', value: 'nirvana' }
-            ]}
-            className={s.select}
-            value={'apple'}
-          />
-          <SelectUI
-            selectOptions={[
-              { text: 'Apple', value: 'apple' },
-              { text: 'Banana', value: 'banana' },
-              { text: 'Smetana', value: 'smetana' },
-              { text: 'Nirvana', value: 'nirvana' }
-            ]}
-            className={s.select}
-            value={'apple'}
-          />
-        </div>
-
-        <FormTextfieldArea label={'About Me'} name={'text'} rows={5} resize />
+    <div className={s.wrapper}>
+      <FormTextfield className={s.input} control={control} label={'Username*'} name={'Username'} type={'text'} />
+      <FormTextfield className={s.input} control={control} label={'First Name'} name={'FirstName'} type={'text'} />
+      <FormTextfield className={s.input} control={control} label={'Last Name'} name={'LastName'} type={'text'} />
+      <div className={s.datePickerBox}>
+        <DatePicker onChange={setDate} value={date} />
       </div>
-    </form>
+      <div className={s.selectBox}>
+        <SelectUI
+          selectOptions={[
+            { text: 'Apple', value: 'apple' },
+            { text: 'Banana', value: 'banana' },
+            { text: 'Smetana', value: 'smetana' },
+            { text: 'Nirvana', value: 'nirvana' }
+          ]}
+          className={s.select}
+          value={'apple'}
+        />
+        <SelectUI
+          selectOptions={[
+            { text: 'Apple', value: 'apple' },
+            { text: 'Banana', value: 'banana' },
+            { text: 'Smetana', value: 'smetana' },
+            { text: 'Nirvana', value: 'nirvana' }
+          ]}
+          className={s.select}
+          value={'apple'}
+        />
+      </div>
+
+      <FormTextfieldArea control={control} label={'About Me'} name={'AboutMe'} rows={5} resize />
+    </div>
   );
 };
-
-export default PersonalInfo;

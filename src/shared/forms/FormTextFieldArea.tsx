@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
 
 import TextArea, { TextAreaProps } from '@/shared/textArea/TextArea';
 
-export type ControlledInputProps = {
+export type ControlledInputProps<TFieldValues extends FieldValues> = {
   className?: string;
+  control: any;
   currentValue?: string;
   resize?: boolean;
-} & Omit<TextAreaProps, 'onChange' | 'value'>;
+} & {
+  currentValue?: TFieldValues[Extract<keyof TFieldValues, string>];
+} & Omit<TextAreaProps, 'onChange' | 'value'> &
+  Omit<UseControllerProps<TFieldValues>, 'defaultValue' | 'disabled' | 'rules'>;
 
-export const FormTextfieldArea = ({ currentValue, ...rest }: ControlledInputProps) => {
-  const [value, setValue] = useState(currentValue || '');
+export const FormTextfieldArea = <TFieldValues extends FieldValues>({
+  control,
+  name,
+  ...rest
+}: ControlledInputProps<TFieldValues>) => {
+  const {
+    field,
+    fieldState: { error }
+  } = useController<TFieldValues>({
+    control,
+    name
+  });
 
-  return <TextArea {...rest} onChange={(e) => setValue(e.target.value)} resize={rest.resize} value={value} />;
+  return <TextArea {...rest} {...field} resize={rest.resize} />;
 };
