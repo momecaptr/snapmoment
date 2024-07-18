@@ -1,7 +1,8 @@
 .boxInput {
   box-sizing: border-box;
   height: 36px;
-  padding: 0 3%;
+
+  text-indent: 5px;
 
   background-color: transparent;
   border: none;
@@ -41,10 +42,6 @@
   }
 }
 
-.boxInputForText {
-  padding: 0 1%;
-}
-
 .placeholder {
   padding-left: 0;
   text-indent: 12px;
@@ -62,7 +59,6 @@
 }
 
 .hover {
-  text-indent: 12px;
   background-color: transparent;
   outline: 2px solid var(--dark-100);
 }
@@ -74,11 +70,12 @@
 }
 
 .errorSeach.boxInput {
+  // Если будут проблемы с отступами в Serch Input поставить сюда   text-indent: 5px; или больше мб 10px
   color: var(--danger-300);
 }
 
 .errorTextAndPassword {
-  text-indent: 12px;
+  text-indent: 5px;
   background-color: transparent;
   border: none;
   outline: 2px solid var(--danger-300);

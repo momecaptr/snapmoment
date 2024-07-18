@@ -59,14 +59,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) 
       break;
     case 'email': {
       classNameForInput = error
-        ? clsx(s.boxInput, s.errorTextAndPassword)
-        : clsx(s.boxInput, inputValue.length === 0 && s.placeholder);
+        ? clsx(s.boxInputForText, s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInputForText, s.boxInput, inputValue.length === 0 && s.placeholder);
       break;
     }
     case 'password':
       classNameForInput = error
-        ? clsx(s.boxInput, s.errorTextAndPassword)
-        : clsx(s.boxInput, inputValue.length === 0 && s.placeholder);
+        ? clsx(s.boxInputForText, s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInputForText, s.boxInput, inputValue.length === 0 && s.placeholder);
       break;
     case 'text':
       classNameForInput = error
