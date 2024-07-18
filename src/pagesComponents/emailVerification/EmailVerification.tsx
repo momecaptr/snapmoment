@@ -1,11 +1,10 @@
 import React from 'react';
 
 import Boy from '@/../public/assets/components/BoyDefault';
-import { Button } from '@/shared/button/Button';
-import { Typography } from '@/shared/typography/Typography';
+import { Button, Typography } from '@/shared/ui';
 
 import s from './EmailVerification.module.scss';
-const EmailVerification = () => {
+export const EmailVerification = () => {
   return (
     <div className={s.boxTitle}>
       <Typography as={'h1'} className={s.title} variant={'h1'}>
@@ -26,5 +25,3 @@ const EmailVerification = () => {
     </div>
   );
 };
-
-export default EmailVerification;

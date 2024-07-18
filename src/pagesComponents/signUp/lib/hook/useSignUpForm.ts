@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 
-import { SignUpSchemaType, signUpSchema } from '@/features/schemas/authSchema/authShema';
+import { SignUpSchemaType, signUpSchema } from '@/features';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const useSignUpForm = () => {
+export const useSignUpForm = () => {
   const {
     control,
     formState: { errors, isValid },
@@ -23,5 +23,3 @@ const useSignUpForm = () => {
     onSubmit
   };
 };
-
-export default useSignUpForm;

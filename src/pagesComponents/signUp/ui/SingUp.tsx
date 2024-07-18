@@ -1,18 +1,14 @@
 'use client';
 import React from 'react';
 
-import useSignUpForm from '@/pagesComponents/signUp/lib/hook/useSignUpForm';
-import { Button } from '@/shared/button/Button';
-import { Card } from '@/shared/card/Card';
-import FormCheckbox from '@/shared/forms/FormCheckbox';
-import { FormTextfield } from '@/shared/forms/FormTextfield';
-import { Typography } from '@/shared/typography/Typography';
-import HeadSignInAndSignUp from '@/widget/headSignInAndSignUp/HeadSignInAndSignUp';
+import { useSignUpForm } from '@/pagesComponents';
+import { Button, Card, FormCheckbox, FormTextfield, Typography } from '@/shared/ui';
+import { HeadSignInAndSignUp } from '@/widget';
 import Link from 'next/link';
 
 import s from '@/pagesComponents/signUp/ui/SignUp.module.scss';
 
-const SignUp = () => {
+export const SignUp = () => {
   const { control, errors, handleSubmit, isValid, onSubmit } = useSignUpForm();
 
   return (
@@ -78,5 +74,3 @@ const SignUp = () => {
     </div>
   );
 };
-
-export default SignUp;

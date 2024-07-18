@@ -1,5 +1,5 @@
 import HeartOutline from '@/../public/assets/components/HeartOutline';
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 import s from './ToggleLike.module.scss';
 

@@ -2,13 +2,13 @@ import React from 'react';
 
 import GitHub from '@/../public/assets/components/GithubSvgrepoCom';
 import Google from '@/../public/assets/components/GoogleSvgrepoCom';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 
 import s from './HeadSignInAndSignUp.module.scss';
 type HeadSignInAndSignUpProps = {
   title: string;
 };
-const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
+export const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
   const { title } = props;
 
   return (
@@ -28,5 +28,3 @@ const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
     </>
   );
 };
-
-export default HeadSignInAndSignUp;

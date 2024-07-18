@@ -1,5 +1,5 @@
 import avatarMock from '@/../public/avatar-mock.jpg';
-import { Typography } from '@/shared/typography/Typography';
+import { Typography } from '@/shared/ui';
 import Image from 'next/image';
 
 import s from './Author.module.scss';

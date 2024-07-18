@@ -1,5 +1,4 @@
-import { Button } from '@/shared/button/Button';
-import Input from '@/shared/input/Input';
+import { Button, Input } from '@/shared/ui';
 
 import s from './AddComment.module.scss';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 import s from './SaveGeneralInfo.module.scss';
 
-const SaveGeneralInfo = () => {
+export const SaveGeneralInfo = () => {
   return (
     <>
       <div className={s.box}>
@@ -13,5 +13,3 @@ const SaveGeneralInfo = () => {
     </>
   );
 };
-
-export default SaveGeneralInfo;

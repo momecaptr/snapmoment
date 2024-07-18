@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Chart, ChartData } from '@/shared/chart/Chart';
-import { Typography } from '@/shared/typography/Typography';
+import { Chart, ChartData, Typography } from '@/shared/ui';
 
 import s from './ChartLike.module.scss';
 
