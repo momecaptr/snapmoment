@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { SwitchChartLike } from '@/features/switchChartLike/SwitchChartLike';
+import { SwitchChartLike } from '@/features';
 import { Typography } from '@/shared/ui';
 
 import s from './Statistics.module.scss';

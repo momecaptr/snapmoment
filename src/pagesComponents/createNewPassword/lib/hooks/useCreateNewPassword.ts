@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features/schemas/authSchema/authShema';
+import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const useCreateNewPassword = () => {

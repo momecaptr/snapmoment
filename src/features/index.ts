@@ -4,3 +4,8 @@ export * from './generalInfoNavigation/GeneralInfoNavigation';
 export * from './moreActions/MoreActions';
 export * from './reSendPost/ReSendPost';
 export * from './saveGeneralInfo/SaveGeneralInfo';
+export * from './schemas/authSchema/authShema';
+export * from './showLikers/ShowLikers';
+export * from './switchChartLike/SwitchChartLike';
+export * from './toggleFavorites/ToggleFavorites';
+export * from './toggleLike/ToggleLike';

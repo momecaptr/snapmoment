@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { appSlice } from '@/app/model/appSlice';
-import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features/schemas/authSchema/authShema';
+import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 
