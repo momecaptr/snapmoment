@@ -1,17 +1,16 @@
+'use client';
 import { useState } from 'react';
 
+import CloseOutline from '@/../public/assets/components/CloseOutline';
+import avatarMock from '@/../public/avatar-mock.jpg';
 import { Author, Comment } from '@/entities';
 import { AddComment, MoreActions, ShowLikers, ToggleLike } from '@/features';
 import { ModalKey, useModal } from '@/shared/lib';
 import { Modal } from '@/shared/ui';
-import { PostInteractionBar } from '@/widget';
-import { UsersLikesModal } from '@/widget/modal/usersLikesModal/UsersLikesModal';
+import { PostInteractionBar, UsersLikesModal } from '@/widget';
 import Image from 'next/image';
 
 import s from './ViewPostModal.module.scss';
-
-import CloseOutline from '../../../../public/assets/components/CloseOutline';
-import avatarMock from '../../../../public/avatar-mock.jpg';
 
 type Props = {
   openViewPhoto: boolean;

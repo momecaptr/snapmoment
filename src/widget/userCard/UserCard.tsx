@@ -6,7 +6,7 @@ import avatarMock from '@/../public/avatar-mock.jpg';
 import { appSlice } from '@/app/model/appSlice';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
-import { ViewPostModal } from '@/widget/modal/viewPostModal/ViewPostModal';
+import { ViewPostModal } from '@/widget';
 import Image from 'next/image';
 
 import s from './UserCard.module.scss';

@@ -1,16 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 
+import Close from '@/../public/assets/components/Close';
 import PhotoProfile from '@/shared/photoProfile/PhotoProfile';
 import { Button, Card, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import s from './ModalAddPhoto.module.scss';
+import s from './AddProfilePhotoModal.module.scss';
 
-import Close from '../../../../public/assets/components/Close';
-
-const ModalAddPhoto = () => {
+export const AddProfilePhotoModal = () => {
   const [imagePreview, setImagePreview] = useState<null | string>(null);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [changeMargin, setChangeMargin] = useState(false);
@@ -90,5 +89,3 @@ const ModalAddPhoto = () => {
     </Card>
   );
 };
-
-export default ModalAddPhoto;

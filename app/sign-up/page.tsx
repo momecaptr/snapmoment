@@ -1,11 +1,11 @@
 import React from 'react';
 
-import ModalAddPhoto from '@/widget/modal/addProfilePhotoModal/ModalAddPhoto';
+import { AddProfilePhotoModal } from '@/widget';
 
 export default function SignUp() {
   return (
     <div>
-      <ModalAddPhoto />
+      <AddProfilePhotoModal />
     </div>
   );
 }
