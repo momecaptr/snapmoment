@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ChartLike } from '@/entities/chartLike/ChartLike';
+import { ChartLike } from '@/entities';
 import { TabSwitcher } from '@/shared/ui';
 
 import s from './SwitchChartLike.module.scss';

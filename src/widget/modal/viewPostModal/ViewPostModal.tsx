@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { Author } from '@/entities/author/Author';
-import { Comment } from '@/entities/comment/Comment';
+import { Author, Comment } from '@/entities';
 import { AddComment } from '@/features/addComment/AddComment';
 import { MoreActions } from '@/features/moreActions/MoreActions';
 import { ShowLikers } from '@/features/showLikers/ShowLikers';

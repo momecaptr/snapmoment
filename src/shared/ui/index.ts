@@ -1,4 +1,3 @@
-export * from './alert';
 export * from './backBtn/BackBtn';
 export * from './button/Button';
 export * from './card/Card';

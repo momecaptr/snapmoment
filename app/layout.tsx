@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import StoreProvider from '@/app/StoreProvider';
-import { Alert } from '@/shared/ui/alert/ui/Alert';
+import { Alert } from '@/entities/alert/ui/Alert';
 import Header from '@/widget/header/Header';
 import { SideBar } from '@/widget/sideBar/SideBar';
 import { Inter } from 'next/font/google';

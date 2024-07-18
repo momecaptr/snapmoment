@@ -1,4 +1,4 @@
-import { Author } from '@/entities/author/Author';
+import { Author } from '@/entities';
 import { Button, Input, Modal } from '@/shared/ui';
 
 import s from './UsersLikesModal.module.scss';
