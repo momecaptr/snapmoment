@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 
-import { useSignInForm } from '@/pagesComponents/signIn/lib/hooks/useSignInForm';
+import { useSignInForm } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { HeadSignInAndSignUp } from '@/widget';
 import Link from 'next/link';

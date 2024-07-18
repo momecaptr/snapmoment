@@ -7,4 +7,6 @@ export * from './forgotPassword/ui/ForgotPassword';
 export * from './forgotPassword/ui/sentEmailModal/SentEmailModal';
 export * from './generalInfo/GeneralInfo';
 export * from './publicPage/ui/PublicPage';
+export * from './signIn/lib/hooks/useSignInForm';
+export * from './signIn/ui/SignIn';
 export * from './statistics/ui/Statistics';
