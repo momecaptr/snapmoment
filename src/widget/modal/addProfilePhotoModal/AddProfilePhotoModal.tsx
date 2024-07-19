@@ -64,7 +64,7 @@ export const AddProfilePhotoModal = () => {
         {imagePreview ? (
           <div className={s.photoContainer}>
             <Image
-              alt={'Превью фото'}
+              alt={'photo preview'}
               className={s.photoProfileWithCircle}
               height={340}
               src={imagePreview}
@@ -76,7 +76,7 @@ export const AddProfilePhotoModal = () => {
           <PhotoProfile />
         )}
         {!imagePreview ? (
-          <div className={s.butoon}>
+          <div className={s.button}>
             <input className={s.customFileUpload} id={'fileInput'} onChange={handleFileChange} type={'file'} />
             <Typography as={'label'} className={s.lable} htmlFor={'fileInput'}>
               Select from Computer

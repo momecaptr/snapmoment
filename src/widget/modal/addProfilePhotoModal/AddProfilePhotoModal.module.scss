@@ -31,9 +31,14 @@
 
 .topButton {
   background-color: transparent;
+
+  // ! Добавил эти строки для отмены закрашивания кнопки на hover
+  &:hover {
+    background-color: transparent;
+  }
 }
 
-.butoon {
+.button {
   margin-top: 60px;
 }
 

@@ -147,7 +147,7 @@
   transition: background-color 0.3s ease-in-out;
 
   &:hover {
-    background-color: var(--info-700);
+    background-color: var(--accent-700);
   }
 
   &:focus {
@@ -158,7 +158,7 @@
 }
 
 .calendarPanelItemCurrentDate .calendarPanelItemDate {
-  color: var(--info-500);
+  color: var(--accent-500);
 }
 
 .calendarPanelItemNotCurrent .calendarPanelItemDate {
