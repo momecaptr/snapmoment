@@ -1,4 +1,3 @@
-'use client';
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
 
 import { Input, InputProps } from '@/shared/ui';

@@ -1,4 +1,3 @@
-'use client';
 import type { RootState } from '@/app/store';
 
 import { useSelector } from 'react-redux';

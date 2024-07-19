@@ -1,4 +1,3 @@
-'use client';
 import React, { useState } from 'react';
 
 import Close from '@/../public/assets/components/Close';
@@ -73,7 +72,7 @@ export const AddProfilePhotoModal = () => {
             <div className={s.blackFone} />
           </div>
         ) : (
-          <PhotoProfile />
+          <PhotoProfile className={s.imageBox} />
         )}
         {!imagePreview ? (
           <div className={s.button}>

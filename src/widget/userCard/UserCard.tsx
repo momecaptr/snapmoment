@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 
 import Block from '@/../public/assets/components/Block';

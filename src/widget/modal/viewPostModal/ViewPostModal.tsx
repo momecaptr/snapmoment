@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';

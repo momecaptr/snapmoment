@@ -1,5 +1,3 @@
-'use client';
-
 import ArrowIosDownOutline from '@/../public/assets/components/ArrowIosDownOutline';
 import { LocaleMenuItem, useLangData } from '@/features';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';

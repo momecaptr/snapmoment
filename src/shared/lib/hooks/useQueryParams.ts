@@ -1,4 +1,3 @@
-'use client';
 import { initCurrentPage, selectOptionPagination, useDebounce } from '@/shared/lib';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 

@@ -1,4 +1,3 @@
-'use client';
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react';
 
 import EyeOff from '@/../public/assets/components/EyeOff'; //'@/assets/icons/svg/EyeOff'

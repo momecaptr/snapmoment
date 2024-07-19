@@ -2,12 +2,10 @@ import React from 'react';
 
 import { SignIn } from '@/pagesComponents';
 
-const Page = () => {
+export default function Page() {
   return (
-    <div>
+    <>
       <SignIn />
-    </div>
+    </>
   );
-};
-
-export default Page;
+}
