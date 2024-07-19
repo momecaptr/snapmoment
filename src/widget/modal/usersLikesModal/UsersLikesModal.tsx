@@ -1,7 +1,5 @@
-import { Author } from '@/entities/author/Author';
-import { Button } from '@/shared/button/Button';
-import Input from '@/shared/input/Input';
-import { Modal } from '@/shared/modal/Modal';
+import { Author } from '@/entities';
+import { Button, Input, Modal } from '@/shared/ui';
 
 import s from './UsersLikesModal.module.scss';
 

@@ -4,16 +4,13 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features/schemas/authSchema/authShema';
-import { Button } from '@/shared/button/Button';
-import { Card } from '@/shared/card/Card';
-import { FormTextfield } from '@/shared/forms/FormTextfield';
-import { Typography } from '@/shared/typography/Typography';
+import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features';
+import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import s from '@/pagesComponents/createNewPassword/ui/CreateNewPassword.module.scss';
 
-const CreateNewPassword = () => {
+export const CreateNewPassword = () => {
   const {
     control,
     formState: { errors, isValid },
@@ -66,5 +63,3 @@ const CreateNewPassword = () => {
     </>
   );
 };
-
-export default CreateNewPassword;

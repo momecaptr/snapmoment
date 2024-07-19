@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Outlinebell } from '@/../public/assets/components';
 import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
-import LocaleSwitcher from '@/features/localeSwitcher/ui/LocaleSwitcher';
-import { Button } from '@/shared/button/Button';
+import { LocaleSwitcher } from '@/features';
+import { Button } from '@/shared/ui';
 
 import s from './Header.module.scss';
 
 type HeaderProps = {
   isAuthorized: boolean;
 };
-const Header = (props: HeaderProps) => {
+export const Header = (props: HeaderProps) => {
   const { isAuthorized } = props;
 
   return (
@@ -35,5 +35,3 @@ const Header = (props: HeaderProps) => {
     </div>
   );
 };
-
-export default Header;

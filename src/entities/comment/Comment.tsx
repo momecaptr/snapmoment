@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 
 import avatarMock from '@/../public/avatar-mock.jpg';
-import { Button } from '@/shared/button/Button';
-import { Typography } from '@/shared/typography/Typography';
+import { Button, Typography } from '@/shared/ui';
 import Image from 'next/image';
 
 import s from './Comment.module.scss';

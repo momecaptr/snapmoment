@@ -1,5 +1,5 @@
 import BookmarkOutline from '@/../public/assets/components/BookmarkOutline';
-import { Button } from '@/shared/button/Button';
+import { Button } from '@/shared/ui';
 
 import s from './ToggleFavorites.module.scss';
 

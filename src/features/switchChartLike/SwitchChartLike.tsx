@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useState } from 'react';
 
-import { ChartLike } from '@/entities/chartLike/ChartLike';
-import { TabSwitcher } from '@/shared/tabs/TabSwitcher';
+import { ChartLike } from '@/entities';
+import { TabSwitcher } from '@/shared/ui';
 
 import s from './SwitchChartLike.module.scss';
 

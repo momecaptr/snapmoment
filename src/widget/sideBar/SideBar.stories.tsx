@@ -1,23 +1,21 @@
 import { useState } from 'react';
 
-import { Button } from '@/shared/button/Button';
-import { Typography } from '@/shared/typography/Typography';
-import { SideBar } from '@/widget/sideBar/SideBar';
+import Bookmark from '@/../public/assets/components/Bookmark';
+import Home from '@/../public/assets/components/Home';
+import LogOutOutline from '@/../public/assets/components/LogOutOutline';
+import MessageCircle from '@/../public/assets/components/MessageCircle';
+import Person from '@/../public/assets/components/Person';
+import PlusSquare from '@/../public/assets/components/PlusSquare';
+import SearchOutline from '@/../public/assets/components/SearchOutline';
+import TrendingUp from '@/../public/assets/components/TrendingUp';
+import { Typography } from '@/shared/ui';
+import { SideBar } from '@/widget';
 import { StoryProps } from '@storybook/blocks';
 import { Meta, StoryFn } from '@storybook/react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 import s from './SideBar.module.scss';
-
-import Bookmark from '../../../public/assets/components/Bookmark';
-import Home from '../../../public/assets/components/Home';
-import LogOutOutline from '../../../public/assets/components/LogOutOutline';
-import MessageCircle from '../../../public/assets/components/MessageCircle';
-import Person from '../../../public/assets/components/Person';
-import PlusSquare from '../../../public/assets/components/PlusSquare';
-import SearchOutline from '../../../public/assets/components/SearchOutline';
-import TrendingUp from '../../../public/assets/components/TrendingUp';
 
 const meta = {
   component: SideBar,
@@ -53,14 +51,14 @@ export const Default: StoryFn<StoryProps> = () => {
     <div className={s.container}>
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Button as={Link} className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
+          <Link className={s.btn} href={`${path}`} key={value} onClick={() => setActiveIcon(value)}>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
             <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
               {name}
             </Typography>
-          </Button>
+          </Link>
         ))}
       </div>
     </div>

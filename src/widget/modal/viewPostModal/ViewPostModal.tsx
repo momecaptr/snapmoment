@@ -1,21 +1,16 @@
+'use client';
 import { useState } from 'react';
 
-import { Author } from '@/entities/author/Author';
-import { Comment } from '@/entities/comment/Comment';
-import { AddComment } from '@/features/addComment/AddComment';
-import { MoreActions } from '@/features/moreActions/MoreActions';
-import { ShowLikers } from '@/features/showLikers/ShowLikers';
-import { ToggleLike } from '@/features/toggleLike/ToggleLike';
-import { ModalKey, useModal } from '@/shared/hooks/useModal';
-import { Modal } from '@/shared/modal/Modal';
-import { UsersLikesModal } from '@/widget/modal/usersLikesModal/UsersLikesModal';
-import { PostInteractionBar } from '@/widget/postInteractionBar/PostInteractionBar';
+import CloseOutline from '@/../public/assets/components/CloseOutline';
+import avatarMock from '@/../public/avatar-mock.jpg';
+import { Author, Comment } from '@/entities';
+import { AddComment, MoreActions, ShowLikers, ToggleLike } from '@/features';
+import { ModalKey, useModal } from '@/shared/lib';
+import { Modal } from '@/shared/ui';
+import { PostInteractionBar, UsersLikesModal } from '@/widget';
 import Image from 'next/image';
 
 import s from './ViewPostModal.module.scss';
-
-import CloseOutline from '../../../../public/assets/components/CloseOutline';
-import avatarMock from '../../../../public/avatar-mock.jpg';
 
 type Props = {
   openViewPhoto: boolean;
