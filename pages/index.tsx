@@ -5,10 +5,9 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+function Home() {
   return <GeneralInfo />;
 }
+
+// Home.getLayout = getLayout;
+export default Home;

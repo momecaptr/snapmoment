@@ -6,6 +6,10 @@ export const useQueryParams = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
+  if (!searchParams) {
+    throw new Error('searchParams is null');
+  }
+
   const query = Object.fromEntries(searchParams.entries());
 
   const itemsPerPage = Number(query.itemsPerPage) ?? Number(selectOptionPagination[0].value);

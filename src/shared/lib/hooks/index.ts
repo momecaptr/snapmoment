@@ -1,7 +1,6 @@
 export * from './useActions';
 export * from './useAppDispatch';
 export * from './useAppSelector';
-export * from './useAppStore';
 export * from './useAutoId';
 export * from './useDebounce';
 export * from './useModal';
