@@ -1,4 +1,4 @@
-import { RootState } from '@/app/store';
+import { RootState } from '@/myApp/store';
 
 export const selectTheme = (state: RootState) => state.app.theme;
 export const selectApp = (state: RootState) => state.app;

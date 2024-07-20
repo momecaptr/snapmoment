@@ -99,7 +99,7 @@
     // &:hover,
     &:focus,
     &[data-state='checked'] {
-      color: var(--info-500);
+      color: var(--accent-500);
       background-color: var(--dark-500);
     }
   }

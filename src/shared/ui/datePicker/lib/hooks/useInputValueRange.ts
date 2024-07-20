@@ -1,4 +1,3 @@
-'use client';
 import React, { useLayoutEffect, useMemo, useState } from 'react';
 
 import { RangeDate, getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui';

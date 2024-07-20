@@ -1,4 +1,3 @@
-'use client';
 import React, { ReactNode, memo } from 'react';
 
 import ArrowBackOutline from '@/../public/assets/components/ArrowBackOutline';
@@ -15,7 +14,7 @@ type Props = {
 
 export const BackBtn = memo(({ children, href, onClick }: Props) => {
   return (
-    <Button as={Link} className={s.backBtn} href={href} onClick={onClick}>
+    <Button as={Link} className={s.backBtn} href={href} onClick={onClick} variant={'text'}>
       <ArrowBackOutline className={s.backArrow} />
       {children}
     </Button>

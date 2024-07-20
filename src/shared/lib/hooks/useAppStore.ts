@@ -1,5 +1,4 @@
-'use client';
-import type { AppStore } from '@/app/store';
+import type { AppStore } from '@/myApp/store';
 
 import { useStore } from 'react-redux';
 

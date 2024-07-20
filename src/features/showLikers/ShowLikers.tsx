@@ -1,5 +1,5 @@
 import avatarMock from '@/../public/avatar-mock.jpg';
-import { appSlice } from '@/app/model/appSlice';
+import { appSlice } from '@/myApp/model/appSlice';
 import { ModalKey, useAppDispatch } from '@/shared/lib';
 import { Typography } from '@/shared/ui';
 import Image from 'next/image';

@@ -1,7 +1,6 @@
 export * from './addComment/AddComment';
 export * from './changePhotoProfile/ChangePhoto';
 export * from './generalInfoNavigation/GeneralInfoNavigation';
-export * from './localeSwitcher/lib/hooks/useLangData';
 export * from './localeSwitcher/ui/LocaleSwitcher';
 export * from './localeSwitcher/ui/localeMenuItem/LocaleMenuItem';
 export * from './moreActions/MoreActions';

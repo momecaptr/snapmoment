@@ -1,4 +1,3 @@
-'use client';
 import { memo } from 'react';
 
 import { Button, Modal, Typography } from '@/shared/ui';

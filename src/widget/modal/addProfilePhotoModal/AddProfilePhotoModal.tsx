@@ -1,4 +1,3 @@
-'use client';
 import React, { useState } from 'react';
 
 import Close from '@/../public/assets/components/Close';
@@ -64,7 +63,7 @@ export const AddProfilePhotoModal = () => {
         {imagePreview ? (
           <div className={s.photoContainer}>
             <Image
-              alt={'Превью фото'}
+              alt={'photo preview'}
               className={s.photoProfileWithCircle}
               height={340}
               src={imagePreview}
@@ -73,10 +72,10 @@ export const AddProfilePhotoModal = () => {
             <div className={s.blackFone} />
           </div>
         ) : (
-          <PhotoProfile />
+          <PhotoProfile className={s.photoProfile} />
         )}
         {!imagePreview ? (
-          <div className={s.butoon}>
+          <div className={s.button}>
             <input className={s.customFileUpload} id={'fileInput'} onChange={handleFileChange} type={'file'} />
             <Typography as={'label'} className={s.lable} htmlFor={'fileInput'}>
               Select from Computer

@@ -1,13 +1,19 @@
 import React from 'react';
 
+import PhotoStub from '@/../public/assets/components/PhotoStub';
+import clsx from 'clsx';
+
 import s from './PhotoProfile.module.scss';
 
-import PhootoStub from '../../../public/assets/components/PhootoStub';
+type Props = {
+  className?: string;
+};
+const PhotoProfile = (props: Props) => {
+  const { className } = props;
 
-const PhotoProfile = () => {
   return (
-    <div className={s.boxPhooto}>
-      <PhootoStub height={48} width={48} />
+    <div className={clsx(className, s.boxPhoto)}>
+      <PhotoStub height={48} width={48} />
     </div>
   );
 };

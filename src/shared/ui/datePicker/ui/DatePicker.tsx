@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 
 import CalendarOutline from '@/../public/assets/components/CalendarOutline';

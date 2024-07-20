@@ -1,4 +1,3 @@
-'use client';
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useId, useState } from 'react';
 
 import clsx from 'clsx';

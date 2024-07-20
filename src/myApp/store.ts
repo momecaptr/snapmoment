@@ -1,5 +1,5 @@
-import { appSlice } from '@/app/model/appSlice';
 import { alertSlice } from '@/entities/alert/model/alertSlice';
+import { appSlice } from '@/myApp/model/appSlice';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const makeStore = () => {

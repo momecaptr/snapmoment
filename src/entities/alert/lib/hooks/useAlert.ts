@@ -1,4 +1,3 @@
-'use client';
 import { AlertFnProps } from '@/entities';
 import { useActions } from '@/shared/lib';
 

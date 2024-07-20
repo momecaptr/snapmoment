@@ -1,4 +1,3 @@
-'use client';
 import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react';
 
 import EyeOff from '@/../public/assets/components/EyeOff'; //'@/assets/icons/svg/EyeOff'
@@ -58,14 +57,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
       break;
     case 'email': {
       classNameForInput = error
-        ? clsx(s.boxInput, s.errorTextAndPassword)
-        : clsx(s.boxInput, inputValue.length === 0 && s.placeholder);
+        ? clsx(s.boxInputForText, s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInputForText, s.boxInput, inputValue.length === 0 && s.placeholder);
       break;
     }
     case 'password':
       classNameForInput = error
-        ? clsx(s.boxInput, s.errorTextAndPassword)
-        : clsx(s.boxInput, inputValue.length === 0 && s.placeholder);
+        ? clsx(s.boxInputForText, s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInputForText, s.boxInput, inputValue.length === 0 && s.placeholder);
+      break;
+    case 'text':
+      classNameForInput = error
+        ? clsx(s.boxInputForText, s.boxInput, s.errorTextAndPassword)
+        : clsx(s.boxInputForText, s.boxInput, inputValue.length === 0 && s.placeholder);
       break;
     default:
       classNameForInput = s.boxInput;
@@ -95,7 +99,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
           value={inputValue}
         />
         {type === 'password' && inputValue.length > 0 && (
-          <Button className={s.Eye} onClick={isShowChangeHandler} type={'button'}>
+          <Button className={s.Eye} onClick={isShowChangeHandler} type={'button'} variant={'text'}>
             <EyeIcon viewBox={'0 0 24 24'} />
           </Button>
         )}
