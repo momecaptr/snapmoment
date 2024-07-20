@@ -1,13 +1,38 @@
 'use client';
 
+import React, { useState } from 'react';
+
 import ArrowIosDownOutline from '@/../public/assets/components/ArrowIosDownOutline';
-import { LocaleMenuItem, useLangData } from '@/features';
+import ByIcon from '@/../public/lang/ByIcon';
+import GbIcon from '@/../public/lang/GbIcon';
+import KzIcon from '@/../public/lang/KzIcon';
+import RuIcon from '@/../public/lang/RuIcon';
+import UaIcon from '@/../public/lang/UaIcon';
+import { LocaleMenuItem } from '@/features';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
-import s from '@/features/localeSwitcher/ui/LocaleSwitcher.module.scss';
+import s from './LocaleSwitcher.module.scss';
+
+export type LangIconType = any;
+export type LangType = 'by' | 'en' | 'kz' | 'ru' | 'ua';
+export type FullName = 'English' | 'Беларуская' | 'Русский' | 'Українська' | 'Қазақ';
+type LangData = {
+  fullName: FullName;
+  icon: LangIconType;
+  isoCode: LangType;
+};
+type TypedLangData = Record<LangType, LangData>;
 
 export const LocaleSwitcher = () => {
-  const { changeLanguage, currentLang, iconFlag, langData } = useLangData();
+  const [iconFlag, setIconFlag] = useState(<GbIcon />);
+  const [currentLang, setCurrentLang] = useState<string>('English');
+  const langData: TypedLangData = {
+    by: { fullName: 'Беларуская', icon: <ByIcon />, isoCode: 'by' },
+    en: { fullName: 'English', icon: <GbIcon />, isoCode: 'en' },
+    kz: { fullName: 'Қазақ', icon: <KzIcon />, isoCode: 'kz' },
+    ru: { fullName: 'Русский', icon: <RuIcon />, isoCode: 'ru' },
+    ua: { fullName: 'Українська', icon: <UaIcon />, isoCode: 'ua' }
+  };
 
   return (
     <DropdownMenu.Root>
@@ -26,7 +51,7 @@ export const LocaleSwitcher = () => {
               icon={value.icon}
               isoCode={value.isoCode}
               key={key}
-              onSelect={() => changeLanguage(key, value.icon)}
+              onSelect={() => {}}
             />
           ))}
           <DropdownMenu.Arrow className={s.DropdownMenuArrow} />

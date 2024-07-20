@@ -1,5 +1,6 @@
-/*import Typography from '@/components/ui/Typography/Typography';*/
-import { FullName } from '@/features';
+'use client';
+
+import { FullName, LangIconType } from '@/features';
 import { Typography } from '@/shared/ui';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
@@ -7,7 +8,7 @@ import s from '@/features/localeSwitcher/ui/LocaleSwitcher.module.scss';
 
 type DropdownMenuItemProps = {
   fullName: FullName;
-  icon: string;
+  icon: LangIconType;
   isoCode: string;
   onSelect: () => void;
 };

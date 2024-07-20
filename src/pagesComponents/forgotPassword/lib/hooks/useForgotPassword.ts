@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 
 import { appSlice } from '@/app/model/appSlice';
 import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features';
@@ -33,7 +32,6 @@ export const useForgotPassword = () => {
     console.log('Captcha value:', value);
     setIsValid(true);
   };
-  const { t } = useTranslation();
 
   return { captchaValue, control, handleCaptchaChange, handleSubmit, isOpen, isValid, onSubmit, setOpen };
 };
