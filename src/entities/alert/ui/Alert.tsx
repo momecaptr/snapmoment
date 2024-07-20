@@ -1,5 +1,3 @@
-'use client';
-
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { alertSelectors } from '@/entities/alert/model/alertSlice';
 import { useActions, useAppSelector } from '@/shared/lib';

@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 
 import { useSignUpForm } from '@/pagesComponents';
@@ -6,7 +5,7 @@ import { Button, Card, FormCheckbox, FormTextfield, Typography } from '@/shared/
 import { HeadSignInAndSignUp } from '@/widget';
 import Link from 'next/link';
 
-import s from '@/pagesComponents/signUp/ui/SignUp.module.scss';
+import s from './SignUp.module.scss';
 
 export const SignUp = () => {
   const { control, errors, handleSubmit, isValid, onSubmit } = useSignUpForm();
@@ -17,7 +16,14 @@ export const SignUp = () => {
         <Card className={s.card}>
           <HeadSignInAndSignUp title={'Sign Up'} />
           <div className={s.box_Input}>
-            <FormTextfield className={s.input} control={control} label={'Username'} name={'username'} type={'text'} />
+            <FormTextfield
+              className={s.input}
+              control={control}
+              error={'Какое-то соообщение'}
+              label={'Username'}
+              name={'username'}
+              type={'text'}
+            />
             <FormTextfield className={s.input} control={control} label={'Email'} name={'email'} type={'email'} />
             <FormTextfield
               className={s.input}

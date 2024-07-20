@@ -2,10 +2,10 @@ import React from 'react';
 
 import { AddProfilePhotoModal } from '@/widget';
 
-export default function SignUp() {
+export default function Page() {
   return (
-    <div>
+    <>
       <AddProfilePhotoModal />
-    </div>
+    </>
   );
 }

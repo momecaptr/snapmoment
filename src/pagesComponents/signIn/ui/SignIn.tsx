@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 
 import { useSignInForm } from '@/pagesComponents';
@@ -6,7 +5,7 @@ import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { HeadSignInAndSignUp } from '@/widget';
 import Link from 'next/link';
 
-import s from '@/pagesComponents/signIn/ui/SignIn.module.scss';
+import s from './SignIn.module.scss';
 
 export const SignIn = () => {
   const { control, errors, handleSubmit, isValid, onSubmit } = useSignInForm();

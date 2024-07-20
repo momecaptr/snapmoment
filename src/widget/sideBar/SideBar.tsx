@@ -1,4 +1,3 @@
-'use client';
 import { ElementType, useState } from 'react';
 
 import Bookmark from '@/../public/assets/components/Bookmark';

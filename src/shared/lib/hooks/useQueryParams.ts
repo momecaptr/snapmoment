@@ -1,4 +1,3 @@
-'use client';
 import { initCurrentPage, selectOptionPagination, useDebounce } from '@/shared/lib';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -6,6 +5,10 @@ export const useQueryParams = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+
+  if (!searchParams) {
+    throw new Error('searchParams is null');
+  }
 
   const query = Object.fromEntries(searchParams.entries());
 
