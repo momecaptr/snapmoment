@@ -1,5 +1,5 @@
-import { selectIsOpen, selectModalKey } from '@/app/model/appSelectors';
-import { toggleModal } from '@/app/model/appSlice';
+import { selectIsOpen, selectModalKey } from '@/myApp/model/appSelectors';
+import { toggleModal } from '@/myApp/model/appSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 
 export enum ModalKey {

@@ -6,7 +6,7 @@ import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 // import { ModalKey, useModal } from '@/shared/utils';
 import Link from 'next/link';
 
-import s from '@/pagesComponents/forgotPassword/ui/ForgotPassword.module.scss';
+import s from './ForgotPassword.module.scss';
 
 export const ForgotPassword = () => {
   const { control, handleCaptchaChange, handleSubmit, isOpen, isValid, onSubmit, setOpen } = useForgotPassword();

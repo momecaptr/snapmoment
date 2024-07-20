@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Block from '@/../public/assets/components/Block';
 import avatarMock from '@/../public/avatar-mock.jpg';
-import { appSlice } from '@/app/model/appSlice';
+import { appSlice } from '@/myApp/model/appSlice';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 import { ViewPostModal } from '@/widget';

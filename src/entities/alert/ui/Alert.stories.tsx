@@ -1,18 +1,16 @@
 import type { Meta } from '@storybook/react';
 
-import { Provider } from 'react-redux';
-
-import store from '@/app/store';
 import { Alert, useAlert } from '@/entities';
+import StoreProvider from '@/myApp/StoreProvider';
 import { Button } from '@/shared/ui';
 
 const meta = {
   component: Alert,
   decorators: [
     (Story: any) => (
-      <Provider store={store}>
+      <StoreProvider>
         <Story />
-      </Provider>
+      </StoreProvider>
     )
   ],
   tags: ['autodocs'],

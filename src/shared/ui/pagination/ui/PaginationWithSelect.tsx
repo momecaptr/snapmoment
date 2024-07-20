@@ -1,5 +1,3 @@
-import { useTranslation } from 'react-i18next';
-
 import { useQueryParams } from '@/shared/lib';
 import { Pagination, SelectUI, Typography } from '@/shared/ui';
 
@@ -36,7 +34,6 @@ export const PaginationWithSelect = ({
   const onValueChange = (count: string) => {
     setItemsPerPage(+count);
   };
-  const { t } = useTranslation();
 
   return (
     <div className={s.box}>

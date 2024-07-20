@@ -1,10 +1,9 @@
 import React from 'react';
 
+import PhotoStub from '@/../public/assets/components/PhotoStub';
 import clsx from 'clsx';
 
 import s from './PhotoProfile.module.scss';
-
-import PhotoStub from '../../../public/assets/components/PhootoStub';
 
 type Props = {
   className?: string;

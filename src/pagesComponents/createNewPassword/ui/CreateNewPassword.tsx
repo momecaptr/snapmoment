@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
@@ -21,7 +20,6 @@ export const CreateNewPassword = () => {
   const onSubmit = async ({ password }: CreateNewPasswordFormValues) => {
     console.log(password);
   };
-  const { t } = useTranslation();
 
   return (
     <>

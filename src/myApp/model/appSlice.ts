@@ -1,4 +1,4 @@
-import { AppSettings, Theme } from '@/app/model/appTypes';
+import { AppSettings, Theme } from '@/myApp/model/appTypes';
 import { ModalKey } from '@/shared/lib';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 

@@ -1,21 +1,20 @@
 import type { AppProps } from 'next/app';
 
 import React from 'react';
-import { Provider } from 'react-redux';
 
-import store from '@/app/store';
 import { Alert } from '@/entities';
+import StoreProvider from '@/myApp/StoreProvider';
 import { PageLayout } from '@/widget';
 
-import '../src/app/styles/index.scss';
+import '@/myApp/styles/index.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
+    <StoreProvider>
       <PageLayout>
         <Component {...pageProps} />
         <Alert />
       </PageLayout>
-    </Provider>
+    </StoreProvider>
   );
 }

@@ -72,7 +72,7 @@ export const AddProfilePhotoModal = () => {
             <div className={s.blackFone} />
           </div>
         ) : (
-          <PhotoProfile className={s.imageBox} />
+          <PhotoProfile className={s.photoProfile} />
         )}
         {!imagePreview ? (
           <div className={s.button}>
