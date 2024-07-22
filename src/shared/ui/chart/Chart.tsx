@@ -19,8 +19,8 @@ export const Chart = <T extends ChartData>({ data, dataKeys }: ChartProps<T>) =>
     <div className={s.chart}>
       <ResponsiveContainer height={400} width={'100%'}>
         <LineChart data={data}>
-          <XAxis dataKey={'name'} />
-          <YAxis />
+          <XAxis dataKey={'name'} tickFormatter={(value) => value} />
+          <YAxis tickFormatter={(value) => value} />
           <Tooltip />
           {Object.keys(dataKeys).map((key) => (
             <Line dataKey={key} key={key} stroke={dataKeys[key]} type={'monotone'} />
