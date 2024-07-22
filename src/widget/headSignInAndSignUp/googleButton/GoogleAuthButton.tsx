@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Google from '@/../public/assets/components/GoogleSvgrepoCom';
+import { useGoogleLogin } from '@react-oauth/google';
 
 export const GoogleAuthButton = () => {
   // 1 -- делаем запрос OAUTH GOOGLE (он сам работает, нам писать его не нужно)
@@ -32,9 +33,30 @@ export const GoogleAuthButton = () => {
   //
   //   4. Получение данных пользователя:
   //   С помощью полученного токена доступа, вы можете запросить данные пользователя от Google API.
+  const login = useGoogleLogin({
+    onError: (error) => {
+      console.log('Login Failed:', error);
+    },
+    onSuccess: (codeResponse) => {
+      console.log(codeResponse);
+    }
+  });
+
   return (
-    <button onClick={handleLogin}>
-      <Google />
-    </button>
+    <>
+      <button onClick={() => login()}>
+        <Google />
+      </button>
+      {/* С этой хуйнй ниже не работает */}
+      {/*<GoogleLogin*/}
+      {/*  onError={() => {*/}
+      {/*    console.log('Login failed');*/}
+      {/*  }}*/}
+      {/*  onSuccess={(codeResponse) => {*/}
+      {/*    console.log(codeResponse);*/}
+      {/*  }}*/}
+      {/*  useOneTap*/}
+      {/*/>*/}
+    </>
   );
 };
