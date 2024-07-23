@@ -1,13 +1,16 @@
 import { alertSlice } from '@/entities/alert/model/alertSlice';
+import { snapmomentAPI } from '@/myApp/api/snapmomentAPI';
 import { appSlice } from '@/myApp/model/appSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
 const makeStore = () =>
   configureStore({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(snapmomentAPI.middleware),
     reducer: {
       alertSlice,
-      app: appSlice.reducer
+      app: appSlice.reducer,
+      [snapmomentAPI.reducerPath]: snapmomentAPI.reducer
     }
   });
 

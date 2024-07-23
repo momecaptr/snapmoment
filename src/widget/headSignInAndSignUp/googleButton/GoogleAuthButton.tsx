@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Google from '@/../public/assets/components/GoogleSvgrepoCom';
+import { useAuthMeMutation } from '@/myApp/api/snapmomentAPI';
 import { useGoogleLogin } from '@react-oauth/google';
 
 export const GoogleAuthButton = () => {
@@ -10,11 +11,12 @@ export const GoogleAuthButton = () => {
     const clientId = '617342613759-f3kbvgm8l310fn40vh6qna2pv8u2uccr.apps.googleusercontent.com';
     const redirectUri = 'http://localhost:3001/api/auth/callback-google';
     const scope = 'email profile';
-    const responseType = 'code';
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}&response_type=code`;
+    // const responseType = 'code';
 
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&response_type=${responseType}`;
+    // const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&response_type=${responseType}`;
 
-    window.location.assign(authUrl);
+    window.location.assign(url);
     const code = 'ОТВЕТ ОТ ГУГЛА ОAUTH2'; // НО ЭТО ЕЩЕ  НЕ АВТОРИЗАЦИЯ
   };
 
@@ -33,12 +35,22 @@ export const GoogleAuthButton = () => {
   //
   //   4. Получение данных пользователя:
   //   С помощью полученного токена доступа, вы можете запросить данные пользователя от Google API.
+  const [authMe] = useAuthMeMutation();
   const login = useGoogleLogin({
     onError: (error) => {
       console.log('Login Failed:', error);
     },
-    onSuccess: (codeResponse) => {
+    onSuccess: async (codeResponse) => {
       console.log(codeResponse);
+      try {
+        const response = await authMe({ code: codeResponse.access_token });
+
+        console.log('Я здесь');
+
+        console.log(response);
+      } catch (er) {
+        console.log('auth me Error', er);
+      }
     }
   });
 
@@ -47,7 +59,10 @@ export const GoogleAuthButton = () => {
       <button onClick={() => login()}>
         <Google />
       </button>
-      {/* С этой хуйнй ниже не работает */}
+      {/*<button onClick={handleLogin}>*/}
+      {/*  <Google />*/}
+      {/*</button>*/}
+      {/* С этой штуки ниже не работает */}
       {/*<GoogleLogin*/}
       {/*  onError={() => {*/}
       {/*    console.log('Login failed');*/}
