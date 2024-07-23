@@ -75,17 +75,22 @@ export const SignUp = () => {
 
           <Button className={s.button} type={'submit'} fullWidth>
             Sign Up
-            {/*<Alert />*/}
           </Button>
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          {/*<Typography as={Link} className={s.signIn} href={'/sign-in'} variant={'regular_link'}>
-            Sign In
-          </Typography>*/}
           <Link className={s.signIn} href={'/sign-in'}>
             Sign In
           </Link>
+          {/*{isValid ? (*/}
+          {/*  <Link className={s.signIn} href={isValid ? '/sign-in' : ''}>*/}
+          {/*    Sign In*/}
+          {/*  </Link>*/}
+          {/*) : (*/}
+          {/*  <Typography className={s.signInDisabled} variant={'regular_text_16'}>*/}
+          {/*    Sign In*/}
+          {/*  </Typography>*/}
+          {/*)}*/}
         </Card>
       </form>
     </div>

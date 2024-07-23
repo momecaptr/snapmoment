@@ -1,4 +1,4 @@
-import { RegistrationType } from '@/myApp/api/api.types';
+import { QueryError, RegistrationType } from '@/myApp/api/api.types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const snapmomentAPI = createApi({
@@ -24,7 +24,10 @@ export const snapmomentAPI = createApi({
         body: { ...data },
         method: 'POST',
         url: '/auth/registration'
-      })
+      }),
+      transformErrorResponse: (res: { data: QueryError; status: number }) => {
+        return res.data;
+      }
     })
   }),
   reducerPath: 'snapmomentAPI'

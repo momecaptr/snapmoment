@@ -64,4 +64,14 @@
   font-weight: 600;
   color: var(--accent-500);
   text-decoration: none;
+
+  border: none;
+
+  &:hover {
+    border: none;
+  }
+}
+
+.signInDisabled {
+  color: var(--light-900);
 }

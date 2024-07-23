@@ -9,3 +9,14 @@ export interface RegistrationType {
   password: string;
   userName: string;
 }
+
+export interface QueryError {
+  error: string;
+  messages: Message[];
+  statusCode: number;
+}
+
+export interface Message {
+  field: string;
+  message: string;
+}
