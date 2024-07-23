@@ -2,7 +2,11 @@ import { z } from 'zod';
 
 // Сообщения об ошибках
 const errorMessages = {
+  agreementPolicyRequired: 'You must agree to the policy',
   invalidEmail: 'Invalid email address',
+  invalidEmailFormat: 'Invalid email format',
+  invalidPasswordCharacters: 'Password cannot contain Cyrillic characters',
+  invalidUsernameCharacters: 'Username can only contain letters, numbers, and underscores',
   passwordLowercase: 'Password must contain at least one lowercase letter',
   passwordMaxLength: 'Your password must be between 6 and 20 characters',
   passwordMinLength: 'Password must be at least 6 characters long',
@@ -17,6 +21,7 @@ const errorMessages = {
 // Общие правила для полей
 const commonPasswordRules = z
   .string()
+  .regex(/^[^\u0400-\u04FF]*$/, { message: errorMessages.invalidPasswordCharacters })
   .min(6, { message: errorMessages.passwordMinLength })
   .max(20, { message: errorMessages.passwordMaxLength })
   .regex(/[A-Z]/, { message: errorMessages.passwordUppercase })
@@ -27,12 +32,13 @@ const commonPasswordRules = z
 const commonEmailRules = z
   .string()
   .min(1, { message: errorMessages.required })
-  .email({ message: errorMessages.invalidEmail });
+  .regex(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, { message: errorMessages.invalidEmailFormat });
 
 const commonUsernameRules = z
   .string()
   .min(1, { message: errorMessages.required })
-  .max(30, { message: errorMessages.usernameMaxLength });
+  .max(30, { message: errorMessages.usernameMaxLength })
+  .regex(/^[a-zA-Z0-9_]*$/, { message: errorMessages.invalidUsernameCharacters });
 
 // Схемы валидации
 export const createNewPasswordSchema = z
@@ -56,16 +62,22 @@ export const signInSchema = z.object({
 
 export const signUpSchema = z
   .object({
+    agreementPolicyStatus: z.boolean().refine((val) => val, {
+      message: errorMessages.agreementPolicyRequired
+    }),
     confirmPassword: commonPasswordRules,
     email: commonEmailRules,
     password: commonPasswordRules,
-    rememberMe: z.boolean(),
     username: commonUsernameRules
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: errorMessages.passwordMismatch,
     path: ['confirmPassword']
   });
+// .refine((data) => data.agreementPolicyStatus, {
+//   message: 'You must agree to remember your login',
+//   path: ['agreementPolicyStatus']
+// });
 
 // Типы данных
 export type SignUpSchemaType = z.infer<typeof signUpSchema>;

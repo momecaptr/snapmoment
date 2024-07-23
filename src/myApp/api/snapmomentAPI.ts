@@ -1,3 +1,4 @@
+import { RegistrationType } from '@/myApp/api/api.types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const snapmomentAPI = createApi({
@@ -9,19 +10,24 @@ export const snapmomentAPI = createApi({
     //     headers.append('x-auth-skip', 'true')
     //   }
   }),
-  endpoints: (builder) => {
-    return {
-      // googleOAuth: builder.mutation<AuthMeGoogleResponse, {code: string}>({
-      googleOAuth: builder.mutation<void, { code: string }>({
-        query: (code) => ({
-          body: code,
-          method: 'POST',
-          url: '/auth/google/login'
-        })
+  endpoints: (builder) => ({
+    // googleOAuth: builder.mutation<AuthMeGoogleResponse, {code: string}>({
+    googleOAuth: builder.mutation<void, { code: string }>({
+      query: (code) => ({
+        body: code,
+        method: 'POST',
+        url: '/auth/google/login'
       })
-    };
-  },
+    }),
+    registration: builder.mutation<void, RegistrationType>({
+      query: (data) => ({
+        body: { ...data },
+        method: 'POST',
+        url: '/auth/registration'
+      })
+    })
+  }),
   reducerPath: 'snapmomentAPI'
 });
 
-export const { useGoogleOAuthMutation } = snapmomentAPI;
+export const { useGoogleOAuthMutation, useRegistrationMutation } = snapmomentAPI;
