@@ -4,10 +4,18 @@ export interface AuthMeGoogleResponse {
 }
 
 export interface RegistrationType {
-  // baseUrl: string;
+  baseUrl?: string;
   email: string;
   password: string;
   userName: string;
+}
+
+export interface GoogleOAuthQuery {
+  code: string;
+}
+
+export interface RegistrationConfirmationQuery {
+  confirmationCode: string;
 }
 
 export interface QueryError {

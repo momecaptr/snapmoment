@@ -1,4 +1,4 @@
-import { QueryError, RegistrationType } from '@/myApp/api/api.types';
+import { GoogleOAuthQuery, QueryError, RegistrationConfirmationQuery, RegistrationType } from '@/myApp/api/api.types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const snapmomentAPI = createApi({
@@ -11,8 +11,19 @@ export const snapmomentAPI = createApi({
     //   }
   }),
   endpoints: (builder) => ({
+    confirmRegistration: builder.mutation<void, RegistrationConfirmationQuery>({
+      query: (data) => {
+        console.log({ data: data });
+
+        return {
+          body: data,
+          method: 'POST',
+          url: '/auth/registration-confirmation'
+        };
+      }
+    }),
     // googleOAuth: builder.mutation<AuthMeGoogleResponse, {code: string}>({
-    googleOAuth: builder.mutation<void, { code: string }>({
+    googleOAuth: builder.mutation<void, GoogleOAuthQuery>({
       query: (code) => ({
         body: code,
         method: 'POST',
@@ -21,7 +32,7 @@ export const snapmomentAPI = createApi({
     }),
     registration: builder.mutation<void, RegistrationType>({
       query: (data) => ({
-        body: { ...data },
+        body: data,
         method: 'POST',
         url: '/auth/registration'
       }),
@@ -33,4 +44,4 @@ export const snapmomentAPI = createApi({
   reducerPath: 'snapmomentAPI'
 });
 
-export const { useGoogleOAuthMutation, useRegistrationMutation } = snapmomentAPI;
+export const { useConfirmRegistrationMutation, useGoogleOAuthMutation, useRegistrationMutation } = snapmomentAPI;

@@ -1,4 +1,5 @@
-export * from './congratulations/Congratulations';
+export * from './congratulations/lib/useConfirmRegistration';
+export * from './congratulations/ui/Congratulations';
 export * from './createNewPassword/lib/hooks/useCreateNewPassword';
 export * from './createNewPassword/ui/CreateNewPassword';
 export * from './emailVerification/EmailVerification';
