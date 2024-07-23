@@ -1,4 +1,3 @@
-import { AuthMeGoogleResponse, CodeAuthMeGoogle } from '@/myApp/api/api.types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const snapmomentAPI = createApi({
@@ -12,10 +11,11 @@ export const snapmomentAPI = createApi({
   }),
   endpoints: (builder) => {
     return {
-      authMe: builder.mutation<AuthMeGoogleResponse, CodeAuthMeGoogle>({
+      // authMe: builder.mutation<AuthMeGoogleResponse, {code: string}>({
+      googleOAuth: builder.mutation<void, { code: string }>({
         query: (code) => ({
+          body: code,
           method: 'POST',
-          params: code,
           url: '/auth/google/login'
         })
       })
@@ -24,4 +24,4 @@ export const snapmomentAPI = createApi({
   reducerPath: 'snapmomentAPI'
 });
 
-export const { useAuthMeMutation } = snapmomentAPI;
+export const { useGoogleOAuthMutation } = snapmomentAPI;

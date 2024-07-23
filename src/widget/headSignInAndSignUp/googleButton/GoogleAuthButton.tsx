@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Google from '@/../public/assets/components/GoogleSvgrepoCom';
-import { useAuthMeMutation } from '@/myApp/api/snapmomentAPI';
+import { useGoogleOAuthMutation } from '@/myApp/api/snapmomentAPI';
 import { useGoogleLogin } from '@react-oauth/google';
 
 export const GoogleAuthButton = () => {
@@ -35,22 +35,25 @@ export const GoogleAuthButton = () => {
   //
   //   4. Получение данных пользователя:
   //   С помощью полученного токена доступа, вы можете запросить данные пользователя от Google API.
-  const [authMe] = useAuthMeMutation();
+  const [authMe] = useGoogleOAuthMutation();
   const login = useGoogleLogin({
+    flow: 'auth-code', // ВОТ ЭТА СТРОКА ОБЯЗАТЕЛЬНА
     onError: (error) => {
       console.log('Login Failed:', error);
     },
     onSuccess: async (codeResponse) => {
       console.log(codeResponse);
+      const response = codeResponse;
+
       try {
-        const response = await authMe({ code: codeResponse.access_token });
+        const asdas = await authMe({ code: response.code });
 
-        console.log('Я здесь');
-
-        console.log(response);
+        console.log(asdas);
       } catch (er) {
         console.log('auth me Error', er);
       }
+
+      console.log(response.code);
     }
   });
 
