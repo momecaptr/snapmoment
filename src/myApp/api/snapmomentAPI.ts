@@ -11,7 +11,7 @@ export const snapmomentAPI = createApi({
   }),
   endpoints: (builder) => {
     return {
-      // authMe: builder.mutation<AuthMeGoogleResponse, {code: string}>({
+      // googleOAuth: builder.mutation<AuthMeGoogleResponse, {code: string}>({
       googleOAuth: builder.mutation<void, { code: string }>({
         query: (code) => ({
           body: code,
