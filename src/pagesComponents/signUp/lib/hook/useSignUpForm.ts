@@ -13,7 +13,6 @@ export const useSignUpForm = () => {
     handleSubmit
   } = useForm<SignUpSchemaType>({
     mode: 'onChange',
-    /*mode: 'onBlur',*/
     resolver: zodResolver(signUpSchema)
   });
 
@@ -23,16 +22,13 @@ export const useSignUpForm = () => {
   const onSubmit = async (data: SignUpSchemaType) => {
     const res = await register({ email: data.email, password: data.password, userName: data.username });
 
-    console.log({ e: res.error });
     try {
       if ('data' in res) {
         successAlert({ message: `We have sent a link to confirm your email to ${data.email}` });
       } else {
         const err = res.error as QueryError;
 
-        console.log(err.messages[0]);
-        errorAlert({ message: `Error - ${err.messages[0].message || 'Unknown error'}` });
-        // errorAlert({ message: 'Error - Unknown error' });
+        errorAlert({ message: `Error - ${err.messages[0].message || 'unknown issue'}` });
       }
     } catch (e) {
       errorAlert({ message: 'An unexpected error occurred. Please try again later.' });
@@ -45,6 +41,5 @@ export const useSignUpForm = () => {
     handleSubmit,
     isValid,
     onSubmit
-    // registerMeAlert
   };
 };

@@ -9,7 +9,6 @@ import s from './SignUp.module.scss';
 
 export const SignUp = () => {
   const { control, errors, handleSubmit, isValid, onSubmit } = useSignUpForm();
-  // const agreement = useWatch({ control, name: 'agreementPolicyStatus' });
 
   return (
     <div className={s.wrapper}>
@@ -82,15 +81,6 @@ export const SignUp = () => {
           <Link className={s.signIn} href={'/sign-in'}>
             Sign In
           </Link>
-          {/*{isValid ? (*/}
-          {/*  <Link className={s.signIn} href={isValid ? '/sign-in' : ''}>*/}
-          {/*    Sign In*/}
-          {/*  </Link>*/}
-          {/*) : (*/}
-          {/*  <Typography className={s.signInDisabled} variant={'regular_text_16'}>*/}
-          {/*    Sign In*/}
-          {/*  </Typography>*/}
-          {/*)}*/}
         </Card>
       </form>
     </div>
