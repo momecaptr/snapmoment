@@ -15,9 +15,9 @@ export const useConfirmRegistration = () => {
   useEffect(() => {
     const confirmFunction = async () => {
       if (code) {
-        const res = await confirmRegistration({ confirmationCode: code as string });
-
         try {
+          const res = await confirmRegistration({ confirmationCode: code as string });
+
           if ('data' in res) {
             successAlert({ message: 'Email was verified. Account was activated' });
           } else {
@@ -34,5 +34,5 @@ export const useConfirmRegistration = () => {
     confirmFunction().catch((err) => {
       console.error('An error occurred:', err);
     });
-  }, [code, confirmRegistration, errorAlert, successAlert]);
+  }, [code]);
 };
