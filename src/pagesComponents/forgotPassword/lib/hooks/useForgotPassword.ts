@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features';
 import { appSlice } from '@/myApp/model/appSlice';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
+import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useForgotPassword = () => {
-  const {
-    control,
-    // formState: { isValid },
-    handleSubmit,
-    setValue
-  } = useForm<ForgotPasswordFormValues>({
+  const { control, handleSubmit, setValue } = useForm<ForgotPasswordFormValues>({
     defaultValues: { email: '' },
     resolver: zodResolver(forgotPasswordSchema)
   });

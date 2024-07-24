@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 function Home() {
   return <GeneralInfo />;
+  // return <MyToast />;
   // return <SignUp />;
 }
 

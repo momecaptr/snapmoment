@@ -19,8 +19,6 @@ type Props = {
 };
 
 export const TabSwitcher = ({ className, onValueChange, tabs, value }: Props) => {
-  // const { t } = useTranslation()
-
   return (
     <div className={clsx(s.container, className)}>
       <Tabs.Root activationMode={'automatic'} className={s.root} onValueChange={onValueChange} value={value}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features';
+import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/shared/schemas';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 

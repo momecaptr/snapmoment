@@ -19,15 +19,23 @@ export const SignUp = () => {
             <FormTextfield
               className={s.input}
               control={control}
-              error={'Какое-то соообщение'}
+              error={errors.username?.message}
               label={'Username'}
               name={'username'}
               type={'text'}
             />
-            <FormTextfield className={s.input} control={control} label={'Email'} name={'email'} type={'email'} />
             <FormTextfield
               className={s.input}
               control={control}
+              error={errors.email?.message}
+              label={'Email'}
+              name={'email'}
+              type={'email'}
+            />
+            <FormTextfield
+              className={s.input}
+              control={control}
+              error={errors.password?.message}
               label={'Password'}
               name={'password'}
               type={'password'}
@@ -35,6 +43,7 @@ export const SignUp = () => {
             <FormTextfield
               className={s.input}
               control={control}
+              error={errors.confirmPassword?.message}
               label={'Password confirmation'}
               name={'confirmPassword'}
               type={'password'}
@@ -60,7 +69,7 @@ export const SignUp = () => {
             }
             className={s.agreement}
             control={control}
-            name={'rememberMe'}
+            name={'agreementPolicyStatus'}
           />
 
           <Button className={s.button} type={'submit'} fullWidth>
@@ -69,9 +78,6 @@ export const SignUp = () => {
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          {/*<Typography as={Link} className={s.signIn} href={'/sign-in'} variant={'regular_link'}>
-            Sign In
-          </Typography>*/}
           <Link className={s.signIn} href={'/sign-in'}>
             Sign In
           </Link>

@@ -28,7 +28,7 @@ export const SignIn = () => {
           <Typography as={'p'} className={s.forgot} variant={'regular_text_14'}>
             Forgot Password
           </Typography>
-          <Button className={s.button} type={'submit'} fullWidth>
+          <Button className={s.button} disabled={!isValid} type={'submit'} fullWidth>
             Sign In
           </Button>
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
