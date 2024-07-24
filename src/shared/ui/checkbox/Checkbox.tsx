@@ -54,7 +54,6 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
         <label className={classNames.label} htmlFor={id ?? generatedId}>
           {label}
         </label>
-        {/*{error && <div className={s.error}>{error}</div>}*/}
       </div>
     );
   }
