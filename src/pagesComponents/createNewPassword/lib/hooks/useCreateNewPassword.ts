@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/features';
+import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useCreateNewPassword = () => {
@@ -21,7 +21,6 @@ export const useCreateNewPassword = () => {
     control,
     errors,
     handleSubmit,
-    // isLoading,
     isValid,
     onSubmit
   };

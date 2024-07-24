@@ -3,7 +3,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 import { SentEmailModal, useForgotPassword } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
-// import { ModalKey, useModal } from '@/shared/utils';
 import Link from 'next/link';
 
 import s from './ForgotPassword.module.scss';

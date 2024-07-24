@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { AddProfilePhotoModal } from '@/widget';
+import { SignUp } from '@/pagesComponents';
 
 export default function Page() {
   return (
     <>
-      <AddProfilePhotoModal />
+      {/*<AddProfilePhotoModal />*/}
+      <SignUp />
     </>
   );
 }

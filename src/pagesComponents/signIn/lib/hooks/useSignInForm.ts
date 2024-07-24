@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { SignInSchemaType, signInSchema } from '@/features';
+import { SignInSchemaType, signInSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useSignInForm = () => {

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import GitHub from '@/../public/assets/components/GithubSvgrepoCom';
-import Google from '@/../public/assets/components/GoogleSvgrepoCom';
+import { GithubAuthButton, GoogleAuthButton } from '@/features';
 import { Typography } from '@/shared/ui';
 
 import s from './HeadSignInAndSignUp.module.scss';
@@ -17,13 +16,8 @@ export const HeadSignInAndSignUp = (props: HeadSignInAndSignUpProps) => {
         {title}
       </Typography>
       <div className={s.subTitle}>
-        {/* ! Это ниже, гугл и гитхаб - будут фичи (компонента или функция через children или пропс) */}
-        <div className={s.google}>
-          <Google height={36} width={36} />
-        </div>
-        <div className={s.github}>
-          <GitHub height={36} width={36} />
-        </div>
+        <GoogleAuthButton />
+        <GithubAuthButton />
       </div>
     </>
   );
