@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Google from '@/../public/assets/components/GoogleSvgrepoCom';
-import { useAuthGoogle } from '@/features/googleButton/lib/useAuthGoogle';
+import { useAuthGoogle } from '@/features';
 
 export const GoogleAuthButton = () => {
   const { login } = useAuthGoogle();

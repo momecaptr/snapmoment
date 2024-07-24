@@ -19,6 +19,11 @@ const errorMessages = {
 };
 
 // Общие правила для полей
+export const RefreshTokenResponseSchema = z.object({
+  accessToken: z.string(),
+  refreshToken: z.string()
+});
+
 const commonPasswordRules = z
   .string()
   .regex(/^[^\u0400-\u04FF]*$/, { message: errorMessages.invalidPasswordCharacters })
@@ -84,3 +89,4 @@ export type SignUpSchemaType = z.infer<typeof signUpSchema>;
 export type SignInSchemaType = z.infer<typeof signInSchema>;
 export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
 export type CreateNewPasswordFormValues = z.infer<typeof createNewPasswordSchema>;
+export type RefreshTokenValues = z.infer<typeof RefreshTokenResponseSchema>;

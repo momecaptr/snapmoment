@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useAlert } from '@/entities';
-import { useConfirmRegistrationMutation } from '@/myApp/api/snapmomentAPI';
+import { useConfirmRegistrationMutation } from '@/shared/api';
 import { useRouter } from 'next/router';
 
 export const useConfirmRegistration = () => {
@@ -14,6 +14,7 @@ export const useConfirmRegistration = () => {
 
   useEffect(() => {
     const confirmFunction = async () => {
+      // ! Должна быть дополнительная логика, проверки существования пользователя в БазеДанных и если его нет, то логика ниже, но если есть, тогда отправлять пользователя на страницу: 1) Если линка рабочая, то на страницу login, 2) если не рабочая, то на страницу resend confirmation link
       if (code) {
         try {
           const res = await confirmRegistration({ confirmationCode: code as string });

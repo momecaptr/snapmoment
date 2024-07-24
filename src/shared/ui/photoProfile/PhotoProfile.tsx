@@ -8,7 +8,7 @@ import s from './PhotoProfile.module.scss';
 type Props = {
   className?: string;
 };
-const PhotoProfile = (props: Props) => {
+export const PhotoProfile = (props: Props) => {
   const { className } = props;
 
   return (
@@ -17,5 +17,3 @@ const PhotoProfile = (props: Props) => {
     </div>
   );
 };
-
-export default PhotoProfile;

@@ -1,4 +1,4 @@
-import { useGoogleOAuthMutation } from '@/myApp/api/snapmomentAPI';
+import { useGoogleOAuthMutation } from '@/shared/api';
 import { useGoogleLogin } from '@react-oauth/google';
 
 export const useAuthGoogle = () => {

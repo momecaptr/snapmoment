@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form';
 
 import { useAlert } from '@/entities';
-import { SignUpSchemaType, signUpSchema } from '@/features';
-import { QueryError } from '@/myApp/api/api.types';
-import { useRegistrationMutation } from '@/myApp/api/snapmomentAPI';
+import { QueryError, useRegistrationMutation } from '@/shared/api';
+import { SignUpSchemaType, signUpSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useSignUpForm = () => {

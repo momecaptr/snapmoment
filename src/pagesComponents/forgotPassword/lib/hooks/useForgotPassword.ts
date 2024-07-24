@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/features';
 import { appSlice } from '@/myApp/model/appSlice';
 import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
+import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const useForgotPassword = () => {
