@@ -1,6 +1,6 @@
 import { alertSlice } from '@/entities/alert/model/alertSlice';
 import { appSlice } from '@/myApp/model/appSlice';
-import { snapmomentAPI } from '@/shared/api';
+import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 

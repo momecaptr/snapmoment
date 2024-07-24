@@ -1,5 +1,5 @@
 import { GoogleOAuthQuery, QueryError, RegistrationConfirmationQuery, RegistrationType } from '@/shared/api';
-import { snapmomentAPI } from '@/shared/api';
+import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 
 export const authApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
