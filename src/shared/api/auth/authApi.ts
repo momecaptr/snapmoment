@@ -14,7 +14,6 @@ export const authApi = snapmomentAPI.injectEndpoints({
         };
       }
     }),
-    // googleOAuth: builder.mutation<AuthMeGoogleResponse, {code: string}>({
     googleOAuth: builder.mutation<void, GoogleOAuthQuery>({
       query: (code) => ({
         body: code,

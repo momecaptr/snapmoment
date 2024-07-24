@@ -79,10 +79,6 @@ export const signUpSchema = z
     message: errorMessages.passwordMismatch,
     path: ['confirmPassword']
   });
-// .refine((data) => data.agreementPolicyStatus, {
-//   message: 'You must agree to remember your login',
-//   path: ['agreementPolicyStatus']
-// });
 
 // Типы данных
 export type SignUpSchemaType = z.infer<typeof signUpSchema>;

@@ -1,4 +1,3 @@
-// components/GoogleAuthButton.js
 import React from 'react';
 
 import GitHub from '@/../public/assets/components/GithubSvgrepoCom';

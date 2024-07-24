@@ -21,7 +21,6 @@ export const useCreateNewPassword = () => {
     control,
     errors,
     handleSubmit,
-    // isLoading,
     isValid,
     onSubmit
   };
