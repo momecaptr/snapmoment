@@ -13,9 +13,10 @@ const GoogleLoginButton = () => {
   //   console.error('Login failed');
   // };
   const login = useGoogleLogin({
+    flow: 'auth-code',
     onSuccess: (tokenResponse) => {
       console.log(tokenResponse);
-      setFavoriteDeck({ code: tokenResponse.access_token });
+      setFavoriteDeck({ code: tokenResponse.code });
     }
   });
 
@@ -23,3 +24,12 @@ const GoogleLoginButton = () => {
 };
 
 export default GoogleLoginButton;
+
+// const login = (): void => {
+// const CLIENT_ID = '535513477329-m3nj9m45g3r0sm8kdh5i8c5jkjs88f0.apps.googleusercontent.com'
+// const REDIRECT_URL = 'http://localhost:3001/oauth-callback-google'// любой на ваш клиент
+// const scope = 'email profile'; // данные которые мы запрашиваем
+// const url = `https://accounts.google.com/o/oauth2/v2/auth?
+//  scope=${scope}&response_type=code&redirect_uri=${REDIRECT_URL}&client_id=${CLIENT_ID}`;
+// window.location.assign(url);
+// }

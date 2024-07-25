@@ -4,10 +4,8 @@ import { Input, InputProps } from '@/shared/ui';
 
 export type ControlledInputProps<TFieldValues extends FieldValues> = {
   className?: string;
-} & {
-  currentValue?: TFieldValues[Extract<keyof TFieldValues, string>];
 } & Omit<InputProps, 'onChange' | 'value'> &
-  Omit<UseControllerProps<TFieldValues>, 'defaultValue' | 'disabled' | 'rules'>;
+  Omit<UseControllerProps<TFieldValues>, 'disabled' | 'rules'>;
 
 export const FormTextfield = <TFieldValues extends FieldValues>({
   control,
@@ -19,8 +17,6 @@ export const FormTextfield = <TFieldValues extends FieldValues>({
     fieldState: { error }
   } = useController<TFieldValues>({
     control,
-    defaultValue: rest.currentValue,
-    disabled: rest.disabled,
     name,
     shouldUnregister: true
   });

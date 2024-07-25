@@ -1,3 +1,14 @@
+export interface GetPostsResponse {
+  items: Item[];
+  pageSize: number;
+  totalCount: number;
+  totalUsers: number;
+}
+
+export interface GetPostsArgs {
+  pageSize: number;
+}
+
 interface Image {
   createdAt: string;
   fileSize: number;
@@ -23,10 +34,4 @@ interface Item {
   ownerId: number;
   updatedAt: string;
   userName: string;
-}
-export interface GetPostsResponse {
-  items: Item[];
-  pageSize: number;
-  totalCount: number;
-  totalUsers: number;
 }

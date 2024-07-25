@@ -12,16 +12,16 @@ import s from './Input.module.scss';
 
 export type InputProps = {
   callback?: (text: string) => void;
-  currentValue?: string;
   error?: string | undefined;
   label?: string;
 } & ComponentPropsWithoutRef<'input'>;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps, ref) => {
-  const { callback, className, currentValue, error, id, label, placeholder, type, ...restProps } = props;
+  const { callback, className, error, id, label, placeholder, type, value, ...restProps } = props;
   const generatedId = useAutoId(id);
   const [isShow, setIsShow] = useState(false);
-  const [inputValue, setInputValue] = useState(currentValue || '');
+
+  const [inputValue, setInputValue] = useState<string>(value ? `${value}` : '');
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     props.onChange?.(e);
@@ -41,8 +41,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
   };
 
   useEffect(() => {
-    props.currentValue === '' && setInputValue('');
-  }, [props.currentValue]);
+    value ? setInputValue(`${value}`) : setInputValue('');
+  }, [value]);
 
   const isShowChangeHandler = () => {
     setIsShow(!isShow);

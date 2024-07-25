@@ -1,24 +1,16 @@
-import { GetPostsResponse } from '@/myApp/api/inctagramTypes';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjc1OSwiaWF0IjoxNzIxODk4NTM2LCJleHAiOjE3MjE5MDIxMzZ9.H6oCt8-r-Zihi1iWuLzWI8oSIvqjkwgNqUMmmVfxYeM';
+
 export const inctagramApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://inctagram.work/api' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://inctagram.work/api',
+    prepareHeaders: (headers) => headers.set('Authorization', `Bearer ${token}`)
+  }),
   endpoints: (builder) => ({
-    getPublicPosts: builder.query<GetPostsResponse, void>({
-      query: () => {
-        return {
-          params: {
-            sortBy: 'createdAt',
-            sortDirection: 'desc'
-          },
-          url: '/v1/public-posts/all'
-        };
-      }
-    }),
     googleOAuth2: builder.mutation<void, { code: string }>({
       query: (code) => {
-        console.log(code);
-
         return {
           body: code,
           method: 'POST',
@@ -27,7 +19,8 @@ export const inctagramApi = createApi({
       }
     })
   }),
-  reducerPath: 'inctagramApi'
+  reducerPath: 'inctagramApi',
+  tagTypes: ['UserProfile']
 });
 
-export const { useGetPublicPostsQuery, useGoogleOAuth2Mutation } = inctagramApi;
+export const { useGoogleOAuth2Mutation } = inctagramApi;
