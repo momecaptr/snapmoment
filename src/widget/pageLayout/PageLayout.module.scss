@@ -4,6 +4,12 @@
   height: 100vh;
 }
 
+.publicLayout {
+  display: grid;
+  grid-template: 'header header' auto 'content content' 1fr / 1fr;
+  height: 100vh;
+}
+
 .header {
   grid-area: header;
 }

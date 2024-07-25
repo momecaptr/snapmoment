@@ -8,7 +8,8 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
-import { Typography } from '@/shared/ui';
+import { useLogoutMutation } from '@/shared/api';
+import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Link from 'next/link';
 
@@ -49,6 +50,7 @@ type MainLinksName =
   | 'Statistics';
 
 export const SideBar = () => {
+  const [logout] = useLogoutMutation();
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
 
   const mainLinks: MainLinksProps[] = [
@@ -58,8 +60,7 @@ export const SideBar = () => {
     { IconComponent: MessageCircle, name: 'Sign Up', path: '/sign-up', value: 'message' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
-    { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' },
-    { IconComponent: LogOutOutline, name: 'Log Out', path: '/logout', value: 'logout' }
+    { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' }
   ];
 
   return (
@@ -75,6 +76,10 @@ export const SideBar = () => {
             </Typography>
           </Link>
         ))}
+        <Button className={s.btn} onClick={(e) => logout()} variant={'text'}>
+          <LogOutOutline className={s.icon} />
+          Log out
+        </Button>
       </div>
     </div>
   );

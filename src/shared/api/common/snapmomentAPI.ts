@@ -3,5 +3,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 export const snapmomentAPI = createApi({
   baseQuery: baseQueryWithReauth,
-  endpoints: () => ({})
+  endpoints: () => ({}),
+  tagTypes: ['Me']
 });
