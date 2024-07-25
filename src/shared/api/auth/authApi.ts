@@ -1,4 +1,4 @@
-import { BaseResponseType, GoogleOAuthQuery, RegistrationType } from '@/shared/api';
+import { BaseResponseType, GoogleOAuthQuery, LoginQuery, RegistrationType } from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 
 export const authApi = snapmomentAPI.injectEndpoints({
@@ -20,6 +20,29 @@ export const authApi = snapmomentAPI.injectEndpoints({
         url: 'v1/auth/google/login'
       })
     }),
+    login: builder.mutation<{ accessToken: string }, LoginQuery>({
+      invalidatesTags: ['Me'],
+      query: (data) => {
+        return {
+          body: data,
+          method: 'POST',
+          url: 'v1/auth/login'
+        };
+      }
+    }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        method: 'POST',
+        url: 'v1/auth/logout'
+      })
+    }),
+    me: builder.query<void, void>({
+      providesTags: ['Me'],
+      query: () => ({
+        method: 'GET',
+        url: 'v1/auth/me'
+      })
+    }),
     registration: builder.mutation<BaseResponseType | void, RegistrationType>({
       query: (data) => ({
         body: data,
@@ -33,4 +56,11 @@ export const authApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { useConfirmRegistrationMutation, useGoogleOAuthMutation, useRegistrationMutation } = authApi;
+export const {
+  useConfirmRegistrationMutation,
+  useGoogleOAuthMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useMeQuery,
+  useRegistrationMutation
+} = authApi;

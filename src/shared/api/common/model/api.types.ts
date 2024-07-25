@@ -10,6 +10,8 @@ export interface RegistrationType {
   userName: string;
 }
 
+export interface LoginQuery extends Omit<RegistrationType, 'baseUrl' | 'userName'> {}
+
 export interface GoogleOAuthQuery {
   code: string;
 }
