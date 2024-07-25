@@ -1,13 +1,10 @@
 import React from 'react';
 
 import TimeManagement from '@/../public/assets/components/TimeManagement';
-import { useConfirmRegistration } from '@/pagesComponents';
 import { Button, Typography } from '@/shared/ui';
 
 import s from './ResendVerificationLink.module.scss';
 export const ResendVerificationLink = () => {
-  useConfirmRegistration();
-
   return (
     <div>
       <Typography as={'h1'} className={s.title} variant={'h1'}>

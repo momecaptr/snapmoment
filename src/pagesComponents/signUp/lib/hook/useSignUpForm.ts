@@ -21,7 +21,6 @@ export const useSignUpForm = () => {
   const onSubmit = async (data: SignUpSchemaType) => {
     const res = await register({ email: data.email, password: data.password, userName: data.username });
 
-    console.log(res);
     try {
       if ('data' in res) {
         successAlert({ message: `We have sent a link to confirm your email to ${data.email}` });
