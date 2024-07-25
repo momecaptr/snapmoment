@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { useAlert } from '@/entities';
-import { QueryError, useRegistrationMutation } from '@/shared/api';
+import { BaseResponseType, useRegistrationMutation } from '@/shared/api';
 import { SignUpSchemaType, signUpSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -21,11 +21,12 @@ export const useSignUpForm = () => {
   const onSubmit = async (data: SignUpSchemaType) => {
     const res = await register({ email: data.email, password: data.password, userName: data.username });
 
+    console.log(res);
     try {
       if ('data' in res) {
         successAlert({ message: `We have sent a link to confirm your email to ${data.email}` });
       } else {
-        const err = res.error as QueryError;
+        const err = res.error as BaseResponseType;
 
         errorAlert({ message: `Error - ${err.messages[0].message || 'unknown issue'}` });
       }

@@ -18,7 +18,7 @@ export interface RegistrationConfirmationQuery {
   confirmationCode: string;
 }
 
-export interface QueryError {
+export interface BaseResponseType {
   error: string;
   messages: Message[];
   statusCode: number;
