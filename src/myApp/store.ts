@@ -1,4 +1,5 @@
 import { alertSlice } from '@/entities/alert/model/alertSlice';
+import { resendVerifyLinkSlice } from '@/features/reSendConfirmationLink/model/resendVerifySlice';
 import { appSlice } from '@/myApp/model/appSlice';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import { configureStore } from '@reduxjs/toolkit';
@@ -10,9 +11,14 @@ const makeStore = () =>
     reducer: {
       alertSlice,
       app: appSlice.reducer,
+      resendVerifyLinkSlice,
       [snapmomentAPI.reducerPath]: snapmomentAPI.reducer
     }
   });
+
+// store.subscribe(() => {
+//   saveStateToCookies(store.getState());
+// });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
