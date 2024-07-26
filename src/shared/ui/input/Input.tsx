@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react';
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useState } from 'react';
 
 import EyeOff from '@/../public/assets/components/EyeOff'; //'@/assets/icons/svg/EyeOff'
 import Close from '@/../public/assets/components/Close';
@@ -40,9 +40,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
     inputElement?.focus();
   };
 
-  // useEffect(() => {
-  //   props.currentValue === '' && setInputValue('');
-  // }, [props.currentValue]);
+  useEffect(() => {
+    props.currentValue === '' && setInputValue('');
+  }, [props.currentValue]);
 
   const isShowChangeHandler = () => {
     setIsShow(!isShow);
