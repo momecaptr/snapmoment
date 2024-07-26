@@ -30,3 +30,9 @@ export interface Message {
   field: string;
   message: string;
 }
+
+export type RecoveryPasswordResponse = {
+  baseUrl?: string;
+  email: string;
+  recaptcha: string;
+};

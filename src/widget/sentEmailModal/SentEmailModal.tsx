@@ -5,13 +5,13 @@ import { Button, Modal, Typography } from '@/shared/ui';
 import s from './SentEmailModal.module.scss';
 
 type Props = {
+  email: string;
   open: boolean;
   setOpen: (value: boolean) => void;
 };
 
-export const SentEmailModal = memo(({ open, setOpen }: Props) => {
+export const SentEmailModal = memo(({ email, open, setOpen }: Props) => {
   const handleOnClose = () => {
-    // router.navigate(path.login)
     setOpen(false);
   };
 
@@ -24,8 +24,7 @@ export const SentEmailModal = memo(({ open, setOpen }: Props) => {
               We have sent a link to confirm your email to
             </Typography>{' '}
             <Typography as={'span'} className={s.text} variant={'regular_text_16'}>
-              epam@epam.com
-              {/*{email} вместо epam@epam.com*/}
+              {email}
             </Typography>
           </div>
           <Button className={s.btn} onClick={handleOnClose}>
