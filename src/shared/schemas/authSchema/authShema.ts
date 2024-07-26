@@ -14,6 +14,7 @@ const errorMessages = {
   passwordNumber: 'Password must contain at least one number',
   passwordSpecialChar: 'Password must contain at least one special character',
   passwordUppercase: 'Password must contain at least one uppercase letter',
+  reCaptchaRequired: 'ReCaptcha required',
   required: 'Required',
   usernameMaxLength: 'Maximum number of characters is 30'
 };
@@ -45,6 +46,8 @@ const commonUsernameRules = z
   .max(30, { message: errorMessages.usernameMaxLength })
   .regex(/^[a-zA-Z0-9_]*$/, { message: errorMessages.invalidUsernameCharacters });
 
+const commonReCaptchaRules = z.string().min(1, { message: errorMessages.reCaptchaRequired });
+
 // Схемы валидации
 export const createNewPasswordSchema = z
   .object({
@@ -57,7 +60,8 @@ export const createNewPasswordSchema = z
   });
 
 export const forgotPasswordSchema = z.object({
-  email: commonEmailRules
+  email: commonEmailRules,
+  recaptcha: commonReCaptchaRules
 });
 
 export const signInSchema = z.object({
