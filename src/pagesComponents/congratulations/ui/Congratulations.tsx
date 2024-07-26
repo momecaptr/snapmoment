@@ -1,14 +1,11 @@
 import React from 'react';
 
 import Girl from '@/../public/assets/components/GirlDefault';
-import { useConfirmRegistration } from '@/pagesComponents';
 import { Button, Typography } from '@/shared/ui';
 import Link from 'next/link';
 
 import s from '@/pagesComponents/congratulations/ui/Congratulation.module.scss';
 export const Congratulations = () => {
-  useConfirmRegistration();
-
   return (
     <div>
       <Typography as={'h1'} className={s.title} variant={'h1'}>

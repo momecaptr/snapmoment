@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
 
+import { useLoginMutation } from '@/shared/api';
 import { SignInSchemaType, signInSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 
 export const useSignInForm = () => {
   const {
@@ -9,11 +11,18 @@ export const useSignInForm = () => {
     formState: { errors, isValid },
     handleSubmit
   } = useForm<SignInSchemaType>({
-    /*mode: 'onBlur',*/
+    mode: 'onChange',
     resolver: zodResolver(signInSchema)
   });
+  const router = useRouter();
 
-  const onSubmit = (data: SignInSchemaType) => console.log(data);
+  const [login, { isError, isSuccess }] = useLoginMutation();
+  const onSubmit = (data: SignInSchemaType) => {
+    login(data).then((res) => localStorage.setItem('accessToken', JSON.stringify(res.data?.accessToken)));
+    if (isSuccess) {
+      router.push('/');
+    }
+  };
 
   return {
     control,
