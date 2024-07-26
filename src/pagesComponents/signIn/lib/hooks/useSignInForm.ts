@@ -4,6 +4,7 @@ import { useLoginMutation } from '@/shared/api';
 import { SignInSchemaType, signInSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export const useSignInForm = () => {
   const {
@@ -17,10 +18,17 @@ export const useSignInForm = () => {
   const router = useRouter();
 
   const [login, { isError, isSuccess }] = useLoginMutation();
-  const onSubmit = (data: SignInSchemaType) => {
-    login(data).then((res) => localStorage.setItem('accessToken', JSON.stringify(res.data?.accessToken)));
-    if (isSuccess) {
+  const onSubmit = async (data: SignInSchemaType) => {
+    // login(data).then((res) => localStorage.setItem('accessToken', JSON.stringify(res.data?.accessToken)));
+    // if (isSuccess) {
+    //   router.push('/');
+    // }
+    const res = await signIn('credentials', { email: data.email, password: data.password, redirect: false });
+
+    if (res && !res.error) {
       router.push('/');
+    } else {
+      console.log(res);
     }
   };
 

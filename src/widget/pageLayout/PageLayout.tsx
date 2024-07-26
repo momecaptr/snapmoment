@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { useMeQuery } from '@/shared/api';
 import { Header, SideBar } from '@/widget';
 import { clsx } from 'clsx';
+import { useSession } from 'next-auth/react';
 
 import s from './PageLayout.module.scss';
 
@@ -15,6 +16,10 @@ export const PageLayout = (props: Props) => {
   const me = useMeQuery();
 
   console.log({ me });
+
+  const session = useSession();
+
+  console.log({ session });
 
   return (
     <main className={clsx(me ? s.layout : s.publicLayout)}>
