@@ -1,4 +1,10 @@
-import { BaseResponseType, GoogleOAuthQuery, LoginQuery, RegistrationType } from '@/shared/api';
+import {
+  BaseResponseType,
+  GoogleOAuthQuery,
+  LoginQuery,
+  RecoveryPasswordResponse,
+  RegistrationType
+} from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 
 export const authApi = snapmomentAPI.injectEndpoints({
@@ -43,6 +49,13 @@ export const authApi = snapmomentAPI.injectEndpoints({
         url: 'v1/auth/me'
       })
     }),
+    passwordRecovery: builder.mutation<void, RecoveryPasswordResponse>({
+      query: (body) => ({
+        body,
+        method: 'POST',
+        url: 'v1/auth/password-recovery'
+      })
+    }),
     registration: builder.mutation<BaseResponseType | void, RegistrationType>({
       query: (data) => ({
         body: data,
@@ -62,5 +75,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  usePasswordRecoveryMutation,
   useRegistrationMutation
 } = authApi;
