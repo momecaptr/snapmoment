@@ -1,18 +1,18 @@
 import React from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
 
-import { SentEmailModal, useForgotPassword } from '@/pagesComponents';
+import { ReCaptcha } from '@/features/reCaptcha/ReCaptcha';
+import { SentEmailModal, usePasswordRecovery } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import Link from 'next/link';
 
-import s from './ForgotPassword.module.scss';
+import s from './PasswordRecovery.module.scss';
 
-export const ForgotPassword = () => {
-  const { control, handleCaptchaChange, handleSubmit, isOpen, isValid, onSubmit, setOpen } = useForgotPassword();
+export const PasswordRecovery = () => {
+  const { control, emailValue, handleSubmit, isOpen, isValid, onSubmit, setOpen } = usePasswordRecovery();
 
   return (
     <>
-      <SentEmailModal open={isOpen} setOpen={setOpen} />
+      <SentEmailModal email={emailValue} open={isOpen} setOpen={setOpen} />
       <div className={s.container}>
         <Card>
           <section className={s.content}>
@@ -39,31 +39,11 @@ export const ForgotPassword = () => {
             <Typography as={Link} className={s.backSignIn} href={'/sign-in'} variant={'h3'}>
               Back to Sign In
             </Typography>
-            {/*<Controller*/}
-            {/*  render={({ onChange }: FieldValues) => (*/}
-            {/*    <ReCAPTCHA*/}
-            {/*      onChange={(value) => {*/}
-            {/*        handleCaptchaChange(value);*/}
-            {/*        onChange(value);*/}
-            {/*      }}*/}
-            {/*      sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}*/}
-            {/*      theme={'dark'}*/}
-            {/*    />*/}
-            {/*  )}*/}
-            {/*  control={control}*/}
-            {/*  name={'recaptcha'}*/}
-            {/*/>*/}
 
-            <ReCAPTCHA
-              onChange={(value) => {
-                handleCaptchaChange(value);
-              }}
-              sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
-              theme={'dark'}
-            />
+            <ReCaptcha control={control} />
           </section>
         </Card>
-      </div>{' '}
+      </div>
     </>
   );
 };
