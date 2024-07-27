@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useLoginMutation } from '@/shared/api';
 import { SignInSchemaType, signInSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 
 export const useSignInForm = () => {
   const {
@@ -14,20 +13,18 @@ export const useSignInForm = () => {
     mode: 'onChange',
     resolver: zodResolver(signInSchema)
   });
-  const router = useRouter();
 
-  const [login, { isError, isSuccess }] = useLoginMutation();
+  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
   const onSubmit = (data: SignInSchemaType) => {
-    login(data).then((res) => localStorage.setItem('accessToken', JSON.stringify(res.data?.accessToken)));
-    if (isSuccess) {
-      router.push('/');
-    }
+    login(data).then((res) => localStorage.setItem('accessToken', String(res.data?.accessToken)));
   };
 
   return {
     control,
     errors,
     handleSubmit,
+    isLoading,
+    isSuccess,
     isValid,
     onSubmit
   };

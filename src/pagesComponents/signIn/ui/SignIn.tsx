@@ -4,11 +4,20 @@ import { useSignInForm } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { HeadSignInAndSignUp } from '@/widget';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import s from './SignIn.module.scss';
 
 export const SignIn = () => {
-  const { control, errors, handleSubmit, isValid, onSubmit } = useSignInForm();
+  const { control, errors, handleSubmit, isLoading, isSuccess, isValid, onSubmit } = useSignInForm();
+  const router = useRouter();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isSuccess) {
+    router.push('/');
+  }
 
   return (
     <div className={s.wrapper}>

@@ -76,7 +76,15 @@ export const SideBar = () => {
             </Typography>
           </Link>
         ))}
-        <Button className={s.btn} onClick={(e) => logout()} variant={'text'}>
+        <Button
+          onClick={(e) => {
+            logout().then(() => {
+              localStorage.removeItem('accessToken');
+            });
+          }}
+          className={s.btn}
+          variant={'text'}
+        >
           <LogOutOutline className={s.icon} />
           Log out
         </Button>

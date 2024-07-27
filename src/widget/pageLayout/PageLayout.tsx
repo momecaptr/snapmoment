@@ -12,16 +12,17 @@ type Props = {
 
 export const PageLayout = (props: Props) => {
   const { children } = props;
-  const me = useMeQuery();
+
+  const { data: me, isFetching } = useMeQuery();
 
   console.log({ me });
 
   return (
     <main className={clsx(me ? s.layout : s.publicLayout)}>
       <div className={s.header}>
-        <Header isAuthorized={false} />
+        <Header isAuthorized={!!me} />
       </div>
-      {me && (
+      {me! && (
         <div className={s.sidebar}>
           <SideBar />
         </div>
