@@ -3,20 +3,24 @@ export interface AuthMeGoogleResponse {
   email: string;
 }
 
-export interface RegistrationType {
+export interface RegistrationArgs {
   baseUrl?: string;
   email: string;
   password: string;
   userName: string;
 }
 
-export interface LoginQuery extends Omit<RegistrationType, 'baseUrl' | 'userName'> {}
+export interface LoginArgs extends Omit<RegistrationArgs, 'baseUrl' | 'userName'> {}
 
-export interface GoogleOAuthQuery {
+export interface LoginResponse {
+  accessToken: string;
+}
+
+export interface GoogleOAuthArgs {
   code: string;
 }
 
-export interface RegistrationConfirmationQuery {
+export interface RegistrationConfirmationArgs {
   confirmationCode: string;
 }
 
@@ -75,4 +79,9 @@ export interface Image {
   uploadId: string;
   url: string;
   width: number;
+}
+
+export interface ResendEmailArgs {
+  baseUrl: string;
+  email: string;
 }
