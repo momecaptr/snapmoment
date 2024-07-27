@@ -39,3 +39,9 @@ export interface ResendEmailArgs {
   baseUrl: string;
   email: string;
 }
+
+export type RecoveryPasswordResponse = {
+  baseUrl?: string;
+  email: string;
+  recaptcha: string;
+};

@@ -25,12 +25,12 @@ type MainLinksProps = {
 type LinksValue =
   | ''
   | 'favorites'
-  | 'forgot-password'
   | 'home'
   | 'logout'
   | 'message'
   | 'person'
   | 'plus'
+  | 'recovery-password'
   | 'search'
   | 'sign-in'
   | 'sign-up'
@@ -39,11 +39,11 @@ type LinksValue =
 type MainLinksName =
   | 'Create'
   | 'Favorites'
-  | 'Forgot Password'
   | 'Home'
   | 'Log Out'
   | 'Messenger'
   | 'My Profile'
+  | 'Recovery Password'
   | 'Search'
   | 'Sign Up'
   | 'Sign in'
@@ -56,7 +56,7 @@ export const SideBar = () => {
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
     { IconComponent: PlusSquare, name: 'Sign in', path: '/sign-in', value: 'plus' },
-    { IconComponent: Person, name: 'Forgot Password', path: '/forgot-password', value: 'person' },
+    { IconComponent: Person, name: 'Recovery Password', path: '/password-recovery', value: 'person' },
     { IconComponent: MessageCircle, name: 'Sign Up', path: '/sign-up', value: 'message' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
