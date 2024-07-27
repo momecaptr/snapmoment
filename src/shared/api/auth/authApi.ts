@@ -1,9 +1,17 @@
-import { BaseResponseType, GoogleOAuthQuery, LoginQuery, RegistrationType } from '@/shared/api';
+import {
+  BaseResponseType,
+  GoogleOAuthArgs,
+  LoginArgs,
+  LoginResponse,
+  RegistrationArgs,
+  RegistrationConfirmationArgs,
+  ResendEmailArgs
+} from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 
 export const authApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
-    confirmRegistration: builder.mutation<void, { confirmationCode: string }>({
+    confirmRegistration: builder.mutation<void, RegistrationConfirmationArgs>({
       query: (data) => ({
         body: data,
         method: 'POST',
@@ -13,14 +21,14 @@ export const authApi = snapmomentAPI.injectEndpoints({
         return res.data;
       }
     }),
-    googleOAuth: builder.mutation<void, GoogleOAuthQuery>({
+    googleOAuth: builder.mutation<void, GoogleOAuthArgs>({
       query: (code) => ({
         body: code,
         method: 'POST',
         url: 'v1/auth/google/login'
       })
     }),
-    login: builder.mutation<{ accessToken: string }, LoginQuery>({
+    login: builder.mutation<LoginResponse, LoginArgs>({
       invalidatesTags: ['Me'],
       query: (data) => {
         return {
@@ -43,11 +51,21 @@ export const authApi = snapmomentAPI.injectEndpoints({
         url: 'v1/auth/me'
       })
     }),
-    registration: builder.mutation<BaseResponseType | void, RegistrationType>({
+    registration: builder.mutation<BaseResponseType | void, RegistrationArgs>({
       query: (data) => ({
         body: data,
         method: 'POST',
         url: 'v1/auth/registration'
+      }),
+      transformErrorResponse: (res: { data: BaseResponseType; status: number }) => {
+        return res.data;
+      }
+    }),
+    resendEmail: builder.mutation<void, ResendEmailArgs>({
+      query: (data) => ({
+        body: data,
+        method: 'POST',
+        url: 'v1/auth/registration-email-resending'
       }),
       transformErrorResponse: (res: { data: BaseResponseType; status: number }) => {
         return res.data;
@@ -62,5 +80,6 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
-  useRegistrationMutation
+  useRegistrationMutation,
+  useResendEmailMutation
 } = authApi;
