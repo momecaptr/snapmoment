@@ -28,7 +28,7 @@ export const Header = () => {
           <SnapMomentLogo className={s.logo} />
         </div>
         <div className={s.itemsWrapper}>
-          {me! && <Outlinebell className={s.bell} />}
+          {me ?? <Outlinebell className={s.bell} />}
           <LocaleSwitcher />
           {!me && (
             <>
