@@ -12,6 +12,7 @@ import { useLogoutMutation } from '@/shared/api';
 import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import s from './SideBar.module.scss';
 
@@ -54,6 +55,7 @@ type MainLinksName =
 export const SideBar = () => {
   const [logout] = useLogoutMutation();
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
+  const router = useRouter();
 
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
@@ -81,9 +83,12 @@ export const SideBar = () => {
         ))}
         <Button
           onClick={(e) => {
-            logout().then(() => {
-              localStorage.removeItem('accessToken');
-            });
+            logout()
+              .unwrap()
+              .then(() => {
+                router.push('/sign-in');
+              });
+            localStorage.removeItem('accessToken');
           }}
           className={s.btn}
           variant={'text'}

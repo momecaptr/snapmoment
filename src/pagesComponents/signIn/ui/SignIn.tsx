@@ -16,7 +16,7 @@ export const SignIn = () => {
     return <div>Loading...</div>;
   }
   if (isSuccess) {
-    router.push('/');
+    router.push('/profile');
   }
 
   return (

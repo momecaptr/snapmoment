@@ -15,6 +15,10 @@ export const PageLayout = (props: Props) => {
 
   const { data: me, isFetching } = useMeQuery();
 
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
   console.log({ me });
 
   return (
