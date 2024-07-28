@@ -40,7 +40,35 @@ export const authApi = snapmomentAPI.injectEndpoints({
       }
     }),
     logout: builder.mutation<void, void>({
-      query: () => ({
+      invalidatesTags: ['Me'],
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        // await queryFulfilled
+        // localStorage.removeItem('accessToken')
+        // dispatch(authApi.util.resetApiState())
+        const res = dispatch(
+          authApi.util.updateQueryData('me', undefined, () => {
+            return null;
+          })
+        );
+
+        try {
+          console.log('successQueryFulfilled');
+          try {
+            const rr = await queryFulfilled;
+
+            console.log({ rr });
+          } catch {
+            console.log('successQueryFulfilled FAILED');
+          }
+        } catch {
+          console.log('failedQueryFulfilled');
+          res.undo();
+        } finally {
+          // localStorage.removeItem('accessToken')
+        }
+      },
+      query: (body) => ({
+        body,
         method: 'POST',
         url: 'v1/auth/logout'
       })

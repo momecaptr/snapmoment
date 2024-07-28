@@ -14,20 +14,21 @@ export const useSignInForm = () => {
     mode: 'onChange',
     resolver: zodResolver(signInSchema)
   });
+
   const router = useRouter();
 
-  const [login, { isError, isSuccess }] = useLoginMutation();
+  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
+
   const onSubmit = (data: SignInSchemaType) => {
-    login(data).then((res) => localStorage.setItem('accessToken', JSON.stringify(res.data?.accessToken)));
-    if (isSuccess) {
-      router.push('/');
-    }
+    login(data).then((res) => localStorage.setItem('accessToken', String(res.data?.accessToken)));
+    router.push('/profile');
   };
 
   return {
     control,
     errors,
     handleSubmit,
+    isLoading,
     isValid,
     onSubmit
   };

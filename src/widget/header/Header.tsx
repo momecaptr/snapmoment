@@ -3,15 +3,23 @@ import React from 'react';
 import { Outlinebell } from '@/../public/assets/components';
 import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
 import { LocaleSwitcher } from '@/features';
+import { useMeQuery } from '@/shared/api';
 import { Button } from '@/shared/ui';
+import { useRouter } from 'next/router';
 
 import s from './Header.module.scss';
 
-type HeaderProps = {
-  isAuthorized: boolean;
-};
-export const Header = (props: HeaderProps) => {
-  const { isAuthorized } = props;
+export const Header = () => {
+  const { data: me, isFetching, isSuccess } = useMeQuery();
+  const router = useRouter();
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  console.log({ me });
+
+  console.log(router.pathname.includes('sign-in'));
 
   return (
     <div className={s.header}>
@@ -20,14 +28,16 @@ export const Header = (props: HeaderProps) => {
           <SnapMomentLogo className={s.logo} />
         </div>
         <div className={s.itemsWrapper}>
-          {isAuthorized && <Outlinebell className={s.bell} />}
+          {me ?? <Outlinebell className={s.bell} />}
           <LocaleSwitcher />
-          {!isAuthorized && (
+          {!me && (
             <>
-              <Button className={s.item} variant={'text'}>
-                Log in
-              </Button>
-              <Button className={s.item}>Sign up</Button>
+              {router.pathname.includes('sign-up') && (
+                <Button className={s.item} variant={'outlined'}>
+                  Sign in
+                </Button>
+              )}
+              {router.pathname.includes('sign-in') && <Button className={s.item}>Sign up</Button>}
             </>
           )}
         </div>

@@ -11,10 +11,10 @@ export const Privacy = (props: PrivacyProps) => {
 
   return (
     <div className={s.wrapper}>
-      <BackBtn href={'/sign-in'}>Back to Sign in</BackBtn>
+      <BackBtn href={'/auth/sign-in'}>Back to Sign in</BackBtn>
 
       {/*↑↑↑ Это нужно заменить на BackBtn ↓↓↓ и подкорректировать ArrowForwardOutline под неообходий размер*/}
-      {/*<BackBtn href={'/sign-in'}>Back to Sign in</BackBtn>*/}
+      {/*<BackBtn href={'/auth/sign-in'}>Back to Sign in</BackBtn>*/}
 
       <div className={s.box}>
         <Typography as={'h1'} className={s.title} variant={'h1'}>

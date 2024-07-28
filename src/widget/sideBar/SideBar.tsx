@@ -1,4 +1,4 @@
-import { ElementType, useState } from 'react';
+import { ComponentProps, ElementType, useState } from 'react';
 
 import Bookmark from '@/../public/assets/components/Bookmark';
 import Home from '@/../public/assets/components/Home';
@@ -12,6 +12,7 @@ import { useLogoutMutation } from '@/shared/api';
 import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import s from './SideBar.module.scss';
 
@@ -30,6 +31,7 @@ type LinksValue =
   | 'message'
   | 'person'
   | 'plus'
+  | 'profile'
   | 'recovery-password'
   | 'search'
   | 'sign-in'
@@ -37,27 +39,31 @@ type LinksValue =
   | 'statistics';
 
 type MainLinksName =
+  | '!!! Sign Up'
+  | '!!! Sign in'
   | 'Create'
   | 'Favorites'
   | 'Home'
   | 'Log Out'
   | 'Messenger'
   | 'My Profile'
+  | 'Profile'
   | 'Recovery Password'
   | 'Search'
-  | 'Sign Up'
-  | 'Sign in'
   | 'Statistics';
 
-export const SideBar = () => {
+type Props = ComponentProps<'div'>;
+export const SideBar = (props: Props) => {
   const [logout] = useLogoutMutation();
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
+  const router = useRouter();
 
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
-    { IconComponent: PlusSquare, name: 'Sign in', path: '/sign-in', value: 'plus' },
+    { IconComponent: PlusSquare, name: '!!! Sign in', path: '/auth/sign-in', value: 'plus' },
     { IconComponent: Person, name: 'Recovery Password', path: '/password-recovery', value: 'person' },
-    { IconComponent: MessageCircle, name: 'Sign Up', path: '/sign-up', value: 'message' },
+    { IconComponent: MessageCircle, name: '!!! Sign Up', path: '/auth/sign-up', value: 'message' },
+    { IconComponent: Bookmark, name: 'Profile', path: '/profile', value: 'profile' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
     { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' }
@@ -76,7 +82,18 @@ export const SideBar = () => {
             </Typography>
           </Link>
         ))}
-        <Button className={s.btn} onClick={(e) => logout()} variant={'text'}>
+        <Button
+          onClick={(e) => {
+            logout()
+              .unwrap()
+              .then(() => {
+                router.push('/auth/sign-in');
+              });
+            localStorage.removeItem('accessToken');
+          }}
+          className={s.btn}
+          variant={'text'}
+        >
           <LogOutOutline className={s.icon} />
           Log out
         </Button>
