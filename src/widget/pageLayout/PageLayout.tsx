@@ -13,7 +13,7 @@ type Props = {
 export const PageLayout = (props: Props) => {
   const { children } = props;
 
-  const { data: me, isFetching } = useMeQuery();
+  const { data: me, isFetching, isSuccess } = useMeQuery();
 
   if (isFetching) {
     return <div>Loading...</div>;
@@ -26,7 +26,7 @@ export const PageLayout = (props: Props) => {
       <div className={s.header}>
         <Header isAuthorized={!!me} />
       </div>
-      {me! && (
+      {isSuccess && (
         <div className={s.sidebar}>
           <SideBar />
         </div>

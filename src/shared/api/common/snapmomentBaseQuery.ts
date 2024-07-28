@@ -55,6 +55,7 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
             if (refreshResult.meta.response.status === 200) {
               localStorage.setItem('accessToken', refreshResultParsed.accessToken);
               result = await baseQuery(args, api, extraOptions);
+              console.log(args);
             }
           }
           // const refreshResult = await baseQuery(
