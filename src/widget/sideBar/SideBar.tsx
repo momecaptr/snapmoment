@@ -1,4 +1,4 @@
-import { ElementType, useState } from 'react';
+import { ComponentProps, ElementType, useState } from 'react';
 
 import Bookmark from '@/../public/assets/components/Bookmark';
 import Home from '@/../public/assets/components/Home';
@@ -39,6 +39,8 @@ type LinksValue =
   | 'statistics';
 
 type MainLinksName =
+  | '!!! Sign Up'
+  | '!!! Sign in'
   | 'Create'
   | 'Favorites'
   | 'Home'
@@ -48,20 +50,19 @@ type MainLinksName =
   | 'Profile'
   | 'Recovery Password'
   | 'Search'
-  | 'Sign Up'
-  | 'Sign in'
   | 'Statistics';
 
-export const SideBar = () => {
+type Props = ComponentProps<'div'>;
+export const SideBar = (props: Props) => {
   const [logout] = useLogoutMutation();
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
   const router = useRouter();
 
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
-    { IconComponent: PlusSquare, name: 'Sign in', path: '/sign-in', value: 'plus' },
+    { IconComponent: PlusSquare, name: '!!! Sign in', path: '/auth/sign-in', value: 'plus' },
     { IconComponent: Person, name: 'Recovery Password', path: '/password-recovery', value: 'person' },
-    { IconComponent: MessageCircle, name: 'Sign Up', path: '/sign-up', value: 'message' },
+    { IconComponent: MessageCircle, name: '!!! Sign Up', path: '/auth/sign-up', value: 'message' },
     { IconComponent: Bookmark, name: 'Profile', path: '/profile', value: 'profile' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
@@ -86,7 +87,7 @@ export const SideBar = () => {
             logout()
               .unwrap()
               .then(() => {
-                router.push('/sign-in');
+                router.push('/auth/sign-in');
               });
             localStorage.removeItem('accessToken');
           }}

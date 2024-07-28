@@ -75,7 +75,7 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
           //   result = await baseQuery(args, api, extraOptions);
           // } else {
           //   console.log('loggedOut');
-          //   Router.push('/sign-in');
+          //   Router.push('/auth/sign-in');
           // }
         } finally {
           release();

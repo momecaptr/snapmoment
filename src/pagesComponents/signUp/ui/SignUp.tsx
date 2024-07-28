@@ -78,7 +78,7 @@ export const SignUp = () => {
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          <Link className={s.signIn} href={'/sign-in'}>
+          <Link className={s.signIn} href={'/auth/sign-in'}>
             Sign In
           </Link>
         </Card>

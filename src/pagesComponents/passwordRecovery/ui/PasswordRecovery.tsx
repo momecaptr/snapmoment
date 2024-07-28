@@ -36,7 +36,7 @@ export const PasswordRecovery = () => {
               </Button>
             </form>
 
-            <Typography as={Link} className={s.backSignIn} href={'/sign-in'} variant={'h3'}>
+            <Typography as={Link} className={s.backSignIn} href={'/auth/sign-in'} variant={'h3'}>
               Back to Sign In
             </Typography>
 

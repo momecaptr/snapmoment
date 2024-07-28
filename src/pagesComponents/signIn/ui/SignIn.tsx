@@ -38,10 +38,10 @@ export const SignIn = () => {
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          {/*<Typography as={Link} className={s.signUp} href={'/sign-up'} variant={'regular_link'}>
+          {/*<Typography as={Link} className={s.signUp} href={'/auth/sign-up'} variant={'regular_link'}>
             Sign Up
           </Typography>*/}
-          <Link className={s.signUp} href={'/sign-up'}>
+          <Link className={s.signUp} href={'/auth/sign-up'}>
             Sign Up
           </Link>
         </Card>
