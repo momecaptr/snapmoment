@@ -86,7 +86,33 @@ export interface Image {
   width: number;
 }
 
-export interface ResendEmailArgs {
-  baseUrl: string;
-  email: string;
+export interface GetUserProfileResponse {
+  aboutMe: string;
+  avatars: Avatar[];
+  city: string;
+  country: string;
+  createdAt: string;
+  dateOfBirth: string;
+  firstName: string;
+  id: number;
+  lastName: string;
+  userName: string;
+}
+
+export interface Avatar {
+  createdAt: string;
+  fileSize: number;
+  height: number;
+  url: string;
+  width: number;
+}
+
+export interface UpdateUserProfileArgs {
+  aboutMe: string;
+  city: string;
+  country: string;
+  dateOfBirth: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
 }

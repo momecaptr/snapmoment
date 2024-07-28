@@ -30,6 +30,7 @@ type LinksValue =
   | 'message'
   | 'person'
   | 'plus'
+  | 'profile'
   | 'recovery-password'
   | 'search'
   | 'sign-in'
@@ -43,6 +44,7 @@ type MainLinksName =
   | 'Log Out'
   | 'Messenger'
   | 'My Profile'
+  | 'Profile'
   | 'Recovery Password'
   | 'Search'
   | 'Sign Up'
@@ -58,6 +60,7 @@ export const SideBar = () => {
     { IconComponent: PlusSquare, name: 'Sign in', path: '/sign-in', value: 'plus' },
     { IconComponent: Person, name: 'Recovery Password', path: '/password-recovery', value: 'person' },
     { IconComponent: MessageCircle, name: 'Sign Up', path: '/sign-up', value: 'message' },
+    { IconComponent: Bookmark, name: 'Profile', path: '/profile', value: 'profile' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
     { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' }
