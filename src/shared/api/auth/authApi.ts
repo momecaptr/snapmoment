@@ -3,7 +3,8 @@ import {
   GoogleOAuthArgs,
   LoginArgs,
   LoginResponse,
-  RecoveryPasswordResponse,
+  MeResponse,
+  RecoveryPasswordArgs,
   RegistrationArgs,
   RegistrationConfirmationArgs,
   ResendEmailArgs
@@ -42,30 +43,9 @@ export const authApi = snapmomentAPI.injectEndpoints({
     logout: builder.mutation<void, void>({
       invalidatesTags: ['Me'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        // await queryFulfilled
-        // localStorage.removeItem('accessToken')
-        // dispatch(authApi.util.resetApiState())
-        const res = dispatch(
-          authApi.util.updateQueryData('me', undefined, () => {
-            return null;
-          })
-        );
-
-        try {
-          console.log('successQueryFulfilled');
-          try {
-            const rr = await queryFulfilled;
-
-            console.log({ rr });
-          } catch {
-            console.log('successQueryFulfilled FAILED');
-          }
-        } catch {
-          console.log('failedQueryFulfilled');
-          res.undo();
-        } finally {
-          // localStorage.removeItem('accessToken')
-        }
+        await queryFulfilled;
+        localStorage.removeItem('accessToken');
+        dispatch(authApi.util.resetApiState());
       },
       query: (body) => ({
         body,
@@ -73,14 +53,14 @@ export const authApi = snapmomentAPI.injectEndpoints({
         url: 'v1/auth/logout'
       })
     }),
-    me: builder.query<void, void>({
+    me: builder.query<MeResponse, void>({
       providesTags: ['Me'],
       query: () => ({
         method: 'GET',
         url: 'v1/auth/me'
       })
     }),
-    passwordRecovery: builder.mutation<void, RecoveryPasswordResponse>({
+    passwordRecovery: builder.mutation<void, RecoveryPasswordArgs>({
       query: (body) => ({
         body,
         method: 'POST',
