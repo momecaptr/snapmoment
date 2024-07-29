@@ -21,8 +21,7 @@ const errorMessages = {
 
 // Общие правила для полей
 export const RefreshTokenResponseSchema = z.object({
-  accessToken: z.string(),
-  refreshToken: z.string()
+  accessToken: z.string()
 });
 
 const commonPasswordRules = z
@@ -48,6 +47,10 @@ const commonUsernameRules = z
 
 const commonReCaptchaRules = z.string().min(1, { message: errorMessages.reCaptchaRequired });
 
+const commonAgreementPolicyStatusRules = z.boolean().refine((val) => val, {
+  message: errorMessages.agreementPolicyRequired
+});
+
 // Схемы валидации
 export const createNewPasswordSchema = z
   .object({
@@ -71,9 +74,7 @@ export const signInSchema = z.object({
 
 export const signUpSchema = z
   .object({
-    agreementPolicyStatus: z.boolean().refine((val) => val, {
-      message: errorMessages.agreementPolicyRequired
-    }),
+    agreementPolicyStatus: commonAgreementPolicyStatusRules,
     confirmPassword: commonPasswordRules,
     email: commonEmailRules,
     password: commonPasswordRules,

@@ -1,6 +1,7 @@
 import {
   BaseResponseType,
   GoogleOAuthArgs,
+  GoogleOAuthResponse,
   LoginArgs,
   LoginResponse,
   MeResponse,
@@ -10,6 +11,7 @@ import {
   ResendEmailArgs
 } from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
+import { transformErrorResponse } from '@/shared/api/lib/transformErrorResponse';
 
 export const authApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,11 +21,10 @@ export const authApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: 'v1/auth/registration-confirmation'
       }),
-      transformErrorResponse: (res: { data: any; status: number }) => {
-        return res.data;
-      }
+      transformErrorResponse
     }),
-    googleOAuth: builder.mutation<void, GoogleOAuthArgs>({
+    googleOAuth: builder.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
+      invalidatesTags: ['Me'],
       query: (code) => ({
         body: code,
         method: 'POST',
@@ -41,7 +42,6 @@ export const authApi = snapmomentAPI.injectEndpoints({
       }
     }),
     logout: builder.mutation<void, void>({
-      invalidatesTags: ['Me'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         localStorage.removeItem('accessToken');
@@ -73,9 +73,7 @@ export const authApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: 'v1/auth/registration'
       }),
-      transformErrorResponse: (res: { data: BaseResponseType; status: number }) => {
-        return res.data;
-      }
+      transformErrorResponse
     }),
     resendEmail: builder.mutation<void, ResendEmailArgs>({
       query: (data) => ({
@@ -83,9 +81,7 @@ export const authApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: 'v1/auth/registration-email-resending'
       }),
-      transformErrorResponse: (res: { data: BaseResponseType; status: number }) => {
-        return res.data;
-      }
+      transformErrorResponse
     })
   })
 });

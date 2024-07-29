@@ -5,6 +5,7 @@ import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
 import { LocaleSwitcher } from '@/features';
 import { useMeQuery } from '@/shared/api';
 import { Button } from '@/shared/ui';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import s from './Header.module.scss';
@@ -12,10 +13,41 @@ import s from './Header.module.scss';
 export const Header = () => {
   const { data: me, isError, isFetching, isSuccess } = useMeQuery();
   const router = useRouter();
+  const hasUrl = (url: string) => {
+    return router.pathname.includes(url);
+  };
 
   if (isFetching) {
     return <div>Loading...</div>;
   }
+
+  const renderAuthButtons = () => {
+    if (hasUrl('sign-up')) {
+      return (
+        <Button as={Link} className={s.item} href={'/auth/sign-in'} variant={'outlined'}>
+          Sign in
+        </Button>
+      );
+    }
+    if (hasUrl('sign-in')) {
+      return (
+        <Button as={Link} className={s.item} href={'/auth/sign-up'}>
+          Sign up
+        </Button>
+      );
+    }
+
+    return (
+      <>
+        <Button as={Link} className={s.item} href={'/auth/sign-in'} variant={'outlined'}>
+          Sign in
+        </Button>
+        <Button as={Link} className={s.item} href={'/auth/sign-up'}>
+          Sign up
+        </Button>
+      </>
+    );
+  };
 
   return (
     <div className={s.header}>
@@ -26,16 +58,7 @@ export const Header = () => {
         <div className={s.itemsWrapper}>
           {me && <Outlinebell className={s.bell} />}
           <LocaleSwitcher />
-          {!me && (
-            <>
-              {router.pathname.includes('sign-up') && (
-                <Button className={s.item} variant={'outlined'}>
-                  Sign in
-                </Button>
-              )}
-              {router.pathname.includes('sign-in') && <Button className={s.item}>Sign up</Button>}
-            </>
-          )}
+          {!me && renderAuthButtons()}
         </div>
       </div>
     </div>
