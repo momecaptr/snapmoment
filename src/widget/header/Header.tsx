@@ -10,16 +10,12 @@ import { useRouter } from 'next/router';
 import s from './Header.module.scss';
 
 export const Header = () => {
-  const { data: me, isFetching, isSuccess } = useMeQuery();
+  const { data: me, isError, isFetching, isSuccess } = useMeQuery();
   const router = useRouter();
 
   if (isFetching) {
     return <div>Loading...</div>;
   }
-
-  console.log({ me });
-
-  console.log(router.pathname.includes('sign-in'));
 
   return (
     <div className={s.header}>
@@ -28,7 +24,7 @@ export const Header = () => {
           <SnapMomentLogo className={s.logo} />
         </div>
         <div className={s.itemsWrapper}>
-          {me ?? <Outlinebell className={s.bell} />}
+          {me && <Outlinebell className={s.bell} />}
           <LocaleSwitcher />
           {!me && (
             <>

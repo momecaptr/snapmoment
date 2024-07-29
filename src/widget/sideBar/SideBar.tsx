@@ -89,7 +89,6 @@ export const SideBar = (props: Props) => {
               .then(() => {
                 router.push('/auth/sign-in');
               });
-            localStorage.removeItem('accessToken');
           }}
           className={s.btn}
           variant={'text'}
