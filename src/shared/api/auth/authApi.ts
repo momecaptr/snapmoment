@@ -8,10 +8,10 @@ import {
   RecoveryPasswordArgs,
   RegistrationArgs,
   RegistrationConfirmationArgs,
-  ResendEmailArgs,
-  transformErrorResponse
+  ResendEmailArgs
 } from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
+import { transformErrorResponse } from '@/shared/api/lib/transformErrorResponse';
 
 export const authApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
