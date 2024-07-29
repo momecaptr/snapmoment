@@ -1,4 +1,4 @@
-export interface AuthMeGoogleResponse {
+export interface GoogleOAuthResponse {
   accessToken: string;
   email: string;
 }

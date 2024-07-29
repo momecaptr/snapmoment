@@ -1,6 +1,7 @@
 import {
   BaseResponseType,
   GoogleOAuthArgs,
+  GoogleOAuthResponse,
   LoginArgs,
   LoginResponse,
   MeResponse,
@@ -22,7 +23,8 @@ export const authApi = snapmomentAPI.injectEndpoints({
       }),
       transformErrorResponse
     }),
-    googleOAuth: builder.mutation<void, GoogleOAuthArgs>({
+    googleOAuth: builder.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
+      invalidatesTags: ['Me'],
       query: (code) => ({
         body: code,
         method: 'POST',
