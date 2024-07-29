@@ -8,7 +8,11 @@ import Link from 'next/link';
 import s from './SignIn.module.scss';
 
 export const SignIn = () => {
-  const { control, errors, handleSubmit, isValid, onSubmit } = useSignInForm();
+  const { control, errors, handleSubmit, isLoading, isValid, onSubmit } = useSignInForm();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={s.wrapper}>
@@ -34,10 +38,10 @@ export const SignIn = () => {
           <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          {/*<Typography as={Link} className={s.signUp} href={'/sign-up'} variant={'regular_link'}>
+          {/*<Typography as={Link} className={s.signUp} href={'/auth/sign-up'} variant={'regular_link'}>
             Sign Up
           </Typography>*/}
-          <Link className={s.signUp} href={'/sign-up'}>
+          <Link className={s.signUp} href={'/auth/sign-up'}>
             Sign Up
           </Link>
         </Card>

@@ -2,32 +2,30 @@ import React from 'react';
 
 import TimeManagement from '@/../public/assets/components/TimeManagement';
 import { useAlert } from '@/entities';
-import { getRegistrationData } from '@/features/reSendConfirmationLink/model/resendVerifySlice';
-import { BaseResponseType, useRegistrationMutation } from '@/shared/api';
-import { useAppSelector } from '@/shared/lib';
+import { BaseResponseType, useResendEmailMutation } from '@/shared/api';
 import { Button, Typography } from '@/shared/ui';
 import { useRouter } from 'next/router';
 
 import s from './ResendVerificationLink.module.scss';
 export const ResendVerificationLink = () => {
-  const [register] = useRegistrationMutation();
+  // const [register] = useRegistrationMutation();
+  const [resend] = useResendEmailMutation();
   const router = useRouter();
   const { query } = router;
+  const fullUrl = router.asPath;
+  const urlWithoutQuery = fullUrl.split('?')[0];
   const { code, email } = query;
   const { errorAlert, successAlert } = useAlert();
-  const dataToResend = useAppSelector(getRegistrationData);
-
-  console.log(dataToResend);
+  // const dataToResend = useAppSelector(getRegistrationData);
   const resendLink = async () => {
-    const res = await register({
-      email: dataToResend.email,
-      password: dataToResend.password,
-      userName: dataToResend.username
+    const res = await resend({
+      baseUrl: urlWithoutQuery as string,
+      email: email as string
     });
 
     try {
       if ('data' in res) {
-        successAlert({ message: `We have sent a link to confirm your email to ${dataToResend.email}` });
+        successAlert({ message: `We have sent a link to confirm your email to ${email}` });
       } else {
         const err = res.error as BaseResponseType;
 

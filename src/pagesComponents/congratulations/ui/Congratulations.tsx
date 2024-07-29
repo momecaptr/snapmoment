@@ -15,7 +15,7 @@ export const Congratulations = () => {
         Your email has been confirmed
       </Typography>
       <div className={s.buttonBox}>
-        <Button as={Link} className={s.button} href={'/sign-in'}>
+        <Button as={Link} className={s.button} href={'/auth/sign-in'}>
           Sign In
         </Button>
       </div>

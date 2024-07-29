@@ -1,12 +1,15 @@
+import { RefreshTokenResponseSchema } from '@/shared/schemas/refreshTokenSchema';
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { Mutex } from 'async-mutex';
 
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://inctagram.work/api/',
+  credentials: 'include',
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('accessToken');
 
+    // console.log({ token });
     if (headers.get('Authorization')) {
       return headers;
     }
@@ -14,6 +17,7 @@ const baseQuery = fetchBaseQuery({
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
+    // headers.set('Authorization', `Bearer ${token}`);
 
     return headers;
   }
@@ -25,57 +29,62 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
   extraOptions
 ) => {
   try {
-    // wait until the mutex is available without locking it
     await mutex.waitForUnlock();
-    const result = await baseQuery(args, api, extraOptions);
+    let result = await baseQuery(args, api, extraOptions);
 
-    // if (result.error && result.error.status === 401) {
-    //   // checking whether the mutex is locked
-    //   if (!mutex.isLocked()) {
-    //     const release = await mutex.acquire();
-    //
-    //     try {
-    //       const refreshToken = localStorage.getItem('refreshToken');
-    //       const refreshResult = await baseQuery(
-    //         {
-    //           headers: {
-    //             Authorization: `Bearer ${refreshToken}`
-    //           },
-    //           method: 'POST',
-    //           url: 'v1/auth/update-tokens'
-    //         },
-    //         api,
-    //         extraOptions
-    //       );
-    //
-    //       if (refreshResult.data) {
-    //         const refreshResultParsed = RefreshTokenResponseSchema.parse(refreshResult.data);
-    //
-    //         localStorage.setItem('accessToken', refreshResultParsed.accessToken);
-    //         localStorage.setItem('refreshToken', refreshResultParsed.refreshToken);
-    //         // retry the initial query
-    //         result = await baseQuery(args, api, extraOptions);
-    //       } else {
-    //         // ! Это из карточек
-    //         // /*!Исправили*/
-    //         // const isPublicRoute = publicRoutes.find(route =>
-    //         //   matchPath(route.path ?? '', window.location.pathname)
-    //         // )
-    //         //
-    //         // if (!isPublicRoute) {
-    //         //   void router.navigate('/login')
-    //         // }
-    //       }
-    //     } finally {
-    //       // release must be called once the mutex should be released again.
-    //       release();
-    //     }
-    //   } else {
-    //     // wait until the mutex is available without locking it
-    //     await mutex.waitForUnlock();
-    //     result = await baseQuery(args, api, extraOptions);
-    //   }
-    // }
+    if (result?.error?.status === 401) {
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire();
+
+        try {
+          if (localStorage.getItem('accessToken')) {
+            const refreshResult = (await baseQuery(
+              {
+                method: 'POST',
+                url: 'v1/auth/update-tokens'
+              },
+              api,
+              extraOptions
+            )) as any;
+
+            console.log(refreshResult);
+
+            const refreshResultParsed = RefreshTokenResponseSchema.parse(refreshResult.data);
+            // const refreshResultParsedMeta = RefreshTokenResponseSchemaMeta.parse(refreshResult.meta)
+
+            if (refreshResult.meta.response.status === 200) {
+              localStorage.setItem('accessToken', refreshResultParsed.accessToken);
+              result = await baseQuery(args, api, extraOptions);
+              console.log(args);
+            }
+          }
+          // const refreshResult = await baseQuery(
+          //   {
+          //     credentials: 'include',
+          //     method: 'POST',
+          //     url: 'v1/auth/update-tokens'
+          //   },
+          //   api,
+          //   extraOptions
+          // )
+          //
+          // if (refreshResult.data) {
+          //   const refreshResultParsed = RefreshTokenResponseSchema.parse(refreshResult.data);
+          //
+          //   localStorage.setItem('accessToken', refreshResultParsed.accessToken);
+          //   result = await baseQuery(args, api, extraOptions);
+          // } else {
+          //   console.log('loggedOut');
+          //   Router.push('/auth/sign-in');
+          // }
+        } finally {
+          release();
+        }
+      } else {
+        await mutex.waitForUnlock();
+        result = await baseQuery(args, api, extraOptions);
+      }
+    }
 
     return result;
   } catch (e) {

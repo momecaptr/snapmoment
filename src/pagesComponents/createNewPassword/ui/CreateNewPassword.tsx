@@ -5,7 +5,7 @@ import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/shared/s
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import s from '@/pagesComponents/createNewPassword/ui/CreateNewPassword.module.scss';
+import s from './CreateNewPassword.module.scss';
 
 export const CreateNewPassword = () => {
   const {

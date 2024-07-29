@@ -2,19 +2,30 @@ import React from 'react';
 
 import { Congratulations, useConfirmRegistration } from '@/pagesComponents';
 import { ResendVerificationLink } from '@/pagesComponents/resendVerificationLink/ResendVerificationLink';
+import { getAuthLayout } from '@/shared/providers';
 
 export default function Page() {
-  const { isError, isSuccess, showLoading } = useConfirmRegistration();
+  const { isError, isLoading, isSuccess } = useConfirmRegistration();
 
-  if (showLoading) {
-    return <div>Loading...</div>;
-  }
+  return getAuthLayout(
+    <>
+      {isError && <ResendVerificationLink />}
+      {isLoading && <div>Loading...</div>}
+      {isSuccess && <Congratulations />}
+    </>
+  );
 
-  if (isSuccess) {
-    return <Congratulations />;
-  }
-
-  if (isError) {
-    return <ResendVerificationLink />;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+  //
+  // if (isSuccess) {
+  //   return <Congratulations />;
+  // }
+  //
+  // if (isError) {
+  //   return <ResendVerificationLink />;
+  // }
 }
+
+// Page.getLayout = getAuthLayout;
