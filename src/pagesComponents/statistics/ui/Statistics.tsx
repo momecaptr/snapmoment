@@ -1,7 +1,7 @@
 import React from 'react';
 
 import GoogleLoginButton from '@/pagesComponents/statistics/ui/GoogleLoginButton';
-import { PostsTest } from '@/pagesComponents/statistics/ui/posts/PostsTest';
+import { ProfileTest } from '@/pagesComponents/statistics/ui/profile/ProfileTest';
 import { Button, Typography } from '@/shared/ui';
 
 import s from './Statistics.module.scss';
@@ -17,9 +17,9 @@ export const Statistics = () => {
         reg github
       </Button>
       {/*<SwitchChartLike />*/}
-      <PostsTest />
+      {/*<PostsTest />*/}
       {/*<UsersTest />*/}
-      {/*<ProfileTest />*/}
+      <ProfileTest />
     </div>
   );
 };

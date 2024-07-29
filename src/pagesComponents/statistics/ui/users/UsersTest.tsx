@@ -15,8 +15,6 @@ export const UsersTest = () => {
     return <p>Error</p>;
   }
 
-  console.log(data);
-
   return (
     <div>
       <select name={'page size'} onChange={(e) => setPageSize(Number(e.target.value))} value={pageSize}>

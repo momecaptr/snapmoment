@@ -6,35 +6,24 @@ import s from './TextArea.module.scss';
 
 export type TextAreaProps = {
   callback?: (text: string) => void;
-  currentValue?: string;
   error?: string | undefined;
   label?: string;
   resize?: boolean;
 } & ComponentPropsWithoutRef<'textarea'>;
 
 export const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: TextAreaProps, ref) => {
-  const { callback, className, currentValue, error, id, label, placeholder, resize, ...restProps } = props;
-  const [inputValue, setInputValue] = useState(currentValue || '');
+  const { callback, className, error, id, label, placeholder, resize, value, ...restProps } = props;
+
+  const [inputValue, setInputValue] = useState<string>(value ? `${value}` : '');
 
   function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     props.onChange?.(e);
     setInputValue(e.target.value);
   }
-  const clearInput = () => {
-    setInputValue('');
-    if (callback) {
-      callback('');
-    }
-  };
-  const focusOnInput = () => {
-    const inputElement = document.getElementById(id ?? generatedId);
-
-    inputElement?.focus();
-  };
 
   useEffect(() => {
-    props.currentValue === '' && setInputValue('');
-  }, [props.currentValue]);
+    value ? setInputValue(`${value}`) : setInputValue('');
+  }, [value]);
 
   const generatedId = useId();
   let classNameForTextArea = '';

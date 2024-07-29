@@ -8,6 +8,7 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
+import { useLogoutMutation } from '@/myApp/api/inctagramApi';
 import { Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -62,17 +63,32 @@ export const SideBar = () => {
     { IconComponent: LogOutOutline, name: 'Log Out', path: '/logout', value: 'logout' }
   ];
 
+  const [setLogout] = useLogoutMutation();
+
   return (
     <div className={s.container}>
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)}>
+          <Link
+            onClick={() => {
+              setActiveIcon(value);
+            }}
+            className={s.btn}
+            href={path}
+            key={value}
+          >
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
-            <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
-              {name}
-            </Typography>
+            {value === 'logout' ? (
+              <Typography as={'span'} className={s.btnText} onClick={setLogout} variant={'medium_text_14'}>
+                {name}
+              </Typography>
+            ) : (
+              <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
+                {name}
+              </Typography>
+            )}
           </Link>
         ))}
       </div>

@@ -5,10 +5,7 @@ import { TextArea, TextAreaProps } from '@/shared/ui/textArea/TextArea';
 
 export type ControlledInputProps<TFieldValues extends FieldValues> = {
   className?: string;
-  currentValue?: string;
   resize?: boolean;
-} & {
-  currentValue?: TFieldValues[Extract<keyof TFieldValues, string>];
 } & Omit<TextAreaProps, 'onChange' | 'value'> &
   Omit<UseControllerProps<TFieldValues>, 'defaultValue' | 'disabled' | 'rules'>;
 

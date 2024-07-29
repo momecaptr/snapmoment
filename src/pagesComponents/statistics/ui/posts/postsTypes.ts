@@ -9,7 +9,7 @@ export interface GetPostsArgs {
   pageSize: number;
 }
 
-interface Image {
+export interface Image {
   createdAt: string;
   fileSize: number;
   height: number;

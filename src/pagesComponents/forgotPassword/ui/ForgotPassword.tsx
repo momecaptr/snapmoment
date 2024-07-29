@@ -59,7 +59,7 @@ export const ForgotPassword = () => {
               onChange={(value) => {
                 handleCaptchaChange(value);
               }}
-              sitekey={'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'}
+              sitekey={'AIzaSyBME4uvSLsmVFDInIRRIKjYa6-DixgeILw'}
               theme={'dark'}
             />
           </section>
