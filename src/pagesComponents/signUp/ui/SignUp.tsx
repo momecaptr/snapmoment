@@ -3,6 +3,7 @@ import React from 'react';
 import { useSignUpForm } from '@/pagesComponents';
 import { Button, Card, FormCheckbox, FormTextfield, Typography } from '@/shared/ui';
 import { HeadSignInAndSignUp } from '@/widget';
+import { clsx } from 'clsx';
 import Link from 'next/link';
 
 import s from './SignUp.module.scss';
@@ -53,16 +54,20 @@ export const SignUp = () => {
           <FormCheckbox
             label={
               <>
-                <Typography as={'p'} variant={'small_text'}>
+                <Typography
+                  as={'p'}
+                  className={clsx(errors.agreementPolicyStatus && s.errorText)}
+                  variant={'small_text'}
+                >
                   I agree to the
                 </Typography>
-                <Typography as={Link} className={s.link} href={'/terms'} variant={'small_link'}>
+                <Typography as={Link} className={s.link} href={'/auth/terms'} variant={'small_link'}>
                   Terms of Service
                 </Typography>
                 <Typography as={'p'} variant={'small_text'}>
                   and
                 </Typography>
-                <Typography as={Link} className={s.link} href={'/privacy'} variant={'small_link'}>
+                <Typography as={Link} className={s.link} href={'/auth/privacy'} variant={'small_link'}>
                   Privacy Policy
                 </Typography>
               </>
