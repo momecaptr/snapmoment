@@ -1,14 +1,17 @@
 import {
   BaseResponseType,
   GoogleOAuthArgs,
+  GoogleOAuthResponse,
   LoginArgs,
   LoginResponse,
-  RecoveryPasswordResponse,
+  MeResponse,
+  RecoveryPasswordArgs,
   RegistrationArgs,
   RegistrationConfirmationArgs,
   ResendEmailArgs
 } from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
+import { transformErrorResponse } from '@/shared/api/lib/transformErrorResponse';
 
 export const authApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,11 +21,10 @@ export const authApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: 'v1/auth/registration-confirmation'
       }),
-      transformErrorResponse: (res: { data: any; status: number }) => {
-        return res.data;
-      }
+      transformErrorResponse
     }),
-    googleOAuth: builder.mutation<void, GoogleOAuthArgs>({
+    googleOAuth: builder.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
+      invalidatesTags: ['Me'],
       query: (code) => ({
         body: code,
         method: 'POST',
@@ -40,32 +42,10 @@ export const authApi = snapmomentAPI.injectEndpoints({
       }
     }),
     logout: builder.mutation<void, void>({
-      invalidatesTags: ['Me'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        // await queryFulfilled
-        // localStorage.removeItem('accessToken')
-        // dispatch(authApi.util.resetApiState())
-        const res = dispatch(
-          authApi.util.updateQueryData('me', undefined, () => {
-            return null;
-          })
-        );
-
-        try {
-          console.log('successQueryFulfilled');
-          try {
-            const rr = await queryFulfilled;
-
-            console.log({ rr });
-          } catch {
-            console.log('successQueryFulfilled FAILED');
-          }
-        } catch {
-          console.log('failedQueryFulfilled');
-          res.undo();
-        } finally {
-          // localStorage.removeItem('accessToken')
-        }
+        await queryFulfilled;
+        localStorage.removeItem('accessToken');
+        dispatch(authApi.util.resetApiState());
       },
       query: (body) => ({
         body,
@@ -73,14 +53,14 @@ export const authApi = snapmomentAPI.injectEndpoints({
         url: 'v1/auth/logout'
       })
     }),
-    me: builder.query<void, void>({
+    me: builder.query<MeResponse, void>({
       providesTags: ['Me'],
       query: () => ({
         method: 'GET',
         url: 'v1/auth/me'
       })
     }),
-    passwordRecovery: builder.mutation<void, RecoveryPasswordResponse>({
+    passwordRecovery: builder.mutation<void, RecoveryPasswordArgs>({
       query: (body) => ({
         body,
         method: 'POST',
@@ -93,9 +73,7 @@ export const authApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: 'v1/auth/registration'
       }),
-      transformErrorResponse: (res: { data: BaseResponseType; status: number }) => {
-        return res.data;
-      }
+      transformErrorResponse
     }),
     resendEmail: builder.mutation<void, ResendEmailArgs>({
       query: (data) => ({
@@ -103,9 +81,7 @@ export const authApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: 'v1/auth/registration-email-resending'
       }),
-      transformErrorResponse: (res: { data: BaseResponseType; status: number }) => {
-        return res.data;
-      }
+      transformErrorResponse
     })
   })
 });

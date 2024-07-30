@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import ReactTimeAgo from 'react-time-ago';
 
-import { useGetPublicPostsQuery } from '@/shared/api/public/piblicApi';
+import { useGetPublicPostsQuery } from '@/shared/api/public/publicApi';
 
 import s from './Posts.module.scss';
 

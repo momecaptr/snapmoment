@@ -1,5 +1,6 @@
 import React from 'react';
 
+import NotFound from '@/../pages/404';
 import { useSignInForm } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { HeadSignInAndSignUp } from '@/widget';
@@ -8,10 +9,14 @@ import Link from 'next/link';
 import s from './SignIn.module.scss';
 
 export const SignIn = () => {
-  const { control, errors, handleSubmit, isLoading, isValid, onSubmit } = useSignInForm();
+  const { control, errors, handleSubmit, isError, isLoading, isValid, onSubmit } = useSignInForm();
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <NotFound />;
   }
 
   return (
@@ -29,21 +34,18 @@ export const SignIn = () => {
               type={'password'}
             />
           </div>
-          <Typography as={'p'} className={s.forgot} variant={'regular_text_14'}>
+          <Typography as={Link} className={s.forgot} href={'/auth/password-recovery'} variant={'regular_text_14'}>
             Forgot Password
           </Typography>
           <Button className={s.button} disabled={!isValid} type={'submit'} fullWidth>
             Sign In
           </Button>
-          <Typography as={'p'} className={s.question} variant={'regular_text_16'}>
+          <Typography className={s.question} variant={'regular_text_16'}>
             Don’t have an account?
           </Typography>
-          {/*<Typography as={Link} className={s.signUp} href={'/auth/sign-up'} variant={'regular_link'}>
+          <Typography as={Link} className={s.signUp} href={'/auth/sign-up'} variant={'regular_text_16'}>
             Sign Up
-          </Typography>*/}
-          <Link className={s.signUp} href={'/auth/sign-up'}>
-            Sign Up
-          </Link>
+          </Typography>
         </Card>
       </form>
     </div>

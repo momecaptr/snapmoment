@@ -1,4 +1,4 @@
-export interface AuthMeGoogleResponse {
+export interface GoogleOAuthResponse {
   accessToken: string;
   email: string;
 }
@@ -40,11 +40,18 @@ export interface ResendEmailArgs {
   email: string;
 }
 
-export type RecoveryPasswordResponse = {
+export type RecoveryPasswordArgs = {
   baseUrl?: string;
   email: string;
   recaptcha: string;
 };
+
+export interface MeResponse {
+  email: string;
+  isBlocked: boolean;
+  userId: number;
+  userName: string;
+}
 
 export interface GetPostsArgs {
   pageSize: number;
