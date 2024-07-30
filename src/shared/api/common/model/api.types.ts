@@ -20,6 +20,14 @@ export interface GoogleOAuthArgs {
   code: string;
 }
 
+export interface CheckRecoveryCodeResponse {
+  email: string;
+}
+
+export interface CheckRecoveryCodeArgs {
+  recoveryCode: string;
+}
+
 export interface RegistrationConfirmationArgs {
   confirmationCode: string;
 }

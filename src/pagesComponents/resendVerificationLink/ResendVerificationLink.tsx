@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 import s from './ResendVerificationLink.module.scss';
 export const ResendVerificationLink = () => {
-  // const [register] = useRegistrationMutation();
   const [resend] = useResendEmailMutation();
   const router = useRouter();
   const { query } = router;
@@ -16,7 +15,6 @@ export const ResendVerificationLink = () => {
   const urlWithoutQuery = fullUrl.split('?')[0];
   const { code, email } = query;
   const { errorAlert, successAlert } = useAlert();
-  // const dataToResend = useAppSelector(getRegistrationData);
   const resendLink = async () => {
     const res = await resend({
       baseUrl: urlWithoutQuery as string,
