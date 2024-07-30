@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 import Close from '@/../public/assets/components/Close';
-import PhotoProfile from '@/shared/photoProfile/PhotoProfile';
-import { Button, Card, Typography } from '@/shared/ui';
+import { Button, Card, PhotoProfile, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Image from 'next/image';
 

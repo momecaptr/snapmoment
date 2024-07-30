@@ -7,12 +7,13 @@ import clsx from 'clsx';
 import s from './Checkbox.module.scss';
 
 export type CheckboxPropsProps = {
+  error?: string | undefined;
   label?: ReactNode;
 } & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>;
 
 export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxPropsProps>(
   (props: CheckboxPropsProps, ref) => {
-    const { checked, className, disabled, id, label, onCheckedChange, ...rest } = props;
+    const { checked, className, disabled, error, id, label, onCheckedChange, ...rest } = props;
     const generatedId = useId();
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {

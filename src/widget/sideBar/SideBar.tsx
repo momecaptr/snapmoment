@@ -1,4 +1,4 @@
-import { ElementType, useState } from 'react';
+import { ComponentProps, ElementType, useState } from 'react';
 
 import Bookmark from '@/../public/assets/components/Bookmark';
 import Home from '@/../public/assets/components/Home';
@@ -8,9 +8,11 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
-import { Typography } from '@/shared/ui';
+import { useLogoutMutation } from '@/shared/api';
+import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import s from './SideBar.module.scss';
 
@@ -24,42 +26,47 @@ type MainLinksProps = {
 type LinksValue =
   | ''
   | 'favorites'
-  | 'forgot-password'
   | 'home'
   | 'logout'
   | 'message'
   | 'person'
   | 'plus'
+  | 'profile'
+  | 'recovery-password'
   | 'search'
   | 'sign-in'
   | 'sign-up'
   | 'statistics';
 
 type MainLinksName =
+  | '!!! Sign Up'
+  | '!!! Sign in'
   | 'Create'
   | 'Favorites'
-  | 'Forgot Password'
   | 'Home'
   | 'Log Out'
   | 'Messenger'
   | 'My Profile'
+  | 'Profile'
+  | 'Recovery Password'
   | 'Search'
-  | 'Sign Up'
-  | 'Sign in'
   | 'Statistics';
 
-export const SideBar = () => {
+type Props = ComponentProps<'div'>;
+export const SideBar = (props: Props) => {
+  const [logout] = useLogoutMutation();
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
+  const router = useRouter();
 
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
-    { IconComponent: PlusSquare, name: 'Sign in', path: '/sign-in', value: 'plus' },
-    { IconComponent: Person, name: 'Forgot Password', path: '/forgot-password', value: 'person' },
-    { IconComponent: MessageCircle, name: 'Sign Up', path: '/sign-up', value: 'message' },
+    { IconComponent: PlusSquare, name: '!!! Sign in', path: '/auth/sign-in', value: 'plus' },
+    { IconComponent: Person, name: 'Recovery Password', path: '/password-recovery', value: 'person' },
+    { IconComponent: MessageCircle, name: '!!! Sign Up', path: '/auth/sign-up', value: 'message' },
+    { IconComponent: Bookmark, name: 'Profile', path: '/profile', value: 'profile' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
-    { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' },
-    { IconComponent: LogOutOutline, name: 'Log Out', path: '/logout', value: 'logout' }
+    { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' }
   ];
 
   return (
@@ -75,6 +82,20 @@ export const SideBar = () => {
             </Typography>
           </Link>
         ))}
+        <Button
+          onClick={(e) => {
+            logout()
+              .unwrap()
+              .then(() => {
+                router.push('/auth/sign-in');
+              });
+          }}
+          className={s.btn}
+          variant={'text'}
+        >
+          <LogOutOutline className={s.icon} />
+          Log out
+        </Button>
       </div>
     </div>
   );

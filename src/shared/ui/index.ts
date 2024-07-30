@@ -15,6 +15,7 @@ export * from './pagination/lib/paginationLogic';
 export * from './pagination/ui/PaginationWithSelect';
 export * from './pagination/ui/paginationInitial/Pagination';
 export * from './pagination/ui/paginationInitial/pageLink/PageLink';
+export * from './photoProfile/PhotoProfile';
 export * from './privacy/Privacy';
 export * from './radio/Radio';
 export * from './select/Select';

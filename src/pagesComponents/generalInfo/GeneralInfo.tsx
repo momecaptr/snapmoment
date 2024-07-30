@@ -2,10 +2,14 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ChangePhoto, GeneralInfoNavigation, SaveGeneralInfo } from '@/features';
+import { useMeQuery } from '@/shared/api';
 import { GeneralInfoForms } from '@/widget';
 
 import s from './GeneralInfo.module.scss';
 export const GeneralInfo = () => {
+  const me = useMeQuery();
+
+  console.log({ me });
   const {
     control,
     formState: { errors },

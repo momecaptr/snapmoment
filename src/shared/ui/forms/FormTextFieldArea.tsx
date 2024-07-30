@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form';
 
-import { TextArea, TextAreaProps } from '@/shared/ui/textArea/TextArea';
+import { TextArea, TextAreaProps } from '@/shared/ui';
 
 export type ControlledInputProps<TFieldValues extends FieldValues> = {
   className?: string;

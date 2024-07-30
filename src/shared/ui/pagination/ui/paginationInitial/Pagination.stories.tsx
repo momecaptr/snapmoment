@@ -12,7 +12,6 @@ const meta = {
 } satisfies Meta<typeof Pagination>;
 
 export default meta;
-// type Story = StoryObj<typeof meta>
 
 export const Default = () => {
   const [currentPage, setCurrentPage] = useState(1);

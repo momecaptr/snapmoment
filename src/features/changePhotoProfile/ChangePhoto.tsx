@@ -1,7 +1,6 @@
 import React from 'react';
 
-import PhotoProfile from '@/shared/photoProfile/PhotoProfile';
-import { Button } from '@/shared/ui';
+import { Button, PhotoProfile } from '@/shared/ui';
 
 import s from './ChangePhoto.module.scss';
 export const ChangePhoto = () => {

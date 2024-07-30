@@ -1,0 +1,19 @@
+.layout {
+  display: grid;
+  grid-template: 'header header' auto 'content content' 1fr / 220px 1fr;
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.content {
+  grid-area: content;
+
+  // overflow-y: auto;
+}

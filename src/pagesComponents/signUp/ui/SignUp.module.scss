@@ -43,6 +43,10 @@
   margin-bottom: 24px;
 }
 
+.errorText {
+  color: var(--danger-300);
+}
+
 .link {
   margin-right: 3px;
   margin-left: 3px;
@@ -64,4 +68,10 @@
   font-weight: 600;
   color: var(--accent-500);
   text-decoration: none;
+
+  border: none;
+
+  &:hover {
+    border: none;
+  }
 }
