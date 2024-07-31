@@ -14,6 +14,9 @@ export const appSlice = createSlice({
   initialState: initialState,
   name: 'app',
   reducers: {
+    closeAllModals: (state, action: PayloadAction<{ key: ModalKey; open: boolean }>) => {
+      state.modal.modalKey = [];
+    },
     setTheme: (state, action: PayloadAction<{ theme: Theme }>) => {
       state.theme = action.payload.theme;
     },
@@ -22,7 +25,12 @@ export const appSlice = createSlice({
       if (action.payload.open) {
         state.modal.modalKey.push(action.payload.key);
       } else {
-        state.modal.modalKey = [];
+        const index = state.modal.modalKey.indexOf(action.payload.key);
+
+        if (index !== -1) {
+          state.modal.modalKey.splice(index, 1);
+        }
+        state.modal.isOpen = state.modal.modalKey.length > 0;
       }
     }
   }
