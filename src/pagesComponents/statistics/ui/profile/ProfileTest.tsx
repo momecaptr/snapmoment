@@ -9,6 +9,8 @@ import {
 import { UpdateUserProfileArgs } from '@/pagesComponents/statistics/ui/profile/profileTypes';
 import { Button, FormTextfield, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
+import { diffYears } from '@formkit/tempo';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -37,7 +39,23 @@ const profileSchema = z
       .max(30)
       .regex(/^[a-zA-ZА-Яа-я]+$/, 'Only latin and cyrillic letters are allowed')
   })
-  .superRefine(() => {});
+  .superRefine((val, ctx) => {
+    if (val.dateOfBirth) {
+      const diff = diffYears(new Date(val.dateOfBirth), new Date());
+
+      console.log(diff);
+
+      if (diff > 13) {
+        return;
+      }
+
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'A user under 13 cannot create a profile. Privacy Policy',
+        path: ['dateOfBirth']
+      });
+    }
+  });
 
 export const ProfileTest = () => {
   const [getProfile, profile] = useLazyGetUserProfileQuery();
@@ -64,7 +82,8 @@ export const ProfileTest = () => {
         lastName: data.lastName ?? '',
         userName: data.userName
       };
-    }
+    },
+    resolver: zodResolver(profileSchema)
   });
 
   const onSubmit = handleSubmit((data) =>
@@ -106,6 +125,11 @@ export const ProfileTest = () => {
         <FormTextfield control={control} label={'First Name'} name={'firstName'} />
         <FormTextfield control={control} label={'Last Name'} name={'lastName'} />
         <input type={'date'} {...register('dateOfBirth')} style={{ color: 'black' }} />
+        {!!formState.errors.dateOfBirth && (
+          <p style={{ color: 'red' }}>
+            A user under 13 cannot create a profile. <a href={'#'}>Privacy Policy</a>
+          </p>
+        )}
         <FormTextfield control={control} label={'Country'} name={'country'} />
         <FormTextfield control={control} label={'City'} name={'city'} />
         <FormTextfieldArea control={control} label={'About Me'} name={'aboutMe'} />
