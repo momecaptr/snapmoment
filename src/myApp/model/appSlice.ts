@@ -5,7 +5,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 const initialState: AppSettings = {
   modal: {
     isOpen: false,
-    modalKey: null
+    modalKey: []
   },
   theme: (typeof window !== 'undefined' && (localStorage.getItem('theme') as Theme)) || 'moon'
 };
@@ -14,12 +14,24 @@ export const appSlice = createSlice({
   initialState: initialState,
   name: 'app',
   reducers: {
+    closeAllModals: (state, action: PayloadAction<{ key: ModalKey; open: boolean }>) => {
+      state.modal.modalKey = [];
+    },
     setTheme: (state, action: PayloadAction<{ theme: Theme }>) => {
       state.theme = action.payload.theme;
     },
     toggleModal: (state, action: PayloadAction<{ key: ModalKey; open: boolean }>) => {
       state.modal.isOpen = action.payload.open;
-      state.modal.modalKey = action.payload.open ? action.payload.key : null;
+      if (action.payload.open) {
+        state.modal.modalKey.push(action.payload.key);
+      } else {
+        const index = state.modal.modalKey.indexOf(action.payload.key);
+
+        if (index !== -1) {
+          state.modal.modalKey.splice(index, 1);
+        }
+        state.modal.isOpen = state.modal.modalKey.length > 0;
+      }
     }
   }
 });

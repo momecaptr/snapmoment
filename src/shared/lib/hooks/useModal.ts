@@ -17,7 +17,7 @@ export const useModal = (modalKey: ModalKey) => {
     dispatch(toggleModal({ key: modalKey, open }));
   };
 
-  const isOpen = isOpenModal && modalKey === contextModalKey;
+  const isOpen = isOpenModal && !!contextModalKey.find((key) => modalKey === key);
 
   return {
     contextModalKey,
