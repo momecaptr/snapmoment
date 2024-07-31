@@ -8,5 +8,5 @@ export type Theme = 'moon' | 'sun';
 
 export interface Modal {
   isOpen: boolean;
-  modalKey: ModalKey | null;
+  modalKey: ModalKey[];
 }
