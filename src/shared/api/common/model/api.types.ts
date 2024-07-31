@@ -54,6 +54,11 @@ export type RecoveryPasswordArgs = {
   recaptcha: string;
 };
 
+export interface CreateNewPasswordArgs {
+  newPassword: string;
+  recoveryCode: string;
+}
+
 export interface MeResponse {
   email: string;
   isBlocked: boolean;

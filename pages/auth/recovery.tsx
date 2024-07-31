@@ -14,9 +14,7 @@ const CheckRecoveryCode = () => {
         try {
           const res = await checkCode({ recoveryCode: String(code) });
 
-          console.log({ code, email, res });
-
-          if (res.data) {
+          if (res.data?.email) {
             localStorage.setItem('recoveryCode', String(code));
             router.push('/auth/create-new-password');
           } else {
