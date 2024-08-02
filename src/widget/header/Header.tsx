@@ -18,7 +18,7 @@ export const Header = () => {
   };
 
   if (isFetching) {
-    return <div>Loading...</div>;
+    return <div>Loading... Header</div>;
   }
 
   const renderAuthButtons = () => {

@@ -19,16 +19,17 @@ export const CreateNewPassword = () => {
     resolver: zodResolver(createNewPasswordSchema)
   });
   const router = useRouter();
+  const { code } = router.query;
   const [createNewPassword] = useCreateNewPasswordMutation();
 
   const onSubmit = async ({ password }: CreateNewPasswordFormValues) => {
     try {
       await createNewPassword({
         newPassword: password,
-        recoveryCode: String(localStorage.getItem('recoveryCode'))
+        recoveryCode: String(code)
       });
 
-      router.push('/auth/sign-in');
+      await router.push('/auth/sign-in');
     } catch (e) {
       console.log(e);
     }
