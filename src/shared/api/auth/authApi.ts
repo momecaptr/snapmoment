@@ -32,7 +32,15 @@ export const authApi = snapmomentAPI.injectEndpoints({
       })
     }),
     login: builder.mutation<LoginResponse, LoginArgs>({
-      invalidatesTags: ['Me'],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        const res = await queryFulfilled;
+
+        localStorage.setItem('accessToken', res.data.accessToken);
+        dispatch(authApi.util.invalidateTags(['Me']));
+
+        // ! можно редирект тут делать или там где логиним пользователя
+        // Router.replace('/profile')
+      },
       query: (data) => {
         return {
           body: data,
