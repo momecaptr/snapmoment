@@ -20,10 +20,10 @@ export const useCheckRecoveryCode = () => {
       const res = await checkCode({ recoveryCode: String(code) }).unwrap();
 
       if (res?.email) {
-        await router.push(`/auth/create-new-password?code=${code}`);
+        await router.replace(`/auth/create-new-password?code=${code}`);
       }
     } catch (e) {
-      await router.push(`/auth/recovery-code-failed?email=${email}`);
+      await router.replace(`/auth/recovery-code-failed?email=${email}`);
       console.error('Error in checkCodeHandler:', e);
       // errorAlert({ message: 'There was an error verifying your recovery code. Please try again.' }); (!!! при использовании возникают зацикленные ошибки)
     }
