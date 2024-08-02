@@ -1,40 +1,36 @@
+import * as React from 'react';
+
 import avatarMock from '@/../public/avatar-mock.jpg';
-import { appSlice } from '@/myApp/model/appSlice';
-import { ModalKey, useAppDispatch } from '@/shared/lib';
+import { GetPostLikesResponse } from '@/shared/api';
 import { Typography } from '@/shared/ui';
 import Image from 'next/image';
 
 import s from './ShowLikers.module.scss';
 
-type Props = {};
+type Props = {
+  postLikes?: GetPostLikesResponse;
+  showViewLikesHandler: () => void;
+};
 
-export const ShowLikers = ({}: Props) => {
-  const dispatch = useAppDispatch();
-
-  const showViewLikesHandler = () => {
-    dispatch(appSlice.actions.toggleModal({ key: ModalKey.ViewLikes, open: true }));
-  };
-
+export const ShowLikers = ({ postLikes, showViewLikesHandler }: Props) => {
   return (
     <div className={s.root}>
-      <div className={s.likes}>
-        <button className={s.usersLikes} onClick={showViewLikesHandler}>
-          {/*стили фоток доделать*/}
-          {/*фотки юзеров*/}
-          <Image alt={'avatarMock'} src={avatarMock} />
-          <Image alt={'avatarMock'} src={avatarMock} />
-          <Image alt={'avatarMock'} src={avatarMock} />
-        </button>
-        <Typography variant={'regular_text_14'}>
-          2 243{' '}
-          <Typography as={'span'} variant={'bold_text_14'}>
-            &quot;Like&quot;
+      {postLikes && postLikes.items && postLikes?.totalCount !== 0 && (
+        <div className={s.likes}>
+          <button className={s.usersLikes} onClick={showViewLikesHandler}>
+            <Image alt={'user avatar'} src={postLikes?.items[0]?.avatars[0]?.url || avatarMock} />
+            <Image alt={'user avatar'} src={postLikes?.items[1]?.avatars[0]?.url || avatarMock} />
+            <Image alt={'user avatar'} src={postLikes?.items[2]?.avatars[0]?.url || avatarMock} />
+          </button>
+
+          <Typography variant={'regular_text_14'}>
+            {postLikes?.totalCount}{' '}
+            <Typography as={'span'} variant={'bold_text_14'}>
+              &quot;Like&quot;
+            </Typography>
           </Typography>
-        </Typography>
-      </div>
-      <Typography className={s.date} variant={'small_text'}>
-        July 3, 2021
-      </Typography>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 24px;
+  padding: 24px;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+
+  .counter {
+    display: flex;
+    flex-flow: row nowrap;
+
+    padding: 12px;
+
+    background-color: var(--dark-700);
+    border: 1px solid var(--dark-300);
+    border-radius: 2px;
+
+    .count {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 30px;
+      height: 24px;
+
+      border-right: 1px solid var(--dark-100);
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

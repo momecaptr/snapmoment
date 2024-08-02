@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TimeManagement from '@/../public/assets/components/TimeManagement';
-import { ReCaptcha } from '@/features/reCaptcha/ReCaptcha';
+import { ReCaptcha } from '@/features';
 import { useRecoveryCodeFailed } from '@/pagesComponents/recoveryCodeFailed/lib/useRecoveryCodeFailed';
 import { Button, Typography } from '@/shared/ui';
 

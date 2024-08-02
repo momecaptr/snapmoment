@@ -1,0 +1,20 @@
+.showBtn {
+  cursor: pointer;
+
+  width: max-content;
+  padding: 0;
+
+  color: var(--accent-500);
+
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: var(--accent-300);
+    background-color: transparent;
+  }
+
+  &:active {
+    color: var(--accent-700);
+  }
+}

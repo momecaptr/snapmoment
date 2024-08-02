@@ -1,5 +1,5 @@
-import { GetUserProfileResponse, UpdateUserProfileArgs } from '@/shared/api';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
+import { GetUserProfileResponse, UpdateUserProfileArgs } from '@/shared/api/profile/profileTypes';
 
 export const profileApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
