@@ -1,5 +1,8 @@
 import {
   BaseResponseType,
+  CheckRecoveryCodeArgs,
+  CheckRecoveryCodeResponse,
+  CreateNewPasswordArgs,
   GoogleOAuthArgs,
   GoogleOAuthResponse,
   LoginArgs,
@@ -15,6 +18,13 @@ import { transformErrorResponse } from '@/shared/api/lib/transformErrorResponse'
 
 export const authApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
+    checkRecoveryCode: builder.mutation<CheckRecoveryCodeResponse, CheckRecoveryCodeArgs>({
+      query: (recoveryCode) => ({
+        body: recoveryCode,
+        method: 'POST',
+        url: 'v1/auth/check-recovery-code'
+      })
+    }),
     confirmRegistration: builder.mutation<void, RegistrationConfirmationArgs>({
       query: (data) => ({
         body: data,
@@ -22,6 +32,13 @@ export const authApi = snapmomentAPI.injectEndpoints({
         url: 'v1/auth/registration-confirmation'
       }),
       transformErrorResponse
+    }),
+    createNewPassword: builder.mutation<void, CreateNewPasswordArgs>({
+      query: (data) => ({
+        body: data,
+        method: 'POST',
+        url: 'v1/auth/new-password'
+      })
     }),
     googleOAuth: builder.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
       invalidatesTags: ['Me'],
@@ -95,7 +112,9 @@ export const authApi = snapmomentAPI.injectEndpoints({
 });
 
 export const {
+  useCheckRecoveryCodeMutation,
   useConfirmRegistrationMutation,
+  useCreateNewPasswordMutation,
   useGoogleOAuthMutation,
   useLoginMutation,
   useLogoutMutation,

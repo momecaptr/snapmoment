@@ -20,6 +20,14 @@ export interface GoogleOAuthArgs {
   code: string;
 }
 
+export interface CheckRecoveryCodeResponse {
+  email: string;
+}
+
+export interface CheckRecoveryCodeArgs {
+  recoveryCode: string;
+}
+
 export interface RegistrationConfirmationArgs {
   confirmationCode: string;
 }
@@ -45,6 +53,11 @@ export type RecoveryPasswordArgs = {
   email: string;
   recaptcha: string;
 };
+
+export interface CreateNewPasswordArgs {
+  newPassword: string;
+  recoveryCode: string;
+}
 
 export interface MeResponse {
   email: string;
