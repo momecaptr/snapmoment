@@ -1,75 +1,60 @@
+// Card.module.scss
 .card {
+  position: relative;
+  overflow: hidden;
   width: 234px;
+}
 
-  .photo {
-    cursor: pointer;
-    height: 240px;
-    margin-bottom: 12px;
-    background-color: var(--light-900);
+.photo {
+  cursor: pointer;
+  overflow: hidden;
 
-    img {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.content {
+  position: relative;
+
+  display: flex;
+  flex-flow: column nowrap;
+
+  background: var(--dark-700);
+
+  transition: transform 0.5s ease;
+
+  &.expanded {
+    transform: translateY(-117px);
+  }
+}
+
+.authorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+
+  .blockBtn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background-color: transparent;
+
+    .blockIcon {
       width: 100%;
       height: 100%;
     }
   }
+}
 
-  .author {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 12px;
-    align-items: center;
+.description {
+  overflow: hidden;
+  max-height: 72px;
 
-    margin-bottom: 12px;
-
-    img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-    }
-
-    .blockBtn {
-      margin-left: auto;
-      padding: 0;
-      background-color: transparent;
-
-      .blockIcon {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
-
-  .timeAgo {
-    color: var(--light-900);
-  }
-
-  .descriptionBlock {
-    .description {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-
-      text-overflow: ellipsis;
-    }
-
-    .showBtn {
-      cursor: pointer;
-
-      align-self: flex-start;
-
-      color: var(--accent-500);
-
-      background-color: transparent;
-      border: none;
-
-      &:hover {
-        color: var(--accent-300);
-      }
-
-      &:active {
-        color: var(--accent-700);
-      }
-    }
+  &.expanded {
+    max-height: 100%;
   }
 }

@@ -6,6 +6,7 @@ type Props = {};
 
 export const MoreActions = ({}: Props) => {
   return (
+    // добавить дропдаун
     <Button className={s.btn} variant={'text'}>
       <MoreHorizontalOutline className={s.moreIcon} />
     </Button>

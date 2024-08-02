@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { ReCaptcha } from '@/features/reCaptcha/ReCaptcha';
-import { SentEmailModal, usePasswordRecovery } from '@/pagesComponents';
+import { ReCaptcha } from '@/features';
+import { usePasswordRecovery } from '@/pagesComponents';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
+import { SentEmailModal } from '@/widget';
 import Link from 'next/link';
 
 import s from './PasswordRecovery.module.scss';

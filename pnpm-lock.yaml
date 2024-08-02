@@ -112,6 +112,9 @@ importers:
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      swiper:
+        specifier: ^11.1.8
+        version: 11.1.8
       swr:
         specifier: ^2.2.5
         version: 2.2.5(react@18.3.1)
@@ -7057,6 +7060,11 @@ packages:
   svg-tags@1.0.0:
     resolution:
       { integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA== }
+
+  swiper@11.1.8:
+    resolution:
+      { integrity: sha512-sBFp7fA+IfZ/7BMcg8/JSEqDD1qZXBUyliT76yk3zIYVu2fMwFVAghhAJ9vBM5tJUtHW5qcD0pmeEGQs1EK14w== }
+    engines: { node: '>= 4.7.0' }
 
   swr@2.2.5:
     resolution:
@@ -14399,6 +14407,8 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   svg-tags@1.0.0: {}
+
+  swiper@11.1.8: {}
 
   swr@2.2.5(react@18.3.1):
     dependencies:

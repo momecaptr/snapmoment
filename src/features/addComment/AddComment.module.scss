@@ -9,6 +9,12 @@
   }
 
   .publishBtn {
+    cursor: pointer;
     padding: 6px 12px;
+    color: var(--accent-500);
+
+    &:active {
+      color: var(--accent-700);
+    }
   }
 }
