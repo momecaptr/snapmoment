@@ -67,6 +67,10 @@ export const forgotPasswordSchema = z.object({
   recaptcha: commonReCaptchaRules
 });
 
+export const resendCreatePasswordSchema = z.object({
+  recaptcha: commonReCaptchaRules
+});
+
 export const signInSchema = z.object({
   email: commonEmailRules,
   password: commonPasswordRules
@@ -91,3 +95,4 @@ export type SignInSchemaType = z.infer<typeof signInSchema>;
 export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
 export type CreateNewPasswordFormValues = z.infer<typeof createNewPasswordSchema>;
 export type RefreshTokenValues = z.infer<typeof RefreshTokenResponseSchema>;
+export type ResendCreatePasswordType = z.infer<typeof resendCreatePasswordSchema>;

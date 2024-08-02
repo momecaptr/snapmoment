@@ -1,9 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useCreateNewPasswordMutation } from '@/shared/api';
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/shared/schemas';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 
 import s from './CreateNewPassword.module.scss';
 
@@ -16,9 +18,21 @@ export const CreateNewPassword = () => {
     defaultValues: { confirmPassword: '', password: '' },
     resolver: zodResolver(createNewPasswordSchema)
   });
+  const router = useRouter();
+  const { code } = router.query;
+  const [createNewPassword] = useCreateNewPasswordMutation();
 
   const onSubmit = async ({ password }: CreateNewPasswordFormValues) => {
-    console.log(password);
+    try {
+      await createNewPassword({
+        newPassword: password,
+        recoveryCode: String(code)
+      });
+
+      await router.push('/auth/sign-in');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

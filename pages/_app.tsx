@@ -10,6 +10,7 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
 import { NextPage } from 'next';
+import { Toaster } from 'sonner';
 
 import '@/myApp/styles/index.scss';
 TimeAgo.addDefaultLocale(en);
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <GoogleOAuthProvider clientId={clientId}>
       <Provider store={store}>
         <Component {...props} />
+        <Toaster />
         <Alert />
       </Provider>
     </GoogleOAuthProvider>
