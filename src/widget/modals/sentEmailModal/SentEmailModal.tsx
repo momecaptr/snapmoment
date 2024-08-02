@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import { Button, Modal, Typography } from '@/shared/ui';
+import { useRouter } from 'next/router';
 
 import s from './SentEmailModal.module.scss';
 
@@ -11,8 +12,11 @@ type Props = {
 };
 
 export const SentEmailModal = memo(({ email, open, setOpen }: Props) => {
+  const router = useRouter();
+
   const handleOnClose = () => {
     setOpen(false);
+    router.replace('/auth/sign-in');
   };
 
   return (

@@ -2,19 +2,26 @@ import avatarMock from '@/../public/avatar-mock.jpg';
 import { Typography } from '@/shared/ui';
 import Image from 'next/image';
 
-import s from './Author.module.scss';
+import s from '@/../src/entities/author/Author.module.scss';
 
-type Props = {};
+type Props = {
+  name: string;
+  photo?: string;
+};
 
-export const Author = ({}: Props) => {
+export const Author = ({ name, photo }: Props) => {
   return (
     <div className={s.author}>
-      <Image alt={'avatarMock'} className={s.authorPhoto} src={avatarMock} />
+      <Image
+        alt={'author avatar'}
+        className={s.authorPhoto}
+        height={100}
+        src={photo || avatarMock}
+        width={100}
+        unoptimized
+      />
 
-      <Typography variant={'h3'}>
-        {/*userName*/}
-        URLProfile
-      </Typography>
+      <Typography variant={'h3'}>{name}</Typography>
     </div>
   );
 };

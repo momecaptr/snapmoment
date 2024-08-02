@@ -1,14 +1,17 @@
 import { ReSendPost, ToggleFavorites, ToggleLike } from '@/features';
+import { GetPostByIdResponse } from '@/shared/api';
 
 import s from './PostInteractionBar.module.scss';
 
-type Props = {};
+type Props = {
+  postData: GetPostByIdResponse;
+};
 
-export const PostInteractionBar = ({}: Props) => {
+export const PostInteractionBar = ({ postData }: Props) => {
   return (
     <div className={s.activitesBtn}>
       <div className={s.group}>
-        <ToggleLike />
+        <ToggleLike data={postData} />
         <ReSendPost />
       </div>
       <ToggleFavorites />

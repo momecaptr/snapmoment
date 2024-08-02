@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { PublicPage } from '@/pagesComponents';
 import { Posts } from '@/pagesComponents/posts/Posts';
 import { useMeQuery } from '@/shared/api';
 import { getAuthLayout, getBaseLayout } from '@/shared/providers';
@@ -13,9 +14,9 @@ export default function Home() {
 
   if (data) {
     // ! Тут PrivatePosts, потому что авторизованы
-    return getBaseLayout(<Posts />);
+    return getBaseLayout(<PublicPage />);
   } else {
-    // ! Тут вместо обычных постов должны быть PubliPosts
+    // ! Тут вместо обычных постов должны быть PublicPosts
     return getAuthLayout(<Posts />);
   }
 }
