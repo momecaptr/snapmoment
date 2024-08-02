@@ -39,7 +39,7 @@ export const authApi = snapmomentAPI.injectEndpoints({
         dispatch(authApi.util.invalidateTags(['Me']));
 
         // ! можно редирект тут делать или там где логиним пользователя
-        // Router.push('/profile')
+        // Router.replace('/profile')
       },
       query: (data) => {
         return {

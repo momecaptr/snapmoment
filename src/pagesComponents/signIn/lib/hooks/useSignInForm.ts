@@ -22,7 +22,7 @@ export const useSignInForm = () => {
   const onSubmit = async (data: SignInSchemaType) => {
     await login(data);
     // ! Редиректить нужно с await! + переадресацию можно сделать в authApi login
-    router.push('/profile');
+    router.replace('/profile');
   };
 
   return {
