@@ -29,7 +29,7 @@ const Success: StoryFn<StoryProps> = (args: StoryProps) => {
 const Error: StoryFn<StoryProps> = (args: StoryProps) => {
   const { showToast } = useCustomToast();
 
-  return <Button onClick={() => showToast({ message: 'Something went wrong!', type: 'error' })}>success</Button>;
+  return <Button onClick={() => showToast({ message: 'Something went wrong!', type: 'error' })}>error</Button>;
 };
 
 export { Error, Success };
