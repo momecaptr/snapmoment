@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Profile } from '@/pagesComponents/profile/Profile';
+import { GeneralInfo } from '@/pagesComponents';
 import { getBaseLayout } from '@/shared/providers';
 
 export default function Page() {
   return (
     <>
-      <Profile />
+      <GeneralInfo />
     </>
   );
 }

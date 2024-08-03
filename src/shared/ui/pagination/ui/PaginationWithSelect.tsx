@@ -4,6 +4,7 @@ import { Pagination, SelectUI, Typography } from '@/shared/ui';
 import s from './PaginationWithSelect.module.scss';
 
 export type selectOptionsType = {
+  key?: string;
   text: string;
   value: string;
 };

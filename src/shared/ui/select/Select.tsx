@@ -29,7 +29,8 @@ export const SelectUI = ({ className, disabled, onValueChange, selectOptions, va
         <Select.Trigger aria-label={'select'} className={selectClasses.trigger} asChild>
           <button>
             <Typography className={s.selectVariant} variant={'regular_text_14'}>
-              {selectOptions.find((el) => el.value === value)?.text || selectOptions[0].text}
+              {selectOptions.find((el) => el.value === value)?.text ||
+                (selectOptions.length > 0 ? selectOptions[0].text : 'No options available')}
             </Typography>
             <ArrowIosDownOutline className={selectClasses.icon} />
           </button>

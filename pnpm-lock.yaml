@@ -70,6 +70,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      country-state-city:
+        specifier: ^3.2.1
+        version: 3.2.1
       javascript-time-ago:
         specifier: ^2.5.10
         version: 2.5.10
@@ -3562,6 +3565,10 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  country-state-city@3.2.1:
+    resolution:
+      { integrity: sha512-kxbanqMc6izjhc/EHkGPCTabSPZ2G6eG4/97akAYHJUN4stzzFEvQPZoF8oXDQ+10gM/O/yUmISCR1ZVxyb6EA== }
 
   create-ecdh@4.0.4:
     resolution:
@@ -11211,6 +11218,8 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.5.3
+
+  country-state-city@3.2.1: {}
 
   create-ecdh@4.0.4:
     dependencies:
