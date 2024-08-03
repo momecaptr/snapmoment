@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app';
 import React, { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
-import { Alert } from '@/entities';
 import { wrapper } from '@/myApp/store';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import TimeAgo from 'javascript-time-ago';
@@ -32,8 +31,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <GoogleOAuthProvider clientId={clientId}>
       <Provider store={store}>
         <Component {...props} />
-        <Toaster />
-        <Alert />
+        <Toaster position={'bottom-left'} />
       </Provider>
     </GoogleOAuthProvider>
   );

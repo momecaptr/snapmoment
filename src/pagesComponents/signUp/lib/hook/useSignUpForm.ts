@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { useAlert } from '@/entities';
 import { BaseResponseType, useRegistrationMutation } from '@/shared/api';
+import { useCustomToast } from '@/shared/lib';
 import { SignUpSchemaType, signUpSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -15,22 +15,22 @@ export const useSignUpForm = () => {
     resolver: zodResolver(signUpSchema)
   });
 
-  const { errorAlert, successAlert } = useAlert();
-
   const [register] = useRegistrationMutation();
+  const { showToast } = useCustomToast();
+
   const onSubmit = async (data: SignUpSchemaType) => {
     const res = await register({ email: data.email, password: data.password, userName: data.username });
 
     try {
       if ('data' in res) {
-        successAlert({ message: `We have sent a link to confirm your email to ${data.email}` });
+        showToast({ message: `We have sent a link to confirm your email to ${data.email}`, type: 'success' });
       } else {
         const err = res.error as BaseResponseType;
 
-        errorAlert({ message: `Error - ${err.messages[0].message || 'unknown issue'}` });
+        showToast({ message: `Error - ${err.messages[0].message || 'unknown issue'}`, type: 'error' });
       }
     } catch (e) {
-      errorAlert({ message: 'An unexpected error occurred. Please try again later.' });
+      showToast({ message: 'An unexpected error occurred. Please try again later.', type: 'error' });
     }
   };
 

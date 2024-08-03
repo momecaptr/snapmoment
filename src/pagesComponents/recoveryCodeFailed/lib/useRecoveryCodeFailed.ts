@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { useAlert } from '@/entities';
 import { BaseResponseType, usePasswordRecoveryMutation } from '@/shared/api';
+import { useCustomToast } from '@/shared/lib';
 import { ForgotPasswordFormValues, ResendCreatePasswordType, resendCreatePasswordSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
@@ -10,7 +10,6 @@ export const useRecoveryCodeFailed = () => {
   const [passwordRecovery, { isLoading }] = usePasswordRecoveryMutation();
   const router = useRouter();
   const { email } = router.query;
-  const { errorAlert, successAlert } = useAlert();
   const {
     control,
     formState: { isValid },
@@ -19,6 +18,8 @@ export const useRecoveryCodeFailed = () => {
     defaultValues: { recaptcha: '' },
     resolver: zodResolver(resendCreatePasswordSchema)
   });
+  const { showToast } = useCustomToast();
+
   const onSubmit = async ({ recaptcha }: ResendCreatePasswordType) => {
     const res = await passwordRecovery({
       email: String(email),
@@ -27,14 +28,14 @@ export const useRecoveryCodeFailed = () => {
 
     try {
       if ('data' in res) {
-        successAlert({ message: `We have sent a link to revalidate your identity to ${email}` });
+        showToast({ message: `We have sent a link to revalidate your identity to ${email}`, type: 'success' });
       } else {
         const err = res.error as BaseResponseType;
 
-        errorAlert({ message: `Error - ${err.messages[0].message || 'unknown issue'}` });
+        showToast({ message: `Error - ${err.messages[0].message || 'unknown issue'}`, type: 'error' });
       }
     } catch (e) {
-      errorAlert({ message: 'An unexpected error occurred. Please try again later.' });
+      showToast({ message: 'An unexpected error occurred. Please try again later.', type: 'error' });
     }
   };
 
