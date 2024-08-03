@@ -3,6 +3,7 @@ export * from './button/Button';
 export * from './card/Card';
 export * from './chart/Chart';
 export * from './checkbox/Checkbox';
+export * from './customToast/CustomToast';
 export * from './datePicker/lib';
 export * from './datePicker/ui/DatePicker';
 export * from './datePicker/ui/DatePickerPopupContent';

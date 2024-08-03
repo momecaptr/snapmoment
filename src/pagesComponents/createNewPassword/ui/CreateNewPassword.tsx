@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useCreateNewPasswordMutation } from '@/shared/api';
+import { useCustomToast } from '@/shared/lib';
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/shared/schemas';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,6 +22,7 @@ export const CreateNewPassword = () => {
   const router = useRouter();
   const { code } = router.query;
   const [createNewPassword] = useCreateNewPasswordMutation();
+  const { showToast } = useCustomToast();
 
   const onSubmit = async ({ password }: CreateNewPasswordFormValues) => {
     try {
@@ -29,9 +31,11 @@ export const CreateNewPassword = () => {
         recoveryCode: String(code)
       });
 
+      showToast({ message: 'The password was successfully updated', type: 'success' });
+
       await router.push('/auth/sign-in');
     } catch (e) {
-      console.log(e);
+      showToast({ message: 'Password update error', type: 'error' });
     }
   };
 

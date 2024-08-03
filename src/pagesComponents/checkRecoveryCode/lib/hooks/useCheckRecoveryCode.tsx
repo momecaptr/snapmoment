@@ -1,17 +1,18 @@
 import { useCallback, useEffect } from 'react';
 
 import { useCheckRecoveryCodeMutation } from '@/shared/api';
+import { useCustomToast } from '@/shared/lib';
 import { useRouter } from 'next/router';
 
 export const useCheckRecoveryCode = () => {
   const router = useRouter();
   const [checkCode, { isError, isLoading }] = useCheckRecoveryCodeMutation();
   const { code, email } = router.query;
-  // const { errorAlert } = useAlert();
+  const { showToast } = useCustomToast();
 
   const checkCodeHandler = useCallback(async () => {
     if (!code) {
-      console.log('No code found in query params');
+      showToast({ message: 'No code found in query params', type: 'success' });
 
       return;
     }
@@ -24,8 +25,7 @@ export const useCheckRecoveryCode = () => {
       }
     } catch (e) {
       await router.replace(`/auth/recovery-code-failed?email=${email}`);
-      console.error('Error in checkCodeHandler:', e);
-      // errorAlert({ message: 'There was an error verifying your recovery code. Please try again.' }); (!!! при использовании возникают зацикленные ошибки)
+      showToast({ message: 'There was an error verifying your recovery code. Please try again.', type: 'error' });
     }
   }, [code, email, checkCode, router]);
 
