@@ -22,7 +22,7 @@ export const Answer = ({ answer, children, isAuth }: Props) => {
         alt={'reviewer photo'}
         className={s.answerUserPhoto}
         height={100}
-        src={answer.from.avatars[0].url || avatarMock}
+        src={answer.from.avatars[0]?.url || avatarMock}
         width={100}
       />
 

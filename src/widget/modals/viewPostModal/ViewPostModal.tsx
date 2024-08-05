@@ -37,7 +37,7 @@ export const ViewPostModal = ({
     setOpen(true);
   };
 
-  const handleOnClose = () => {
+  const setCloseModalHandler = () => {
     setOpenViewPhoto(false);
   };
 
@@ -46,8 +46,8 @@ export const ViewPostModal = ({
       <>
         <UsersLikesModal open={isOpen} postLikes={postLikes} setOpen={setOpen} />
 
-        <Modal className={s.modal} onOpenChange={handleOnClose} open={openViewPhoto} title={''}>
-          <button className={s.closeBtn} onClick={handleOnClose}>
+        <Modal className={s.modal} onOpenChange={setCloseModalHandler} open={openViewPhoto} title={''}>
+          <button className={s.closeBtn} onClick={setCloseModalHandler}>
             <CloseOutline className={s.closeIcon} />
           </button>
 
@@ -56,14 +56,12 @@ export const ViewPostModal = ({
 
             <div className={s.about}>
               <div className={s.authorBlock}>
-                <div className={s.authorWrapper}>
-                  {!isFetching && (
-                    <>
-                      <Author name={postData.userName} photo={postData.avatarOwner} />
-                      {isAuth && <MoreActions />}
-                    </>
-                  )}
-                </div>
+                {!isFetching && (
+                  <div className={s.authorWrapper}>
+                    <Author name={postData.userName} photo={postData.avatarOwner} />
+                    {isAuth && <MoreActions />}
+                  </div>
+                )}
               </div>
 
               <div className={s.comments}>
@@ -77,7 +75,7 @@ export const ViewPostModal = ({
 
               <div className={s.actions}>
                 <div className={s.actionsWrapper}>
-                  {isAuth && <PostInteractionBar postData={postData} />}
+                  {isAuth && <PostInteractionBar postData={postData} postLikes={postLikes} />}
                   {!isFetching && (
                     <>
                       <ShowLikers postLikes={postLikes} showViewLikesHandler={showViewLikesHandler} />
