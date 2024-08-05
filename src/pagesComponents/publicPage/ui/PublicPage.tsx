@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
 import {
-  useGetPublicPostsQuery,
+  Item,
   useLazyGetPostByIdQuery,
   useLazyGetPostCommentsByPostIdQuery,
   useLazyGetPostLikesQuery,
@@ -10,14 +10,31 @@ import {
 } from '@/shared/api';
 import { ModalKey, useModal } from '@/shared/lib';
 import { UserCard, ViewPostModal } from '@/widget';
+import { InferGetStaticPropsType } from 'next';
 
 import s from './PublicPage.module.scss';
 
-export const PublicPage = () => {
+import { getStaticProps } from '../../../../pages';
+
+export const PublicPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  return (
+    <>
+      <section className={s.container}>
+        <RegisteredUsersCounter />
+
+        <PostList posts={posts} />
+      </section>
+    </>
+  );
+};
+
+const PostList = ({ posts }: { posts: Item[] }) => {
+  return <div className={s.cards}>{posts?.map((post) => <PublicPost key={post.id} post={post} />)}</div>;
+};
+
+const PublicPost = ({ post }: { post: Item }) => {
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
 
-  const { data: me } = useMeQuery();
-  const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: 4 });
   const [getPostById, { data: postData, isFetching }] = useLazyGetPostByIdQuery();
   const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
     useLazyGetPostCommentsByPostIdQuery();
@@ -29,6 +46,9 @@ export const PublicPage = () => {
     getPostCommentsByPostId({ postId: postId });
     getPostLikes({ postId: postId });
   };
+
+  const { data: me } = useMeQuery();
+
   const isDataFetching = isFetching && isFetchingPostComments && isFetchingPostLikes;
 
   return (
@@ -42,16 +62,7 @@ export const PublicPage = () => {
         postLikes={postLikes}
         setOpenViewPhoto={setOpen}
       />
-
-      <section className={s.container}>
-        <RegisteredUsersCounter />
-
-        <div className={s.cards}>
-          {publicPosts?.items.map((post) => (
-            <UserCard key={post.id} lazyOpenModalHandler={lazyOpenModalHandler} post={post} />
-          ))}
-        </div>
-      </section>
+      <UserCard key={post.id} lazyOpenModalHandler={lazyOpenModalHandler} post={post} />
     </>
   );
 };
