@@ -15,7 +15,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
 export const ButtonPolymorph = <T extends ElementType = 'button'>(props: ButtonProps<T>, ref: any) => {
   const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props;
 
-  return <Component className={clsx(className, s.button, s[variant], fullWidth && s.fullWidth)} ref={ref} {...rest} />;
+  return <Component className={clsx(s.button, s[variant], fullWidth && s.fullWidth, className)} ref={ref} {...rest} />;
 };
 
 export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType = 'button'>(
