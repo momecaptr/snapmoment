@@ -12,25 +12,24 @@
 
       display: flex;
 
-      width: 48px;
+      width: fit-content;
       padding: 0;
 
       background-color: transparent;
       border: none;
 
       img {
+        position: relative;
         width: 24px;
         height: 24px;
         border-radius: 50%;
 
         &:nth-child(2) {
-          position: absolute;
-          left: 12px;
+          margin-left: -12px;
         }
 
         &:nth-child(3) {
-          position: absolute;
-          left: 24px;
+          margin-left: -12px;
         }
       }
     }

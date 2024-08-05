@@ -23,7 +23,7 @@ export const PublicPage = () => {
     useLazyGetPostCommentsByPostIdQuery();
   const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
 
-  const lazyOpenModalHandler = (postId: number, isOpen: boolean) => {
+  const lazyOpenModalHandler = async (postId: number, isOpen: boolean) => {
     setOpen(isOpen);
     getPostById({ postId: postId });
     getPostCommentsByPostId({ postId: postId });

@@ -17,7 +17,7 @@ export const Posts = (props: Props) => {
       {data?.items.map((item) => {
         return (
           <div className={s.postContainer} key={item.id}>
-            <img alt={'postPhoto'} className={s.postPhoto} src={item.images[0].url} />
+            <img alt={'postPhoto'} className={s.postPhoto} src={item.images[0]?.url} />
             <div>
               <img alt={'avatar'} className={s.avatar} src={item.avatarOwner} />
               <p>{item.userName}</p>
