@@ -3,8 +3,8 @@ import type { AppProps } from 'next/app';
 import React, { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
-import { DevMode } from '@/features';
 import { wrapper } from '@/myApp/store';
+import { DevMode } from '@/shared/ui';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';

@@ -27,11 +27,15 @@ export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Checkb
         [s.checked]: checked,
         [s.disabled]: disabled
       }),
-      label: clsx(s.Label, className, { [s.disabled]: disabled }),
-      root: clsx(s.CheckboxRoot, className, {
-        [s.checked]: checked,
-        [s.disabled]: disabled
-      })
+      label: clsx(s.Label, { [s.disabled]: disabled }, className),
+      root: clsx(
+        s.CheckboxRoot,
+        {
+          [s.checked]: checked,
+          [s.disabled]: disabled
+        },
+        className
+      )
     };
 
     return (

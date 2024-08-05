@@ -1,7 +1,5 @@
 import { ComponentProps, ElementType, ReactNode, memo } from 'react';
 
-import clsx from 'clsx';
-
 import s from './Typography.module.scss';
 
 type TypographyVariant =
@@ -37,7 +35,7 @@ const TypographyBasic = <E extends ElementType = typeof defaultElement>({
   variant = 'regular_text_16',
   ...otherProps
 }: TextProps<E>) => {
-  const classNames = clsx(className, s[variant]);
+  const classNames = `${className} ${s[variant]}`;
   const Component = as || 'p';
 
   return (

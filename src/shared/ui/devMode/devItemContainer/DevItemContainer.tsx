@@ -4,7 +4,7 @@ import ArrowIosDownOutline from '@/../public/assets/components/ArrowIosDownOutli
 import { Button } from '@/shared/ui';
 import { clsx } from 'clsx';
 
-import s from '@/features/devMode/DevMode.module.scss';
+import s from './DevItem.module.scss';
 
 type Props = {
   children?: ReactNode;

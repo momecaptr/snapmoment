@@ -1,14 +1,14 @@
-.sideBarBtnText {
-  color: var(--light-900);
-
-  &:hover {
-    color: var(--accent-500);
-  }
-}
-
 .sideBarBtn {
   color: var(--light-900);
   text-decoration: none;
+
+  & .sideBarBtnText {
+    color: var(--light-900);
+
+    &:hover {
+      color: var(--accent-500);
+    }
+  }
 }
 
 .iconArrowRight {

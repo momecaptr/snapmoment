@@ -1,6 +1,5 @@
 export * from './addComment/AddComment';
 export * from './changePhotoProfile/ChangePhoto';
-export * from './devMode/DevMode';
 export * from './generalInfoNavigation/GeneralInfoNavigation';
 export * from './githubButton/GithubAuthButton';
 export * from './googleButton/lib/useAuthGoogle';

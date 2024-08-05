@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import DevItemContainer from '@/features/devMode/devItemContainer/DevItemContainer';
-import { DevSideBar } from '@/features/devMode/devSideBar/DevSideBar';
 import { Button } from '@/shared/ui';
+import DevItemContainer from '@/shared/ui/devMode/devItemContainer/DevItemContainer';
+import { DevSideBar } from '@/shared/ui/devMode/devSideBar/DevSideBar';
 import { clsx } from 'clsx';
 
 import s from './DevMode.module.scss';

@@ -93,7 +93,7 @@ export const DevSideBar = () => {
       {mainLinks.map(({ IconComponent, name, path, value }) => (
         <Link className={s.sideBarBtn} href={path} key={value}>
           <IconComponent className={s.iconArrowRight} />
-          <Typography as={'span'} className={s.sideBarBtnText} variant={'medium_text_14'}>
+          <Typography as={'span'} className={s.sideBarBtnText} variant={'small_text'}>
             {name}
           </Typography>
         </Link>
