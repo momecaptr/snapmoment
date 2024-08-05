@@ -6,6 +6,7 @@
 }
 
 .photo {
+  height: 240px;
   cursor: pointer;
   overflow: hidden;
 
@@ -51,10 +52,15 @@
 }
 
 .description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
   max-height: 72px;
+  text-overflow: ellipsis;
 
   &.expanded {
+    display: initial;
     max-height: 100%;
   }
 }

@@ -35,7 +35,7 @@ export const Comment = ({ children, comment, isAuth }: Props) => {
         alt={'avatarMock'}
         className={s.commentUserPhoto}
         height={100}
-        src={comment.from.avatars[0].url || avatarMock}
+        src={comment.from.avatars[0]?.url || avatarMock}
         width={100}
       />
 

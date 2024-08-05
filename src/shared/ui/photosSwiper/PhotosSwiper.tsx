@@ -72,19 +72,22 @@ export const PhotosSwiper: React.FC<Props> = ({ sliders }) => {
             </SwiperSlide>
           ))
         ) : (
-          <div className={s.photo}>
+          <SwiperSlide className={s.swiperSlide}>
             <Image alt={'post photo'} height={100} src={sliders[0]?.url || avatarMock} width={100} unoptimized />
-          </div>
+          </SwiperSlide>
         )}
       </Swiper>
-
-      <button className={s.swiperButtonPrev} ref={prevRef}>
-        <ArrowIosBack />
-      </button>
-      <button className={s.swiperButtonNext} ref={nextRef}>
-        <ArrowIosForward />
-      </button>
-      <div className={s.swiperPagination}></div>
+      {sliders.length > 1 && (
+        <>
+          <button className={s.swiperButtonPrev} ref={prevRef}>
+            <ArrowIosBack />
+          </button>
+          <button className={s.swiperButtonNext} ref={nextRef}>
+            <ArrowIosForward />
+          </button>
+          <div className={s.swiperPagination}></div>
+        </>
+      )}
     </div>
   );
 };

@@ -41,3 +41,9 @@ export const gradeNames = [
 ];
 
 export const initCurrentPage = '1';
+
+export enum LikeStatus {
+  DISLIKE = 'DISLIKE',
+  LIKE = 'LIKE',
+  NONE = 'NONE'
+}

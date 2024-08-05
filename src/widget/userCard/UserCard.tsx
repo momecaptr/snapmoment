@@ -30,7 +30,7 @@ export const UserCard = ({ lazyOpenModalHandler, post }: Props) => {
   return (
     <div className={s.card}>
       <div className={s.photo} onClick={showViewPhotoHandler}>
-        <Image alt={'post photos'} height={100} src={post.images[0].url || avatarMock} width={100} unoptimized />
+        <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />
       </div>
 
       <div className={clsx(s.content, isShowText && s.expanded)}>
