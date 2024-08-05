@@ -21,7 +21,6 @@ type LinksValue =
   | 'logout'
   | 'message'
   | 'password-recovery'
-  | 'person'
   | 'plus'
   | 'privacy'
   | 'profile'
@@ -43,7 +42,6 @@ type MainLinksName =
   | 'My Profile'
   | 'Password recovery'
   | 'Privacy'
-  | 'Profile'
   | 'Recovery Password'
   | 'Search'
   | 'Sign Up'
@@ -55,13 +53,11 @@ export const DevSideBar = () => {
   const mainLinks: MainLinksProps[] = [
     { IconComponent: ArrowIosForward, name: 'Home', path: '/', value: 'home' },
     { IconComponent: ArrowIosForward, name: 'Create', path: '/auth/plus', value: 'plus' },
-    { IconComponent: ArrowIosForward, name: 'My Profile', path: '/person', value: 'person' },
+    { IconComponent: ArrowIosForward, name: 'My Profile', path: '/profile', value: 'profile' },
     { IconComponent: ArrowIosForward, name: 'Messenger', path: '/message', value: 'message' },
     { IconComponent: ArrowIosForward, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: ArrowIosForward, name: 'Statistics', path: '/statistics', value: 'statistics' },
     { IconComponent: ArrowIosForward, name: 'Favorites', path: '/favorites', value: 'favorites' },
-    { IconComponent: ArrowIosForward, name: 'Profile', path: '/profile', value: 'profile' },
-    { IconComponent: ArrowIosForward, name: 'Profile', path: '/profile', value: 'profile' },
     { IconComponent: ArrowIosForward, name: 'Sign Up', path: '/auth/sign-up', value: 'sign-up' },
     { IconComponent: ArrowIosForward, name: 'Sign in', path: '/auth/sign-in', value: 'sign-in' },
     {
