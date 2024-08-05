@@ -14,10 +14,14 @@ import { Button } from '@/shared/ui';
 import s from '../Pagination.module.scss';
 
 export const PageLink = ({ active, children, className, disabled, ...props }: Props) => {
-  const customClassName = clsx(s.pageLink, className, {
-    [s.active]: active,
-    [s.disabled]: disabled
-  });
+  const customClassName = clsx(
+    s.pageLink,
+    {
+      [s.active]: active,
+      [s.disabled]: disabled
+    },
+    className
+  );
 
   return (
     <div className={s.pageLinkWrapper}>

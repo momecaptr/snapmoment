@@ -78,7 +78,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
   const styleForType = isShow ? 'text' : 'password';
 
   return (
-    <div className={clsx(className, s.box)}>
+    <div className={clsx(s.box, className)}>
       <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
         {type !== 'search' && label}
       </Typography>

@@ -1,0 +1,8 @@
+.iconArrowDown {
+  margin-left: 3px;
+  transition: 0.2s;
+
+  & path {
+    fill: var(--light-700);
+  }
+}
