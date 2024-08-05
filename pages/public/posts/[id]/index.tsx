@@ -56,5 +56,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const post: PostTest = await res.json();
 
   // Передача данных поста на страницу через пропсы
-  return { props: { post } };
+  return { props: { post }, revalidate: 60 };
 };

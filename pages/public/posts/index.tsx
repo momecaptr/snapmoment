@@ -35,6 +35,7 @@ export interface PostArrayTest {
   return {
     props: {
       posts
-    }
+    },
+    revalidate: 60
   };
 };
