@@ -19,10 +19,10 @@
       border: none;
 
       img {
+        position: relative;
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        position: relative;
 
         &:nth-child(2) {
           margin-left: -12px;
