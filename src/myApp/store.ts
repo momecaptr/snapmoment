@@ -1,11 +1,13 @@
 import { appSlice } from '@/myApp/model/appSlice';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import { configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { Context, createWrapper } from 'next-redux-wrapper';
 
-const makeStore = () =>
+const makeStore = (context?: Context) =>
   configureStore({
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(snapmomentAPI.middleware),
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(snapmomentAPI.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({ thunk: { extraArgument: context } }).concat(snapmomentAPI.middleware),
     reducer: {
       app: appSlice.reducer,
       [snapmomentAPI.reducerPath]: snapmomentAPI.reducer

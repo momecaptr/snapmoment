@@ -27,6 +27,10 @@ export const UserCard = ({ lazyOpenModalHandler, post }: Props) => {
 
   const toggleShowText = () => setIsShowText(!isShowText);
 
+  if (!post) {
+    return <div>no post</div>;
+  }
+
   return (
     <div className={s.card}>
       <div className={s.photo} onClick={showViewPhotoHandler}>

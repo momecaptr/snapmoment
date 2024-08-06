@@ -9,6 +9,7 @@ import { GetPostByIdResponse, GetPostCommentsByPostIdResponse } from '@/shared/a
 import { ModalKey, useModal } from '@/shared/lib';
 import { Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
+import { useRouter } from 'next/router';
 
 import s from './ViewPostModal.module.scss';
 
@@ -32,21 +33,23 @@ export const ViewPostModal = ({
   setOpenViewPhoto
 }: Props) => {
   const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
+  const router = useRouter();
 
   const showViewLikesHandler = () => {
     setOpen(true);
   };
 
   const setCloseModalHandler = () => {
-    setOpenViewPhoto(false);
+    // setOpenViewPhoto(false);
+    router.back();
   };
 
   return (
     postData && (
       <>
-        <UsersLikesModal open={isOpen} postLikes={postLikes} setOpen={setOpen} />
+        <UsersLikesModal postLikes={postLikes} setOpen={setOpen} open />
 
-        <Modal className={s.modal} onOpenChange={setCloseModalHandler} open={openViewPhoto} title={''}>
+        <Modal className={s.modal} onOpenChange={setCloseModalHandler} title={''} open>
           <button className={s.closeBtn} onClick={setCloseModalHandler}>
             <CloseOutline className={s.closeIcon} />
           </button>

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { wrapper } from '@/myApp/store';
 import { PublicPage } from '@/pagesComponents';
 import { Posts } from '@/pagesComponents/posts/Posts';
-import { GetPostsResponse, Item, useMeQuery } from '@/shared/api';
+import { Item, getPublicPosts, useMeQuery } from '@/shared/api';
+import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
 import { getAuthLayout, getBaseLayout } from '@/shared/providers';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
 
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -25,35 +27,31 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
 //   return <BaseLayout>{page}</BaseLayout>;
 // };
 
-export const getStaticProps: GetStaticProps<{ posts: Item[] }> = async () => {
-  const pageSize = 4;
-  const sortBy = 'createdAt';
-  const sortDirection = 'desc';
-  const url = new URL('https://inctagram.work/api/v1/public-posts/all');
+export const getStaticProps = wrapper.getStaticProps(
+  (store) => async (): Promise<GetStaticPropsResult<{ posts: Item[] }>> => {
+    const pageSize = 4;
+    const sortBy = 'createdAt';
+    const sortDirection = 'desc';
 
-  url.searchParams.append('pageSize', pageSize.toString());
-  url.searchParams.append('sortBy', sortBy);
-  url.searchParams.append('sortDirection', sortDirection);
+    const posts = await store.dispatch(
+      getPublicPosts.initiate({
+        pageSize,
+        sortBy,
+        sortDirection
+      })
+    );
 
-  const res = await fetch(url.toString(), {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'GET'
-  });
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
 
-  if (!res.ok) {
-    console.error('Failed to fetch posts:', res.status, res.statusText);
+    if (!posts || !posts.data) {
+      return { props: { posts: [] }, revalidate: 60 };
+    }
 
-    return { props: { posts: [] }, revalidate: 60 };
+    return {
+      props: {
+        posts: posts.data.items
+      },
+      revalidate: 60
+    };
   }
-
-  const data: GetPostsResponse = await res.json();
-
-  return {
-    props: {
-      posts: data.items
-    },
-    revalidate: 60
-  };
-};
+);

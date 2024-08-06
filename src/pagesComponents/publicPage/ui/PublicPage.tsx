@@ -9,8 +9,9 @@ import {
   useMeQuery
 } from '@/shared/api';
 import { ModalKey, useModal } from '@/shared/lib';
-import { UserCard, ViewPostModal } from '@/widget';
+import { UserCard } from '@/widget';
 import { InferGetStaticPropsType } from 'next';
+import Link from 'next/link';
 
 import s from './PublicPage.module.scss';
 
@@ -29,10 +30,18 @@ export const PublicPage = ({ posts }: InferGetStaticPropsType<typeof getStaticPr
 };
 
 const PostList = ({ posts }: { posts: Item[] }) => {
-  return <div className={s.cards}>{posts?.map((post) => <PublicPost key={post.id} post={post} />)}</div>;
+  return (
+    <div className={s.cards}>
+      {posts?.map((post) => (
+        <Link href={`/public/posts/${post.id}`} key={post.id}>
+          <PublicPost1 post={post} />
+        </Link>
+      ))}
+    </div>
+  );
 };
 
-const PublicPost = ({ post }: { post: Item }) => {
+export const PublicPost1 = ({ post }: { post: Item }) => {
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
 
   const [getPostById, { data: postData, isFetching }] = useLazyGetPostByIdQuery();
@@ -53,16 +62,7 @@ const PublicPost = ({ post }: { post: Item }) => {
 
   return (
     <>
-      <ViewPostModal
-        isAuth={!!me?.userId}
-        isFetching={isDataFetching}
-        openViewPhoto={isOpen}
-        postComments={postComments}
-        postData={postData}
-        postLikes={postLikes}
-        setOpenViewPhoto={setOpen}
-      />
-      <UserCard key={post.id} lazyOpenModalHandler={lazyOpenModalHandler} post={post} />
+      <UserCard lazyOpenModalHandler={lazyOpenModalHandler} post={post} />
     </>
   );
 };
