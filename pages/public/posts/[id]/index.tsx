@@ -39,12 +39,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   const { id } = context.params!;
   const postId = Number(id);
 
-  // const postPromise = await store.dispatch(publicApi.endpoints.getPostById.initiate({ postId }));
   const postPromise = await store.dispatch(getPostById.initiate({ postId }));
 
   const post = postPromise.data || null;
-
-  console.log('post', post);
 
   return {
     props: {

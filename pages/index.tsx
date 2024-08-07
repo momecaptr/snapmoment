@@ -29,15 +29,11 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
 
 export const getStaticProps = wrapper.getStaticProps(
   (store) => async (): Promise<GetStaticPropsResult<{ posts: Item[] }>> => {
-    const pageSize = 4;
-    const sortBy = 'createdAt';
-    const sortDirection = 'desc';
-
     const posts = await store.dispatch(
       getPublicPosts.initiate({
-        pageSize,
-        sortBy,
-        sortDirection
+        pageSize: 4,
+        sortBy: 'createdAt',
+        sortDirection: 'desc'
       })
     );
 
