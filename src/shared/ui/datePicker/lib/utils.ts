@@ -1,5 +1,3 @@
-import { RangeDate } from '@/shared/ui';
-
 export const daysOfTheWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 export const months = [
   'January',
@@ -51,11 +49,8 @@ const getDayOfTheWeek = (date: Date) => {
 export const getPreviousMonthDays = (year: number, month: number) => {
   const currentMonthFirstDay = new Date(year, month, 1);
   const prevMonthCellsAmount = getDayOfTheWeek(currentMonthFirstDay);
-
   const daysAmountInPrevMonth = getDaysAmountInAMonth(year, month - 1);
-
   const dateCells: DateCellItem[] = [];
-
   const [cellYear, cellMonth] = month === 0 ? [year - 1, 11] : [year, month - 1];
 
   for (let i = prevMonthCellsAmount - 1; i >= 0; i--) {
@@ -73,13 +68,9 @@ export const getPreviousMonthDays = (year: number, month: number) => {
 export const getNextMonthDays = (year: number, month: number) => {
   const currentMonthFirstDay = new Date(year, month, 1);
   const prevMonthCellsAmount = getDayOfTheWeek(currentMonthFirstDay);
-
   const daysAmount = getDaysAmountInAMonth(year, month);
-
   const nextMonthDays = VISIBLE_CELLS_AMOUNT - daysAmount - prevMonthCellsAmount;
-
   const [cellYear, cellMonth] = month === 11 ? [year + 1, 0] : [year, month + 1];
-
   const dateCells: DateCellItem[] = [];
 
   for (let i = 1; i <= nextMonthDays; i++) {
@@ -110,46 +101,47 @@ export const getCurrentMothDays = (year: number, month: number, numberOfDays: nu
 };
 
 const addLeadingZeroIfNeeded = (value: number) => {
-  if (value > 9) {
-    return value.toString();
-  }
-
-  return `0${value}`;
+  return value > 9 ? value.toString() : `0${value}`;
 };
 
-export const getInputValueFromDate = (value: Date) => {
-  const date = addLeadingZeroIfNeeded(value.getDate());
-  const month = addLeadingZeroIfNeeded(value.getMonth() + 1);
-  const year = value.getFullYear();
+export const getInputValueFromDate = (date: Date): string => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const dayString = addLeadingZeroIfNeeded(day);
+  const monthString = addLeadingZeroIfNeeded(month);
 
-  return `${date}/${month}/${year}`;
+  return `${dayString}.${monthString}.${year}`;
 };
 
-export const getDateFromInputValue = (inputValue: string): RangeDate | undefined => {
-  if (!isValidDateString(inputValue)) {
-    return;
+export const getDateFromInputValue = (dateString: string): Date | null => {
+  const datePattern = /^(\d{2})\.(\d{2})\.(\d{4})$/;
+  const match = dateString.match(datePattern);
+
+  if (!match) {
+    console.error('Invalid date format. Expected format is DD.MM.YYYY.');
+
+    return null;
   }
 
-  const match = inputValue.match(validValueRegex);
+  const day = parseInt(match[1], 10);
+  const month = parseInt(match[2], 10) - 1;
+  const year = parseInt(match[3], 10);
+  const date = new Date(year, month, day);
 
-  if (match) {
-    const [, startDay, startMonth, startYear, endDay, endMonth, endYear] = match;
+  if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+    console.error('Invalid date. Please check the input values.');
 
-    const startDate = new Date(Number(startYear), Number(startMonth) - 1, Number(startDay));
-    const endDate = new Date(Number(endYear), Number(endMonth) - 1, Number(endDay));
-
-    return { endDate, startDate };
+    return null;
   }
+
+  return date;
 };
 
-const validValueRegex = /(\d{2})\/(\d{2})\/(\d{4}) - (\d{2})\/(\d{2})\/(\d{4})/;
+const validValueRegex = /^(\d{2})\.(\d{2})\.(\d{4})$/;
 
 export const isValidDateString = (value: string) => {
-  if (!validValueRegex.test(value)) {
-    return false;
-  }
-
-  return true;
+  return validValueRegex.test(value);
 };
 
 export function isToday(cell: DateCellItem, todayDate: Date) {
@@ -158,68 +150,34 @@ export function isToday(cell: DateCellItem, todayDate: Date) {
   );
 }
 
-export function isInRange(value: Date, min?: Date, max?: Date) {
-  if (min && max) {
-    return isSmallerThanDate(value, max) && isBiggerThanDate(value, min);
+export function isInRange(value: Date, startDate?: Date, endDate?: Date): boolean {
+  if (startDate && !isBiggerThanDate(value, startDate)) {
+    return false;
   }
 
-  if (min) {
-    return isBiggerThanDate(value, min);
-  }
-
-  if (max) {
-    return isSmallerThanDate(value, max);
+  if (endDate && !isSmallerThanDate(value, endDate)) {
+    return false;
   }
 
   return true;
 }
 
-function isBiggerThanDate(value: Date, date: Date) {
-  const isValueFullYear = value.getFullYear();
-  const isValueMonth = value.getMonth();
-  const isValueDate = value.getDate();
-
-  if (isValueFullYear > date.getFullYear()) {
-    return true;
-  }
-
-  if (isValueFullYear < date.getFullYear()) {
-    return false;
-  }
-
-  if (isValueMonth > date.getMonth()) {
-    return true;
-  }
-
-  if (isValueMonth < date.getMonth()) {
-    return false;
-  }
-
-  return isValueDate >= date.getDate();
+function isBiggerThanDate(value: Date, date: Date): boolean {
+  return (
+    value.getFullYear() > date.getFullYear() ||
+    (value.getFullYear() === date.getFullYear() &&
+      (value.getMonth() > date.getMonth() ||
+        (value.getMonth() === date.getMonth() && value.getDate() >= date.getDate())))
+  );
 }
 
-function isSmallerThanDate(value: Date, date: Date) {
-  const isValueFullYear = value.getFullYear();
-  const isValueMonth = value.getMonth();
-  const isValueDate = value.getDate();
-
-  if (isValueFullYear > date.getFullYear()) {
-    return false;
-  }
-
-  if (isValueFullYear < date.getFullYear()) {
-    return true;
-  }
-
-  if (isValueMonth > date.getMonth()) {
-    return false;
-  }
-
-  if (isValueMonth < date.getMonth()) {
-    return true;
-  }
-
-  return isValueDate <= date.getDate();
+function isSmallerThanDate(value: Date, date: Date): boolean {
+  return (
+    value.getFullYear() < date.getFullYear() ||
+    (value.getFullYear() === date.getFullYear() &&
+      (value.getMonth() < date.getMonth() ||
+        (value.getMonth() === date.getMonth() && value.getDate() <= date.getDate())))
+  );
 }
 
 export const removeOneDay = (date: Date): Date => {
@@ -236,13 +194,4 @@ export const addDay = (date: Date, day: number): Date => {
   newDate.setDate(newDate.getDate() + day);
 
   return newDate;
-};
-
-export const findMiddleDate = (startDate: Date, endDate: Date): Date => {
-  const startTime = startDate.getTime();
-  const endTime = endDate.getTime();
-
-  const middleTime = (startTime + endTime) / 2;
-
-  return new Date(middleTime);
 };

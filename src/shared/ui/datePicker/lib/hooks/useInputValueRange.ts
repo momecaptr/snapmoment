@@ -1,35 +1,35 @@
-import React, { useLayoutEffect, useMemo, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 
-import { RangeDate, getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui';
+import { getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui';
 
 interface Props {
-  max?: Date;
-  min?: Date;
-  value: RangeDate;
+  value: Date;
 }
 
-export const useInputValueRange = ({ max, min, value }: Props) => {
+export const useInputValueRange = ({ value }: Props) => {
   const [inputValue, setInputValue] = useState('');
 
-  const onInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value.trim());
-  };
+  }, []);
 
   useLayoutEffect(() => {
     setInputValue(getInputValueDate(value));
-  }, [value, setInputValue]);
+  }, [value]);
 
-  const [inputValueDate, isValidInputValue] = useMemo(() => {
+  const memoizedResult = useMemo(() => {
     const date = getDateFromInputValue(inputValue);
 
     if (!date) {
-      return [undefined, false];
+      return { date: undefined, isValid: false };
     }
 
-    const isDateInRange = isInRange(date.startDate, min, max) && isInRange(date.endDate, min, max);
+    const isDateInRange = isInRange(date);
 
-    return [date, isDateInRange];
-  }, [inputValue, min, max]);
+    return { date, isValid: isDateInRange };
+  }, [inputValue]);
+
+  const { date: inputValueDate, isValid: isValidInputValue } = memoizedResult;
 
   return {
     inputValue,

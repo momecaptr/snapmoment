@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Control } from 'react-hook-form';
 
-import { DatePicker, FormTextfield, RangeDate, SelectUI, addNumberDay } from '@/shared/ui';
+import { DatePicker, FormTextfield, SelectUI } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
 
 import s from './GeneralInfoForms.module.scss';
@@ -10,10 +10,7 @@ type PersonalInfoProps = {
 };
 export const GeneralInfoForms = (props: PersonalInfoProps) => {
   const { control } = props;
-  const [date, setDate] = useState<RangeDate>({
-    endDate: addNumberDay({ date: new Date(), day: 2 }),
-    startDate: new Date()
-  });
+  const [date, setDate] = useState<Date>(new Date('2020-01-01'));
 
   return (
     <div className={s.wrapper}>

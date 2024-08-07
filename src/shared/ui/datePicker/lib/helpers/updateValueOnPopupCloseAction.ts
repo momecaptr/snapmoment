@@ -1,12 +1,12 @@
-import { RangeDate, getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui';
+import { getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui';
 
 interface Props {
   inputValue: string;
   max?: Date;
   min?: Date;
-  onChange: (value: RangeDate) => void;
+  onChange: (value: Date) => void;
   setInputValue: (value: string) => void;
-  value: RangeDate;
+  value: Date;
 }
 
 export const updateValueOnPopupCloseAction = ({ inputValue, max, min, onChange, setInputValue, value }: Props) => {
@@ -18,7 +18,7 @@ export const updateValueOnPopupCloseAction = ({ inputValue, max, min, onChange, 
     return;
   }
 
-  const isDateInRange = isInRange(date.startDate, min, max) && isInRange(date.endDate, min, max);
+  const isDateInRange = isInRange(date, min, max);
 
   if (!isDateInRange) {
     return;

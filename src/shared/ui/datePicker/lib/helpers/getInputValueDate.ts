@@ -1,5 +1,5 @@
-import { RangeDate, getInputValueFromDate } from '@/shared/ui';
+import { getInputValueFromDate } from '@/shared/ui';
 
-export const getInputValueDate = (value: RangeDate): string => {
-  return `${getInputValueFromDate(value.startDate)} - ${getInputValueFromDate(value.endDate)}`;
+export const getInputValueDate = (value: Date): string => {
+  return `${getInputValueFromDate(value)}`;
 };

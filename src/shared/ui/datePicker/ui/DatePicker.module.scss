@@ -9,7 +9,7 @@
     pointer-events: none;
 
     position: absolute;
-    top: 6px;
+    top: 4px;
     right: 12px;
 
     width: 24px;
@@ -35,6 +35,11 @@
 
 .showPopup .datePickerInput {
   cursor: text;
+}
+
+.datePickerInputInvalid {
+  color: var(--danger-100);
+  border: 1px solid var(--danger-100);
 }
 
 .datePickerPopup {
