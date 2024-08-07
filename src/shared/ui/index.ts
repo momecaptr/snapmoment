@@ -7,6 +7,7 @@ export * from './customToast/CustomToast';
 export * from './datePicker/lib';
 export * from './datePicker/ui/DatePicker';
 export * from './datePicker/ui/DatePickerPopupContent';
+export * from './devMode/DevMode';
 export * from './forms/FormCheckbox';
 export * from './forms/FormTextfield';
 export * from './input/Input';

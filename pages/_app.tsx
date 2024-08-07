@@ -4,6 +4,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import { Provider } from 'react-redux';
 
 import { wrapper } from '@/myApp/store';
+import { DevMode } from '@/shared/ui';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <GoogleOAuthProvider clientId={clientId}>
       <Provider store={store}>
         <Component {...props} />
+        <DevMode isActive />
         <Toaster position={'bottom-left'} />
       </Provider>
     </GoogleOAuthProvider>
