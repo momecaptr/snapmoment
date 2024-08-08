@@ -14,7 +14,7 @@ export const SaveGeneralInfo = (props: SaveGeneralInfoProps) => {
   return (
     <>
       <div className={s.box}>
-        <Button className={clsx(className, s.button)}>Save Changes</Button>
+        <Button className={clsx(s.button, className)}>Save Changes</Button>
       </div>
     </>
   );

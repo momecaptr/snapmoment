@@ -22,7 +22,9 @@ export const Modal = ({ children, className, style, title, ...props }: Props) =>
       <Dialog.Title></Dialog.Title>
       <Dialog.Description></Dialog.Description>
       <Dialog.Content className={clsx(s.DialogContent)}>
-        <Card className={clsx(className, s.card)} style={style}>
+        <Dialog.Title />
+        <Dialog.Description />
+        <Card className={clsx(s.card, className)} style={style}>
           <div className={s.header} data-header={'header'}>
             <Typography as={'h1'} variant={'h1'}>
               {title}

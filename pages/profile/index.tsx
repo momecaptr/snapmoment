@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { getBaseLayout } from '@/shared/providers';
-import MyProfile from '@/widget/myProfile/MyProfile';
+import { MyProfile } from '@/widget';
 
 export default function Page() {
   return (

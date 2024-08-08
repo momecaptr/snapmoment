@@ -1,0 +1,202 @@
+@import '@/myApp/styles/mixins';
+
+.datePicker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  & > svg {
+    pointer-events: none;
+
+    position: absolute;
+    top: 4px;
+    right: 12px;
+
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.datePickerInput {
+  cursor: pointer;
+
+  width: 100%;
+  padding: 6px 60px 6px 12px;
+
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-500);
+  border-radius: 2px;
+
+  &:focus {
+    border: 2px solid var(--success-100);
+    outline: none;
+  }
+}
+
+.showPopup .datePickerInput {
+  cursor: text;
+}
+
+.datePickerInputInvalid {
+  color: var(--danger-100);
+  border: 1px solid var(--danger-100);
+}
+
+.datePickerPopup {
+  position: absolute;
+  top: 105%;
+  left: 0;
+
+  padding: 16px 24px;
+
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-500);
+  border-radius: 2px;
+}
+
+.calendarPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: none;
+}
+
+.calendarPanelDate {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.calendarPanelContent {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.calendarPanelButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.popupBtnMonth {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  background-color: var(--dark-300);
+  border: 1px solid var(--dark-300);
+  border-radius: 50%;
+
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--dark-500);
+    border: 1px solid var(--dark-500);
+  }
+
+  &:active {
+    color: var(--dark-500);
+    background-color: var(--light-500);
+    border: 1px solid var(--light-500);
+  }
+
+  &:focus {
+    border: 1px solid var(--accent-300) !important;
+    border-radius: 50%;
+    outline: 1px solid var(--accent-300) !important;
+  }
+}
+
+.calendarPanelButtonsRight,
+.calendarPanelButtonsLeft {
+  display: flex;
+}
+
+.calendarPanelItem {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    opacity: 0.2;
+  }
+}
+
+.calendarPanelItemWeekDay {
+  margin-bottom: 12px;
+  color: var(--dark-300);
+}
+
+.calendarPanelItemToday {
+  color: red;
+}
+
+.calendarPanelItemDate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--accent-700);
+  }
+
+  &:focus {
+    border: 1px solid var(--accent-300) !important;
+    border-radius: 50%;
+    outline: 1px solid var(--accent-300) !important;
+  }
+}
+
+.calendarPanelItemCurrentDate .calendarPanelItemDate {
+  color: var(--accent-500);
+}
+
+.calendarPanelItemNotCurrent .calendarPanelItemDate {
+  color: var(--light-900);
+}
+
+.calendarPanelItemNotInRange {
+  cursor: not-allowed;
+}
+
+.calendarPanelItemNotInRange .calendarPanelItemDate {
+  color: var(--light-900);
+}
+
+.calendarPanelItemDaysOff {
+  color: var(--danger-300);
+}
+
+.calendarPanelItemSelectedStartDate .calendarPanelItemDate {
+  background-color: var(--accent-900);
+  border-radius: 50% 0 0 50%;
+}
+
+.calendarPanelItemSelectedEndDate .calendarPanelItemDate {
+  background-color: var(--accent-900);
+  border-radius: 0 50% 50% 0;
+}
+
+.calendarPanelItemSelectedDate .calendarPanelItemDate {
+  background-color: var(--accent-900);
+  border-radius: 0;
+}
+
+.calendarPanelItemSelectedStartAndEndDate .calendarPanelItemDate {
+  border-radius: 50%;
+}

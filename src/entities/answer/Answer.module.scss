@@ -1,0 +1,68 @@
+.answer {
+  display: flex;
+  gap: 12px;
+
+  .answerUserPhoto {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+
+  .answerBody {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 12px;
+
+    width: 100%;
+    margin-bottom: 5px;
+
+    .answerTextBlock {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+
+      .answerText {
+        width: 100%;
+        word-break: break-word;
+
+        .answerUserName {
+          font-weight: 700;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .answerInfo {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 12px;
+      align-items: center;
+
+      .likeCounts {
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--light-900);
+      }
+
+      .answerBtn {
+        cursor: pointer;
+
+        padding: 0;
+
+        font-weight: var(--font-weight-semi-bold);
+        color: var(--light-900);
+
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+        &:hover {
+          color: var(--light-700);
+        }
+
+        &:active {
+          color: var(--light-900);
+        }
+      }
+    }
+  }
+}

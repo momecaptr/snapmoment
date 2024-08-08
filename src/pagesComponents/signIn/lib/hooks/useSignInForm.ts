@@ -19,9 +19,10 @@ export const useSignInForm = () => {
 
   const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
 
-  const onSubmit = (data: SignInSchemaType) => {
-    login(data).then((res) => localStorage.setItem('accessToken', String(res.data?.accessToken)));
-    router.push('/profile');
+  const onSubmit = async (data: SignInSchemaType) => {
+    await login(data);
+    // ! Редиректить нужно с await! + переадресацию можно сделать в authApi login
+    router.replace('/profile');
   };
 
   return {

@@ -5,13 +5,12 @@ import { ChangePhoto, SaveGeneralInfo } from '@/features';
 import { isPhotoInState } from '@/myApp/model/appSlice';
 import { useGetUserProfilePhotoQuery } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import {
-  useGetPersonalInformationUserQuery,
   useLazyGetPersonalInformationUserQuery,
   useSetPersonalInformationUserMutation
 } from '@/shared/api/personalInformationUser/personalInformationUser';
 import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserAPI';
 import { useAppDispatch } from '@/shared/lib';
-import { FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
+import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
 import { City, Country, ICity, IState, State } from 'country-state-city';
 
@@ -60,8 +59,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   const [country, setCountry] = useState<string>(countryOptions[0]?.value || '');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-
-  const { data: getPersonalInfo } = useGetPersonalInformationUserQuery();
+  const [date, setDate] = useState<Date>(new Date('2020-01-01'));
   const dispatch = useAppDispatch();
   const {
     control,
@@ -71,12 +69,18 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
     reset
   } = useForm<FormData>();
 
+  // const formattedDate = date.toLocaleDateString('ru-RU', {
+  //   day: 'numeric',
+  //   month: 'numeric',
+  //   year: 'numeric'
+  // });
+
   const onSubmit: SubmitHandler<FormData> = (formData) => {
     setPersonalInformation({
       aboutMe: formData.aboutMe,
       city: city,
       country: country,
-      dateOfBirth: formData.dateOfBirth,
+      dateOfBirth: date.toDateString(),
       firstName: formData.firstName,
       lastName: formData.lastName,
       region: state,
@@ -202,7 +206,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                   type={'text'}
                 />
               </div>
-              <div className={s.datePickerBox}>{/*<DatePicker onChange={setDate} value={date} />*/}</div>
+              <div className={s.datePickerBox}>{<DatePicker onChange={setDate} value={date} />}</div>
 
               <div className={state !== '' ? s.selectBoxForThreeSelect : s.selectBoxForTwoSelect}>
                 <div>

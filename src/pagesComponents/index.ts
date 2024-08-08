@@ -1,3 +1,5 @@
+export * from './checkRecoveryCode/lib/hooks/useCheckRecoveryCode';
+export * from './checkRecoveryCode/ui/CheckRecoveryCode';
 export * from './congratulations/lib/useConfirmRegistration';
 export * from './congratulations/ui/Congratulations';
 export * from './createNewPassword/lib/hooks/useCreateNewPassword';
@@ -7,9 +9,10 @@ export * from './generalInfo/GeneralInfo';
 export * from './passwordRecovery/lib/hooks/usePasswordRecovery';
 export * from './passwordRecovery/ui/PasswordRecovery';
 export * from './publicPage/ui/PublicPage';
+export * from './recoveryCodeFailed/lib/useRecoveryCodeFailed';
+export * from './recoveryCodeFailed/ui/RecoveryCodeFailed';
 export * from './signIn/lib/hooks/useSignInForm';
 export * from './signIn/ui/SignIn';
 export * from './signUp/lib/hook/useSignUpForm';
 export * from './signUp/ui/SignUp';
 export * from './statistics/ui/Statistics';
-export * from '@/widget/sentEmailModal/SentEmailModal';

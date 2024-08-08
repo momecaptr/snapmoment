@@ -1,4 +1,4 @@
-import { Button, Input } from '@/shared/ui';
+import { Input, Typography } from '@/shared/ui';
 
 import s from './AddComment.module.scss';
 
@@ -8,9 +8,10 @@ export const AddComment = ({}: Props) => {
   return (
     <div className={s.createComment}>
       <Input className={s.text} placeholder={'Add a Comment...'} type={'text'} />
-      <Button className={s.publishBtn} variant={'text'}>
+
+      <Typography as={'button'} className={s.publishBtn} variant={'h3'}>
         Publish
-      </Button>
+      </Typography>
     </div>
   );
 };

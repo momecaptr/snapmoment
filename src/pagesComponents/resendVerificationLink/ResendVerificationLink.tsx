@@ -1,22 +1,20 @@
 import React from 'react';
 
 import TimeManagement from '@/../public/assets/components/TimeManagement';
-import { useAlert } from '@/entities';
 import { BaseResponseType, useResendEmailMutation } from '@/shared/api';
+import { useCustomToast } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 import { useRouter } from 'next/router';
 
 import s from './ResendVerificationLink.module.scss';
 export const ResendVerificationLink = () => {
-  // const [register] = useRegistrationMutation();
   const [resend] = useResendEmailMutation();
   const router = useRouter();
   const { query } = router;
   const fullUrl = router.asPath;
   const urlWithoutQuery = fullUrl.split('?')[0];
   const { code, email } = query;
-  const { errorAlert, successAlert } = useAlert();
-  // const dataToResend = useAppSelector(getRegistrationData);
+  const { showToast } = useCustomToast();
   const resendLink = async () => {
     const res = await resend({
       baseUrl: urlWithoutQuery as string,
@@ -25,14 +23,14 @@ export const ResendVerificationLink = () => {
 
     try {
       if ('data' in res) {
-        successAlert({ message: `We have sent a link to confirm your email to ${email}` });
+        showToast({ message: `We have sent a link to confirm your email to ${email}`, type: 'success' });
       } else {
         const err = res.error as BaseResponseType;
 
-        errorAlert({ message: `Error - ${err.messages[0].message || 'unknown issue'}` });
+        showToast({ message: `Error - ${err.messages[0].message || 'unknown issue'}`, type: 'error' });
       }
     } catch (e) {
-      errorAlert({ message: 'An unexpected error occurred. Please try again later.' });
+      showToast({ message: 'An unexpected error occurred. Please try again later.', type: 'error' });
     }
   };
 

@@ -5,7 +5,7 @@ import { PhotoProfile, Post, Typography, Wrapper } from '@/shared/ui';
 import Link from 'next/link';
 
 import s from './MyProfile.module.scss';
-const MyProfile = () => {
+export const MyProfile = () => {
   const { data } = useGetPersonalInformationUserQuery();
 
   return (
@@ -55,5 +55,3 @@ const MyProfile = () => {
     </Wrapper>
   );
 };
-
-export default MyProfile;

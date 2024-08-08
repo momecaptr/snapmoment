@@ -1,60 +1,61 @@
 import { useState } from 'react';
+import * as React from 'react';
 
 import Block from '@/../public/assets/components/Block';
 import avatarMock from '@/../public/avatar-mock.jpg';
-import { appSlice } from '@/myApp/model/appSlice';
-import { ModalKey, useAppDispatch, useModal } from '@/shared/lib';
+import { Author } from '@/entities';
+import { ToggleDescription } from '@/features';
+import { TimeAgo } from '@/features/timeAgo/TimeAgo';
+import { Item } from '@/shared/api/public/publicTypes';
 import { Button, Typography } from '@/shared/ui';
-import { ViewPostModal } from '@/widget';
+import { clsx } from 'clsx';
 import Image from 'next/image';
 
 import s from './UserCard.module.scss';
-type Props = {};
 
-export const UserCard = ({}: Props) => {
+type Props = {
+  lazyOpenModalHandler: (userId: number, isOpen: boolean) => void;
+  post: Item;
+};
+
+export const UserCard = ({ lazyOpenModalHandler, post }: Props) => {
   const [isShowText, setIsShowText] = useState(false);
-  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-  const dispatch = useAppDispatch();
+
   const showViewPhotoHandler = () => {
-    dispatch(appSlice.actions.toggleModal({ key: ModalKey.ViewPhoto, open: true }));
+    lazyOpenModalHandler(post.id, true);
   };
+
   const toggleShowText = () => setIsShowText(!isShowText);
 
   return (
-    <>
-      <ViewPostModal openViewPhoto={isOpen} setOpenViewPhoto={setOpen} />
-      <div className={s.card}>
-        <div className={s.photo} onClick={showViewPhotoHandler}>
-          <Image alt={'avatarMock'} src={avatarMock} />
-        </div>
-        <div className={s.author}>
-          {/*userAvatar*/}
-          <Image alt={'avatarMock'} src={avatarMock} />
-          <Typography variant={'h3'}>
-            {/*userName*/}
-            URLProfile
-          </Typography>
+    <div className={s.card}>
+      <div className={s.photo} onClick={showViewPhotoHandler}>
+        <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />
+      </div>
+
+      <div className={clsx(s.content, isShowText && s.expanded)}>
+        <div className={s.authorContainer}>
+          <Author name={post.userName} photo={post.avatarOwner} />
+
           {isShowText && (
             <Button className={s.blockBtn} onClick={toggleShowText}>
               <Block className={s.blockIcon} />
             </Button>
           )}
         </div>
-        <Typography className={s.timeAgo} variant={'small_text'}>
-          {/*реализовать логику min hour day days*/}
-          22 min ago
+
+        <TimeAgo time={post.createdAt} />
+
+        <Typography as={'p'} className={clsx(s.description, isShowText && s.expanded)} variant={'regular_text_14'}>
+          {post.description}
         </Typography>
-        <div className={s.descriptionBlock}>
-          <Typography as={'p'} className={isShowText ? '' : s.description} variant={'regular_text_14'}>
-            {/*description*/}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor inc Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor inc
-          </Typography>
-          <Button className={s.showBtn} onClick={toggleShowText}>
-            {!isShowText ? 'Show more' : 'Hide'}
-          </Button>
-        </div>
+
+        <ToggleDescription
+          isLength={post.description.length > 20}
+          isShowText={isShowText}
+          toggleShowText={toggleShowText}
+        />
       </div>
-    </>
+    </div>
   );
 };
