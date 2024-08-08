@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DatePicker, RangeDate, addNumberDay } from '@/shared/ui';
+import { DatePicker } from '@/shared/ui';
 import { Meta, StoryFn } from '@storybook/react';
 
 interface CustomArgs {}
@@ -17,10 +17,7 @@ const meta: Meta<StoryProps> = {
 export default meta;
 
 const Defoult: StoryFn<StoryProps> = (args: StoryProps) => {
-  const [date, setDate] = useState<RangeDate>({
-    endDate: addNumberDay({ date: new Date(), day: 2 }),
-    startDate: new Date()
-  });
+  const [date, setDate] = useState<Date>(new Date('2020-01-01'));
 
   return (
     <>
