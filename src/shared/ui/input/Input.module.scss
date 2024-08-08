@@ -1,7 +1,7 @@
 .boxInput {
   box-sizing: border-box;
   height: 36px;
-  padding: 0 2%;
+  padding: 0 10px;
 
   background-color: transparent;
   border: none;
@@ -42,8 +42,7 @@
 }
 
 .placeholder {
-  padding-left: 0;
-  text-indent: 5px;
+  padding-left: 10px;
 }
 
 .boxImg {
@@ -58,7 +57,7 @@
 }
 
 .hover {
-  text-indent: 5px;
+  text-indent: 1%;
   background-color: transparent;
   outline: 2px solid var(--dark-100);
 }
@@ -74,7 +73,7 @@
 }
 
 .errorTextAndPassword {
-  text-indent: 5px;
+  text-indent: 0;
   background-color: transparent;
   border: none;
   outline: 2px solid var(--danger-300);
