@@ -4,10 +4,7 @@ import { GeneralInfoNavigation } from '@/features';
 import { useMeQuery } from '@/shared/api';
 import { ModalKey, useModal } from '@/shared/lib';
 import { Wrapper } from '@/shared/ui';
-import { AddProfilePhotoModal, GeneralInfoForms } from '@/widget';
-import { AccountManagement } from '@/widget/';
-import { Devices } from '@/widget/';
-import { MyPayments } from '@/widget/';
+import { AccountManagement, AddProfilePhotoModal, Devices, GeneralInfoForms, MyPayments } from '@/widget';
 
 import s from './GeneralInfo.module.scss';
 

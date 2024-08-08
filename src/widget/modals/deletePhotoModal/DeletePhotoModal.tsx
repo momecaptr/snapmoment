@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { Button, Modal } from '@/shared/ui';
 
 import s from './DeletePhotoModal.module.scss';
+
 type Props = {
   deletePhotoProfile: () => void;
   isOpen: boolean;
   setOpen: (open: boolean) => void;
 };
-export const DeletePhotoModal = (props: Props) => {
-  const { deletePhotoProfile, isOpen, setOpen } = props;
 
-  const onChangeDeletePhoto = () => {
+export const DeletePhotoModal = memo(({ deletePhotoProfile, isOpen, setOpen }: Props) => {
+  const onChangeDeletePhoto = useCallback(() => {
     deletePhotoProfile();
-    setOpen(!isOpen);
-  };
+    setOpen(false);
+  }, [deletePhotoProfile, setOpen]);
 
-  const onChangeNoDeletePhoto = () => {
-    setOpen(!isOpen);
-  };
+  const onChangeNoDeletePhoto = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
 
   return (
     <Modal className={s.sizeModal} onOpenChange={setOpen} open={isOpen} title={'Delete Photo'}>
@@ -29,4 +29,4 @@ export const DeletePhotoModal = (props: Props) => {
       </div>
     </Modal>
   );
-};
+});

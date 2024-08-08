@@ -1,16 +1,16 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { ChangePhoto, SaveGeneralInfo } from '@/features';
 import { isPhotoInState } from '@/myApp/model/appSlice';
-import { useGetUserProfilePhotoQuery } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import {
+  useGetUserProfilePhotoQuery,
   useLazyGetPersonalInformationUserQuery,
   useSetPersonalInformationUserMutation
-} from '@/shared/api/personalInformationUser/personalInformationUser';
-import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserAPI';
+} from '@/shared/api/';
+import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserTypes';
 import { useAppDispatch } from '@/shared/lib';
-import { profileSettingsSchema } from '@/shared/schemas/profileSettingsSchema';
+import { profileSettingsSchema } from '@/shared/schemas/';
 import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -37,18 +37,14 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   const [setPersonalInformation, { isLoading: isLoadingSet }] = useSetPersonalInformationUserMutation();
   const { data: getProfilePhoto } = useGetUserProfilePhotoQuery();
 
-  // const [date, setDate] = useState<RangeDate>({
-  //   endDate: addNumberDay({ date: new Date(), day: 2 }),
-  //   startDate: new Date()
-  // });
   const countryOptions: CountryOption[] = useMemo(
     () =>
       Country.getAllCountries()
-        .filter((country) => {
-          const states = State.getStatesOfCountry(country.isoCode);
-
-          return states.some((state) => City.getCitiesOfState(country.isoCode, state.isoCode).length > 0);
-        })
+        .filter((country) =>
+          State.getStatesOfCountry(country.isoCode).some(
+            (state) => City.getCitiesOfState(country.isoCode, state.isoCode).length > 0
+          )
+        )
         .map((country) => ({
           text: country.name,
           value: country.isoCode
@@ -68,30 +64,26 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
     control,
     formState: { errors },
     handleSubmit,
-    register,
     reset
   } = useForm<FormData>({
     resolver: zodResolver(profileSettingsSchema)
   });
 
-  // const formattedDate = date.toLocaleDateString('ru-RU', {
-  //   day: 'numeric',
-  //   month: 'numeric',
-  //   year: 'numeric'
-  // });
-
-  const onSubmit: SubmitHandler<FormData> = (formData) => {
-    setPersonalInformation({
-      aboutMe: formData.aboutMe,
-      city: city,
-      country: country,
-      dateOfBirth: date.toDateString(),
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      region: state,
-      userName: formData.userName
-    });
-  };
+  const onSubmit: SubmitHandler<FormData> = useCallback(
+    (formData) => {
+      setPersonalInformation({
+        aboutMe: formData.aboutMe,
+        city: city,
+        country: country,
+        dateOfBirth: date.toDateString(),
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        region: state,
+        userName: formData.userName
+      });
+    },
+    [city, country, date, state]
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,7 +121,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
         setState(states.length > 0 ? states[0].isoCode : '');
       }
     }
-  }, [country]);
+  }, [country, state]);
 
   useEffect(() => {
     if (country && state) {
@@ -148,36 +140,45 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
     } else {
       dispatch(isPhotoInState(false));
     }
-  }, [getProfilePhoto]);
+  }, [getProfilePhoto, dispatch]);
 
-  const onChangeCountry = (value: string) => {
+  const onChangeCountry = useCallback((value: string) => {
     setCountry(value);
     setState('');
     setCity('');
-  };
+  }, []);
 
-  const onChangeState = (value: string) => {
+  const onChangeState = useCallback((value: string) => {
     setState(value);
     setCity('');
-  };
+  }, []);
 
-  const onChangeCity = (value: string) => {
+  const onChangeCity = useCallback((value: string) => {
     setCity(value);
-  };
+  }, []);
 
-  const stateOptions = stateData.map((state) => ({
-    text: state.name,
-    value: state.isoCode
-  }));
+  const stateOptions = useMemo(
+    () =>
+      stateData.map((state) => ({
+        text: state.name,
+        value: state.isoCode
+      })),
+    [stateData]
+  );
 
-  const cityOptions = cityData.map((city) => ({
-    text: city.name,
-    value: city.name
-  }));
+  const cityOptions = useMemo(
+    () =>
+      cityData.map((city) => ({
+        text: city.name,
+        value: city.name
+      })),
+    [cityData]
+  );
 
   if (isLoading) {
     return <Loading />;
   }
+  console.log('123');
 
   return (
     <>
@@ -214,9 +215,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
               </div>
               <div className={s.datePickerBox}>
                 <DatePicker name={'dateOfBirth'} onChange={setDate} value={date} />
-                {/*{error}*/}
               </div>
-
               <div className={state !== '' ? s.selectBoxForThreeSelect : s.selectBoxForTwoSelect}>
                 <div>
                   <Typography className={s.label} variant={'regular_text_14'}>

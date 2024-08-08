@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import DeletePhoto from '@/../public/Delet photo.svg';
 import { selectIsPhotoInState } from '@/myApp/model/appSelectors';
-import { useDeleteMainPhotoProfileMutation } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
+import { useDeleteMainPhotoProfileMutation } from '@/shared/api/';
 import { useAppSelector } from '@/shared/lib';
 import { Button, PhotoProfile } from '@/shared/ui';
-import { DeletePhotoModal } from '@/widget';
+import { DeletePhotoModal } from '@/widget/modals/';
 import Image from 'next/image';
 
 import s from './ChangePhoto.module.scss';
@@ -16,15 +16,19 @@ type Props = {
   setOpen: (open: boolean) => void;
 };
 
-export const ChangePhoto = (props: Props) => {
+export const ChangePhoto = memo((props: Props) => {
   const { deletePhoto = false, isOpen, setOpen } = props;
   const [isOpenDeletePhoto, setIsOpenDeletePhoto] = useState(false);
   const isPhotoInState = useAppSelector(selectIsPhotoInState);
   const [deletePhotoProfile] = useDeleteMainPhotoProfileMutation();
 
-  const onChangeDeletePhoto = () => {
-    setIsOpenDeletePhoto(!isOpenDeletePhoto);
-  };
+  const onChangeDeletePhoto = useCallback(() => {
+    setIsOpenDeletePhoto((prev) => !prev);
+  }, []);
+
+  const onToggleOpen = useCallback(() => {
+    setOpen(!isOpen);
+  }, [setOpen, isOpen]);
 
   return (
     <>
@@ -41,10 +45,10 @@ export const ChangePhoto = (props: Props) => {
           </div>
         )}
         <PhotoProfile />
-        <Button className={s.button} onClick={() => setOpen(!isOpen)} variant={'outlined'}>
+        <Button className={s.button} onClick={onToggleOpen} variant={'outlined'}>
           Add a Profile Photo
         </Button>
       </div>
     </>
   );
-};
+});

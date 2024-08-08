@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useGetPersonalInformationUserQuery } from '@/shared/api/personalInformationUser/personalInformationUser';
+import { useGetPersonalInformationUserQuery } from '@/shared/api/';
 import { PhotoProfile, Post, Typography, Wrapper } from '@/shared/ui';
 import Link from 'next/link';
 

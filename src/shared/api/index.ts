@@ -1,5 +1,7 @@
 export * from './auth/authApi';
 export * from './common/model/api.types';
+export * from './mainPhotoProfile/mainPhotoProfileAPI';
+export * from './personalInformationUser/personalInformationUserAPI';
 export * from './posts/postsApi';
 export * from './posts/postsTypes';
 export * from './profile/profileApi';
