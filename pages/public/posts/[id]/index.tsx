@@ -1,36 +1,32 @@
 import * as React from 'react';
 
 import { wrapper } from '@/myApp/store';
-import {
-  Item,
-  getPostById,
-  useLazyGetPostCommentsByPostIdQuery,
-  useLazyGetPostLikesQuery,
-  useMeQuery
-} from '@/shared/api';
-import { ModalKey, useModal } from '@/shared/lib';
-import { ViewPostModal } from '@/widget';
+import { Item, getPostById } from '@/shared/api';
 import { GetServerSideProps } from 'next';
+import Image from 'next/image';
 
 const PublicPostModal = ({ post }: { post: Item }) => {
-  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-
-  const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
-    useLazyGetPostCommentsByPostIdQuery();
-  const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
-  const { data: me } = useMeQuery();
+  // const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
+  //
+  // const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
+  //   useLazyGetPostCommentsByPostIdQuery();
+  // const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
+  // const { data: me } = useMeQuery();
 
   return (
     <div>
-      <ViewPostModal
-        isAuth={!!me?.userId}
-        isFetching={false}
-        openViewPhoto={isOpen}
-        postComments={postComments}
-        postData={post}
-        postLikes={postLikes}
-        setOpenViewPhoto={setOpen}
-      />
+      {/*<ViewPostModal*/}
+      {/*  isAuth={!!me?.userId}*/}
+      {/*  isFetching={false}*/}
+      {/*  openViewPhoto={isOpen}*/}
+      {/*  postComments={postComments}*/}
+      {/*  postData={post}*/}
+      {/*  postLikes={postLikes}*/}
+      {/*  setOpenViewPhoto={setOpen}*/}
+      {/*/>*/}
+      <p>{post.id}</p>
+      <p>{post.userName}</p>
+      <Image alt={post.images[0].url} height={200} src={post.images[0].url} width={200} />
     </div>
   );
 };
