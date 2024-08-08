@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Profile } from '@/pagesComponents/profile/Profile';
 import { getBaseLayout } from '@/shared/providers';
+import { MyProfile } from '@/widget';
 
 export default function Page() {
   return (
-    <>
-      <Profile />
-    </>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <MyProfile />
+    </div>
   );
 }
 

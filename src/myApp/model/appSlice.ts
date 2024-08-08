@@ -3,6 +3,7 @@ import { ModalKey } from '@/shared/lib';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: AppSettings = {
+  isPhotoInState: false,
   modal: {
     isOpen: false,
     modalKey: []
@@ -16,6 +17,10 @@ export const appSlice = createSlice({
   reducers: {
     closeAllModals: (state, action: PayloadAction<{ key: ModalKey; open: boolean }>) => {
       state.modal.modalKey = [];
+    },
+    isPhotoInState: (state, action: PayloadAction<boolean>) => {
+      state.isPhotoInState = action.payload;
+      console.log(state.isPhotoInState);
     },
     setTheme: (state, action: PayloadAction<{ theme: Theme }>) => {
       state.theme = action.payload.theme;
@@ -36,6 +41,6 @@ export const appSlice = createSlice({
   }
 });
 
-export const { setTheme, toggleModal } = appSlice.actions;
+export const { isPhotoInState, setTheme, toggleModal } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -8,11 +8,12 @@ import { clsx } from 'clsx';
 import s from './DatePicker.module.scss';
 
 export interface DatePickerProps {
+  name?: string;
   onChange: (value: Date) => void;
   value: Date;
 }
 
-export const DatePicker = ({ onChange, value }: DatePickerProps) => {
+export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
   const { elementRef, handleInputClick, setShowPopup, showPopup } = useShowPopup();
 
   const handleChange = (value: Date) => {
@@ -41,6 +42,7 @@ export const DatePicker = ({ onChange, value }: DatePickerProps) => {
     <div className={clsx(s.datePicker, showPopup && s.showPopup)} ref={elementRef}>
       <input
         className={clsx(s.datePickerInput, !isValidInputValue && s.datePickerInputInvalid)}
+        name={name}
         onChange={onInputValueChange}
         onClick={handleInputClick}
         onKeyDown={onKeyDown}

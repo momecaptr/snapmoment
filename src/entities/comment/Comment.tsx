@@ -5,7 +5,7 @@ import ReactTimeAgo from 'react-time-ago';
 import avatarMock from '@/../public/avatar-mock.jpg';
 import { Answer } from '@/entities';
 import { useGetAnswersWithPaginationQuery } from '@/shared/api';
-import { CommentsViewModel } from '@/shared/api/public/publicTypes';
+import { CommentsViewModel } from '@/shared/api/';
 import { Button, Typography } from '@/shared/ui';
 import Image from 'next/image';
 

@@ -1,7 +1,11 @@
-export * from './generalInfoForms/GeneralInfoForms';
 export * from './headSignInAndSignUp/HeadSignInAndSignUp';
 export * from './header/Header';
 export * from './modals';
+export * from './myProfile/MyProfile';
 export * from './postInteractionBar/PostInteractionBar';
 export * from './sideBar/SideBar';
 export * from './userCard/UserCard';
+export { AccountManagement } from '@/widget/generalInformation/accountManagement/AccountManagement';
+export { Devices } from '@/widget/generalInformation/devices/Devices';
+export { GeneralInfoForms } from '@/widget/generalInformation/generalInfoForms/GeneralInfoForms';
+export { MyPayments } from '@/widget/generalInformation/myPayments/MyPayments';
