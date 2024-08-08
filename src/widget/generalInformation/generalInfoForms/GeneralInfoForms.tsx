@@ -10,8 +10,10 @@ import {
 } from '@/shared/api/personalInformationUser/personalInformationUser';
 import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserAPI';
 import { useAppDispatch } from '@/shared/lib';
+import { profileSettingsSchema } from '@/shared/schemas/profileSettingsSchema';
 import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { City, Country, ICity, IState, State } from 'country-state-city';
 
 import s from './GeneralInfoForms.module.scss';
@@ -61,13 +63,16 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   const [city, setCity] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date('2020-01-01'));
   const dispatch = useAppDispatch();
+
   const {
     control,
     formState: { errors },
     handleSubmit,
     register,
     reset
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    resolver: zodResolver(profileSettingsSchema)
+  });
 
   // const formattedDate = date.toLocaleDateString('ru-RU', {
   //   day: 'numeric',
@@ -144,6 +149,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
       dispatch(isPhotoInState(false));
     }
   }, [getProfilePhoto]);
+
   const onChangeCountry = (value: string) => {
     setCountry(value);
     setState('');
@@ -206,7 +212,10 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                   type={'text'}
                 />
               </div>
-              <div className={s.datePickerBox}>{<DatePicker onChange={setDate} value={date} />}</div>
+              <div className={s.datePickerBox}>
+                <DatePicker name={'dateOfBirth'} onChange={setDate} value={date} />
+                {/*{error}*/}
+              </div>
 
               <div className={state !== '' ? s.selectBoxForThreeSelect : s.selectBoxForTwoSelect}>
                 <div>

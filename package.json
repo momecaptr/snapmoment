@@ -21,6 +21,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.18",
     "@fontsource/roboto": "^5.0.13",
+    "@formkit/tempo": "^0.1.2",
     "@hookform/resolvers": "^3.7.0",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-checkbox": "^1.1.1",

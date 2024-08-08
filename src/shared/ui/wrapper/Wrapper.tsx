@@ -7,7 +7,7 @@ import s from './Wrapper.module.scss';
 type Props = {
   children: React.ReactNode;
   className?: string;
-  variant?: 'box' | 'boxContent' | 'withoutStyles';
+  variant?: 'box' | 'boxContent' | 'navBar' | 'withoutStyles';
 };
 export const Wrapper = (props: Props) => {
   const { children, className, variant = 'boxContent' } = props;
