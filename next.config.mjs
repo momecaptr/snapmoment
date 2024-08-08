@@ -5,6 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        pathname: '**',
         hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com'
       }
     ]
