@@ -1,0 +1,13 @@
+.box {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 96px;
+  align-items: center;
+
+  background-color: var(--dark-500);
+}
+
+.radioRoot {
+  gap: 12px;
+  padding-left: 22px;
+}

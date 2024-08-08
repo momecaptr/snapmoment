@@ -1,0 +1,60 @@
+.wrapper {
+  width: 1280px;
+}
+
+.post {
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 53px;
+}
+
+.boxPhotoProfile {
+  margin-left: 20px;
+}
+
+.photo {
+  width: 204px;
+  height: 204px;
+}
+
+.post > div {
+  margin: 0 auto;
+}
+
+.profilePhotoAndInfo {
+  display: grid;
+  grid-template-columns: 242px 1fr;
+}
+
+.nameAndButton {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.subscribleAndFollowers {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 23px;
+}
+
+.personInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button {
+  all: unset;
+
+  cursor: pointer;
+
+  padding: 6px 24px;
+
+  background-color: var(--dark-300);
+  border-radius: 2px;
+}

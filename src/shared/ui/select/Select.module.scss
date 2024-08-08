@@ -72,10 +72,11 @@
 }
 
 .selectContent {
-  overflow: hidden;
+  overflow-y: auto;
   justify-content: start;
 
   width: var(--radix-select-trigger-width);
+  max-height: 200px;
 
   background-color: var(--dark-700);
   border: 1px solid var(--dark-100);
