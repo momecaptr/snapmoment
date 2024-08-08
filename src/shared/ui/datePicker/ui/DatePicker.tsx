@@ -1,43 +1,41 @@
 import React from 'react';
 
 import CalendarOutline from '@/../public/assets/components/CalendarOutline';
-import { DatePickerPopupContent, updateValueOnPopupCloseAction, useInputValueRange, useShowPopup } from '@/shared/ui';
+import { updateValueOnPopupCloseAction, useInputValueRange, useShowPopup } from '@/shared/ui/datePicker/lib';
+import { DatePickerPopupContent } from '@/shared/ui/datePicker/ui/DatePickerPopupContent';
 import { clsx } from 'clsx';
 
 import s from './DatePicker.module.scss';
 
-export type RangeDate = {
-  endDate: Date;
-  startDate: Date;
-};
-
 export interface DatePickerProps {
-  max?: Date;
-  min?: Date;
-  onChange: (value: RangeDate) => void;
-  value: RangeDate;
+  onChange: (value: Date) => void;
+  value: Date;
 }
 
-export const DatePicker = ({ max, min, onChange, value }: DatePickerProps) => {
-  const { elementRef, handleInputClick, showPopup } = useShowPopup();
+export const DatePicker = ({ onChange, value }: DatePickerProps) => {
+  const { elementRef, handleInputClick, setShowPopup, showPopup } = useShowPopup();
 
-  const handleChange = (value: RangeDate) => {
-    onChange({ ...value });
+  const handleChange = (value: Date) => {
+    onChange(value);
   };
 
   const { inputValue, inputValueDate, isValidInputValue, onInputValueChange, setInputValue } = useInputValueRange({
-    max,
-    min,
     value
   });
+
+  // console.log('isValidInputValue', isValidInputValue);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key !== 'Enter') {
       return;
     }
 
-    updateValueOnPopupCloseAction({ inputValue, max, min, onChange, setInputValue, value });
+    updateValueOnPopupCloseAction({ inputValue, onChange, setInputValue, value });
   };
+
+  if (!isValidInputValue && showPopup) {
+    setShowPopup(false);
+  }
 
   return (
     <div className={clsx(s.datePicker, showPopup && s.showPopup)} ref={elementRef}>
@@ -49,16 +47,15 @@ export const DatePicker = ({ max, min, onChange, value }: DatePickerProps) => {
         type={'text'}
         value={inputValue}
       />
-      <CalendarOutline />
+      <CalendarOutline color={isValidInputValue ? '' : 'var(--danger-100)'} />
 
       {showPopup && (
         <div className={s.datePickerPopup}>
           <DatePickerPopupContent
             inputValueDate={inputValueDate}
-            max={max}
-            min={min}
             onChange={handleChange}
-            selectedValue={value.endDate}
+            selectedValue={value}
+            setShowPopup={setShowPopup}
           />
         </div>
       )}

@@ -2,19 +2,16 @@ import { useLayoutEffect, useMemo, useState } from 'react';
 
 import {
   DateCellItem,
-  RangeDate,
   addDay,
   daysOfTheWeek,
-  findMiddleDate,
   getCurrentMothDays,
   getDaysAmountInAMonth,
   getNextMonthDays,
   getPreviousMonthDays,
-  isInRange,
   isToday,
   months,
   removeOneDay
-} from '@/shared/ui';
+} from '@/shared/ui/datePicker/lib';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { clsx } from 'clsx';
 
@@ -25,19 +22,17 @@ const currentMonth = new Date().getMonth();
 const currentYear = new Date().getFullYear();
 
 interface DatePickerPopupContentProps {
-  inputValueDate?: RangeDate;
-  max?: Date;
-  min?: Date;
-  onChange: (value: RangeDate) => void;
+  inputValueDate?: Date;
+  onChange: (value: Date) => void;
   selectedValue: Date;
+  setShowPopup: (value: boolean) => void;
 }
 
 export const DatePickerPopupContent = ({
   inputValueDate,
-  max,
-  min,
   onChange,
-  selectedValue
+  selectedValue,
+  setShowPopup
 }: DatePickerPopupContentProps) => {
   const [panelYear, setPanelYear] = useState(() => selectedValue.getFullYear());
   const [panelMonth, setPanelMonth] = useState(() => selectedValue.getMonth());
@@ -48,8 +43,8 @@ export const DatePickerPopupContent = ({
       return;
     }
 
-    setPanelMonth(inputValueDate.endDate.getMonth());
-    setPanelYear(inputValueDate.endDate.getFullYear());
+    setPanelMonth(inputValueDate.getMonth());
+    setPanelYear(inputValueDate.getFullYear());
   }, [inputValueDate]);
 
   const dateCells = useMemo(() => {
@@ -62,34 +57,8 @@ export const DatePickerPopupContent = ({
     return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
   }, [panelYear, panelMonth]);
 
-  const onDateSelect = (item: DateCellItem) => {
-    if (!inputValueDate) {
-      return;
-    }
-
-    const middleDate = findMiddleDate(inputValueDate.startDate, inputValueDate.endDate);
-
-    if (new Date(item.year, item.month, item.date) < middleDate) {
-      onChange({ ...inputValueDate, startDate: new Date(item.year, item.month, item.date) });
-    }
-
-    if (new Date(item.year, item.month, item.date) >= middleDate) {
-      if (inputValueDate.startDate < new Date(item.year, item.month, item.date)) {
-        onChange({ ...inputValueDate, endDate: new Date(item.year, item.month, item.date) });
-      }
-
-      if (inputValueDate.startDate > new Date(item.year, item.month, item.date)) {
-        onChange({ ...inputValueDate, startDate: new Date(item.year, item.month, item.date) });
-      }
-    }
-  };
-
   const onDateSelectOne = (item: DateCellItem) => {
-    onChange({
-      ...inputValueDate,
-      endDate: new Date(item.year, item.month, item.date),
-      startDate: new Date(item.year, item.month, item.date)
-    });
+    onChange(new Date(item.year, item.month, item.date));
   };
 
   const nextMonth = () => {
@@ -164,7 +133,8 @@ export const DatePickerPopupContent = ({
           const isTodayDate = isToday(cell, todayDate);
           const isNotCurrent = cell.type !== 'current';
 
-          const isDateInRange = isInRange(date, min, max);
+          // const isDateInRange = isInRange(date, inputValueDate);
+          const isDateInRange = true;
 
           const daysOff = !isNotCurrent && (date.getDay() === 6 || date.getDay() === 0);
 
@@ -172,12 +142,7 @@ export const DatePickerPopupContent = ({
             return;
           }
 
-          const isSelectedDate = getIntermediateDates(inputValueDate.startDate, inputValueDate.endDate).find(
-            (el) => cell.year === el.getFullYear() && cell.month === el.getMonth() && cell.date === el.getDate()
-          );
-          const isSelectedStartDate = checkDate(cell, inputValueDate.startDate);
-          const isSelectedEndDate = checkDate(cell, inputValueDate.endDate);
-          const isSelectedStartAndEndDate = isSelectedStartDate && isSelectedEndDate;
+          const isSelectedDate = checkDate(cell, inputValueDate);
 
           return (
             <div
@@ -188,15 +153,23 @@ export const DatePickerPopupContent = ({
                 isNotCurrent && s.calendarPanelItemNotCurrent,
                 !isDateInRange && s.calendarPanelItemNotInRange,
                 daysOff && s.calendarPanelItemDaysOff,
-                isSelectedStartDate && s.calendarPanelItemSelectedStartDate,
-                isSelectedEndDate && s.calendarPanelItemSelectedEndDate,
-                isSelectedDate && s.calendarPanelItemSelectedDate,
-                isSelectedStartAndEndDate && s.calendarPanelItemSelectedStartAndEndDate
+                // isSelectedDate && s.calendarPanelItemSelectedStartDate,
+                // isSelectedEndDate && s.calendarPanelItemSelectedEndDate,
+                isSelectedDate && s.calendarPanelItemSelectedStartAndEndDate
+                // isSelectedStartAndEndDate && s.calendarPanelItemSelectedStartAndEndDate
               )}
-              key={`${cell.date}-${cell.month}-${cell.year}`}
-              onClick={() => isDateInRange && onDateSelect(cell)}
-              onDoubleClick={() => isDateInRange && onDateSelectOne(cell)}
-              onKeyDown={(e) => e.key === 'Enter' && isDateInRange && onDateSelect(cell)}
+              onClick={() => {
+                isDateInRange && onDateSelectOne(cell);
+                setShowPopup(false);
+              }}
+              onDoubleClick={() => {
+                isDateInRange && onDateSelectOne(cell);
+              }}
+              onKeyDown={(e) => {
+                e.key === 'Enter' && isDateInRange && onDateSelectOne(cell);
+                setShowPopup(false);
+              }}
+              key={`${cell.date}.${cell.month}.${cell.year}`}
             >
               <span className={s.calendarPanelItemDate} tabIndex={0}>
                 {cell.date}
