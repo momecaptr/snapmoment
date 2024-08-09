@@ -25,4 +25,4 @@ export const profileSettingsSchema = z.object({
     })
 });
 
-export type profileSettingsSchemaType = z.infer<typeof profileSettingsSchema>;
+export type ProfileSettingsSchemaType = z.infer<typeof profileSettingsSchema>;
