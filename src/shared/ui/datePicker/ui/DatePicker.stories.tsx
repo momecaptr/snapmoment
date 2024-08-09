@@ -17,7 +17,7 @@ const meta: Meta<StoryProps> = {
 
 export default meta;
 
-const Defoult: StoryFn<StoryProps> = (args: StoryProps) => {
+const Defoult: StoryFn<StoryProps> = () => {
   const [date, setDate] = useState<Date>(new Date('2020-01-01'));
 
   return (
