@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DatePicker } from '@/shared/ui';
+import { Button, DatePicker } from '@/shared/ui';
 import { Meta, StoryFn } from '@storybook/react';
 
 interface CustomArgs {}
@@ -21,9 +21,10 @@ const Defoult: StoryFn<StoryProps> = (args: StoryProps) => {
 
   return (
     <>
-      <div style={{ width: '300px' }}>
+      <div style={{ marginBottom: '50px', width: '300px' }}>
         <DatePicker onChange={setDate} value={date} />
       </div>
+      <Button onClick={() => console.log('stories-date', date)}>show date in console</Button>
     </>
   );
 };

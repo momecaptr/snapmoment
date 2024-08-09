@@ -119,7 +119,7 @@ export const getDateFromInputValue = (dateString: string): Date | null => {
   const match = dateString.match(datePattern);
 
   if (!match) {
-    console.error('Invalid date format. Expected format is DD.MM.YYYY.');
+    // console.error('Invalid date format. Expected format is DD.MM.YYYY.');
 
     return null;
   }

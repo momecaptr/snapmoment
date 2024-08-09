@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import CalendarOutline from '@/../public/assets/components/CalendarOutline';
-import { updateValueOnPopupCloseAction, useInputValueRange, useShowPopup } from '@/shared/ui/datePicker/lib';
+import { getDateFromInputValue, getInputValueDate, useShowPopup } from '@/shared/ui/datePicker/lib';
 import { DatePickerPopupContent } from '@/shared/ui/datePicker/ui/DatePickerPopupContent';
 import { clsx } from 'clsx';
 
@@ -16,22 +16,43 @@ export interface DatePickerProps {
 export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
   const { elementRef, handleInputClick, setShowPopup, showPopup } = useShowPopup();
 
-  const handleChange = (value: Date) => {
-    onChange(value);
+  // const { inputValue, inputValueDate, isValidInputValue, onInputValueChange, setInputValue } = useInputValueRange({
+  //   value
+  // });
+  const [inputValue, setInputValue] = useState<string>(getInputValueDate(value));
+  const [isValidInputValue, setIsValidInputValue] = useState(true);
+  const [currentDate, setCurrentDate] = useState<Date>(value);
+
+  const handleChange = (valueDate: Date) => {
+    setIsValidInputValue(!!getDateFromInputValue(inputValue));
+    if (isValidInputValue) {
+      // console.log('popap', valueDate);
+      onChange(valueDate);
+      setInputValue(getInputValueDate(valueDate));
+    }
   };
 
-  const { inputValue, inputValueDate, isValidInputValue, onInputValueChange, setInputValue } = useInputValueRange({
-    value
-  });
+  const onInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value);
+    setIsValidInputValue(!!getDateFromInputValue(e.currentTarget.value));
 
-  // console.log('isValidInputValue', isValidInputValue);
+    const date = getDateFromInputValue(e.currentTarget.value);
+
+    if (date) {
+      setCurrentDate(date);
+    }
+  };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key !== 'Enter') {
       return;
     }
 
-    updateValueOnPopupCloseAction({ inputValue, onChange, setInputValue, value });
+    const dateOnPressEnter = getDateFromInputValue(inputValue);
+
+    if (dateOnPressEnter) {
+      handleChange(dateOnPressEnter);
+    }
   };
 
   if (!isValidInputValue && showPopup) {
@@ -41,6 +62,13 @@ export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
   return (
     <div className={clsx(s.datePicker, showPopup && s.showPopup)} ref={elementRef}>
       <input
+        onBlur={() => {
+          const dateOnPressEnter = getDateFromInputValue(inputValue);
+
+          if (dateOnPressEnter) {
+            handleChange(dateOnPressEnter);
+          }
+        }}
         className={clsx(s.datePickerInput, !isValidInputValue && s.datePickerInputInvalid)}
         name={name}
         onChange={onInputValueChange}
@@ -54,9 +82,9 @@ export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
       {showPopup && (
         <div className={s.datePickerPopup}>
           <DatePickerPopupContent
-            inputValueDate={inputValueDate}
+            inputValueDate={value}
             onChange={handleChange}
-            selectedValue={value}
+            selectedValue={currentDate}
             setShowPopup={setShowPopup}
           />
         </div>
