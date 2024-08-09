@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button, DatePicker } from '@/shared/ui';
+import { DatePicker } from '@/shared/ui';
 import { Meta, StoryFn } from '@storybook/react';
 
 interface CustomArgs {}
@@ -16,15 +16,14 @@ const meta: Meta<StoryProps> = {
 
 export default meta;
 
-const Defoult: StoryFn<StoryProps> = (args: StoryProps) => {
+const Defoult: StoryFn<StoryProps> = () => {
   const [date, setDate] = useState<Date>(new Date('2020-01-01'));
 
   return (
     <>
-      <div style={{ marginBottom: '50px', width: '300px' }}>
+      <div style={{ width: '300px' }}>
         <DatePicker onChange={setDate} value={date} />
       </div>
-      <Button onClick={() => alert(date)}>show date</Button>
     </>
   );
 };
