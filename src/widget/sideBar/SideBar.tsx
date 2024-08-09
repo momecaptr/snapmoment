@@ -8,7 +8,7 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
-import { useLogoutMutation } from '@/shared/api';
+import { useLogoutMutation } from '@/shared/api/auth/authApi';
 import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 import Link from 'next/link';

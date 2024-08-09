@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { GetPostLikesResponse } from '@/shared/api';
+import { GetPostLikesResponse } from '@/shared/api/posts/postsTypes';
 import { Typography } from '@/shared/ui';
 import Image from 'next/image';
 

@@ -1,4 +1,5 @@
-import { getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui/datePicker/lib';
+import { getDateFromInputValue, isInRange } from '../utils';
+import { getInputValueDate } from './getInputValueDate';
 
 interface Props {
   inputValue: string;

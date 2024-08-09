@@ -1,11 +1,11 @@
+import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import {
   GetAnswersWithPaginationArgs,
   GetAnswersWithPaginationResponse,
   GetPostLikesArgs,
   GetPostLikesResponse,
   UpdateLikePostArgs
-} from '@/shared/api/';
-import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
+} from '@/shared/api/posts/postsTypes';
 
 export const postsApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,9 +1,11 @@
 import { useQueryParams } from '@/shared/lib';
-import { Pagination, SelectUI, Typography } from '@/shared/ui';
+import { SelectUI, Typography } from '@/shared/ui';
 
 import s from './PaginationWithSelect.module.scss';
 
-export type selectOptionsType = {
+import { Pagination } from './paginationInitial/Pagination';
+
+export type SelectOptionsType = {
   text: string;
   value: string;
 };
@@ -12,7 +14,7 @@ type Props = {
   currentPage: number;
   disabled?: boolean;
   itemsPerPage: number;
-  selectOptions: selectOptionsType[];
+  selectOptions: SelectOptionsType[];
   setCurrentPage: (value: number) => void;
   setItemsPerPage: (value: number) => void;
   totalItems: number;

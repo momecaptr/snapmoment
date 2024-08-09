@@ -1,11 +1,8 @@
 import React, { useLayoutEffect, useMemo, useState } from 'react';
 
-import {
-  getDateFromInputValueMultiple,
-  getInputValueDateMultiple,
-  isInRangeMultiple
-} from '@/shared/ui/datePickerMultiple/lib';
-import { RangeDateMultiple } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiple';
+import { getDateFromInputValueMultiple, isInRangeMultiple } from '../../lib/utils';
+import { RangeDateMultiple } from '../../ui/DatePickerMultiple';
+import { getInputValueDateMultiple } from '../helpers/getInputValueDateMultiple';
 
 interface Props {
   max?: Date;

@@ -1,4 +1,4 @@
-import { Avatar } from '@/shared/api';
+import { Avatar } from '@/shared/api/public/publicTypes';
 
 export interface GetUserProfileResponse {
   aboutMe: string;

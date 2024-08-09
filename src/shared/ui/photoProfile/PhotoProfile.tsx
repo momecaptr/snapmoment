@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import PhotoStub from '@/../public/assets/components/PhotoStub';
 import Stub from '@/../public/epicpen_6ymMwEsBEI.png';
-import { useGetUserProfilePhotoQuery } from '@/shared/api/';
+import { useGetUserProfilePhotoQuery } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import clsx from 'clsx';
 import Image from 'next/image';
 

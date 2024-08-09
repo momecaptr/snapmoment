@@ -1,15 +1,14 @@
 import React from 'react';
 
 import CalendarOutline from '@/../public/assets/components/CalendarOutline';
-import {
-  updateValueOnPopupCloseActionMultiple,
-  useInputValueRangeMultiple,
-  useShowPopupMultiple
-} from '@/shared/ui/datePickerMultiple/lib';
-import { DatePickerMultiplePopupContent } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiplePopupContent';
 import { clsx } from 'clsx';
 
 import s from './DatePickerMultiple.module.scss';
+
+import { updateValueOnPopupCloseActionMultiple } from '../lib/helpers/updateValueOnPopupCloseActionMultiple';
+import { useInputValueRangeMultiple } from '../lib/hooks/useInputValueRangeMultiple';
+import { useShowPopupMultiple } from '../lib/hooks/useShowPopupMultiple';
+import { DatePickerMultiplePopupContent } from '../ui/DatePickerMultiplePopupContent';
 
 export type RangeDateMultiple = {
   endDate: Date;

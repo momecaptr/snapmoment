@@ -1,5 +1,5 @@
 import { Author } from '@/entities';
-import { GetPostLikesResponse } from '@/shared/api';
+import { GetPostLikesResponse } from '@/shared/api/posts/postsTypes';
 import { Button, Input, Modal } from '@/shared/ui';
 
 import s from './UsersLikesModal.module.scss';

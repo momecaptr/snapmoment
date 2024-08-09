@@ -1,6 +1,7 @@
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 
-import { getDateFromInputValue, getInputValueDate, isInRange } from '@/shared/ui/datePicker/lib';
+import { getInputValueDate } from '../helpers/getInputValueDate';
+import { getDateFromInputValue, isInRange } from '../utils';
 
 interface Props {
   value: Date;

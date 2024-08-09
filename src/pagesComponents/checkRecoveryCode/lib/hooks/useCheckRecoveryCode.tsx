@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { useCheckRecoveryCodeMutation } from '@/shared/api';
+import { useCheckRecoveryCodeMutation } from '@/shared/api/auth/authApi';
 import { useCustomToast } from '@/shared/lib';
 import { useRouter } from 'next/router';
 

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
 import { GeneralInfoNavigation } from '@/features';
-import { useMeQuery } from '@/shared/api';
 import { ModalKey, useModal } from '@/shared/lib';
 import { Wrapper } from '@/shared/ui';
 import { AccountManagement, AddProfilePhotoModal, Devices, GeneralInfoForms, MyPayments } from '@/widget';
+// import { AccountManagement, Devices, GeneralInfoForms, MyPayments } from '@/widget';
+// import { AddProfilePhotoModal } from '@/widgetaddProfilePhotoModal/AddProfilePhotoModal';
+
+import { useMeQuery } from '@/shared/api/auth/authApi';
 
 import s from './GeneralInfo.module.scss';
 

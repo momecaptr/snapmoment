@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useSetMainPhotoProfileMutation } from '@/shared/api/';
+import { useSetMainPhotoProfileMutation } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import { Button, Modal, PhotoProfile, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 import Image from 'next/image';

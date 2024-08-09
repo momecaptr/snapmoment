@@ -1,4 +1,4 @@
-import { RangeDateMultiple } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiple';
+import { RangeDateMultiple } from '../ui/DatePickerMultiple';
 
 export const daysOfTheWeekMultiple = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 export const monthsMultiple = [
