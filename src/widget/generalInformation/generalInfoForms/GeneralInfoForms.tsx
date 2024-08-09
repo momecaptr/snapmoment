@@ -10,10 +10,12 @@ import {
 } from '@/shared/api/personalInformationUser/personalInformationUserAPI';
 import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserTypes';
 import { useAppDispatch } from '@/shared/lib';
+import { profileSettingsSchema } from '@/shared/schemas';
 import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
-import { format } from '@formkit/tempo';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { City, Country, ICity, IState, State } from 'country-state-city';
+import Link from 'next/link';
 
 import s from './GeneralInfoForms.module.scss';
 
@@ -56,27 +58,24 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   const [country, setCountry] = useState<string>(countryOptions[0]?.value || '');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [date, setDate] = useState<Date>(new Date('01.01.2000'));
+  const [date, setDate] = useState<Date>(new Date('2000-01-01'));
   const dispatch = useAppDispatch();
 
   const {
     control,
     formState: { errors },
-    getValues,
     handleSubmit,
     reset
-  } = useForm<FormData>();
-  // resolver: zodResolver(profileSettingsSchema)
+  } = useForm<FormData>({
+    resolver: zodResolver(profileSettingsSchema)
+  });
 
   const onSubmit: SubmitHandler<FormData> = (formData) => {
-    console.log({ formDataUserName: formData.userName, userName: data?.userName });
-    console.log({ doB: format(date, 'YYYY-MM-DD') });
     setPersonalInformation({
       aboutMe: formData.aboutMe,
       city: city,
       country: country,
-      // dateOfBirth: '2000-08-09T06:45:12.743Z',
-      dateOfBirth: date.toISOString(),
+      dateOfBirth: date.toISOString(), // Преобразуем дату в ISO строку для хранения
       firstName: formData.firstName,
       lastName: formData.lastName,
       region: state,
@@ -103,6 +102,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
         setCountry(data.country ?? '');
         setState(data.region ?? '');
         setCity(data.city ?? '');
+        setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date('2000-01-01'));
       }
     };
 
@@ -120,7 +120,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
         setState(states.length > 0 ? states[0].isoCode : '');
       }
     }
-  }, [country, state]);
+  }, [country]);
 
   useEffect(() => {
     if (country && state) {
@@ -177,7 +177,6 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   if (isLoading) {
     return <Loading />;
   }
-  console.log('123');
 
   return (
     <>
@@ -199,7 +198,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                   className={s.input}
                   control={control}
                   currentValue={data.firstName}
-                  label={'First Name'}
+                  label={'First Name*'}
                   name={'firstName'}
                   type={'text'}
                 />
@@ -207,15 +206,26 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                   className={s.input}
                   control={control}
                   currentValue={data.lastName}
-                  label={'Last Name'}
+                  label={'Last Name*'}
                   name={'lastName'}
                   type={'text'}
                 />
               </div>
               <div className={s.datePickerBox}>
-                <DatePicker onChange={setDate} value={date} />
+                <Typography className={s.label} variant={'regular_text_14'}>
+                  Date of birth
+                </Typography>
+                <DatePicker error={!!errors.dateOfBirth} name={'dateOfBirth'} onChange={setDate} value={date} />
+                {errors.dateOfBirth && (
+                  <Typography className={s.errorDate} variant={'small_text'}>
+                    A user under 13 cannot create a profile.{' '}
+                    <Link className={s.PrivacyLink} href={'/auth/privacy'}>
+                      Privacy Policy
+                    </Link>
+                  </Typography>
+                )}
               </div>
-              <div className={state !== '' ? s.selectBoxForThreeSelect : s.selectBoxForTwoSelect}>
+              <div className={s.selectBoxForThreeSelect}>
                 <div>
                   <Typography className={s.label} variant={'regular_text_14'}>
                     Select your country

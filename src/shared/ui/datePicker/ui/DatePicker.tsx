@@ -11,12 +11,13 @@ import s from './DatePicker.module.scss';
 import { useShowPopup } from '../lib/hooks/useShowPopup';
 
 export interface DatePickerProps {
+  error?: boolean;
   name?: string;
   onChange: (value: Date) => void;
   value: Date;
 }
 
-export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
+export const DatePicker = ({ error, name, onChange, value }: DatePickerProps) => {
   const { elementRef, handleInputClick, setShowPopup, showPopup } = useShowPopup();
   const [inputValue, setInputValue] = useState<string>(getInputValueDate(value));
   const [isValidInputValue, setIsValidInputValue] = useState(true);
@@ -60,6 +61,11 @@ export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
   return (
     <div className={clsx(s.datePicker, showPopup && s.showPopup)} ref={elementRef}>
       <input
+        className={clsx(
+          s.datePickerInput,
+          !isValidInputValue && s.datePickerInputInvalid,
+          error && s.datePickerInputInvalid
+        )}
         onBlur={() => {
           const dateOnPressEnter = getDateFromInputValue(inputValue);
 
@@ -67,7 +73,6 @@ export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
             handleChange(dateOnPressEnter);
           }
         }}
-        className={clsx(s.datePickerInput, !isValidInputValue && s.datePickerInputInvalid)}
         name={name}
         onChange={onInputValueChange}
         onClick={handleInputClick}

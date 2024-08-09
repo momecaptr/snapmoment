@@ -79,7 +79,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props: InputProps
 
   return (
     <div className={clsx(s.box, className)}>
-      <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_16'}>
+      <Typography as={'label'} className={s.label} htmlFor={id ?? generatedId} variant={'regular_text_14'}>
         {type !== 'search' && label}
       </Typography>
       <div className={s.searchClose}>

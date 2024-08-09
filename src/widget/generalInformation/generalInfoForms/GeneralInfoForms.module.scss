@@ -13,7 +13,7 @@
 
   width: 100%;
   height: 2px;
-  margin: 45px 0;
+  margin: 24px 0;
 
   background-color: var(--dark-100);
 }
@@ -21,18 +21,12 @@
 .boxAllFormContent {
   display: flex;
   flex-flow: column nowrap;
-  gap: 28px;
+  gap: 24px;
 }
 
 .selectBoxForThreeSelect {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
-}
-
-.selectBoxForTwoSelect {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
@@ -44,4 +38,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
+}
+
+.errorDate {
+  color: var(--danger-500);
+}
+
+.PrivacyLink {
+  color: var(--danger-500);
 }
