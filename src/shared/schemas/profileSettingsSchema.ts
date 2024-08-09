@@ -1,7 +1,17 @@
 import { z } from 'zod';
+
 export const profileSettingsSchema = z.object({
   aboutMe: z.string().min(0, { message: 'About Me is required' }).max(200, { message: 'About Me is too long' }),
-  dateOfBirth: z.string().date(),
+  dateOfBirth: z.string().refine(
+    (value) => {
+      const date = new Date(value);
+
+      return !isNaN(date.getTime());
+    },
+    {
+      message: 'Invalid date format'
+    }
+  ),
   firstName: z
     .string()
     .min(1, { message: 'First Name is required' })
@@ -16,7 +26,7 @@ export const profileSettingsSchema = z.object({
     .regex(/^[A-Za-zА-Яа-я]+$/, {
       message: 'Last name can only contain letters from the Latin or Cyrillic alphabet'
     }),
-  username: z
+  userName: z
     .string()
     .min(6, { message: 'Username is required' })
     .max(30, { message: 'Username is too long' })

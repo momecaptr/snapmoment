@@ -12,7 +12,6 @@ import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/pe
 import { useAppDispatch } from '@/shared/lib';
 import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
-import { format } from '@formkit/tempo';
 import { City, Country, ICity, IState, State } from 'country-state-city';
 
 import s from './GeneralInfoForms.module.scss';
@@ -56,7 +55,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   const [country, setCountry] = useState<string>(countryOptions[0]?.value || '');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [date, setDate] = useState<Date>(new Date('01.01.2000'));
+  const [date, setDate] = useState<Date>(new Date('01.01.1991'));
   const dispatch = useAppDispatch();
 
   const {
@@ -65,18 +64,17 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
     getValues,
     handleSubmit,
     reset
-  } = useForm<FormData>();
-  // resolver: zodResolver(profileSettingsSchema)
+  } = useForm<FormData>({
+    // resolver: zodResolver(profileSettingsSchema)
+  });
 
+  console.log(errors);
   const onSubmit: SubmitHandler<FormData> = (formData) => {
-    console.log({ formDataUserName: formData.userName, userName: data?.userName });
-    console.log({ doB: format(date, 'YYYY-MM-DD') });
     setPersonalInformation({
       aboutMe: formData.aboutMe,
       city: city,
       country: country,
-      // dateOfBirth: '2000-08-09T06:45:12.743Z',
-      dateOfBirth: date.toISOString(),
+      dateOfBirth: formData.dateOfBirth.toString(),
       firstName: formData.firstName,
       lastName: formData.lastName,
       region: state,
@@ -177,7 +175,9 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   if (isLoading) {
     return <Loading />;
   }
-  console.log('123');
+  const dateString = data?.dateOfBirth;
+  const trimmedDate = dateString?.split('T')[0];
+  const mtDateBirth = trimmedDate ? new Date(trimmedDate) : new Date('01.01.2000');
 
   return (
     <>
@@ -213,7 +213,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                 />
               </div>
               <div className={s.datePickerBox}>
-                <DatePicker onChange={setDate} value={date} />
+                <DatePicker name={'dateOfBirth'} onChange={setDate} value={mtDateBirth} />
               </div>
               <div className={state !== '' ? s.selectBoxForThreeSelect : s.selectBoxForTwoSelect}>
                 <div>
