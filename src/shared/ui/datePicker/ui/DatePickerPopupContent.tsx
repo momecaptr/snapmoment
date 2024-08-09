@@ -133,7 +133,6 @@ export const DatePickerPopupContent = ({
           const isTodayDate = isToday(cell, todayDate);
           const isNotCurrent = cell.type !== 'current';
 
-          // const isDateInRange = isInRange(date, inputValueDate);
           const isDateInRange = true;
 
           const daysOff = !isNotCurrent && (date.getDay() === 6 || date.getDay() === 0);
@@ -153,10 +152,7 @@ export const DatePickerPopupContent = ({
                 isNotCurrent && s.calendarPanelItemNotCurrent,
                 !isDateInRange && s.calendarPanelItemNotInRange,
                 daysOff && s.calendarPanelItemDaysOff,
-                // isSelectedDate && s.calendarPanelItemSelectedStartDate,
-                // isSelectedEndDate && s.calendarPanelItemSelectedEndDate,
                 isSelectedDate && s.calendarPanelItemSelectedStartAndEndDate
-                // isSelectedStartAndEndDate && s.calendarPanelItemSelectedStartAndEndDate
               )}
               onClick={() => {
                 isDateInRange && onDateSelectOne(cell);
