@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { UpdateUserProfileArgs } from '@/shared/api';
 import { useLazyGetUserProfileQuery, useUpdateUserProfileMutation } from '@/shared/api/profile/profileApi';
+import { UpdateUserProfileArgs } from '@/shared/api/profile/profileTypes';
 import { Button, FormTextfield } from '@/shared/ui';
 
 export const Profile = () => {

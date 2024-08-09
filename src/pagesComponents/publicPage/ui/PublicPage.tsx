@@ -1,17 +1,18 @@
 import * as React from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
-import {
-  useGetPublicPostsQuery,
-  useLazyGetPostByIdQuery,
-  useLazyGetPostCommentsByPostIdQuery,
-  useLazyGetPostLikesQuery,
-  useMeQuery
-} from '@/shared/api';
 import { ModalKey, useModal } from '@/shared/lib';
 import { UserCard, ViewPostModal } from '@/widget';
 // import { UserCard } from '@/widget';
 // import { ViewPostModal } from '@/widgetviewPostModal/ViewPostModal';
+
+import { useMeQuery } from '@/shared/api/auth/authApi';
+import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
+import {
+  useGetPublicPostsQuery,
+  useLazyGetPostByIdQuery,
+  useLazyGetPostCommentsByPostIdQuery
+} from '@/shared/api/public/publicApi';
 
 import s from './PublicPage.module.scss';
 

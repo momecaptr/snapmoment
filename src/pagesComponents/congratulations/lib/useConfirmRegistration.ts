@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useConfirmRegistrationMutation } from '@/shared/api';
+import { useConfirmRegistrationMutation } from '@/shared/api/auth/authApi';
 import { useRouter } from 'next/router';
 
 export const useConfirmRegistration = () => {

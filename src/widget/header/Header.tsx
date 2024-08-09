@@ -3,7 +3,7 @@ import React from 'react';
 import { Outlinebell } from '@/../public/assets/components';
 import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
 import { LocaleSwitcher } from '@/features';
-import { useMeQuery } from '@/shared/api';
+import { useMeQuery } from '@/shared/api/auth/authApi';
 import { Button } from '@/shared/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

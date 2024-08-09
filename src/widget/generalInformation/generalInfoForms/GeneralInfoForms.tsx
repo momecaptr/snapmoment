@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { ChangePhoto, SaveGeneralInfo } from '@/features';
 import { isPhotoInState } from '@/myApp/model/appSlice';
+import { useGetUserProfilePhotoQuery } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import {
-  useGetUserProfilePhotoQuery,
   useLazyGetPersonalInformationUserQuery,
   useSetPersonalInformationUserMutation
-} from '@/shared/api/';
+} from '@/shared/api/personalInformationUser/personalInformationUserAPI';
 import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserTypes';
 import { useAppDispatch } from '@/shared/lib';
 import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';

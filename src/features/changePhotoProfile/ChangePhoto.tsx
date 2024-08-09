@@ -2,7 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 
 import DeletePhoto from '@/../public/Delet photo.svg';
 import { selectIsPhotoInState } from '@/myApp/model/appSelectors';
-import { useDeleteMainPhotoProfileMutation } from '@/shared/api/';
+import { useDeleteMainPhotoProfileMutation } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import { useAppSelector } from '@/shared/lib';
 import { Button, PhotoProfile } from '@/shared/ui';
 import { DeletePhotoModal } from '@/widget';
