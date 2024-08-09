@@ -1,5 +1,5 @@
-import { getInputValueFromDateMultiple } from '@/shared/ui/datePickerMultiple/lib';
-import { RangeDateMultiple } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiple';
+import { RangeDateMultiple } from '../../ui/DatePickerMultiple';
+import { getInputValueFromDateMultiple } from '../utils';
 
 export const getInputValueDateMultiple = (value: RangeDateMultiple): string => {
   return `${getInputValueFromDateMultiple(value.startDate)} - ${getInputValueFromDateMultiple(value.endDate)}`;

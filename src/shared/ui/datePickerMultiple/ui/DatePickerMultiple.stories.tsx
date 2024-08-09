@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-import { addNumberDayMultiple } from '@/shared/ui/datePickerMultiple/lib';
-import { DatePickerMultiple, RangeDateMultiple } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiple';
 import { Meta, StoryFn } from '@storybook/react';
+
+import { addNumberDayMultiple } from '../lib/helpers/addNumberDayMultiple';
+import { DatePickerMultiple, RangeDateMultiple } from './DatePickerMultiple';
 
 interface CustomArgs {}
 
