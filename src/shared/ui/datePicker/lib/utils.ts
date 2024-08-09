@@ -119,8 +119,6 @@ export const getDateFromInputValue = (dateString: string): Date | null => {
   const match = dateString.match(datePattern);
 
   if (!match) {
-    // console.error('Invalid date format. Expected format is DD.MM.YYYY.');
-
     return null;
   }
 
@@ -130,18 +128,10 @@ export const getDateFromInputValue = (dateString: string): Date | null => {
   const date = new Date(year, month, day);
 
   if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
-    console.error('Invalid date. Please check the input values.');
-
     return null;
   }
 
   return date;
-};
-
-const validValueRegex = /^(\d{2})\.(\d{2})\.(\d{4})$/;
-
-export const isValidDateString = (value: string) => {
-  return validValueRegex.test(value);
 };
 
 export function isToday(cell: DateCellItem, todayDate: Date) {

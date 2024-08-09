@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-import CalendarOutline from '@/../public/assets/components/CalendarOutline';
 import { getDateFromInputValue, getInputValueDate, useShowPopup } from '@/shared/ui/datePicker/lib';
 import { DatePickerPopupContent } from '@/shared/ui/datePicker/ui/DatePickerPopupContent';
 import { clsx } from 'clsx';
 
 import s from './DatePicker.module.scss';
+
+import { CalendarOutline } from '../../../../../public/assets/components';
 
 export interface DatePickerProps {
   name?: string;
@@ -15,10 +16,6 @@ export interface DatePickerProps {
 
 export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
   const { elementRef, handleInputClick, setShowPopup, showPopup } = useShowPopup();
-
-  // const { inputValue, inputValueDate, isValidInputValue, onInputValueChange, setInputValue } = useInputValueRange({
-  //   value
-  // });
   const [inputValue, setInputValue] = useState<string>(getInputValueDate(value));
   const [isValidInputValue, setIsValidInputValue] = useState(true);
   const [currentDate, setCurrentDate] = useState<Date>(value);
@@ -26,7 +23,6 @@ export const DatePicker = ({ name, onChange, value }: DatePickerProps) => {
   const handleChange = (valueDate: Date) => {
     setIsValidInputValue(!!getDateFromInputValue(inputValue));
     if (isValidInputValue) {
-      // console.log('popap', valueDate);
       onChange(valueDate);
       setInputValue(getInputValueDate(valueDate));
     }
