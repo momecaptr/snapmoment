@@ -1,7 +1,7 @@
 import { z } from 'zod';
 export const profileSettingsSchema = z.object({
   aboutMe: z.string().min(0, { message: 'About Me is required' }).max(200, { message: 'About Me is too long' }),
-  dateOfBirth: z.string().date().optional(),
+  dateOfBirth: z.string().date(),
   firstName: z
     .string()
     .min(1, { message: 'First Name is required' })
@@ -25,4 +25,4 @@ export const profileSettingsSchema = z.object({
     })
 });
 
-export type profileSettingsSchemaType = z.infer<typeof profileSettingsSchema>;
+export type ProfileSettingsSchemaType = z.infer<typeof profileSettingsSchema>;

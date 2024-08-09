@@ -1,2 +1,2 @@
-export * from './authLayout/AuthLayout';
-export * from './baseLayout/BaseLayout';
+export { AuthLayout, getAuthLayout } from './authLayout/AuthLayout';
+export { BaseLayout, getBaseLayout } from './baseLayout/BaseLayout';

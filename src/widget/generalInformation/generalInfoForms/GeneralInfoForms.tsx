@@ -3,17 +3,16 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { ChangePhoto, SaveGeneralInfo } from '@/features';
 import { isPhotoInState } from '@/myApp/model/appSlice';
+import { useGetUserProfilePhotoQuery } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import {
-  useGetUserProfilePhotoQuery,
   useLazyGetPersonalInformationUserQuery,
   useSetPersonalInformationUserMutation
-} from '@/shared/api/';
+} from '@/shared/api/personalInformationUser/personalInformationUserAPI';
 import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/personalInformationUserTypes';
 import { useAppDispatch } from '@/shared/lib';
-import { profileSettingsSchema } from '@/shared/schemas/';
 import { DatePicker, FormTextfield, Loading, SelectUI, Typography } from '@/shared/ui';
 import { FormTextfieldArea } from '@/shared/ui/forms/FormTextFieldArea';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from '@formkit/tempo';
 import { City, Country, ICity, IState, State } from 'country-state-city';
 
 import s from './GeneralInfoForms.module.scss';
@@ -57,33 +56,33 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
   const [country, setCountry] = useState<string>(countryOptions[0]?.value || '');
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [date, setDate] = useState<Date>(new Date('2020-01-01'));
+  const [date, setDate] = useState<Date>(new Date('01.01.2000'));
   const dispatch = useAppDispatch();
 
   const {
     control,
     formState: { errors },
+    getValues,
     handleSubmit,
     reset
-  } = useForm<FormData>({
-    resolver: zodResolver(profileSettingsSchema)
-  });
+  } = useForm<FormData>();
+  // resolver: zodResolver(profileSettingsSchema)
 
-  const onSubmit: SubmitHandler<FormData> = useCallback(
-    (formData) => {
-      setPersonalInformation({
-        aboutMe: formData.aboutMe,
-        city: city,
-        country: country,
-        dateOfBirth: date.toDateString(),
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        region: state,
-        userName: formData.userName
-      });
-    },
-    [city, country, date, state]
-  );
+  const onSubmit: SubmitHandler<FormData> = (formData) => {
+    console.log({ formDataUserName: formData.userName, userName: data?.userName });
+    console.log({ doB: format(date, 'YYYY-MM-DD') });
+    setPersonalInformation({
+      aboutMe: formData.aboutMe,
+      city: city,
+      country: country,
+      // dateOfBirth: '2000-08-09T06:45:12.743Z',
+      dateOfBirth: date.toISOString(),
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      region: state,
+      userName: formData.userName
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -214,7 +213,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                 />
               </div>
               <div className={s.datePickerBox}>
-                <DatePicker name={'dateOfBirth'} onChange={setDate} value={date} />
+                <DatePicker onChange={setDate} value={date} />
               </div>
               <div className={state !== '' ? s.selectBoxForThreeSelect : s.selectBoxForTwoSelect}>
                 <div>

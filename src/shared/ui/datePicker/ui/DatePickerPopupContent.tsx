@@ -1,5 +1,10 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { clsx } from 'clsx';
+
+import s from './DatePicker.module.scss';
+
 import {
   DateCellItem,
   addDay,
@@ -11,11 +16,7 @@ import {
   isToday,
   months,
   removeOneDay
-} from '@/shared/ui/datePicker/lib';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
-
-import s from './DatePicker.module.scss';
+} from '../lib/utils';
 
 const currentDate = new Date().getDate();
 const currentMonth = new Date().getMonth();

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { DatePicker } from '@/shared/ui';
 import { Meta, StoryFn } from '@storybook/react';
+
+import { DatePicker } from './DatePicker';
 
 interface CustomArgs {}
 

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
-import { getDateFromInputValue, getInputValueDate, useShowPopup } from '@/shared/ui/datePicker/lib';
+import CalendarOutline from '@/../public/assets/components/CalendarOutline';
+import { getInputValueDate } from '@/shared/ui/datePicker/lib/helpers/getInputValueDate';
+import { getDateFromInputValue } from '@/shared/ui/datePicker/lib/utils';
 import { DatePickerPopupContent } from '@/shared/ui/datePicker/ui/DatePickerPopupContent';
 import { clsx } from 'clsx';
 
 import s from './DatePicker.module.scss';
 
-import { CalendarOutline } from '../../../../../public/assets/components';
+import { useShowPopup } from '../lib/hooks/useShowPopup';
 
 export interface DatePickerProps {
   name?: string;

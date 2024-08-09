@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PublicPage } from '@/pagesComponents';
 import { Posts } from '@/pagesComponents/posts/Posts';
-import { useMeQuery } from '@/shared/api';
+import { useMeQuery } from '@/shared/api/auth/authApi';
 import { getAuthLayout, getBaseLayout } from '@/shared/providers';
 import { Inter } from 'next/font/google';
 

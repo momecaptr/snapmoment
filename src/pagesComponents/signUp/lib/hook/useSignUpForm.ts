@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { BaseResponseType, useRegistrationMutation } from '@/shared/api';
+import { useRegistrationMutation } from '@/shared/api/auth/authApi';
+import { BaseResponseType } from '@/shared/api/common/model/api.types';
 import { useCustomToast } from '@/shared/lib';
 import { SignUpSchemaType, signUpSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
