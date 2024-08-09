@@ -1,5 +1,5 @@
-export * from './answer/Answer';
-export * from './author/Author';
-export * from './chartLike/ChartLike';
-export * from './comment/Comment';
-export * from './registeredUsersCounter/RegisteredUsersCounter';
+export { Answer } from './answer/Answer';
+export { Author } from './author/Author';
+export { ChartLike } from './chartLike/ChartLike';
+export { Comment } from './comment/Comment';
+export { RegisteredUsersCounter } from './registeredUsersCounter/RegisteredUsersCounter';

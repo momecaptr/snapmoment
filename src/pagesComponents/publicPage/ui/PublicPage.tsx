@@ -10,6 +10,8 @@ import {
 } from '@/shared/api';
 import { ModalKey, useModal } from '@/shared/lib';
 import { UserCard, ViewPostModal } from '@/widget';
+// import { UserCard } from '@/widget';
+// import { ViewPostModal } from '@/widgetviewPostModal/ViewPostModal';
 
 import s from './PublicPage.module.scss';
 

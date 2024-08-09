@@ -5,7 +5,7 @@ import { selectIsPhotoInState } from '@/myApp/model/appSelectors';
 import { useDeleteMainPhotoProfileMutation } from '@/shared/api/';
 import { useAppSelector } from '@/shared/lib';
 import { Button, PhotoProfile } from '@/shared/ui';
-import { DeletePhotoModal } from '@/widget/modals/';
+import { DeletePhotoModal } from '@/widget';
 import Image from 'next/image';
 
 import s from './ChangePhoto.module.scss';
