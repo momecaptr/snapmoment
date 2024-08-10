@@ -65,17 +65,20 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
     control,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
+    setValue
   } = useForm<FormData>({
     resolver: zodResolver(profileSettingsSchema)
   });
+
+  console.log({ dstate: date.toISOString(), serverdob: data?.dateOfBirth });
 
   const onSubmit: SubmitHandler<FormData> = (formData) => {
     setPersonalInformation({
       aboutMe: formData.aboutMe,
       city: city,
       country: country,
-      dateOfBirth: date.toISOString(), // Преобразуем дату в ISO строку для хранения
+      dateOfBirth: formData.dateOfBirth, // Преобразуем дату в ISO строку для хранения
       firstName: formData.firstName,
       lastName: formData.lastName,
       region: state,
@@ -93,6 +96,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
           city: data.city ?? '',
           country: data.country ?? '',
           dateOfBirth: data.dateOfBirth ?? '',
+          // dateOfBirth: '1950-01-01' ?? '',
           firstName: data.firstName ?? '',
           lastName: data.lastName ?? '',
           region: data.region ?? '',
@@ -102,7 +106,9 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
         setCountry(data.country ?? '');
         setState(data.region ?? '');
         setCity(data.city ?? '');
-        setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date('2000-01-01'));
+        // setDate(data?.dateOfBirth ? new Date(data?.dateOfBirth) : new Date('2000-01-01'));
+        setDate(new Date(data?.dateOfBirth));
+        // setDate(new Date(data.dateOfBirth));
       }
     };
 
@@ -215,7 +221,15 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                 <Typography className={s.label} variant={'regular_text_14'}>
                   Date of birth
                 </Typography>
-                <DatePicker error={!!errors.dateOfBirth} name={'dateOfBirth'} onChange={setDate} value={date} />
+                <DatePicker
+                  onChange={(newDate) => {
+                    setDate(newDate); // Обновление локального состояния
+                    setValue('dateOfBirth', newDate.toISOString()); // Установка значения в форму
+                  }}
+                  error={!!errors.dateOfBirth}
+                  name={'dateOfBirth'}
+                  value={date}
+                />
                 {errors.dateOfBirth && (
                   <Typography className={s.errorDate} variant={'small_text'}>
                     A user under 13 cannot create a profile.{' '}
