@@ -1,6 +1,6 @@
 export { AccountManagement } from './generalInformation/accountManagement/AccountManagement';
 export { Devices } from './generalInformation/devices/Devices';
-export { GeneralInfoForms } from './generalInformation/generalInfoForms/GeneralInfoForms';
+export { GeneralInfoForms } from './generalInformation/generalInfoForms/ui/GeneralInfoForms';
 export { MyPayments } from './generalInformation/myPayments/MyPayments';
 export { HeadSignInAndSignUp } from './headSignInAndSignUp/HeadSignInAndSignUp';
 export { Header } from './header/Header';
