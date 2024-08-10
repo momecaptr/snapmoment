@@ -17,16 +17,14 @@ const meta: Meta<StoryProps> = {
 
 export default meta;
 
-const Defoult: StoryFn<StoryProps> = () => {
-  const [date, setDate] = useState<Date>(new Date('2020-01-01'));
+const Default: StoryFn<StoryProps> = () => {
+  const [date, setDate] = useState<string>(new Date('2020-01-01T00:00:00.000Z').toISOString());
 
   return (
-    <>
-      <div style={{ width: '300px' }}>
-        <DatePicker onChange={setDate} value={date} />
-      </div>
-    </>
+    <div style={{ width: '300px' }}>
+      <DatePicker onChange={(newDate: string) => setDate(newDate)} value={date} />
+    </div>
   );
 };
 
-export { Defoult };
+export { Default };
