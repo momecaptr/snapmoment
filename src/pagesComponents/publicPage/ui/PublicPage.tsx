@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
+import { useInfiniteScroll } from '@/pagesComponents/publicPage/lib/hooks/useInfiniteScroll';
 import {
   useGetPublicPostsQuery,
   useLazyGetPostByIdQuery,
@@ -16,14 +16,14 @@ import { ViewPostModal } from '@/widget/modals/viewPostModal/ViewPostModal';
 import s from './PublicPage.module.scss';
 
 export const PublicPage = () => {
-  const startPostsCount = 10;
-  const newPostsPerRequestCount = 10;
-  const [currentPostsCount, setCurrentPostsCount] = useState(startPostsCount);
-  const [isPostsFetching, setIsPostsFetching] = useState(false);
+  const startPostsCount = 5;
+  const newPostsPerRequestCount = 5;
+
+  const { currentElementsCount: currentPostsCount } = useInfiniteScroll(startPostsCount, newPostsPerRequestCount);
+  const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: currentPostsCount });
 
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
   const { data: me } = useMeQuery();
-  const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: currentPostsCount });
   const [getPostById, { data: postData, isFetching }] = useLazyGetPostByIdQuery();
   const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
     useLazyGetPostCommentsByPostIdQuery();
@@ -36,33 +36,6 @@ export const PublicPage = () => {
     getPostLikes({ postId: postId });
   };
   const isDataFetching = isFetching && isFetchingPostComments && isFetchingPostLikes;
-
-  useEffect(() => {
-    if (isPostsFetching) {
-      setCurrentPostsCount((prevState) => prevState + newPostsPerRequestCount);
-    }
-    setIsPostsFetching(false);
-  }, [isPostsFetching]);
-
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-
-    return function () {
-      document.removeEventListener('scroll', scrollHandler);
-    };
-  }, []);
-
-  const scrollHandler = () => {
-    const totalPageHeight = document.documentElement.scrollHeight;
-    const currentDistanceFromTop = document.documentElement.scrollTop;
-    const visibleRegion = window.innerHeight;
-    const distanceToBottom = 100;
-
-    if (totalPageHeight - (visibleRegion + currentDistanceFromTop) < distanceToBottom) {
-      console.log('scroll coming to bottom');
-      setIsPostsFetching(true);
-    }
-  };
 
   return (
     <>
