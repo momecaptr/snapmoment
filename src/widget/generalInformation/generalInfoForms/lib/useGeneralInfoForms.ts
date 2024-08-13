@@ -1,5 +1,3 @@
-import type { ICity, IState } from 'country-state-city/lib/interface';
-
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -13,7 +11,7 @@ import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/pe
 import { useAppDispatch } from '@/shared/lib';
 import { profileSettingsSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { City, Country, State } from 'country-state-city';
+import { City, Country, ICity, IState, State } from 'country-state-city';
 export const useGeneralInfoForms = () => {
   const [getInfo, { data, isLoading }] = useLazyGetPersonalInformationUserQuery();
   const [setPersonalInformation, { isLoading: isLoadingSet }] = useSetPersonalInformationUserMutation();
