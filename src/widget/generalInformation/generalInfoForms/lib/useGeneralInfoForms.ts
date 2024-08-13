@@ -11,7 +11,10 @@ import { PersonalInformationArgs } from '@/shared/api/personalInformationUser/pe
 import { useAppDispatch } from '@/shared/lib';
 import { profileSettingsSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { City, Country, ICity, IState, State } from 'country-state-city';
+import City from 'country-state-city/lib/city';
+import Country from 'country-state-city/lib/country';
+import { ICity, IState } from 'country-state-city/lib/interface';
+import State from 'country-state-city/lib/state';
 
 export const useGeneralInfoForms = () => {
   const [getInfo, { data, isLoading }] = useLazyGetPersonalInformationUserQuery();
@@ -84,7 +87,7 @@ export const useGeneralInfoForms = () => {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, [getInfo, reset]);
 
   useEffect(() => {
