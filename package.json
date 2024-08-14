@@ -21,6 +21,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.18",
     "@fontsource/roboto": "^5.0.13",
+    "@formkit/tempo": "^0.1.2",
     "@hookform/resolvers": "^3.7.0",
     "@radix-ui/colors": "^3.0.0",
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -40,6 +41,7 @@
     "async-mutex": "^0.5.0",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
+    "country-state-city": "^3.2.1",
     "javascript-time-ago": "^2.5.10",
     "next": "14.2.5",
     "next-redux-wrapper": "^8.1.0",

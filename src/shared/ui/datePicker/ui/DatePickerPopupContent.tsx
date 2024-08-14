@@ -1,5 +1,10 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { clsx } from 'clsx';
+
+import s from './DatePicker.module.scss';
+
 import {
   DateCellItem,
   addDay,
@@ -11,11 +16,7 @@ import {
   isToday,
   months,
   removeOneDay
-} from '@/shared/ui';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
-
-import s from './DatePicker.module.scss';
+} from '../lib/utils';
 
 const currentDate = new Date().getDate();
 const currentMonth = new Date().getMonth();
@@ -25,9 +26,15 @@ interface DatePickerPopupContentProps {
   inputValueDate?: Date;
   onChange: (value: Date) => void;
   selectedValue: Date;
+  setShowPopup: (value: boolean) => void;
 }
 
-export const DatePickerPopupContent = ({ inputValueDate, onChange, selectedValue }: DatePickerPopupContentProps) => {
+export const DatePickerPopupContent = ({
+  inputValueDate,
+  onChange,
+  selectedValue,
+  setShowPopup
+}: DatePickerPopupContentProps) => {
   const [panelYear, setPanelYear] = useState(() => selectedValue.getFullYear());
   const [panelMonth, setPanelMonth] = useState(() => selectedValue.getMonth());
   const todayDate = useMemo(() => new Date(), []);
@@ -127,7 +134,6 @@ export const DatePickerPopupContent = ({ inputValueDate, onChange, selectedValue
           const isTodayDate = isToday(cell, todayDate);
           const isNotCurrent = cell.type !== 'current';
 
-          // const isDateInRange = isInRange(date, inputValueDate);
           const isDateInRange = true;
 
           const daysOff = !isNotCurrent && (date.getDay() === 6 || date.getDay() === 0);
@@ -147,15 +153,20 @@ export const DatePickerPopupContent = ({ inputValueDate, onChange, selectedValue
                 isNotCurrent && s.calendarPanelItemNotCurrent,
                 !isDateInRange && s.calendarPanelItemNotInRange,
                 daysOff && s.calendarPanelItemDaysOff,
-                // isSelectedDate && s.calendarPanelItemSelectedStartDate,
-                // isSelectedEndDate && s.calendarPanelItemSelectedEndDate,
                 isSelectedDate && s.calendarPanelItemSelectedStartAndEndDate
-                // isSelectedStartAndEndDate && s.calendarPanelItemSelectedStartAndEndDate
               )}
+              onClick={() => {
+                isDateInRange && onDateSelectOne(cell);
+                setShowPopup(false);
+              }}
+              onDoubleClick={() => {
+                isDateInRange && onDateSelectOne(cell);
+              }}
+              onKeyDown={(e) => {
+                e.key === 'Enter' && isDateInRange && onDateSelectOne(cell);
+                setShowPopup(false);
+              }}
               key={`${cell.date}.${cell.month}.${cell.year}`}
-              onClick={() => isDateInRange && onDateSelectOne(cell)}
-              onDoubleClick={() => isDateInRange && onDateSelectOne(cell)}
-              onKeyDown={(e) => e.key === 'Enter' && isDateInRange && onDateSelectOne(cell)}
             >
               <span className={s.calendarPanelItemDate} tabIndex={0}>
                 {cell.date}

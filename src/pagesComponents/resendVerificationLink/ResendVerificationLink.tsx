@@ -1,7 +1,8 @@
 import React from 'react';
 
 import TimeManagement from '@/../public/assets/components/TimeManagement';
-import { BaseResponseType, useResendEmailMutation } from '@/shared/api';
+import { useResendEmailMutation } from '@/shared/api/auth/authApi';
+import { BaseResponseType } from '@/shared/api/common/model/api.types';
 import { useCustomToast } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 import { useRouter } from 'next/router';

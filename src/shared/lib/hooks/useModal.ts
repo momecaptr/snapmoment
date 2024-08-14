@@ -3,6 +3,7 @@ import { toggleModal } from '@/myApp/model/appSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 
 export enum ModalKey {
+  ChangePhoto = 'ChangePhoto',
   Success = 'Success',
   ViewLikes = 'ViewLikes',
   ViewPhoto = 'ViewPhoto'

@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
 
-import { PaginationWithSelect, selectOptionsType } from '@/shared/ui';
+import { SelectOptionsType } from '@/shared/ui';
+
+import { PaginationWithSelect } from './PaginationWithSelect';
 
 const meta = {
   argTypes: {},
@@ -42,7 +44,7 @@ export const Default: Story = {
       { text: '30', value: '30' },
       { text: '50', value: '50' },
       { text: '100', value: '100' }
-    ] as selectOptionsType[],
+    ] as SelectOptionsType[],
     setCurrentPage: () => {},
     setItemsPerPage: () => {},
     totalItems: 300

@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
-        hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com',
+        protocol: 'https',
         pathname: '**',
-        protocol: 'https'
+        hostname: 'staging-it-incubator.s3.eu-central-1.amazonaws.com'
       }
     ]
-  },
-  reactStrictMode: false
+  }
 };
 
 export default nextConfig;

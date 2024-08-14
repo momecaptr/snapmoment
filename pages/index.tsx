@@ -3,8 +3,10 @@ import React from 'react';
 import { wrapper } from '@/myApp/store';
 import { PublicPage } from '@/pagesComponents';
 import { Posts } from '@/pagesComponents/posts/Posts';
-import { Item, getPublicPosts, useMeQuery } from '@/shared/api';
+import { useMeQuery } from '@/shared/api/auth/authApi';
 import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
+import { getPublicPosts } from '@/shared/api/public/publicApi';
+import { Item } from '@/shared/api/public/publicTypes';
 import { getAuthLayout, getBaseLayout } from '@/shared/providers';
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
 

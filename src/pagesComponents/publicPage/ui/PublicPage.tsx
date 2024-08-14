@@ -1,13 +1,10 @@
 import * as React from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
-import {
-  Item,
-  useLazyGetPostByIdQuery,
-  useLazyGetPostCommentsByPostIdQuery,
-  useLazyGetPostLikesQuery,
-  useMeQuery
-} from '@/shared/api';
+import { useMeQuery } from '@/shared/api/auth/authApi';
+import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
+import { useLazyGetPostByIdQuery, useLazyGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
+import { Item } from '@/shared/api/public/publicTypes';
 import { ModalKey, useModal } from '@/shared/lib';
 import { UserCard } from '@/widget';
 import { InferGetStaticPropsType } from 'next';

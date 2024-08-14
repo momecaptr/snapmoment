@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import { wrapper } from '@/myApp/store';
-import { Item, getPostById } from '@/shared/api';
+import { getPostById } from '@/shared/api/public/publicApi';
+import { Item } from '@/shared/api/public/publicTypes';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 

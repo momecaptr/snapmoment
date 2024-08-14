@@ -13,6 +13,9 @@ importers:
       '@fontsource/roboto':
         specifier: ^5.0.13
         version: 5.0.13
+      '@formkit/tempo':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@hookform/resolvers':
         specifier: ^3.7.0
         version: 3.7.0(react-hook-form@7.52.1(react@18.3.1))
@@ -70,6 +73,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      country-state-city:
+        specifier: ^3.2.1
+        version: 3.2.1
       javascript-time-ago:
         specifier: ^2.5.10
         version: 2.5.10
@@ -1304,6 +1310,10 @@ packages:
   '@fontsource/roboto@5.0.13':
     resolution:
       { integrity: sha512-j61DHjsdUCKMXSdNLTOxcG701FWnF0jcqNNQi2iPCDxU8seN/sMxeh62dC++UiagCWq9ghTypX+Pcy7kX+QOeQ== }
+
+  '@formkit/tempo@0.1.2':
+    resolution:
+      { integrity: sha512-jNPPbjL8oj7hK3eHX++CwbR6X4GKQt+x00/q4yeXkwynXHGKL27dylYhpEgwrmediPP4y7s0XtN1if/M/JYujg== }
 
   '@hookform/resolvers@3.7.0':
     resolution:
@@ -3562,6 +3572,10 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  country-state-city@3.2.1:
+    resolution:
+      { integrity: sha512-kxbanqMc6izjhc/EHkGPCTabSPZ2G6eG4/97akAYHJUN4stzzFEvQPZoF8oXDQ+10gM/O/yUmISCR1ZVxyb6EA== }
 
   create-ecdh@4.0.4:
     resolution:
@@ -8744,6 +8758,8 @@ snapshots:
 
   '@fontsource/roboto@5.0.13': {}
 
+  '@formkit/tempo@0.1.2': {}
+
   '@hookform/resolvers@3.7.0(react-hook-form@7.52.1(react@18.3.1))':
     dependencies:
       react-hook-form: 7.52.1(react@18.3.1)
@@ -11211,6 +11227,8 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.5.3
+
+  country-state-city@3.2.1: {}
 
   create-ecdh@4.0.4:
     dependencies:

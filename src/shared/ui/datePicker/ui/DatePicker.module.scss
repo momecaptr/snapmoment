@@ -23,8 +23,10 @@
   width: 100%;
   padding: 6px 60px 6px 12px;
 
+  line-height: 24px;
+
   background-color: var(--dark-700);
-  border: 1px solid var(--dark-500);
+  border: 1px solid var(--dark-100);
   border-radius: 2px;
 
   &:focus {
@@ -38,8 +40,8 @@
 }
 
 .datePickerInputInvalid {
-  color: var(--danger-100);
-  border: 1px solid var(--danger-100);
+  color: var(--danger-500);
+  border: 1px solid var(--danger-500);
 }
 
 .datePickerPopup {
@@ -198,5 +200,6 @@
 }
 
 .calendarPanelItemSelectedStartAndEndDate .calendarPanelItemDate {
+  border: 2px solid var(--accent-900);
   border-radius: 50%;
 }

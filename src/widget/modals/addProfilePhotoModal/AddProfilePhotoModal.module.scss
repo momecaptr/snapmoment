@@ -26,26 +26,23 @@
   align-items: center;
   justify-content: center;
 
-  padding: 72px 135px 108px;
+  padding: 0 135px 60px;
 }
 
 .topButton {
   background-color: transparent;
 
-  // ! Добавил эти строки для отмены закрашивания кнопки на hover
   &:hover {
     background-color: transparent;
   }
 }
 
 .button {
+  display: flex;
+  justify-content: center;
+  width: 219px;
   margin-top: 60px;
 }
-
-// .photo {
-//    width: 222px;
-//    height: 228px;
-// }
 
 .customFileUpload {
   display: none;
@@ -54,36 +51,44 @@
 .lable {
   padding: 6px 24px;
   background-color: var(--accent-500);
+  border-radius: 2px;
 }
 
 .errorMessage {
-  margin-top: 24px;
+  width: 397px;
   padding: 6px 24px;
 
   color: var(--light-100);
   text-align: center;
 
-  background-color: var(--danger-500);
+  background-color: var(--danger-900);
+  border: 1px solid var(--danger-300);
 }
 
 .boxErrorMessage {
-  margin: 0 24px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
 }
 
 .changeMargin {
-  padding: 24px 135px 108px;
+  padding: 24px 135px 60px;
 }
 
 .buttonSave {
   position: absolute;
-  right: 24px;
-  bottom: 36px;
+  right: 10px;
+  bottom: 0;
+  padding: 6px 24px;
 }
 
 .photoContainer {
   position: relative;
+
   width: 332px;
   height: 340px;
+  margin-bottom: 15px;
+
   background-color: rgb(0 0 0 / 65%);
 }
 
@@ -104,15 +109,4 @@
 
   opacity: 0.5;
   background-color: black;
-}
-
-.photoProfile {
-  // width: 222px !important;
-  // height: 228px !important;
-  // background-color: var(--dark-500) !important;
-  // border-radius: 0 !important;
-  width: 222px;
-  height: 228px;
-  background-color: var(--dark-500);
-  border-radius: 0;
 }

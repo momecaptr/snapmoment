@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import Link from 'next/link';
+import { Button } from '@/shared/ui';
 
 import s from './GeneralInfoNavigation.module.scss';
 
-export const GeneralInfoNavigation = () => {
-  const [activeLink, setActiveLink] = useState('');
+type GeneralInfoNavigationProps = {
+  setActiveSection: (section: string) => void;
+};
+
+export const GeneralInfoNavigation: React.FC<GeneralInfoNavigationProps> = ({ setActiveSection }) => {
+  const [activeLink, setActiveLink] = React.useState('General information');
 
   const handleClick = (link: string) => {
     setActiveLink(link);
+    setActiveSection(link);
   };
 
   const links = ['General information', 'Devices', 'Account Management', 'My payments'];
@@ -18,13 +23,13 @@ export const GeneralInfoNavigation = () => {
       <div className={s.boxAllLine}>
         {links.map((link, index) => (
           <div className={s.boxLinkLine} key={index}>
-            <Link
+            <Button
               className={`${s.link} ${activeLink === link ? s.activeLink : ''}`}
-              href={'/'}
               onClick={() => handleClick(link)}
+              variant={'text'}
             >
               {link}
-            </Link>
+            </Button>
             <span className={`${s.line} ${activeLink === link ? s.activeLine : ''}`} />
           </div>
         ))}

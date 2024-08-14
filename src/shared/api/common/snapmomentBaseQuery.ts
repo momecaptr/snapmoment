@@ -58,25 +58,6 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
               console.log(args);
             }
           }
-          // const refreshResult = await baseQuery(
-          //   {
-          //     credentials: 'include',
-          //     method: 'POST',
-          //     url: 'v1/auth/update-tokens'
-          //   },
-          //   api,
-          //   extraOptions
-          // )
-          //
-          // if (refreshResult.data) {
-          //   const refreshResultParsed = RefreshTokenResponseSchema.parse(refreshResult.data);
-          //
-          //   localStorage.setItem('accessToken', refreshResultParsed.accessToken);
-          //   result = await baseQuery(args, api, extraOptions);
-          // } else {
-          //   console.log('loggedOut');
-          //   Router.push('/auth/sign-in');
-          // }
         } finally {
           release();
         }

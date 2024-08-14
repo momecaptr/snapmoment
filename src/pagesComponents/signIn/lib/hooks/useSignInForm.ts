@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { useLoginMutation } from '@/shared/api';
+import { useLoginMutation } from '@/shared/api/auth/authApi';
 import { SignInSchemaType, signInSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';

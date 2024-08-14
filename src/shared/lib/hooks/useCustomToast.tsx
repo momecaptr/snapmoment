@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 
-import { CustomToastProps } from '@/shared/ui';
-import { CustomToast } from '@/shared/ui/customToast/CustomToast';
+import { CustomToast, CustomToastProps } from '@/shared/ui';
 import { toast } from 'sonner';
 
 export const useCustomToast = () => {

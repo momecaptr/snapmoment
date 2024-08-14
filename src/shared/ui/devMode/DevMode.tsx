@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 import { Button } from '@/shared/ui';
-import DevItemContainer from '@/shared/ui/devMode/devItemContainer/DevItemContainer';
-import { DevSideBar } from '@/shared/ui/devMode/devSideBar/DevSideBar';
 import { clsx } from 'clsx';
 
 import s from './DevMode.module.scss';
+
+import DevItemContainer from './devItemContainer/DevItemContainer';
+import { DevSideBar } from './devSideBar/DevSideBar';
 
 type Props = {
   isActive?: boolean;

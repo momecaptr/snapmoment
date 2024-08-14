@@ -1,7 +1,7 @@
 .boxInput {
   box-sizing: border-box;
   height: 36px;
-  padding: 0 3%;
+  padding: 0 10px;
 
   background-color: transparent;
   border: none;
@@ -9,7 +9,7 @@
   box-shadow: inset 0 0 0 1px var(--dark-300);
 
   &[type='search'] {
-    padding: 0 30px 0 34px;
+    padding: 0 1% 0 34px;
 
     &::-webkit-search-cancel-button {
       appearance: none;
@@ -42,8 +42,7 @@
 }
 
 .placeholder {
-  padding-left: 0;
-  text-indent: 12px;
+  padding-left: 10px;
 }
 
 .boxImg {
@@ -58,7 +57,7 @@
 }
 
 .hover {
-  text-indent: 12px;
+  text-indent: 1%;
   background-color: transparent;
   outline: 2px solid var(--dark-100);
 }
@@ -74,7 +73,7 @@
 }
 
 .errorTextAndPassword {
-  text-indent: 12px;
+  text-indent: 0;
   background-color: transparent;
   border: none;
   outline: 2px solid var(--danger-300);
@@ -139,5 +138,5 @@
 
 .label {
   font-size: 14px;
-  color: var(--dark-100);
+  color: var(--light-900);
 }
