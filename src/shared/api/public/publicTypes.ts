@@ -132,3 +132,14 @@ export type AnswerItems = {
   isLiked: boolean;
   likeCount: number;
 };
+
+export interface GetPublicUserProfileResponse {
+  aboutMe: string;
+  avatars: Avatar[];
+  id: number;
+  userName: string;
+}
+
+export interface GetPublicPostsUserArgs extends GetPostsArgs {
+  userId: number;
+}

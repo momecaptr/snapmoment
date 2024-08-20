@@ -1,0 +1,41 @@
+.container {
+  margin: 0 auto;
+  padding: 33px 10%;
+}
+
+.userInfo {
+  display: flex;
+  gap: 38px;
+  margin-bottom: 53px;
+
+  & > img {
+    width: 204px;
+    height: 204px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.infoList {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 23px;
+}
+
+.postsList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  img {
+    width: 100%;
+    height: 1fr;
+    object-fit: cover;
+  }
+}
