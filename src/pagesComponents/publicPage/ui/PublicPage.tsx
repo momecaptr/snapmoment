@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
-import { useInfiniteScroll } from '@/pagesComponents/publicPage/lib/hooks/useInfiniteScroll';
+import { IUseInfiniteScroll, useInfiniteScroll } from '@/pagesComponents/publicPage/lib/hooks/useInfiniteScroll';
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
 import {
@@ -28,7 +28,8 @@ export const PublicPage = () => {
     isFetching: isFetchingPosts,
     newElementsPerRequestCount: NEW_POSTS_PER_REQUEST_COUNT,
     startElementsCount: START_POSTS_COUNT
-  });
+  } as IUseInfiniteScroll);
+
   //послыаем запрос на получение постов в useGetPublicPostsQuery
   const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: currentPostsCount });
 
