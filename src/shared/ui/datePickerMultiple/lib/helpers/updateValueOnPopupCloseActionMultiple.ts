@@ -1,9 +1,6 @@
-import {
-  getDateFromInputValueMultiple,
-  getInputValueDateMultiple,
-  isInRangeMultiple
-} from '@/shared/ui/datePickerMultiple/lib';
-import { RangeDateMultiple } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiple';
+import { RangeDateMultiple } from '../../ui/DatePickerMultiple';
+import { getDateFromInputValueMultiple, isInRangeMultiple } from '../utils';
+import { getInputValueDateMultiple } from './getInputValueDateMultiple';
 
 interface Props {
   inputValue: string;

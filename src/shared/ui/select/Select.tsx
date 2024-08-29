@@ -1,5 +1,5 @@
 import { ArrowIosDownOutline } from '@/../public/assets/components';
-import { Typography, selectOptionsType } from '@/shared/ui';
+import { SelectOptionsType, Typography } from '@/shared/ui';
 import * as Select from '@radix-ui/react-select';
 import clsx from 'clsx';
 
@@ -10,7 +10,7 @@ type Props = {
   disabled?: boolean;
   name?: string;
   onValueChange?: (items: string) => void;
-  selectOptions: selectOptionsType[];
+  selectOptions: SelectOptionsType[];
   value?: string;
 };
 

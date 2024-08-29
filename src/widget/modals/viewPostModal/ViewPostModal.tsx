@@ -4,7 +4,7 @@ import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Author, Comment } from '@/entities';
 import { AddComment, MoreActions, ShowLikers } from '@/features';
 import { TimeAgo } from '@/features/timeAgo/TimeAgo';
-import { GetPostLikesResponse } from '@/shared/api';
+import { GetPostLikesResponse } from '@/shared/api/posts/postsTypes';
 import { GetPostByIdResponse, GetPostCommentsByPostIdResponse } from '@/shared/api/public/publicTypes';
 import { ModalKey, useModal } from '@/shared/lib';
 import { Modal, PhotosSwiper } from '@/shared/ui';

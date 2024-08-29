@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 
-import { BaseResponseType, usePasswordRecoveryMutation } from '@/shared/api';
+import { usePasswordRecoveryMutation } from '@/shared/api/auth/authApi';
+import { BaseResponseType } from '@/shared/api/common/model/api.types';
 import { useCustomToast } from '@/shared/lib';
 import { ForgotPasswordFormValues, ResendCreatePasswordType, resendCreatePasswordSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';

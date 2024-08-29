@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { appSlice } from '@/myApp/model/appSlice';
-import { usePasswordRecoveryMutation } from '@/shared/api';
+import { usePasswordRecoveryMutation } from '@/shared/api/auth/authApi';
 import { ModalKey, useAppDispatch, useCustomToast, useModal } from '@/shared/lib';
 import { ForgotPasswordFormValues, forgotPasswordSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';

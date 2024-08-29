@@ -1,4 +1,4 @@
-import { useGoogleOAuthMutation } from '@/shared/api';
+import { useGoogleOAuthMutation } from '@/shared/api/auth/authApi';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/navigation';
 

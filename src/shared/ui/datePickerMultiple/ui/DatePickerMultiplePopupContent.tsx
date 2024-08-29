@@ -1,5 +1,10 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { clsx } from 'clsx';
+
+import s from './DatePickerMultiple.module.scss';
+
 import {
   DateCellItemMultiple,
   addDayMultiple,
@@ -13,12 +18,8 @@ import {
   isTodayMultiple,
   monthsMultiple,
   removeOneDayMultiple
-} from '@/shared/ui/datePickerMultiple/lib';
-import { RangeDateMultiple } from '@/shared/ui/datePickerMultiple/ui/DatePickerMultiple';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
-
-import s from './DatePickerMultiple.module.scss';
+} from '../lib/utils';
+import { RangeDateMultiple } from './DatePickerMultiple';
 
 const currentDate = new Date().getDate();
 const currentMonth = new Date().getMonth();

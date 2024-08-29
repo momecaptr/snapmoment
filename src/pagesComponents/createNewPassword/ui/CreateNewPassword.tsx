@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useCreateNewPasswordMutation } from '@/shared/api';
+import { useCreateNewPasswordMutation } from '@/shared/api/auth/authApi';
 import { useCustomToast } from '@/shared/lib';
 import { CreateNewPasswordFormValues, createNewPasswordSchema } from '@/shared/schemas';
 import { Button, Card, FormTextfield, Typography } from '@/shared/ui';

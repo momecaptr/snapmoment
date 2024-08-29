@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 
 import { useState } from 'react';
 
-import { Pagination } from '@/shared/ui';
+import { Pagination } from './Pagination';
 
 const meta = {
   argTypes: {},

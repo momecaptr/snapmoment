@@ -1,5 +1,10 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
 
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { clsx } from 'clsx';
+
+import s from './DatePicker.module.scss';
+
 import {
   DateCellItem,
   addDay,
@@ -11,11 +16,7 @@ import {
   isToday,
   months,
   removeOneDay
-} from '@/shared/ui/datePicker/lib';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
-
-import s from './DatePicker.module.scss';
+} from '../lib/utils';
 
 const currentDate = new Date().getDate();
 const currentMonth = new Date().getMonth();
@@ -133,7 +134,6 @@ export const DatePickerPopupContent = ({
           const isTodayDate = isToday(cell, todayDate);
           const isNotCurrent = cell.type !== 'current';
 
-          // const isDateInRange = isInRange(date, inputValueDate);
           const isDateInRange = true;
 
           const daysOff = !isNotCurrent && (date.getDay() === 6 || date.getDay() === 0);
@@ -153,10 +153,7 @@ export const DatePickerPopupContent = ({
                 isNotCurrent && s.calendarPanelItemNotCurrent,
                 !isDateInRange && s.calendarPanelItemNotInRange,
                 daysOff && s.calendarPanelItemDaysOff,
-                // isSelectedDate && s.calendarPanelItemSelectedStartDate,
-                // isSelectedEndDate && s.calendarPanelItemSelectedEndDate,
                 isSelectedDate && s.calendarPanelItemSelectedStartAndEndDate
-                // isSelectedStartAndEndDate && s.calendarPanelItemSelectedStartAndEndDate
               )}
               onClick={() => {
                 isDateInRange && onDateSelectOne(cell);

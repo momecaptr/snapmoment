@@ -2,24 +2,28 @@ import * as React from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
 import { useInfiniteScroll } from '@/pagesComponents/publicPage/lib/hooks/useInfiniteScroll';
+import { useMeQuery } from '@/shared/api/auth/authApi';
+import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
 import {
   useGetPublicPostsQuery,
   useLazyGetPostByIdQuery,
-  useLazyGetPostCommentsByPostIdQuery,
-  useLazyGetPostLikesQuery,
-  useMeQuery
-} from '@/shared/api';
+  useLazyGetPostCommentsByPostIdQuery
+} from '@/shared/api/public/publicApi';
 import { ModalKey, useModal } from '@/shared/lib';
 import { UserCard } from '@/widget';
 import { ViewPostModal } from '@/widget/modals/viewPostModal/ViewPostModal';
 
 import s from './PublicPage.module.scss';
 
-export const PublicPage = () => {
-  const startPostsCount = 5;
-  const newPostsPerRequestCount = 5;
+//todo: добавить тернарник для значений в зависимости от размера экрана.
+const START_POSTS_COUNT = 5;
+const NEW_POSTS_PER_REQUEST_COUNT = 5;
 
-  const { currentElementsCount: currentPostsCount } = useInfiniteScroll(startPostsCount, newPostsPerRequestCount);
+export const PublicPage = () => {
+  const { currentElementsCount: currentPostsCount } = useInfiniteScroll({
+    newElementsPerRequestCount: NEW_POSTS_PER_REQUEST_COUNT,
+    startElementsCount: START_POSTS_COUNT
+  });
   const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: currentPostsCount });
 
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);

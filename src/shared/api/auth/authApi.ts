@@ -12,7 +12,7 @@ import {
   RegistrationArgs,
   RegistrationConfirmationArgs,
   ResendEmailArgs
-} from '@/shared/api';
+} from '@/shared/api/common/model/api.types';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import { transformErrorResponse } from '@/shared/api/lib/transformErrorResponse';
 
