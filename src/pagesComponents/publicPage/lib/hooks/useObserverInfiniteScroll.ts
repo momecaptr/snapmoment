@@ -1,11 +1,12 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 
-export interface IUseInfiniteScrollAlt {
+export interface IUseObserverInfiniteScroll {
   callBack: () => void;
   triggerRef: MutableRefObject<HTMLElement>;
+  wrapperRef: MutableRefObject<HTMLElement>;
 }
 
-export const useInfiniteScrollAlt = (props: IUseInfiniteScrollAlt) => {
+export const useObserverInfiniteScroll = (props: IUseObserverInfiniteScroll) => {
   const { callBack, triggerRef } = props;
   const ref = useRef<IntersectionObserver | null>();
 

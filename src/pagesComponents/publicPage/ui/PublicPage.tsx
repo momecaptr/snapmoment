@@ -16,19 +16,25 @@ import { ViewPostModal } from '@/widget/modals/viewPostModal/ViewPostModal';
 import s from './PublicPage.module.scss';
 
 //todo: добавить тернарник для значений в зависимости от размера экрана.
-const START_POSTS_COUNT = 5;
-const NEW_POSTS_PER_REQUEST_COUNT = 5;
+const START_POSTS_COUNT = 8;
+const NEW_POSTS_PER_REQUEST_COUNT = 4;
 
 export const PublicPage = () => {
+  //получаем метод refetch и флаг isFetching для использования в useInfiniteScroll из useGetPublicPostsQuery
+  const { isFetching: isFetchingPosts, refetch: reFetchPosts } = useGetPublicPostsQuery({});
+
   const { currentElementsCount: currentPostsCount } = useInfiniteScroll({
+    callBack: reFetchPosts,
+    isFetching: isFetchingPosts,
     newElementsPerRequestCount: NEW_POSTS_PER_REQUEST_COUNT,
     startElementsCount: START_POSTS_COUNT
   });
+  //послыаем запрос на получение постов в useGetPublicPostsQuery
   const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: currentPostsCount });
 
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
   const { data: me } = useMeQuery();
-  const [getPostById, { data: postData, isFetching }] = useLazyGetPostByIdQuery();
+  const [getPostById, { data: postData, isFetching: isFetchingPostData }] = useLazyGetPostByIdQuery();
   const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
     useLazyGetPostCommentsByPostIdQuery();
   const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
@@ -39,7 +45,7 @@ export const PublicPage = () => {
     getPostCommentsByPostId({ postId: postId });
     getPostLikes({ postId: postId });
   };
-  const isDataFetching = isFetching && isFetchingPostComments && isFetchingPostLikes;
+  const isDataFetching = isFetchingPostData && isFetchingPostComments && isFetchingPostLikes;
 
   return (
     <>
