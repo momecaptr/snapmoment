@@ -1,65 +1,66 @@
 import * as React from 'react';
+import { Fragment, useEffect } from 'react';
 
+import { getStaticProps } from '@/../pages';
+import { getServerSideProps } from '@/../pages/public/posts';
 import { RegisteredUsersCounter } from '@/entities';
-import { useMeQuery } from '@/shared/api/auth/authApi';
-import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
-import { useLazyGetPostByIdQuery, useLazyGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
 import { Item } from '@/shared/api/public/publicTypes';
 import { ModalKey, useModal } from '@/shared/lib';
-import { UserCard } from '@/widget';
-import { InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
+import { UserCard, ViewPostModal } from '@/widget';
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
+import { useRouter } from 'next/router';
 
 import s from './PublicPage.module.scss';
 
-import { getStaticProps } from '../../../../pages';
+// export default function PublicPage({
+//   postComments,
+//   postData,
+//   postLikes,
+//   posts
+// }: {
+//   posts: Item[];
+// } & InferGetServerSidePropsType<typeof getServerSideProps> &
+//   InferGetStaticPropsType<typeof getStaticProps>) {
+const PublicPage = ({
+  postComments,
+  postData,
+  postLikes,
+  posts
+}: {
+  posts: Item[];
+} & InferGetServerSidePropsType<typeof getServerSideProps> &
+  InferGetStaticPropsType<typeof getStaticProps>) => {
+  const router = useRouter();
+  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
 
-export const PublicPage = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  useEffect(() => {
+    if (router.query.id) {
+      setOpen(true);
+    }
+  }, [router.query.id]);
+
+  const showViewPostModalHandler = (postId: number) => {
+    setOpen(true);
+    router.push(`/public/posts/?id=${postId}`, undefined, { shallow: true });
+  };
+
   return (
     <>
+      {isOpen && postData && <ViewPostModal postComments={postComments} postData={postData} postLikes={postLikes} />}
+
       <section className={s.container}>
         <RegisteredUsersCounter />
 
-        <PostList posts={posts} />
+        <div className={s.cards}>
+          {posts?.map((post) => (
+            <Fragment key={post.id}>
+              <UserCard post={post} showViewPostModalHandler={showViewPostModalHandler} />
+            </Fragment>
+          ))}
+        </div>
       </section>
     </>
   );
 };
 
-const PostList = ({ posts }: { posts: Item[] }) => {
-  return (
-    <div className={s.cards}>
-      {posts?.map((post) => (
-        <Link href={`/public/posts/${post.id}`} key={post.id}>
-          <PublicPost1 post={post} />
-        </Link>
-      ))}
-    </div>
-  );
-};
-
-export const PublicPost1 = ({ post }: { post: Item }) => {
-  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-
-  const [getPostById, { data: postData, isFetching }] = useLazyGetPostByIdQuery();
-  const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
-    useLazyGetPostCommentsByPostIdQuery();
-  const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
-
-  const lazyOpenModalHandler = async (postId: number, isOpen: boolean) => {
-    setOpen(isOpen);
-    getPostById({ postId: postId });
-    getPostCommentsByPostId({ postId: postId });
-    getPostLikes({ postId: postId });
-  };
-
-  const { data: me } = useMeQuery();
-
-  const isDataFetching = isFetching && isFetchingPostComments && isFetchingPostLikes;
-
-  return (
-    <>
-      <UserCard lazyOpenModalHandler={lazyOpenModalHandler} post={post} />
-    </>
-  );
-};
+export default PublicPage;

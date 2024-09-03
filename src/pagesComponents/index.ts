@@ -8,7 +8,7 @@ export { EmailVerification } from './emailVerification/EmailVerification';
 export { GeneralInfo } from './generalInfo/GeneralInfo';
 export { usePasswordRecovery } from './passwordRecovery/lib/hooks/usePasswordRecovery';
 export { PasswordRecovery } from './passwordRecovery/ui/PasswordRecovery';
-export { PublicPage } from './publicPage/ui/PublicPage';
+export { default as PublicPage } from './publicPage/ui/PublicPage';
 export { useRecoveryCodeFailed } from './recoveryCodeFailed/lib/useRecoveryCodeFailed';
 export { RecoveryCodeFailed } from './recoveryCodeFailed/ui/RecoveryCodeFailed';
 export { useSignInForm } from './signIn/lib/hooks/useSignInForm';

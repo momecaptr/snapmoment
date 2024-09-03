@@ -1,8 +1,7 @@
 import React from 'react';
 
+import Page from '@/../pages/public/posts';
 import { wrapper } from '@/myApp/store';
-import { PublicPage } from '@/pagesComponents';
-import { Posts } from '@/pagesComponents/posts/Posts';
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
 import { getPublicPosts } from '@/shared/api/public/publicApi';
@@ -13,21 +12,14 @@ import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
 // const inter = Inter({ subsets: ['latin'] });
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // return <GeneralInfo />;
   const { data } = useMeQuery();
 
   if (data) {
-    // ! Тут PrivatePosts, потому что авторизованы
-    return getBaseLayout(<Posts />);
+    return getBaseLayout(<Page posts={posts} />);
   } else {
-    // ! Тут вместо обычных постов должны быть PublicPosts
-    return getAuthLayout(<PublicPage posts={posts} />);
+    return getAuthLayout(<Page posts={posts} />);
   }
 }
-
-// Home.getLayout = function getLayout(page: React.ReactNode) {
-//   return <BaseLayout>{page}</BaseLayout>;
-// };
 
 export const getStaticProps = wrapper.getStaticProps(
   (store) => async (): Promise<GetStaticPropsResult<{ posts: Item[] }>> => {
