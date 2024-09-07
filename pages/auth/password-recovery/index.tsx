@@ -1,5 +1,5 @@
 import { PasswordRecovery } from '@/pagesComponents';
-import { getAuthLayout } from '@/shared/providers';
+import { getNonAuthorizedLayout } from '@/shared/providers';
 
 export default function Page() {
   return (
@@ -8,4 +8,4 @@ export default function Page() {
     </>
   );
 }
-Page.getLayout = getAuthLayout;
+Page.getLayout = getNonAuthorizedLayout;

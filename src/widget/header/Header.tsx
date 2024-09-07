@@ -52,9 +52,9 @@ export const Header = () => {
   return (
     <div className={s.header}>
       <div className={s.wrapper}>
-        <div className={s.logoWrapper}>
+        <Link className={s.logoWrapper} href={'/'}>
           <SnapMomentLogo className={s.logo} />
-        </div>
+        </Link>
         <div className={s.itemsWrapper}>
           {me && <Outlinebell className={s.bell} />}
           <LocaleSwitcher />

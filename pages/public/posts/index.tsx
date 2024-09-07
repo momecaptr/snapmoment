@@ -7,7 +7,7 @@ import { PublicPage } from '@/pagesComponents';
 import { getPostLikes } from '@/shared/api/posts/postsApi';
 import { getPostById, getPostCommentsByPostId } from '@/shared/api/public/publicApi';
 import { Item } from '@/shared/api/public/publicTypes';
-import { getBaseLayout } from '@/shared/providers';
+import { getConditionLayout } from '@/shared/providers';
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType, PreviewData } from 'next';
 
 type Props = {
@@ -53,4 +53,4 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   }
 );
 
-Page.getLayout = getBaseLayout;
+Page.getLayout = getConditionLayout;

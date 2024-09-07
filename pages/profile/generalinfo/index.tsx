@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { GeneralInfo } from '@/pagesComponents';
-import { getBaseLayout } from '@/shared/providers';
+import { getAuthorizedLayout } from '@/shared/providers';
 
 export default function Page() {
   return (
@@ -11,4 +11,4 @@ export default function Page() {
   );
 }
 
-Page.getLayout = getBaseLayout;
+Page.getLayout = getAuthorizedLayout;

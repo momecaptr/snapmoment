@@ -4,9 +4,12 @@ import StoreProvider from '@/myApp/StoreProvider';
 import { Header, SideBar } from '@/widget';
 import { NextPage } from 'next';
 
-import s from './BaseLayout.module.scss';
+import s from './AuthorizedLayout.module.scss';
 
-export const BaseLayout: NextPage<PropsWithChildren> = (props) => {
+/**
+ * Layout for authorized users.
+ */
+export const AuthorizedLayout: NextPage<PropsWithChildren> = (props) => {
   const { children } = props;
 
   return (
@@ -22,10 +25,13 @@ export const BaseLayout: NextPage<PropsWithChildren> = (props) => {
   );
 };
 
-export const getBaseLayout = (page: ReactElement) => {
+/**
+ * Layout for authorized users.
+ */
+export const getAuthorizedLayout = (page: ReactElement) => {
   return (
     <StoreProvider>
-      <BaseLayout>{page}</BaseLayout>
+      <AuthorizedLayout>{page}</AuthorizedLayout>
     </StoreProvider>
   );
 };
