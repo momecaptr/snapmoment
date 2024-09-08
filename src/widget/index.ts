@@ -4,6 +4,7 @@ export { GeneralInfoForms } from './generalInformation/generalInfoForms/ui/Gener
 export { MyPayments } from './generalInformation/myPayments/MyPayments';
 export { HeadSignInAndSignUp } from './headSignInAndSignUp/HeadSignInAndSignUp';
 export { Header } from './header/Header';
+export { MappedPosts } from './mappedPosts/MappedPosts';
 export { AddProfilePhotoModal } from './modals/addProfilePhotoModal/AddProfilePhotoModal';
 export { DeletePhotoModal } from './modals/deletePhotoModal/DeletePhotoModal';
 export { SentEmailModal } from './modals/sentEmailModal/SentEmailModal';

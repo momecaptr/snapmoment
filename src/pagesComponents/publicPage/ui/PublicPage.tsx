@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useCallback } from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
-import Posts from '@/pagesComponents/publicPage/ui/posts/Posts';
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
 import { useLazyGetPostByIdQuery, useLazyGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
 import { ModalKey, useModal } from '@/shared/lib';
+import { MappedPosts } from '@/widget';
 import { ViewPostModal } from '@/widget/modals/viewPostModal/ViewPostModal';
 
 import s from './PublicPage.module.scss';
@@ -44,7 +44,7 @@ export const PublicPage = () => {
 
       <section className={s.container}>
         <RegisteredUsersCounter />
-        <Posts onOpenModal={lazyOpenModalHandler} />
+        <MappedPosts onOpenModal={lazyOpenModalHandler} />
       </section>
     </div>
   );
