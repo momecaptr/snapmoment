@@ -20,12 +20,16 @@ export const MappedPosts = (props: Props) => {
 
   const [getPublicPosts, { data: publicPosts, isFetching }] = useLazyGetPublicPostsQuery();
 
+  // Запрашиваем первые посты при загрузке компонента
   useEffect(() => {
     getPublicPosts({ pageSize: START_POSTS_COUNT });
   }, []);
 
+  //Проверяем есть ли еще посты на сервере
+  const hasMorePosts = publicPosts?.totalCount === publicPosts?.items.length;
+
   const onLoadNextPosts = useCallback(() => {
-    if (!isFetching) {
+    if (!isFetching && !hasMorePosts) {
       getPublicPosts({ pageSize: publicPosts ? publicPosts.items.length + NEXT_POSTS_COUNT : 0 });
     }
   }, [isFetching]);
