@@ -11,15 +11,11 @@ import { useRouter } from 'next/router';
 import s from './Header.module.scss';
 
 export const Header = () => {
-  const { data: me, isError, isFetching, isSuccess } = useMeQuery();
+  const { data: me } = useMeQuery();
   const router = useRouter();
   const hasUrl = (url: string) => {
     return router.pathname.includes(url);
   };
-
-  if (isFetching) {
-    return <div>Loading... Header</div>;
-  }
 
   const renderAuthButtons = () => {
     if (hasUrl('sign-up')) {
