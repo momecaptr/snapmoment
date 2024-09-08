@@ -41,7 +41,7 @@ const commonUsernameRules = z
   .min(1, { message: errorMessages.required })
   .min(6, { message: errorMessages.usernameMinLength })
   .max(30, { message: errorMessages.usernameMaxLength })
-  .regex(/^[a-zA-Z0-9_]*$/, { message: errorMessages.invalidUsernameCharacters });
+  .regex(/^[a-zA-Z0-9_-]*$/, { message: errorMessages.invalidUsernameCharacters });
 
 const commonReCaptchaRules = z.string().min(1, { message: errorMessages.reCaptchaRequired });
 
