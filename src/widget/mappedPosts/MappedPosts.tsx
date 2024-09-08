@@ -10,7 +10,7 @@ type Props = {
   onOpenModal: (postId: number, isOpen: boolean) => Promise<void>;
 };
 
-//_todo: добавить тернарник этим константам, например, в зависимости от размеров экрана
+//todo: добавить тернарник этим константам, например, в зависимости от размеров экрана
 const START_POSTS_COUNT = 10;
 const NEXT_POSTS_COUNT = 10;
 
