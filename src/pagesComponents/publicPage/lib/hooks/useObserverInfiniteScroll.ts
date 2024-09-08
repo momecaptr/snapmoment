@@ -1,13 +1,21 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 
-export interface IUseObserverInfiniteScroll {
+interface IObserverOptions {
+  root: HTMLElement | null;
+  rootMargin: string;
+  threshold: number;
+}
+
+type PropsOptions = Omit<IObserverOptions, 'root'>;
+
+export interface IUseObserverInfiniteScroll extends Partial<PropsOptions> {
   callBack?: () => void;
   triggerRef: MutableRefObject<HTMLDivElement>;
   wrapperRef?: MutableRefObject<HTMLDivElement>;
 }
 
 export const useObserverInfiniteScroll = (props: IUseObserverInfiniteScroll) => {
-  const { callBack, triggerRef, wrapperRef } = props;
+  const { callBack, rootMargin = '100px 0px', threshold = 1.0, triggerRef, wrapperRef } = props;
   const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -15,10 +23,10 @@ export const useObserverInfiniteScroll = (props: IUseObserverInfiniteScroll) => 
     const triggerElement = triggerRef.current;
 
     if (callBack) {
-      const options = {
-        root: wrapperElement,
-        rootMargin: '300px 0px', // Можно добавить отступы к корневому элементу
-        threshold: 1.0 //0.5 === Callback будет вызван, когда элемент на 50% виден в viewport
+      const options: IObserverOptions = {
+        root: wrapperElement, // Корневой элемент
+        rootMargin: rootMargin, // Отступы к корневому элементу
+        threshold: threshold // 0.5 === Callback будет вызван, когда элемент на 50% виден в viewport
       };
 
       observer.current = new IntersectionObserver(([entry]) => {

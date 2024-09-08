@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useCallback } from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
 import Posts from '@/pagesComponents/publicPage/ui/posts/Posts';
@@ -18,12 +19,15 @@ export const PublicPage = () => {
     useLazyGetPostCommentsByPostIdQuery();
   const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
 
-  const lazyOpenModalHandler = async (postId: number, isOpen: boolean) => {
-    setOpen(isOpen);
-    getPostById({ postId: postId });
-    getPostCommentsByPostId({ postId: postId });
-    getPostLikes({ postId: postId });
-  };
+  const lazyOpenModalHandler = useCallback(
+    async (postId: number, isOpen: boolean) => {
+      setOpen(isOpen);
+      getPostById({ postId: postId });
+      getPostCommentsByPostId({ postId: postId });
+      getPostLikes({ postId: postId });
+    },
+    [getPostById, getPostCommentsByPostId, getPostLikes, setOpen]
+  );
   const isDataFetching = isFetchingPostData && isFetchingPostComments && isFetchingPostLikes;
 
   return (
