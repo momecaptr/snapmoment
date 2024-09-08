@@ -1,41 +1,37 @@
 import * as React from 'react';
+import { useCallback } from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
-import { ModalKey, useModal } from '@/shared/lib';
-import { UserCard, ViewPostModal } from '@/widget';
-// import { UserCard } from '@/widget';
-// import { ViewPostModal } from '@/widgetviewPostModal/ViewPostModal';
-
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
-import {
-  useGetPublicPostsQuery,
-  useLazyGetPostByIdQuery,
-  useLazyGetPostCommentsByPostIdQuery
-} from '@/shared/api/public/publicApi';
+import { useLazyGetPostByIdQuery, useLazyGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
+import { ModalKey, useModal } from '@/shared/lib';
+import { MappedPosts } from '@/widget';
+import { ViewPostModal } from '@/widget/modals/viewPostModal/ViewPostModal';
 
 import s from './PublicPage.module.scss';
 
 export const PublicPage = () => {
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-
   const { data: me } = useMeQuery();
-  const { data: publicPosts } = useGetPublicPostsQuery({ pageSize: 4 });
-  const [getPostById, { data: postData, isFetching }] = useLazyGetPostByIdQuery();
+  const [getPostById, { data: postData, isFetching: isFetchingPostData }] = useLazyGetPostByIdQuery();
   const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
     useLazyGetPostCommentsByPostIdQuery();
   const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
 
-  const lazyOpenModalHandler = async (postId: number, isOpen: boolean) => {
-    setOpen(isOpen);
-    getPostById({ postId: postId });
-    getPostCommentsByPostId({ postId: postId });
-    getPostLikes({ postId: postId });
-  };
-  const isDataFetching = isFetching && isFetchingPostComments && isFetchingPostLikes;
+  const lazyOpenModalHandler = useCallback(
+    async (postId: number, isOpen: boolean) => {
+      setOpen(isOpen);
+      getPostById({ postId: postId });
+      getPostCommentsByPostId({ postId: postId });
+      getPostLikes({ postId: postId });
+    },
+    [getPostById, getPostCommentsByPostId, getPostLikes, setOpen]
+  );
+  const isDataFetching = isFetchingPostData && isFetchingPostComments && isFetchingPostLikes;
 
   return (
-    <>
+    <div>
       <ViewPostModal
         isAuth={!!me?.userId}
         isFetching={isDataFetching}
@@ -48,13 +44,8 @@ export const PublicPage = () => {
 
       <section className={s.container}>
         <RegisteredUsersCounter />
-
-        <div className={s.cards}>
-          {publicPosts?.items.map((post) => (
-            <UserCard key={post.id} lazyOpenModalHandler={lazyOpenModalHandler} post={post} />
-          ))}
-        </div>
+        <MappedPosts onOpenModal={lazyOpenModalHandler} />
       </section>
-    </>
+    </div>
   );
 };
