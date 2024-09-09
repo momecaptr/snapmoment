@@ -16,7 +16,8 @@ const errorMessages = {
   passwordUppercase: 'Password must contain at least one uppercase letter',
   reCaptchaRequired: 'ReCaptcha required',
   required: 'Required',
-  usernameMaxLength: 'Maximum number of characters is 30'
+  usernameMaxLength: 'Maximum number of characters is 30',
+  usernameMinLength: 'Minimum number of characters 6'
 };
 
 // Общие правила для полей
@@ -38,8 +39,9 @@ const commonEmailRules = z
 const commonUsernameRules = z
   .string()
   .min(1, { message: errorMessages.required })
+  .min(6, { message: errorMessages.usernameMinLength })
   .max(30, { message: errorMessages.usernameMaxLength })
-  .regex(/^[a-zA-Z0-9_]*$/, { message: errorMessages.invalidUsernameCharacters });
+  .regex(/^[a-zA-Z0-9_-]*$/, { message: errorMessages.invalidUsernameCharacters });
 
 const commonReCaptchaRules = z.string().min(1, { message: errorMessages.reCaptchaRequired });
 
