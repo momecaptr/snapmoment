@@ -1,4 +1,4 @@
-import { ComponentProps, ElementType, useState } from 'react';
+import React, { ComponentProps, ElementType, useState } from 'react';
 
 import Bookmark from '@/../public/assets/components/Bookmark';
 import Home from '@/../public/assets/components/Home';
@@ -9,7 +9,9 @@ import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
 import { useLogoutMutation } from '@/shared/api/auth/authApi';
+import { ModalKey, useModal } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
+import { CreatePostModal } from '@/widget/sideBar/createPostModal/CreatePostModal';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -25,7 +27,7 @@ type MainLinksProps = {
 
 type LinksValue =
   | ''
-  | 'create'
+  // | 'create'
   | 'favorites'
   | 'home'
   | 'logout'
@@ -38,25 +40,23 @@ type LinksValue =
   | 'statistics';
 
 type MainLinksName =
-  | 'Create'
-  | 'Favorites'
-  | 'Home'
-  | 'Log Out'
-  | 'Messenger'
-  | 'My Profile'
-  | 'Recovery Password'
-  | 'Search'
-  | 'Statistics';
+  // | 'Create'
+  'Favorites' | 'Home' | 'Log Out' | 'Messenger' | 'My Profile' | 'Recovery Password' | 'Search' | 'Statistics';
 
 type Props = ComponentProps<'div'>;
 export const SideBar = (props: Props) => {
   const [logout] = useLogoutMutation();
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
   const router = useRouter();
+  const { isOpen, setOpen } = useModal(ModalKey.CreatePost);
+
+  const openCreatePostModalHandler = () => {
+    setOpen(true);
+  };
 
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
-    { IconComponent: PlusSquare, name: 'Create', path: '/auth/create', value: 'create' },
+    // { IconComponent: PlusSquare, name: 'Create', path: '/auth/create', value: 'create' },
     { IconComponent: Person, name: 'My Profile', path: '/profile', value: 'profile' },
     { IconComponent: MessageCircle, name: 'Messenger', path: '/message', value: 'message' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
@@ -66,6 +66,7 @@ export const SideBar = (props: Props) => {
 
   return (
     <div className={s.container}>
+      <CreatePostModal isOpen={isOpen} setOpen={setOpen} />
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
           <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)}>
@@ -77,6 +78,12 @@ export const SideBar = (props: Props) => {
             </Typography>
           </Link>
         ))}
+        <Button className={s.btn} onClick={openCreatePostModalHandler} variant={'text'}>
+          <PlusSquare className={s.icon} />
+          <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>
+            Create
+          </Typography>
+        </Button>
         <Button
           onClick={(e) => {
             logout()

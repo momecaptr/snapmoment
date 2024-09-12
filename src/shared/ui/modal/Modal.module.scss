@@ -116,6 +116,10 @@
   }
 }
 
+.hidden {
+  display: none;
+}
+
 @keyframes overlayShow {
   from {
     opacity: 0;

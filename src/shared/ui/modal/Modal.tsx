@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef } from 'react';
+import { CSSProperties, ComponentPropsWithoutRef, ReactNode } from 'react';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Card, Typography } from '@/shared/ui';
@@ -8,14 +8,26 @@ import { clsx } from 'clsx';
 import s from './Modal.module.scss';
 
 export type ModalProps = {
+  backButton?: ReactNode;
   className?: string;
+  nextButton?: ReactNode;
   onOpenChange: (value: boolean) => void;
   open: boolean;
+  showCloseButton?: boolean;
   style?: CSSProperties;
   title?: string;
 } & Omit<ComponentPropsWithoutRef<typeof Dialog.Dialog>, 'onOpenChange' | 'open'>;
 
-export const Modal = ({ children, className, style, title, ...props }: ModalProps) => (
+export const Modal = ({
+  backButton,
+  children,
+  className,
+  nextButton,
+  showCloseButton = true,
+  style,
+  title,
+  ...props
+}: ModalProps) => (
   <Dialog.Root {...props}>
     <Dialog.Portal>
       <Dialog.Overlay className={s.DialogOverlay} />
@@ -26,11 +38,13 @@ export const Modal = ({ children, className, style, title, ...props }: ModalProp
         <Dialog.Description />
         <Card className={clsx(s.card, className)} style={style}>
           <div className={s.header} data-header={'header'}>
+            {backButton}
             <Typography as={'h1'} variant={'h1'}>
               {title}
             </Typography>
+            {nextButton}
             <Dialog.Close asChild>
-              <button aria-label={'Close'} className={s.closeBtn}>
+              <button aria-label={'Close'} className={clsx(s.closeBtn, { [s.hidden]: !showCloseButton })}>
                 <CloseOutline />
               </button>
             </Dialog.Close>

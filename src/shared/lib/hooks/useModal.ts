@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/shared/lib';
 
 export enum ModalKey {
   ChangePhoto = 'ChangePhoto',
+  CreatePost = 'CreatePost',
   Success = 'Success',
   ViewLikes = 'ViewLikes',
   ViewPhoto = 'ViewPhoto'

@@ -1,3 +1,5 @@
+import type { Image as ImageType } from '@/shared/api/public/publicTypes';
+
 import * as React from 'react';
 import { useRef } from 'react';
 
@@ -18,7 +20,7 @@ import 'swiper/scss/pagination';
 import s from './PhotosSwiper.module.scss';
 
 type Props = {
-  sliders: GetPostsCommentArgsImages[];
+  sliders: GetPostsCommentArgsImages[] | ImageType[];
 };
 
 export const PhotosSwiper: React.FC<Props> = ({ sliders }) => {
