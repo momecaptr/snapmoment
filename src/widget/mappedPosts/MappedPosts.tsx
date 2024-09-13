@@ -29,8 +29,8 @@ export const MappedPosts = (props: Props) => {
   const hasMorePosts = publicPosts?.totalCount === publicPosts?.items.length;
 
   const onLoadNextPosts = useCallback(() => {
-    if (!isFetching && !hasMorePosts) {
-      getPublicPosts({ pageSize: publicPosts ? publicPosts.items.length + NEXT_POSTS_COUNT : 0 });
+    if (!isFetching && !hasMorePosts && publicPosts) {
+      getPublicPosts({ pageSize: publicPosts.items.length + NEXT_POSTS_COUNT });
     }
   }, [isFetching]);
 
