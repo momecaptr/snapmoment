@@ -14,26 +14,17 @@ import s from './UserCard.module.scss';
 
 type Props = {
   post: Item;
-  showViewPostModalHandler: (id: number) => void;
+  showPostModalHandler: (id: number) => void;
 };
 
-export const UserCard = ({ post, showViewPostModalHandler }: Props) => {
+export const UserCard = ({ post, showPostModalHandler }: Props) => {
   const [isShowText, setIsShowText] = useState(false);
 
   const toggleShowText = () => setIsShowText(!isShowText);
 
-  if (!post) {
-    return <div>no post</div>;
-  }
-
   return (
     <div className={s.card}>
-      {/*<div className={s.photo} >*/}
-      <div className={s.photo} onClick={() => showViewPostModalHandler(post.id)}>
-        {/*  <Link href={`/public/posts/?id=${post.id}`} shallow>*/}
-        {/*    <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />*/}
-        {/*  </Link>*/}
-
+      <div className={s.photo} onClick={() => showPostModalHandler(post.id)}>
         <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />
       </div>
 
@@ -55,7 +46,7 @@ export const UserCard = ({ post, showViewPostModalHandler }: Props) => {
         </Typography>
 
         <ToggleDescription
-          isLength={post.description.length > 20}
+          isLength={post.description.length > 100}
           isShowText={isShowText}
           toggleShowText={toggleShowText}
         />

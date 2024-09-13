@@ -17,7 +17,6 @@ export const PostInteractionBar = ({ postData, postLikes }: Props) => {
   const [updateLikePost] = useUpdateLikePostMutation();
 
   const isMyLike = !!postLikes?.items?.find((item) => item.userId === me?.userId);
-
   const updateLikeStatusHandler = async () => {
     await updateLikePost({
       likeStatus: isMyLike ? LikeStatus.NONE : LikeStatus.LIKE,

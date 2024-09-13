@@ -6,7 +6,7 @@ import { getPostLikes } from '@/shared/api/posts/postsApi';
 import { getPostById, getPostCommentsByPostId, getPublicPosts } from '@/shared/api/public/publicApi';
 import { ModalKey, useModal } from '@/shared/lib';
 import { getConditionLayout } from '@/shared/providers';
-import { ViewPostModal } from '@/widget';
+import { PostModal } from '@/widget';
 import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 
@@ -25,15 +25,15 @@ export default function Home({
     }
   }, [router.query.id]);
 
-  const showViewPostModalHandler = (postId: number) => {
+  const showPostModalHandler = (postId: number) => {
     setOpen(true);
     router.push(`/?id=${postId}`);
   };
 
   return getConditionLayout(
     <>
-      {isOpen && postData && <ViewPostModal postComments={postComments} postData={postData} postLikes={postLikes} />}
-      <PublicPage posts={posts} showViewPostModalHandler={showViewPostModalHandler} />
+      {isOpen && <PostModal postComments={postComments} postData={postData} postLikes={postLikes} />}
+      <PublicPage posts={posts} showPostModalHandler={showPostModalHandler} />
     </>
   );
 }
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         }
       };
     } catch (error) {
-      console.error('Error fetching post data:', error);
+      console.error('Abort fetching post data:', error);
 
       return {
         props: {

@@ -9,10 +9,10 @@ import s from './PublicPage.module.scss';
 
 type Props = {
   posts: Item[];
-  showViewPostModalHandler: (postId: number) => void;
+  showPostModalHandler: (postId: number) => void;
 };
 
-export default function PublicPage({ posts, showViewPostModalHandler }: Props) {
+export default function PublicPage({ posts, showPostModalHandler }: Props) {
   return (
     <>
       <section className={s.container}>
@@ -21,7 +21,7 @@ export default function PublicPage({ posts, showViewPostModalHandler }: Props) {
         <div className={s.cards}>
           {posts?.map((post) => (
             <Fragment key={post.id}>
-              <UserCard post={post} showViewPostModalHandler={showViewPostModalHandler} />
+              <UserCard post={post} showPostModalHandler={showPostModalHandler} />
             </Fragment>
           ))}
         </div>

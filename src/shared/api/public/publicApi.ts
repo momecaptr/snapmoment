@@ -60,10 +60,4 @@ export const publicApi = snapmomentAPI.injectEndpoints({
 export const { getPostById, getPostCommentsByPostId, getPublicPosts, getPublicPostsUser, getPublicUserProfile } =
   publicApi.endpoints;
 
-export const {
-  useGetPostCommentsByPostIdQuery,
-  useGetPublicPostsQuery,
-  useGetTotalUsersCountQuery,
-  useLazyGetPostByIdQuery,
-  useLazyGetPostCommentsByPostIdQuery
-} = publicApi;
+export const { useGetPublicPostsQuery, useGetTotalUsersCountQuery, useLazyGetPublicPostsQuery } = publicApi;
