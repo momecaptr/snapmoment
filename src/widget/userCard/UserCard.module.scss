@@ -29,7 +29,7 @@
 
   &.expanded {
     // на сколько px поднять (для анимации)
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }
 
@@ -38,6 +38,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 12px 0;
+
   .blockBtn {
     width: 24px;
     height: 24px;
