@@ -78,7 +78,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
       title={previewOrPreviews.length ? 'Cropping' : 'Add Photo'}
     >
       {/* todo НЕ ЗАБУДЬ ДОБАВИТЬ Button submit*/}
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/*todo Ошибки откидывать в еще одной модалке или в toast*/}
         {/*<Typography as={'h1'} variant={'h1'}>*/}
         {/*  <div className={s.boxErrorMessage}>*/}
@@ -93,13 +93,13 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
           {previewOrPreviews.length ? (
             <>
               <PhotoContainer addImage={addImgHandler} images={previewOrPreviews} />
-              {/*todo Тут должно быть не save, а куча всякой хуйни: cropping, filters*/}
-              <div className={s.croppingArea}>
+              {/*todo Тут должно быть не save, а куча всякой хуйни: cropping, filters и меняться на блок фильтров справа*/}
+              <div className={s.bottomArea}>
                 <div>
                   <Button>Ratio</Button>
                   <Button>Scale</Button>
                 </div>
-                {/*todo открывает картинку */}
+                {/*todo открывает диалоговое окно с миниатюрными версиями загруженных картинок */}
                 <Button>ImgIcon</Button>
               </div>
             </>
