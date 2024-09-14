@@ -1,5 +1,10 @@
-.photoProfileWithCircle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.singlePhotoWrapper {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  .singlePhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }

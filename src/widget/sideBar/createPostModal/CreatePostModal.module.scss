@@ -1,12 +1,5 @@
-// ! БЛОК ДЛЯ МОДАЛКИ
-
-.createPostModal {
-  width: 492px;
-  height: 100%;
-
-  [data-content='content'] {
-    padding: 0;
-  }
+.card {
+  width: 70vw;
 }
 
 .boxErrorMessage {
@@ -26,7 +19,37 @@
   border: 1px solid var(--danger-300);
 }
 
+.createPostModal {
+  overflow: unset;
+  padding: 0;
+}
+
+.notCropping {
+  display: flex;
+  align-items: center;
+  .filtersPanel{
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+  }
+  .publicationPanel {
+    display: grid;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+  }
+
+}
+
 .boxContent {
+  //width: 700px;
+  //height: 500px;
+  max-height: 80vh;
+  min-height: 30vh;
+  max-width: 60vw;
+  min-width: 50vw;
+
   position: relative;
 
   display: flex;
@@ -36,120 +59,54 @@
 
   // padding: 0 135px 60px;
 
-  & .bottomArea {
+  .croppingPanel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
-}
 
-.box {
-  position: relative;
-  width: 492px;
-  background-color: var(--dark-300);
-}
+  .boxPhoto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.line {
-  display: flex;
-  width: 100%;
-  height: 2px;
-  background-color: var(--dark-100);
-}
+    width: 222px;
+    height: 228px;
 
-.boxTitleAndButton {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-}
+    background-color: var(--dark-500);
 
-.topButton {
-  background-color: transparent;
-
-  &:hover {
-    background-color: transparent;
+    // border-radius: 50%;
   }
-}
 
-.button {
-  display: flex;
-  justify-content: center;
-  width: 219px;
-  margin-top: 60px;
-}
+  .button {
+    display: flex;
+    justify-content: center;
+    width: 219px;
+    margin-top: 60px;
 
-.customFileUpload {
-  display: none;
-}
+    .customFileUpload {
+      display: none;
+    }
 
-.lable {
-  padding: 6px 24px;
-  background-color: var(--accent-500);
-  border-radius: 2px;
-}
-
-.draftBtn {
-  padding: 6px 24px;
-  border-radius: 2px;
-
-  .draftTxt {
-    color: var(--accent-500);
-
-    &:hover {
-      color: var(--accent-100);
+    .lable {
+      padding: 6px 24px;
+      background-color: var(--accent-500);
+      border-radius: 2px;
     }
   }
-}
+  .draftBtn {
+    padding: 6px 24px;
+    border-radius: 2px;
 
-.changeMargin {
-  padding: 24px 135px 60px;
-}
+    .draftTxt {
+      color: var(--accent-500);
 
-.buttonSave {
-  position: absolute;
-  right: 10px;
-  bottom: 0;
-  padding: 6px 24px;
-}
-
-.photoContainer {
-  position: relative;
-
-  width: 332px;
-  height: 340px;
-  margin-bottom: 15px;
-
-  background-color: rgb(0 0 0 / 65%);
-}
-
-.photoProfileWithCircle {
-  width: 100%;
-  height: 100%;
-
-  // mask-image: radial-gradient(circle, black 65%, rgb(0 0 0 / 50%) 5%);
-}
-
-.photoProfileWithCircle::before {
-  content: '';
-
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  opacity: 0.5;
-  background-color: black;
-}
-
-.boxPhoto {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 222px;
-  height: 228px;
-
-  background-color: var(--dark-500);
-
-  // border-radius: 50%;
+      &:hover {
+        color: var(--accent-100);
+      }
+    }
+  }
 }

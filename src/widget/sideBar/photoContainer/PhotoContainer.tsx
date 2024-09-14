@@ -1,11 +1,9 @@
-import { ChangeEvent } from 'react';
-
 import Image from 'next/image';
 
 import s from './PhotoContainer.module.scss';
 
 type PhotoContainerProps = {
-  addImage: (e: ChangeEvent<HTMLInputElement>) => void;
+  // addImage: (e: ChangeEvent<HTMLInputElement>) => void;
   images: string[];
 };
 
@@ -15,11 +13,11 @@ type PhotoContainerProps = {
  * @constructor
  */
 export const PhotoContainer = (props: PhotoContainerProps) => {
-  const { addImage, images } = props;
+  const { images } = props;
 
   return (
-    <div className={s.photoContainer}>
-      <Image alt={'photo preview'} className={s.photoProfileWithCircle} height={340} src={images[0]} width={332} />
+    <div className={s.singlePhotoWrapper}>
+      <Image alt={'photo preview'} className={s.singlePhoto} height={340} src={images[0]} width={332} />
     </div>
   );
 };
