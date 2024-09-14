@@ -13,6 +13,7 @@ import { NextPage } from 'next';
 import { Toaster } from 'sonner';
 
 import '@/myApp/styles/index.scss';
+import 'react-image-crop/dist/ReactCrop.css';
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
