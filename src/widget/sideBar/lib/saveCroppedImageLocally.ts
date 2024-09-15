@@ -2,7 +2,7 @@ import { type Crop } from 'react-image-crop';
 
 import { cropImageToCanvas } from '@/widget/sideBar/lib/cropImageToCanvas';
 
-interface SaveCrop {
+export interface SaveCrop {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
   completedCrop: Crop | null;
   imgRef: React.MutableRefObject<HTMLImageElement | null>;

@@ -1,20 +1,17 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import ReactCrop, {
-  type Crop,
-  centerCrop,
-  // convertToPixelCrop,
-  makeAspectCrop
-} from 'react-image-crop';
+import ReactCrop, { type Crop } from 'react-image-crop';
 
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
 import PhotoStub from '@/../public/assets/components/PhotoStub';
 import { Button, Modal, Typography } from '@/shared/ui';
+import Slider from '@/shared/ui/slider/Slider';
+import { centerAspectCrop } from '@/widget/sideBar/lib/centerAspectCrop';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { navigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
-import { processImage } from '@/widget/sideBar/lib/processImage';
 import { saveCroppedImageLocally } from '@/widget/sideBar/lib/saveCroppedImageLocally';
+// import { canvasPreview } from './canvasPreview';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -41,28 +38,36 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   const [isScaleDialogOpen, setIsScaleDialogOpen] = useState(false);
   const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
   const ratioDialogRef = useRef<HTMLDivElement | null>(null);
+  const scaleDialogRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const imgRefScale = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const availableRatios = [
+    { title: 'Custom', value: undefined },
+    { title: '1:1', value: 1 / 1 },
+    { title: '4:5', value: 4 / 5 },
+    { title: '16:9', value: 16 / 9 }
+  ];
+
+  // todo КОГДА НАЖИМАЕМ НА SmallImg или Next, нужно сохранять state
+
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ratioDialogRef.current && !ratioDialogRef.current.contains(event.target as Node)) {
-        // Закрыть диалог, если клик произошел вне него
+    const handleClickOutside = (event: MouseEvent, ref: React.RefObject<HTMLElement>) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         setIsRatioDialogOpen(false);
+        setIsScaleDialogOpen(false);
       }
     };
 
-    if (isRatioDialogOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
+    document.addEventListener('mousedown', (event) => handleClickOutside(event, ratioDialogRef));
+    document.addEventListener('mousedown', (event) => handleClickOutside(event, scaleDialogRef));
 
-    // Чистим слушатель, когда компонент размонтируется или состояние изменится
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', (event) => handleClickOutside(event, ratioDialogRef));
+      document.removeEventListener('mousedown', (event) => handleClickOutside(event, scaleDialogRef));
     };
-  }, [isRatioDialogOpen]);
+  }, []);
 
   const navigateBtnHandler = (direction: 'back' | 'next') => {
     navigateBtnLogic({
@@ -80,61 +85,11 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     register
   } = useForm();
 
-  const handleInputImg = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      const isProcessed = processImage(file, setPreviews, setErrorMessage);
-
-      if (isProcessed) {
-        if (cover?.lastModified === file.lastModified && cover?.name === file.name) {
-          setCover(null);
-        } else {
-          setCover(file);
-        }
-      } else {
-        setCover(null);
-      }
-    }
-    e.target.value = '';
-  };
-
-  const addImgHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      processImage(file, setPreviews, setErrorMessage);
-    }
-
-    e.target.value = '';
-  };
-
   const onSubmit = (data: any) => {
     console.log(data);
   };
 
   /* Cropping image logic */
-
-  const centerAspectCrop = (mediaWidth: number, mediaHeight: number, aspect: number) => {
-    /*
-     * Эта функция создаёт обрезку изображения по заданному аспектному соотношению, чтобы изображение было отцентрировано.
-     * Использует makeAspectCrop для создания обрезки с определённым соотношением сторон и центрирует её с помощью centerCrop.
-     * Она нужна для автоматической установки обрезки при загрузке изображения.
-     * */
-    return centerCrop(
-      makeAspectCrop(
-        {
-          unit: '%', // Единицы измерения - проценты
-          width: 90 // Ширина обрезки - 90% от ширины изображения
-        },
-        aspect, // Соотношение сторон возьмем из state
-        mediaWidth,
-        mediaHeight
-      ),
-      mediaWidth,
-      mediaHeight
-    );
-  };
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     /*
@@ -159,20 +114,6 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     reader.readAsDataURL(file);
   };
 
-  // todo ЭТУ УБРАТЬ ПОПРОБОВАТЬ
-  const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    /*
-     * Эта функция вызывается, когда изображение загружено на страницу.
-     * Она автоматически задаёт обрезку на основе размеров изображения и заданного соотношения сторон (aspect).
-     * Это полезно для предварительной настройки обрезки, когда изображение только загружается.
-     * */
-    if (aspect) {
-      const { height, width } = e.currentTarget;
-
-      setCrop(centerAspectCrop(width, height, aspect));
-    }
-  };
-
   const saveCroppedToStateHandler = () => {
     saveCroppedImageLocally({ canvasRef, completedCrop, imgRef, setPreviews });
   };
@@ -192,6 +133,15 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
       setCrop(newCrop);
       setCompletedCrop(newCrop);
     }
+  };
+
+  const saveScaledToStateHandler = () => {
+    if (!imgRef.current) {
+      return;
+    }
+
+    setPreviews([imgRef.current.src]);
+    console.log('Обрезанное изображение сохранено');
   };
 
   return (
@@ -227,8 +177,8 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                     <ReactCrop
                       aspect={aspect}
                       crop={crop}
-                      onChange={(_, percentCrop) => setCrop(percentCrop)}
-                      onComplete={(c) => setCompletedCrop(c)}
+                      onChange={(_: Crop, percentCrop: Crop) => setCrop(percentCrop)}
+                      onComplete={(c: Crop) => setCompletedCrop(c)}
                       style={{ height: '100%', width: '100%' }}
                     >
                       <Image
@@ -239,45 +189,72 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                         ref={imgRef}
                         src={previews[0]}
                         style={{ objectFit: 'cover', transform: `scale(${scale})` }}
+                        // style={{ objectFit: 'cover' }}
                         width={500}
                       />
                     </ReactCrop>
                     <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
                   </>
                 ) : (
-                  <Image alt={'photo preview'} className={s.singlePhoto} height={400} src={previews[0]} width={500} />
+                  <Image
+                    alt={'photo preview'}
+                    className={s.singlePhoto}
+                    height={400}
+                    ref={imgRef}
+                    src={previews[0]}
+                    style={{ transform: `scale(${scale})` }}
+                    width={500}
+                  />
                 )}
               </div>
 
               {activeSection === 'Cropping' && (
                 <div className={s.croppingPanel}>
                   <div className={s.ratioAndScale}>
-                    {isRatioDialogOpen ? (
-                      <div ref={ratioDialogRef}>
-                        <Button onClick={saveCroppedToStateHandler} type={'button'}>
-                          Save crop
-                        </Button>
-                        <div className={s.ratioDialog}>
-                          <Button onClick={() => handleAspectChange()} type={'button'} variant={'outlined'}>
-                            Original
+                    <div>
+                      {isRatioDialogOpen ? (
+                        <div ref={ratioDialogRef}>
+                          <Button onClick={saveCroppedToStateHandler} type={'button'}>
+                            Save crop
                           </Button>
-                          <Button onClick={() => handleAspectChange(1 / 1)} type={'button'} variant={'outlined'}>
-                            1:1
-                          </Button>
-                          <Button onClick={() => handleAspectChange(4 / 5)} type={'button'} variant={'outlined'}>
-                            4:5
-                          </Button>
-                          <Button onClick={() => handleAspectChange(16 / 9)} type={'button'} variant={'outlined'}>
-                            16:9
-                          </Button>
+                          <div className={s.ratioDialog}>
+                            {availableRatios.map((ratio) => (
+                              <Button
+                                className={clsx(s.ratioButton, ratio.value === aspect && s.selected)}
+                                key={ratio.title}
+                                onClick={() => handleAspectChange(ratio.value)}
+                                type={'button'}
+                                variant={'outlined'}
+                              >
+                                {ratio.title}
+                              </Button>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <Button onClick={() => setIsRatioDialogOpen(true)} type={'button'}>
-                        Ratio
+                      ) : (
+                        <Button onClick={() => setIsRatioDialogOpen(true)} type={'button'}>
+                          Ratio
+                        </Button>
+                      )}
+                    </div>
+                    <div>
+                      {isScaleDialogOpen && (
+                        <div ref={scaleDialogRef}>
+                          <div className={s.scaleDialog}>
+                            <Slider
+                              max={2}
+                              min={0.1}
+                              onValueChange={([newValue]) => setScale(newValue)}
+                              step={0.1}
+                              value={[scale]}
+                            />
+                          </div>
+                        </div>
+                      )}
+                      <Button onClick={() => setIsScaleDialogOpen(true)} type={'button'}>
+                        Scale
                       </Button>
-                    )}
-                    <Button type={'button'}>Scale</Button>
+                    </div>
                   </div>
 
                   <Button type={'button'}>Small-Imgs</Button>
@@ -321,3 +298,46 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     </Modal>
   );
 };
+
+// const handleInputImg = (e: ChangeEvent<HTMLInputElement>) => {
+//   const file = e.target.files?.[0];
+//
+//   if (file) {
+//     const isProcessed = processImage(file, setPreviews, setErrorMessage);
+//
+//     if (isProcessed) {
+//       if (cover?.lastModified === file.lastModified && cover?.name === file.name) {
+//         setCover(null);
+//       } else {
+//         setCover(file);
+//       }
+//     } else {
+//       setCover(null);
+//     }
+//   }
+//   e.target.value = '';
+// };
+//
+// const addImgHandler = (e: ChangeEvent<HTMLInputElement>) => {
+//   const file = e.target.files?.[0];
+//
+//   if (file) {
+//     processImage(file, setPreviews, setErrorMessage);
+//   }
+//
+//   e.target.value = '';
+// };
+
+// // todo ЭТУ УБРАТЬ ПОПРОБОВАТЬ
+// const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+//   /*
+//    * Эта функция вызывается, когда изображение загружено на страницу.
+//    * Она автоматически задаёт обрезку на основе размеров изображения и заданного соотношения сторон (aspect).
+//    * Это полезно для предварительной настройки обрезки, когда изображение только загружается.
+//    * */
+//   if (aspect) {
+//     const { height, width } = e.currentTarget;
+//
+//     setCrop(centerAspectCrop(width, height, aspect));
+//   }
+// };
