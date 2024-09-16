@@ -6,7 +6,6 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 import PhotoStub from '@/../public/assets/components/PhotoStub';
 import { Button, Modal, Typography } from '@/shared/ui';
 import Slider from '@/shared/ui/slider/Slider';
-import { centerAspectCrop } from '@/widget/sideBar/lib/centerAspectCrop';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { navigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
@@ -31,7 +30,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   const [cover, setCover] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [activeSection, setActiveSection] = useState<Sections>('Cropping');
-  const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+  const [aspect, setAspect] = useState<number | undefined>();
   const [scale, setScale] = useState(1);
   const [crop, setCrop] = useState<Crop>();
   const [isRatioDialogOpen, setIsRatioDialogOpen] = useState(false);
@@ -115,6 +114,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   };
 
   const saveCroppedToStateHandler = () => {
+    setCrop(undefined);
     saveCroppedImageLocally({ canvasRef, completedCrop, imgRef, setPreviews });
   };
 
@@ -122,17 +122,18 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     /*
      * Эта функция изменяет соотношение сторон для обрезки изображения.
      * Когда вызывается функция, она устанавливает новое соотношение сторон (например, 1:1 или 16:9), пересчитывает обрезку с новым аспектом и обновляет состояние crop и completedCrop.
-     * Это полезно, когда пользователь хочет изменить соотношение сторон для изображения.
      * */
+
     setAspect(newAspect);
 
-    if (imgRef.current) {
-      const { height, width } = imgRef.current;
-      const newCrop = centerAspectCrop(width, height, newAspect || width / height);
-
-      setCrop(newCrop);
-      setCompletedCrop(newCrop);
-    }
+    // ! А МОЖЕТ ОНО НАХУЙ И НЕ НАДО.
+    // if (imgRef.current) {
+    //   const { height, width } = imgRef.current;
+    //   const newCrop = centerAspectCrop(width, height, newAspect || width / height);
+    //
+    //   setCrop(newCrop);
+    //   setCompletedCrop(newCrop);
+    // }
   };
 
   const saveScaledToStateHandler = () => {
@@ -179,21 +180,19 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                       crop={crop}
                       onChange={(_: Crop, percentCrop: Crop) => setCrop(percentCrop)}
                       onComplete={(c: Crop) => setCompletedCrop(c)}
-                      style={{ height: '100%', width: '100%' }}
+                      style={{ height: '100%', transform: `scale(${scale}`, width: '100%' }}
                     >
                       <Image
                         alt={'photo preview'}
                         className={s.singlePhoto}
                         height={400}
-                        // onLoad={onImageLoad}
                         ref={imgRef}
                         src={previews[0]}
-                        style={{ objectFit: 'cover', transform: `scale(${scale})` }}
-                        // style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover' }}
                         width={500}
                       />
                     </ReactCrop>
-                    <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+                    <canvas ref={canvasRef} style={{ display: 'none', transform: `scale(${scale}` }}></canvas>
                   </>
                 ) : (
                   <Image
@@ -242,9 +241,12 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                         <div ref={scaleDialogRef}>
                           <div className={s.scaleDialog}>
                             <Slider
+                              onValueChange={([newValue]) => {
+                                setCrop(undefined);
+                                setScale(newValue);
+                              }}
                               max={2}
                               min={0.1}
-                              onValueChange={([newValue]) => setScale(newValue)}
                               step={0.1}
                               value={[scale]}
                             />
