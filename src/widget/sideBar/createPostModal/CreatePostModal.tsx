@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import ReactCrop, { type Crop } from 'react-image-crop';
+import { type Crop } from 'react-image-crop';
 
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
 import PhotoStub from '@/../public/assets/components/PhotoStub';
@@ -9,7 +9,6 @@ import Slider from '@/shared/ui/slider/Slider';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { navigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
-import { saveCroppedImageLocally } from '@/widget/sideBar/lib/saveCroppedImageLocally';
 // import { canvasPreview } from './canvasPreview';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -50,23 +49,24 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   ];
 
   // todo КОГДА НАЖИМАЕМ НА SmallImg или Next, нужно сохранять state
+  // todo УДАЛИТЬ REACT IMAGE CROP
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent, ref: React.RefObject<HTMLElement>) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsRatioDialogOpen(false);
-        setIsScaleDialogOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', (event) => handleClickOutside(event, ratioDialogRef));
-    document.addEventListener('mousedown', (event) => handleClickOutside(event, scaleDialogRef));
-
-    return () => {
-      document.removeEventListener('mousedown', (event) => handleClickOutside(event, ratioDialogRef));
-      document.removeEventListener('mousedown', (event) => handleClickOutside(event, scaleDialogRef));
-    };
-  }, []);
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent, ref: React.RefObject<HTMLElement>) => {
+  //     if (ref.current && !ref.current.contains(event.target as Node)) {
+  //       setIsRatioDialogOpen(false);
+  //       setIsScaleDialogOpen(false);
+  //     }
+  //   };
+  //
+  //   document.addEventListener('mousedown', (event) => handleClickOutside(event, ratioDialogRef));
+  //   document.addEventListener('mousedown', (event) => handleClickOutside(event, scaleDialogRef));
+  //
+  //   return () => {
+  //     document.removeEventListener('mousedown', (event) => handleClickOutside(event, ratioDialogRef));
+  //     document.removeEventListener('mousedown', (event) => handleClickOutside(event, scaleDialogRef));
+  //   };
+  // }, []);
 
   const navigateBtnHandler = (direction: 'back' | 'next') => {
     navigateBtnLogic({
@@ -113,38 +113,6 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     reader.readAsDataURL(file);
   };
 
-  const saveCroppedToStateHandler = () => {
-    setCrop(undefined);
-    saveCroppedImageLocally({ canvasRef, completedCrop, imgRef, setPreviews });
-  };
-
-  const handleAspectChange = (newAspect?: number) => {
-    /*
-     * Эта функция изменяет соотношение сторон для обрезки изображения.
-     * Когда вызывается функция, она устанавливает новое соотношение сторон (например, 1:1 или 16:9), пересчитывает обрезку с новым аспектом и обновляет состояние crop и completedCrop.
-     * */
-
-    setAspect(newAspect);
-
-    // ! А МОЖЕТ ОНО НАХУЙ И НЕ НАДО.
-    // if (imgRef.current) {
-    //   const { height, width } = imgRef.current;
-    //   const newCrop = centerAspectCrop(width, height, newAspect || width / height);
-    //
-    //   setCrop(newCrop);
-    //   setCompletedCrop(newCrop);
-    // }
-  };
-
-  const saveScaledToStateHandler = () => {
-    if (!imgRef.current) {
-      return;
-    }
-
-    setPreviews([imgRef.current.src]);
-    console.log('Обрезанное изображение сохранено');
-  };
-
   return (
     <Modal
       backButton={
@@ -175,35 +143,18 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
               <div className={s.singlePhotoWrapper}>
                 {isRatioDialogOpen ? (
                   <>
-                    <ReactCrop
-                      aspect={aspect}
-                      crop={crop}
-                      onChange={(_: Crop, percentCrop: Crop) => setCrop(percentCrop)}
-                      onComplete={(c: Crop) => setCompletedCrop(c)}
-                      style={{ height: '100%', transform: `scale(${scale}`, width: '100%' }}
-                    >
-                      <Image
-                        alt={'photo preview'}
-                        className={s.singlePhoto}
-                        height={400}
-                        ref={imgRef}
-                        src={previews[0]}
-                        style={{ objectFit: 'cover' }}
-                        width={500}
-                      />
-                    </ReactCrop>
-                    <canvas ref={canvasRef} style={{ display: 'none', transform: `scale(${scale}` }}></canvas>
+                    {/*ОБОРАЧИВАЕМ ИЛИ НЕТ???*/}
+                    <Image
+                      alt={'photo preview'}
+                      className={s.singlePhoto}
+                      height={400}
+                      ref={imgRef}
+                      src={previews[0]}
+                      width={500}
+                    />
                   </>
                 ) : (
-                  <Image
-                    alt={'photo preview'}
-                    className={s.singlePhoto}
-                    height={400}
-                    ref={imgRef}
-                    src={previews[0]}
-                    style={{ transform: `scale(${scale})` }}
-                    width={500}
-                  />
+                  <Image alt={'photo preview'} className={s.singlePhoto} height={400} src={previews[0]} width={500} />
                 )}
               </div>
 
@@ -211,51 +162,56 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                 <div className={s.croppingPanel}>
                   <div className={s.ratioAndScale}>
                     <div>
-                      {isRatioDialogOpen ? (
-                        <div ref={ratioDialogRef}>
-                          <Button onClick={saveCroppedToStateHandler} type={'button'}>
-                            Save crop
-                          </Button>
-                          <div className={s.ratioDialog}>
-                            {availableRatios.map((ratio) => (
-                              <Button
-                                className={clsx(s.ratioButton, ratio.value === aspect && s.selected)}
-                                key={ratio.title}
-                                onClick={() => handleAspectChange(ratio.value)}
-                                type={'button'}
-                                variant={'outlined'}
-                              >
-                                {ratio.title}
-                              </Button>
-                            ))}
-                          </div>
-                        </div>
-                      ) : (
-                        <Button onClick={() => setIsRatioDialogOpen(true)} type={'button'}>
-                          Ratio
+                      {/* {isRatioDialogOpen ? (*/}
+                      <div ref={ratioDialogRef}>
+                        <Button
+                          onClick={() => {
+                            console.log('Сохранить обрезку');
+                          }}
+                          type={'button'}
+                        >
+                          Save crop
                         </Button>
-                      )}
+                        <div className={s.ratioDialog}>
+                          {availableRatios.map((ratio) => (
+                            <Button
+                              className={clsx(s.ratioButton, ratio.value === aspect && s.selected)}
+                              key={ratio.title}
+                              onClick={() => console.log('Сохранить соотношение сторон')}
+                              type={'button'}
+                              variant={'outlined'}
+                            >
+                              {ratio.title}
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+                      {/*) : (*/}
+                      {/*  <Button onClick={() => setIsRatioDialogOpen(true)} type={'button'}>*/}
+                      {/*    Ratio*/}
+                      {/*  </Button>*/}
+                      {/*)}*/}
                     </div>
                     <div>
-                      {isScaleDialogOpen && (
-                        <div ref={scaleDialogRef}>
-                          <div className={s.scaleDialog}>
-                            <Slider
-                              onValueChange={([newValue]) => {
-                                setCrop(undefined);
-                                setScale(newValue);
-                              }}
-                              max={2}
-                              min={0.1}
-                              step={0.1}
-                              value={[scale]}
-                            />
-                          </div>
+                      {/*{isScaleDialogOpen && (*/}
+                      <div ref={scaleDialogRef}>
+                        <div className={s.scaleDialog}>
+                          <Slider
+                            onValueChange={([newValue]) => {
+                              setCrop(undefined);
+                              setScale(newValue);
+                            }}
+                            max={2}
+                            min={1}
+                            step={0.1}
+                            value={[scale]}
+                          />
                         </div>
-                      )}
-                      <Button onClick={() => setIsScaleDialogOpen(true)} type={'button'}>
-                        Scale
-                      </Button>
+                      </div>
+                      {/*)}*/}
+                      {/*<Button onClick={() => setIsScaleDialogOpen(true)} type={'button'}>*/}
+                      {/*  Scale*/}
+                      {/*</Button>*/}
                     </div>
                   </div>
 
