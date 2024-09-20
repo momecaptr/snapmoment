@@ -1,9 +1,9 @@
 import { Sections } from '@/widget/sideBar/createPostModal/CreatePostModal';
-import { ImgProps } from '@/widget/sideBar/createPostModal/createPost';
+import { CreatePostImgProps } from '@/widget/sideBar/createPostModal/createPost';
 
 interface ModalTitle {
   activeSection: Sections;
-  allPostImages: ImgProps[];
+  allPostImages: CreatePostImgProps[];
 }
 
 /**

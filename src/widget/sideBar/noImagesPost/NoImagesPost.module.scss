@@ -1,0 +1,40 @@
+.boxPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 222px;
+  height: 228px;
+
+  background-color: var(--dark-500);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  width: 219px;
+  margin-top: 60px;
+
+  .upload {
+    display: none;
+  }
+
+  .label {
+    padding: 6px 24px;
+    background-color: var(--accent-500);
+    border-radius: 2px;
+  }
+}
+
+.draftBtn {
+  padding: 6px 24px;
+  border-radius: 2px;
+
+  .draftTxt {
+    color: var(--accent-500);
+
+    &:hover {
+      color: var(--accent-100);
+    }
+  }
+}

@@ -6,10 +6,10 @@ export type AspectVals = {
   text: string;
   value: number;
 };
-export type CroppedImgForProps = Partial<ImgProps> & Pick<ImgProps, 'id'>;
-export type UpdateImgById = Omit<ImgProps, 'imageUrl'>;
+export type CroppedImgForProps = Partial<CreatePostImgProps> & Pick<CreatePostImgProps, 'id'>;
+export type UpdateImgById = Omit<CreatePostImgProps, 'imageUrl'>;
 
-export type ImgProps = {
+export type CreatePostImgProps = {
   aspect: AspectVals;
   crop: CropInit;
   croppedAreaPx: CroppedAreaPx;

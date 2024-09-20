@@ -7,47 +7,6 @@
   padding: 0;
 }
 
-.notCropping {
-  display: flex;
-  align-items: center;
-
-  .filtersPanel {
-    width: 50%;
-    height: 100%;
-    padding: 10px;
-  }
-
-  .publicationPanel {
-    display: grid;
-    justify-content: center;
-
-    width: 50%;
-    height: 100%;
-    padding: 10px;
-  }
-
-  .singlePhotoWrapper {
-    // width: 50%;
-    position: relative;
-
-    display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-
-    aspect-ratio: 1 / 1;
-    height: auto;
-
-    // overflow: hidden;
-
-    .singlePhoto {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-}
-
 .boxContent {
   position: relative;
 
@@ -61,112 +20,61 @@
   min-height: 30vh;
   max-height: 80vh;
 
-  // width: 700px;
-  // height: 500px;
+  &.fullWidth {
+    flex-direction: column;
+  }
 
-  // padding: 0 135px 60px;
+  &.splitContent {
+    flex-direction: row;
+    width: 100%;
+    max-width: unset;
+  }
+}
 
-  .singlePhotoWrapper {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+
+  &.croppingBlock {
     width: 50%;
 
-    .singlePhoto {
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-      max-height: 100%;
-
-      object-fit: contain;
-    }
-  }
-
-  .croppingPanel {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    display: flex;
-    justify-content: space-between;
-
-    width: 100%;
-
-    .ratioAndScale {
-      // flex-direction: column;
-      position: relative;
+    .cropperElement {
+      overflow: hidden;
       display: flex;
+      align-items: center;
+      justify-content: center;
 
-      .ratioDialog {
-        position: absolute;
-        bottom: 100%;
-        display: flex;
-        flex-direction: column;
-
-        .ratioButton {
-          cursor: pointer;
-          margin-bottom: 5px;
-        }
-
-        .selected {
-          color: var(--light-100);
-          background-color: var(--accent-500);
-        }
-      }
-
-      .scaleDialog {
-        position: absolute;
-        bottom: 100%;
-
-        display: flex;
-        flex-direction: column;
-
-        background-color: dimgray;
-      }
+      width: 100%;
+      height: 100%;
     }
   }
 
-  .boxPhoto {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 222px;
-    height: 228px;
-
-    background-color: var(--dark-500);
-
-    // border-radius: 50%;
-  }
-
-  .button {
-    display: flex;
-    justify-content: center;
-    width: 219px;
-    margin-top: 60px;
-
-    .customFileUpload {
-      display: none;
-    }
-
-    .lable {
-      padding: 6px 24px;
-      background-color: var(--accent-500);
-      border-radius: 2px;
+  &.notCroppingBlock {
+    .imageWrapper {
+      // не знаю зачем
     }
   }
+}
 
-  .draftBtn {
-    padding: 6px 24px;
-    border-radius: 2px;
+.filtersPanel,
+.publicationPanel {
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+}
 
-    .draftTxt {
-      color: var(--accent-500);
+.imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-      &:hover {
-        color: var(--accent-100);
-      }
-    }
+  width: 100%;
+  height: 100%;
+
+  &.splitContent {
+    width: 50%;
   }
 }
 

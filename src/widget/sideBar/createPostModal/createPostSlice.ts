@@ -1,6 +1,6 @@
 import {
+  CreatePostImgProps,
   CroppedAreaPx,
-  ImgProps,
   UpdateImgAspect,
   UpdateImgCrop,
   UpdateImgZoom
@@ -10,7 +10,7 @@ import { v1 } from 'uuid';
 
 const slice = createSlice({
   initialState: {
-    allPostImages: [] as ImgProps[]
+    allPostImages: [] as CreatePostImgProps[]
   },
   name: 'createPost',
   reducers: {
@@ -18,7 +18,7 @@ const slice = createSlice({
       const existingPhoto = state.allPostImages.find((img) => img.imageUrl === action.payload.imageUrl);
 
       if (!existingPhoto) {
-        const imgDataToSave: ImgProps = {
+        const imgDataToSave: CreatePostImgProps = {
           aspect: { text: '1:1', value: 1 },
           crop: { x: 0, y: 0 },
           croppedAreaPx: null,
@@ -31,7 +31,7 @@ const slice = createSlice({
         state.allPostImages.unshift(imgDataToSave);
       }
     },
-    setAllPostImgs(state, action: PayloadAction<{ images: ImgProps[] }>) {
+    setAllPostImgs(state, action: PayloadAction<{ images: CreatePostImgProps[] }>) {
       state.allPostImages = action.payload.images.map((el) => ({ ...el }));
     },
     updateAspect(state, action: PayloadAction<UpdateImgAspect>) {
