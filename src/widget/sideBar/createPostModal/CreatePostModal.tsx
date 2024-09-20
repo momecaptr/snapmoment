@@ -15,6 +15,8 @@ import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
 // import { canvasPreview } from './canvasPreview';
 import clsx from 'clsx';
 import Image from 'next/image';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import s from './CreatePostModal.module.scss';
 
@@ -40,6 +42,8 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [activeSection, setActiveSection] = useState<Sections>('Cropping');
+  const selectImgInputRef = () => inputRef.current?.click();
+  const inputRef = useRef<HTMLInputElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const { navigateBtnLogic } = useNavigateBtnLogic({
@@ -66,14 +70,32 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    const acceptedTypes = ['image/jpeg', 'image/png'];
+    const maxSizeBytes = 20 * 1024 * 1024; // 20 MB Max
 
     if (!file) {
+      return;
+    }
+
+    if (!acceptedTypes.includes(file.type)) {
+      setErrorMessage('Wrong file type');
+
+      return;
+    }
+
+    if (file.size > maxSizeBytes) {
+      setErrorMessage('Max file size should be less than 20 MB');
+
       return;
     }
 
     const imageUrl = URL.createObjectURL(file);
 
     dispatch(createPostActions.addPostImgs({ imageUrl }));
+
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
 
     return () => URL.revokeObjectURL(imageUrl);
   };
@@ -148,43 +170,74 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         {allPostImages.length !== 0 ? (
           <>
             <div className={clsx(s.block, activeSection === 'Cropping' ? s.croppingBlock : s.notCroppingBlock)}>
-              {allPostImages.map((img) => (
-                <div className={s.imageWrapper} key={img.id}>
-                  {activeSection === 'Cropping' ? (
-                    <div className={s.cropperElement}>
-                      <Cropper
-                        aspect={img.aspect.value}
-                        crop={img.crop}
-                        image={img.imageUrl}
-                        onCropChange={(crop) => onCropChange({ crop, id: img.id })}
-                        onCropComplete={onCropComplete(img.id)}
-                        onZoomChange={(zoom) => onZoomChange({ id: img.id, zoom })}
-                        showGrid={false}
-                        zoom={img.zoom}
-                        {...cropperExtraStyles}
-                      />
+              <Swiper
+                style={{
+                  height: '500px',
+                  position: 'relative'
+                }}
+                allowTouchMove={false}
+                className={'post-images-slider'}
+                key={allPostImages.length}
+                modules={[Navigation, Pagination]}
+                noSwiping={false}
+                pagination={{ clickable: true }}
+                slidesPerView={1}
+                spaceBetween={10}
+                touchStartPreventDefault={false}
+                navigation
+              >
+                {allPostImages.map((img) => (
+                  <SwiperSlide className={s.swiper} key={img.id}>
+                    <div className={s.imageWrapper}>
+                      {activeSection === 'Cropping' ? (
+                        <div className={s.cropperElement}>
+                          <Cropper
+                            aspect={img.aspect.value}
+                            crop={img.crop}
+                            image={img.imageUrl}
+                            onCropChange={(crop) => onCropChange({ crop, id: img.id })}
+                            onCropComplete={onCropComplete(img.id)}
+                            onZoomChange={(zoom) => onZoomChange({ id: img.id, zoom })}
+                            showGrid={false}
+                            zoom={img.zoom}
+                            {...cropperExtraStyles}
+                          />
+                        </div>
+                      ) : (
+                        <div className={s.imageSubWrapper}>
+                          <Image
+                            alt={'Post'}
+                            className={s.imageElement}
+                            height={500}
+                            src={img.imageUrl || ''}
+                            width={500}
+                          />
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className={s.imageSubWrapper}>
-                      <Image
-                        alt={'Post'}
-                        className={s.imageElement}
-                        height={500}
-                        src={img.imageUrl || ''}
-                        width={500}
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
-              {activeSection === 'Cropping' && (
-                <CropAndScalePost
-                  onAspectChange={onAspectChange}
-                  onSelectFile={onSelectFile}
-                  onZoomChange={onZoomChange}
-                />
-              )}
+                  </SwiperSlide>
+                ))}
+                {activeSection === 'Cropping' && (
+                  <CropAndScalePost
+                    onAspectChange={onAspectChange}
+                    onSelectFile={onSelectFile}
+                    onZoomChange={onZoomChange}
+                  />
+                )}
+              </Swiper>
             </div>
+            <Button className={s.addImg} onClick={selectImgInputRef} type={'button'}>
+              AddImg
+              <input
+                accept={'image/jpeg, image/png'}
+                id={'fileInput'}
+                name={'file'}
+                onChange={onSelectFile}
+                ref={inputRef}
+                style={{ display: 'none' }}
+                type={'file'}
+              />
+            </Button>
             {activeSection !== 'Cropping' && (
               <div className={clsx(s.rightContent, activeSection === 'Filters' ? s.filtersPanel : s.publicationPanel)}>
                 {activeSection === 'Filters' && <div>Тут фильтры</div>}

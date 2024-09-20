@@ -17,8 +17,6 @@ type PropsCropAndScale = {
 };
 export const CropAndScalePost = (props: PropsCropAndScale) => {
   const { onAspectChange, onSelectFile, onZoomChange } = props;
-  const inputRef = useRef<HTMLInputElement>(null);
-  const selectImgInputRef = () => inputRef.current?.click();
   const [scale, setScale] = useState(1);
   const [isRatioDialogOpen, setIsRatioDialogOpen] = useState(false);
   const [isScaleDialogOpen, setIsScaleDialogOpen] = useState(false);
@@ -69,19 +67,6 @@ export const CropAndScalePost = (props: PropsCropAndScale) => {
         )}
         <Button onClick={() => setIsScaleDialogOpen(!isScaleDialogOpen)} type={'button'}>
           Scale
-        </Button>
-      </div>
-      <div>
-        <Button onClick={() => selectImgInputRef()} type={'button'}>
-          AddImg
-          <input
-            id={'fileInput'}
-            name={'file'}
-            onChange={(e) => onSelectFile(e)}
-            ref={inputRef}
-            style={{ display: 'none' }}
-            type={'file'}
-          />
         </Button>
       </div>
     </div>
