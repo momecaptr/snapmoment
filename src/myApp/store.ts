@@ -1,5 +1,6 @@
 import { appSlice } from '@/myApp/model/appSlice';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
+import { createPostSlice } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
@@ -8,6 +9,7 @@ const makeStore = () =>
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(snapmomentAPI.middleware),
     reducer: {
       app: appSlice.reducer,
+      createPost: createPostSlice,
       [snapmomentAPI.reducerPath]: snapmomentAPI.reducer
     }
   });

@@ -1,8 +1,9 @@
 import { Sections } from '@/widget/sideBar/createPostModal/CreatePostModal';
+import { ImgProps } from '@/widget/sideBar/createPostModal/createPost';
 
 interface ModalTitle {
   activeSection: Sections;
-  previews: string[];
+  allPostImages: ImgProps[];
 }
 
 /**
@@ -12,9 +13,9 @@ interface ModalTitle {
  */
 
 export const modalTitle = (props: ModalTitle) => {
-  const { activeSection, previews } = props;
+  const { activeSection, allPostImages } = props;
 
-  if (!previews.length) {
+  if (!allPostImages.length) {
     return 'Add Photo';
   }
   if (activeSection === 'Cropping') {
