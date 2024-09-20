@@ -113,6 +113,10 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
       },
       cropAreaStyle: {
         border: 'none'
+      },
+      mediaStyle: {
+        height: '100%',
+        'object-fit': 'contain'
       }
     }
   };
@@ -134,7 +138,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         ) : null
       }
       className={clsx(activeSection !== 'Cropping' && s.card)}
-      classNameContent={clsx(allPostImages.length ? s.createPostModal : '')}
+      classNameContent={s.createPostModal}
       onOpenChange={() => setOpen(false)}
       open={isOpen}
       showCloseButton={!allPostImages.length}
@@ -161,8 +165,14 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                       />
                     </div>
                   ) : (
-                    <div className={s.imageElement}>
-                      <Image alt={'Post'} height={500} src={img.imageUrl || ''} width={500} />
+                    <div className={s.imageSubWrapper}>
+                      <Image
+                        alt={'Post'}
+                        className={s.imageElement}
+                        height={500}
+                        src={img.imageUrl || ''}
+                        width={500}
+                      />
                     </div>
                   )}
                 </div>

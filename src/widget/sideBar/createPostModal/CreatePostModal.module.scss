@@ -17,7 +17,7 @@
 
   min-width: 50vw;
   max-width: 60vw;
-  min-height: 30vh;
+  min-height: 40vh;
   max-height: 80vh;
 
   &.fullWidth {
@@ -53,7 +53,14 @@
 
   &.notCroppingBlock {
     .imageWrapper {
-      // не знаю зачем
+      .imageSubWrapper {
+        // не знаю зачем
+        .imageElement {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
     }
   }
 }
