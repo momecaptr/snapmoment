@@ -31,26 +31,6 @@
   }
 }
 
-.croppingBlock {
-  position: unset;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 50%;
-
-  .cropperElement {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .leftContent {
   position: unset;
 
@@ -68,6 +48,10 @@
       }
     }
   }
+}
+
+.rightContent {
+  // empty
 }
 
 .addImg {

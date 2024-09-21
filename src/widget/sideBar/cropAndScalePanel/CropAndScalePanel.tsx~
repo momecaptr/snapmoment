@@ -8,11 +8,11 @@ import { AspectVals } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import clsx from 'clsx';
 
-import s from './CropAndScalePost.module.scss';
+import s from './CropAndScalePanel.module.scss';
 
 type PropsCropAndScale = {
-  onAspectChange: ({ aspect, id }: { aspect: AspectVals; id: string }) => void;
-  onZoomChange: ({ id, zoom }: { id: string; zoom: number }) => void;
+  onAspectChange: ({ aspect }: { aspect: AspectVals }) => void;
+  onZoomChange: ({ zoom }: { zoom: number }) => void;
 };
 export const CropAndScalePanel = (props: PropsCropAndScale) => {
   const { onAspectChange, onZoomChange } = props;
@@ -36,7 +36,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
                     ratio.value === aspectRatios.find((r) => r.value === ratio.value)?.value && s.selected
                   )}
                   key={ratio.text}
-                  onClick={() => onAspectChange({ aspect: ratio, id: allPostImages[0].id })}
+                  onClick={() => onAspectChange({ aspect: ratio})}
                   type={'button'}
                   variant={'outlined'}
                 >
@@ -54,7 +54,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
             <div className={s.scaleDialog}>
               <Slider
                 onValueChange={([newValue]) => {
-                  onZoomChange({ id: allPostImages[0].id, zoom: newValue });
+                  onZoomChange({zoom: newValue });
                 }}
                 max={3}
                 min={1}
