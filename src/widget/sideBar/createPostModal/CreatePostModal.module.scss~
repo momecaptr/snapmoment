@@ -31,44 +31,44 @@
   }
 }
 
-.croppingBlock {
-  position: unset;
+  .croppingBlock {
+    position: unset;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 50%;
-
-  .cropperElement {
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    width: 50%;
+
+    .cropperElement {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      height: 100%;
+    }
   }
-}
 
-.leftContent {
-  position: unset;
+  .leftContent {
+    position: unset;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  width: 50%;
-
-  .imageWrapper {
-    .imageSubWrapper {
-      .imageElement {
-        width: 100%;
-        object-fit: contain;
+    width: 50%;
+    .imageWrapper {
+      .imageSubWrapper {
+        .imageElement {
+          width: 100%;
+          object-fit: contain;
+        }
       }
     }
   }
-}
 
 .addImg {
   position: absolute;

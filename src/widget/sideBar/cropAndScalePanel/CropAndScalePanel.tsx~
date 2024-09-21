@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { useAppSelector } from '@/shared/lib';
 import { Button } from '@/shared/ui';
@@ -12,11 +12,10 @@ import s from './CropAndScalePost.module.scss';
 
 type PropsCropAndScale = {
   onAspectChange: ({ aspect, id }: { aspect: AspectVals; id: string }) => void;
-  onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
   onZoomChange: ({ id, zoom }: { id: string; zoom: number }) => void;
 };
-export const CropAndScalePost = (props: PropsCropAndScale) => {
-  const { onAspectChange, onSelectFile, onZoomChange } = props;
+export const CropAndScalePanel = (props: PropsCropAndScale) => {
+  const { onAspectChange, onZoomChange } = props;
   const [scale, setScale] = useState(1);
   const [isRatioDialogOpen, setIsRatioDialogOpen] = useState(false);
   const [isScaleDialogOpen, setIsScaleDialogOpen] = useState(false);

@@ -6,7 +6,6 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Button, Modal } from '@/shared/ui';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
@@ -14,6 +13,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 
 import s from './CreatePostModal.module.scss';
+import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
 
 type PropsCrPostModal = {
   isOpen: boolean;
