@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 
+import { ExpandOutline } from '@/../public/assets/components';
 import { useAppSelector } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button, DropDownWrapper } from '@/shared/ui';
 import Slider from '@/shared/ui/slider/Slider';
 import { aspectRatios } from '@/widget/sideBar/createPostModal/CreatePostModal';
 import { AspectVals } from '@/widget/sideBar/createPostModal/createPost';
@@ -26,6 +27,9 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
   return (
     <div className={s.croppingPanel}>
       <div className={s.ratioAndScale}>
+        <DropDownWrapper icon={ExpandOutline} type={'menu'}>
+          <h1>ЖЛПА</h1>
+        </DropDownWrapper>
         {isRatioDialogOpen && (
           <div ref={ratioDialogRef}>
             <div className={s.ratioDialog}>
@@ -36,7 +40,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
                     ratio.value === aspectRatios.find((r) => r.value === ratio.value)?.value && s.selected
                   )}
                   key={ratio.text}
-                  onClick={() => onAspectChange({ aspect: ratio})}
+                  onClick={() => onAspectChange({ aspect: ratio })}
                   type={'button'}
                   variant={'outlined'}
                 >
@@ -54,7 +58,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
             <div className={s.scaleDialog}>
               <Slider
                 onValueChange={([newValue]) => {
-                  onZoomChange({zoom: newValue });
+                  onZoomChange({ zoom: newValue });
                 }}
                 max={3}
                 min={1}

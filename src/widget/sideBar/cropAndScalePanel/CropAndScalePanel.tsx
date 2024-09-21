@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 
+import expandOutline from '@/../public/assets/expand-outline.svg';
 import { useAppSelector } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { Button, DropDownWrapper } from '@/shared/ui';
 import Slider from '@/shared/ui/slider/Slider';
 import { aspectRatios } from '@/widget/sideBar/createPostModal/CreatePostModal';
 import { AspectVals } from '@/widget/sideBar/createPostModal/createPost';
@@ -26,6 +27,9 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
   return (
     <div className={s.croppingPanel}>
       <div className={s.ratioAndScale}>
+        <DropDownWrapper icon={expandOutline} type={'menu'}>
+          <h1>ЖЛПА</h1>
+        </DropDownWrapper>
         {isRatioDialogOpen && (
           <div ref={ratioDialogRef}>
             <div className={s.ratioDialog}>
