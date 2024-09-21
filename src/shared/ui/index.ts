@@ -11,6 +11,8 @@ export type { CustomToastProps } from './customToast/CustomToast';
 export { DatePicker } from './datePicker/ui/DatePicker';
 export { DatePickerMultiple } from './datePickerMultiple/ui/DatePickerMultiple';
 export { DevMode } from './devMode/DevMode';
+export { DropDownItem } from './dropDown/DropDownItem';
+export { DropDownWrapper } from './dropDown/DropDownWrapper';
 export { FormCheckbox } from './forms/FormCheckbox';
 export { FormTextfieldArea } from './forms/FormTextFieldArea';
 export { FormTextfield } from './forms/FormTextfield';
