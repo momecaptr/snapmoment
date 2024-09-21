@@ -4,7 +4,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { clsx } from 'clsx';
 import Link from 'next/link';
 
-import s from './DropDown.module.scss';
+import s from './DropDownWrapper.module.scss';
 
 import { Button } from '../button/Button';
 import { Typography } from '../typography/Typography';

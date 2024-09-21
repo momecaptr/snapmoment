@@ -4,14 +4,14 @@ import Cropper, { Area, Point } from 'react-easy-crop';
 import ArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import ArrowIosForward from '@/../public/assets/components/ArrowIosForward';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { Button } from '@/shared/ui';
+import { AddNewImgPanel } from '@/widget/sideBar/addNewImgPanel/AddNewImgPanel';
 import { aspectRatios } from '@/widget/sideBar/createPostModal/CreatePostModal';
 import { AspectVals } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScalePanel } from '@/widget/sideBar/cropAndScalePanel/CropAndScalePanel';
 import { clsx } from 'clsx';
 import { Swiper as SwiperProps } from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import s from './CropAndScaleSection.module.scss';
@@ -22,8 +22,6 @@ type CropAndScaleSectionType = {
 
 export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
   const { onSelectFile } = props;
-  const selectImgInputRef = () => inputRef.current?.click();
-  const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   // Для передачи в slider с какой id картинки работаем
@@ -99,6 +97,11 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
     });
   };
 
+  // Функция для переключения на слайд по индексу
+  const handleSelectImageSwiper = (index: number) => {
+    swiperRef.current?.slideTo(index);
+  };
+
   return (
     <div className={s.wrapper}>
       <div className={s.croppingBlock}>
@@ -107,14 +110,10 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
             nextEl: `.${s.swiperButtonNext}`,
             prevEl: `.${s.swiperButtonPrev}`
           }}
-          pagination={{
-            clickable: true,
-            el: `.${s.swiperPagination}`
-          }}
           allowTouchMove={false}
           className={s.photosSwiper}
           key={allPostImages.length}
-          modules={[Navigation, Pagination]}
+          modules={[Navigation]}
           onSlideChange={handleSlideChange}
           onSwiper={handleSwiperInit}
           touchStartPreventDefault={false}
@@ -152,22 +151,16 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
             >
               <ArrowIosForward />
             </button>
-            <div className={s.swiperPagination}></div>
           </>
         )}
       </div>
-      <Button className={s.addImg} onClick={selectImgInputRef} type={'button'}>
-        AddImg
-        <input
-          accept={'image/jpeg, image/png'}
-          id={'fileInput'}
-          name={'file'}
-          onChange={onSelectFile}
-          ref={inputRef}
-          style={{ display: 'none' }}
-          type={'file'}
+      <div className={s.addImg}>
+        <AddNewImgPanel
+          onSelectFile={onSelectFile}
+          onSelectImageSwiper={handleSelectImageSwiper}
+          swiperIndex={swiperRef.current?.realIndex}
         />
-      </Button>
+      </div>
     </div>
   );
 };

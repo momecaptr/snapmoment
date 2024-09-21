@@ -31,9 +31,6 @@ const slice = createSlice({
         state.allPostImages.unshift(imgDataToSave);
       }
     },
-    deletePhoto(state, action: PayloadAction<{ id: string }>) {
-      state.allPostImages = state.allPostImages.filter((img) => img.id !== action.payload.id);
-    },
     setAllPostImgs(state, action: PayloadAction<{ images: CreatePostImgProps[] }>) {
       state.allPostImages = action.payload.images.map((el) => ({ ...el }));
     },

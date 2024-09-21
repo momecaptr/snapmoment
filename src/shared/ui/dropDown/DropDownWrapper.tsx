@@ -8,7 +8,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { clsx } from 'clsx';
 import { StaticImageData } from 'next/image';
 
-import s from './DropDown.module.scss';
+import s from './DropDownWrapper.module.scss';
 
 import { Typography } from '../typography/Typography';
 
