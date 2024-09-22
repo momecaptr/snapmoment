@@ -17,7 +17,7 @@ type SliderProps = {
   thumbStyle?: CSSProperties;
   trackClassName?: string;
   trackStyle?: CSSProperties;
-  valueWrapperClassName?: CSSProperties;
+  valueWrapperClassName?: CSSProperties
 } & ComponentPropsWithoutRef<typeof RadixSlider.Root>;
 
 export const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProps>((props, ref) => {

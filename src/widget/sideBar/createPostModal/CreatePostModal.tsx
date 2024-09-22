@@ -22,13 +22,6 @@ type PropsCrPostModal = {
 
 export type Sections = 'Cropping' | 'Filters' | 'Publication';
 
-export const aspectRatios = [
-  { text: 'Original', value: 1 / 1 },
-  { text: '1:1', value: 1 / 1 },
-  { text: '4:5', value: 4 / 5 },
-  { text: '16:9', value: 16 / 9 }
-];
-
 export const CreatePostModal = (props: PropsCrPostModal) => {
   const { isOpen, setOpen } = props;
 

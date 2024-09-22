@@ -1,4 +1,4 @@
-import { CSSProperties, ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useState } from 'react';
+import { CSSProperties, ComponentPropsWithoutRef, ReactNode, forwardRef, useState } from 'react';
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { clsx } from 'clsx';
@@ -7,7 +7,7 @@ import s from './CustomDropDown.module.scss';
 
 import { Typography, TypographyVariant } from '../typography/Typography';
 
-type DropdownProps = {
+type CustomDropdownWrapperProps = {
   align?: 'center' | 'end' | 'start';
   children?: ReactNode;
   className?: string;
@@ -19,10 +19,10 @@ type DropdownProps = {
   trigger?: ReactNode;
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Root>;
 
-export const CustomDropdown = forwardRef<ElementRef<typeof DropdownMenu.Trigger>, DropdownProps>(
+export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdownWrapperProps>(
   (
     {
-      align,
+      align = 'center',
       children,
       className,
       isArrow = true,
@@ -31,7 +31,7 @@ export const CustomDropdown = forwardRef<ElementRef<typeof DropdownMenu.Trigger>
       stayOpen = false,
       style,
       trigger
-    }: DropdownProps,
+    }: CustomDropdownWrapperProps,
     ref
   ) => {
     const [open, setOpen] = useState(false);
@@ -61,7 +61,9 @@ export const CustomDropdown = forwardRef<ElementRef<typeof DropdownMenu.Trigger>
             style={style}
           >
             {isArrow && <DropdownMenu.Arrow className={classNames.arrowWrap} />}
-            <div className={classNames.itemsWrap}>{children}</div>
+            <div className={classNames.itemsWrap}>
+              {children} {/* Рендерим children напрямую */}
+            </div>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
@@ -69,7 +71,7 @@ export const CustomDropdown = forwardRef<ElementRef<typeof DropdownMenu.Trigger>
   }
 );
 
-type DropdownItemProps = {
+type CustomDropdownItemProps = {
   children?: ReactNode;
   className?: string;
   disabled?: boolean;
@@ -82,7 +84,7 @@ export const CustomDropdownItem = ({
   onSelect,
   style,
   ...restProps
-}: DropdownItemProps) => {
+}: CustomDropdownItemProps) => {
   const classNames = {
     item: clsx(s.dropdownMenuItem, className)
   };
@@ -94,12 +96,12 @@ export const CustomDropdownItem = ({
   );
 };
 
-type DropdownItemWithIconProps = {
+type CustomDropdownItemWithIconProps = {
   icon?: ReactNode;
   title: string;
   variant?: TypographyVariant;
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Item> &
-  Omit<DropdownItemProps, 'children'>;
+  Omit<CustomDropdownItemProps, 'children'>;
 
 export const CustomDropdownItemWithIcon = ({
   className,
@@ -110,7 +112,7 @@ export const CustomDropdownItemWithIcon = ({
   title,
   variant,
   ...rest
-}: DropdownItemWithIconProps) => {
+}: CustomDropdownItemWithIconProps) => {
   const classNames = {
     icon: clsx(s.itemIcon),
     item: clsx(s.dropdownMenuItem, className)

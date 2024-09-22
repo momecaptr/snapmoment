@@ -76,7 +76,8 @@ const slice = createSlice({
     }
   },
   selectors: {
-    allPostImages: (sliceState) => sliceState.allPostImages
+    allPostImages: (sliceState) => sliceState.allPostImages,
+    soloImg: (sliceState, id: string) => sliceState.allPostImages.find((el) => el.id === id)
   }
 });
 

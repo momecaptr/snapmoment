@@ -7,41 +7,50 @@
   display: flex;
   justify-content: space-between;
 
-  .ratioAndScale {
-    //position: relative;
+  .opener {
     display: flex;
-
-    .bottomButtons {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: var(--dark-500);
+    border-radius: 5px;
+    &:hover {
+      cursor: pointer;
     }
+  }
 
-    .ratioDialog {
-      position: absolute;
-      bottom: 100%;
-      display: flex;
-      flex-direction: column;
+}
+.contentAspectsWrapper,
+.contentZoomWrapper{
+  background-color: var(--dark-500);
+  border-radius: 7px 7px 7px 0;
+  padding: 5px;
+}
 
-      .ratioButton {
-        cursor: pointer;
-        margin-bottom: 5px;
-      }
+.contentAspects {
+  display: flex;
+  padding: 0;
+  &:hover {
+    cursor: pointer;
+    outline-offset: -3px;
+    outline: 3px solid var(--accent-100)
+  }
+  .aspectWrapper {
+    padding: 6px 12px;
+    gap: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
 
-      .selected {
-        color: var(--light-100);
-        background-color: var(--accent-500);
-      }
-    }
-
-    .scaleDialog {
-      position: absolute;
-      bottom: 100%;
-
-      display: flex;
-      flex-direction: column;
-
-      background-color: dimgray;
-    }
+.contentZoom {
+  padding: 0;
+  .slider {
+    //background-color: red;
+  }
+  .sliderContainer {
+    gap:5px
   }
 }

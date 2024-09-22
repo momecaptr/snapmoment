@@ -5,10 +5,9 @@ import ArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import ArrowIosForward from '@/../public/assets/components/ArrowIosForward';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { AddNewImgPanel } from '@/widget/sideBar/addNewImgPanel/AddNewImgPanel';
-import { aspectRatios } from '@/widget/sideBar/createPostModal/CreatePostModal';
-import { AspectVals } from '@/widget/sideBar/createPostModal/createPost';
+import { AspectRatioVals } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { CropAndScalePanel } from '@/widget/sideBar/cropAndScalePanel/CropAndScalePanel';
+import { CropAndScalePanel, aspectRatios } from '@/widget/sideBar/cropAndScalePanel/CropAndScalePanel';
 import { clsx } from 'clsx';
 import { Swiper as SwiperProps } from 'swiper';
 import { Navigation } from 'swiper/modules';
@@ -35,7 +34,7 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
     dispatch(createPostActions.updateZoom({ id, zoom }));
   };
 
-  const onAspectChange = ({ aspect, id }: { aspect: AspectVals; id: string }) => {
+  const onAspectChange = ({ aspect, id }: { aspect: AspectRatioVals; id: string }) => {
     if (aspect) {
       dispatch(createPostActions.updateAspect({ aspect, id }));
       if (aspect.text === aspectRatios[0].text) {
@@ -134,6 +133,7 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
                 />
               </div>
               <CropAndScalePanel
+                id={img.id}
                 onAspectChange={({ aspect }) => onAspectChange({ aspect, id: img.id })}
                 onZoomChange={({ zoom }) => onZoomChange({ id: img.id, zoom })}
               />

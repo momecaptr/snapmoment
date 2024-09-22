@@ -19,7 +19,7 @@ export type CroppedImgForProps = Partial<CreatePostImgProps> & Pick<CreatePostIm
 export type UpdateImgById = Omit<CreatePostImgProps, 'imageUrl'>;
 
 export type CreatePostImgProps = {
-  aspect: AspectRatioVals;
+  aspect: AspectVals;
   crop: CropInit;
   croppedAreaPx: CroppedAreaPx;
   id: string;

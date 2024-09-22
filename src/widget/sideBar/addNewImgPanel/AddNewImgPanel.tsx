@@ -4,7 +4,7 @@ import PictureOutline from '@/../public/assets/components/PictureOutline';
 import PlusCircleOutline from '@/../public/assets/components/PlusCircleOutline';
 import TrashOutline from '@/../public/assets/components/TrashOutline';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { Button, CustomDropdown, CustomDropdownItem } from '@/shared/ui';
+import { Button, CustomDropdownItem, CustomDropdownWrapper } from '@/shared/ui';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { clsx } from 'clsx';
 import Image from 'next/image';
@@ -30,7 +30,7 @@ export const AddNewImgPanel = (props: Props) => {
 
   return (
     <div className={s.container}>
-      <CustomDropdown
+      <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
             <PictureOutline style={{ height: '24px', width: '24px' }} />
@@ -77,7 +77,7 @@ export const AddNewImgPanel = (props: Props) => {
             type={'file'}
           />
         </CustomDropdownItem>
-      </CustomDropdown>
+      </CustomDropdownWrapper>
     </div>
   );
 };
