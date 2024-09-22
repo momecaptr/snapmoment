@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, ReactNode, forwardRef } from 'react';
+import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, forwardRef } from 'react';
 
 import { clsx } from 'clsx';
 
@@ -6,7 +6,7 @@ import s from './Button.module.scss';
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T;
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   fullWidth?: boolean;
   variant?: 'outlined' | 'primary' | 'secondary' | 'text';
