@@ -1,8 +1,8 @@
-import { Sections } from '@/widget/sideBar/createPostModal/CreatePostModal';
-import { CreatePostImgProps } from '@/widget/sideBar/createPostModal/createPost';
+import { modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
+import { CreatePostImgProps, CreatePostModalSections } from '@/widget/sideBar/createPostModal/createPost';
 
 interface ModalTitle {
-  activeSection: Sections;
+  activeSection: CreatePostModalSections;
   allPostImages: CreatePostImgProps[];
 }
 
@@ -16,15 +16,15 @@ export const modalTitle = (props: ModalTitle) => {
   const { activeSection, allPostImages } = props;
 
   if (!allPostImages.length) {
-    return 'Add Photo';
+    return 'Add Photo' as string;
   }
-  if (activeSection === 'Cropping') {
-    return 'Cropping' as string;
+  if (activeSection === modalSection.cropping) {
+    return modalSection.cropping as string;
   }
-  if (activeSection === 'Filters') {
-    return 'Filters' as string;
+  if (activeSection === modalSection.filters) {
+    return modalSection.filters as string;
   }
-  if (activeSection === 'Publication') {
-    return 'Publication' as string;
+  if (activeSection === modalSection.publication) {
+    return modalSection.publication as string;
   }
 };

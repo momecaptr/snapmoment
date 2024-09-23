@@ -1,5 +1,6 @@
 import {
   CreatePostImgProps,
+  CreatePostModalSections,
   CroppedAreaPx,
   UpdateImgAspect,
   UpdateImgCrop,
@@ -10,6 +11,7 @@ import { v1 } from 'uuid';
 
 const slice = createSlice({
   initialState: {
+    activeSection: 'Cropping' as CreatePostModalSections,
     allPostImages: [] as CreatePostImgProps[]
   },
   name: 'createPost',
@@ -33,6 +35,9 @@ const slice = createSlice({
     },
     deletePhoto(state, action: PayloadAction<{ id: string }>) {
       state.allPostImages = state.allPostImages.filter((img) => img.id !== action.payload.id);
+    },
+    setActiveSection(state, action: PayloadAction<{ section: CreatePostModalSections }>) {
+      state.activeSection = action.payload.section;
     },
     setAllPostImgs(state, action: PayloadAction<{ images: CreatePostImgProps[] }>) {
       state.allPostImages = action.payload.images.map((el) => ({ ...el }));
@@ -76,6 +81,7 @@ const slice = createSlice({
     }
   },
   selectors: {
+    activeSection: (sliceState) => sliceState.activeSection,
     allPostImages: (sliceState) => sliceState.allPostImages,
     soloImg: (sliceState, id: string) => sliceState.allPostImages.find((el) => el.id === id)
   }

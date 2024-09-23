@@ -7,7 +7,7 @@ import { createPostActions, createPostSelectors } from '@/widget/sideBar/createP
 // }
 
 /**
- * HookFunction that returns function to navigate between sections of the modal
+ * Function that navigates between sections of the modal
  */
 
 export const useNavigateBtnLogic = () => {

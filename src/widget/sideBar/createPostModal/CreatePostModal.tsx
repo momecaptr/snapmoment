@@ -20,22 +20,24 @@ type PropsCrPostModal = {
   setOpen: (value: boolean) => void;
 };
 
-export type Sections = 'Cropping' | 'Filters' | 'Publication';
+export const modalSection = {
+  cropping: 'Cropping',
+  filters: 'Filters',
+  publication: 'Publication'
+} as const;
 
 export const CreatePostModal = (props: PropsCrPostModal) => {
   const { isOpen, setOpen } = props;
 
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
+  const activeSection = useAppSelector(createPostSelectors.activeSection);
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
-  const [activeSection, setActiveSection] = useState<Sections>('Cropping');
+  // const [activeSection, setActiveSection] = useState<CreatePostModalSections>(createPostModalSections.cropping);
   const imgRef = useRef<HTMLImageElement>(null);
 
-  const { navigateBtnLogic } = useNavigateBtnLogic({
-    activeSection,
-    setActiveSection
-  });
+  const { navigateBtnLogic } = useNavigateBtnLogic();
 
   const navigateBtnHandler = (direction: 'back' | 'next') => {
     navigateBtnLogic(direction);
@@ -77,6 +79,8 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
     dispatch(createPostActions.addPostImgs({ imageUrl }));
 
+    e.target.value = '';
+
     return () => URL.revokeObjectURL(imageUrl);
   };
 
@@ -96,18 +100,18 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
           </Button>
         ) : null
       }
-      className={clsx(activeSection !== 'Cropping' && s.card)}
+      className={clsx(activeSection !== modalSection.cropping && s.card)}
       classNameContent={s.createPostModal}
       onOpenChange={() => setOpen(false)}
       open={isOpen}
       showCloseButton={!allPostImages.length}
       title={modalTitle({ activeSection, allPostImages })}
     >
-      <div className={clsx(s.boxContent, activeSection === 'Cropping' ? s.fullWidth : s.splitContent)}>
+      <div className={clsx(s.boxContent, activeSection === modalSection.cropping ? s.fullWidth : s.splitContent)}>
         {allPostImages.length !== 0 ? (
           <>
-            {activeSection === 'Cropping' && <CropAndScaleSection onSelectFile={onSelectFile} />}
-            {activeSection !== 'Cropping' && (
+            {activeSection === modalSection.cropping && <CropAndScaleSection onSelectFile={onSelectFile} />}
+            {activeSection !== modalSection.cropping && (
               <>
                 <div className={s.leftContent}>
                   {allPostImages.map((img) => (
@@ -125,10 +129,13 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                   ))}
                 </div>
                 <div
-                  className={clsx(s.rightContent, activeSection === 'Filters' ? s.filtersPanel : s.publicationPanel)}
+                  className={clsx(
+                    s.rightContent,
+                    activeSection === modalSection.filters ? s.filtersPanel : s.publicationPanel
+                  )}
                 >
-                  {activeSection === 'Filters' && <div>Тут фильтры</div>}
-                  {activeSection === 'Publication' && (
+                  {activeSection === modalSection.filters && <div>Тут фильтры</div>}
+                  {activeSection === modalSection.publication && (
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div>Описание и прочая срань</div>
                     </form>

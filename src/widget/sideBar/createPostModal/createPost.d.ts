@@ -1,22 +1,12 @@
 import { ElementType } from 'react';
 
-export type CropInit = {
-  x: number;
-  y: number;
-};
-export type AspectVals = {
-  text: string;
-  value: number;
-};
+import { modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
 
 export type AspectRatioVals = {
   comp?: ElementType;
   text: string;
   value: number;
 };
-
-export type CroppedImgForProps = Partial<CreatePostImgProps> & Pick<CreatePostImgProps, 'id'>;
-export type UpdateImgById = Omit<CreatePostImgProps, 'imageUrl'>;
 
 export type CreatePostImgProps = {
   aspect: AspectRatioVals;
@@ -28,6 +18,10 @@ export type CreatePostImgProps = {
   zoom: number;
 };
 
+export type CropInit = {
+  x: number;
+  y: number;
+};
 export type CroppedAreaPx = {
   height: number;
   width: number;
@@ -49,3 +43,6 @@ type UpdateImgAspect = {
   aspect: AspectRatioVals;
   id: string;
 };
+
+// export type Sections = 'Cropping' | 'Filters' | 'Publication';
+export type CreatePostModalSections = (typeof modalSection)[keyof typeof modalSection];
