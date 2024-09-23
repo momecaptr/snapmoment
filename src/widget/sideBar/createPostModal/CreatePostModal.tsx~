@@ -5,6 +5,7 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Button, Modal } from '@/shared/ui';
+import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
@@ -20,26 +21,41 @@ type PropsCrPostModal = {
   setOpen: (value: boolean) => void;
 };
 
+export const direction = {
+  back: 'Back',
+  next: 'Next'
+} as const;
+
 export const modalSection = {
   cropping: 'Cropping',
   filters: 'Filters',
   publication: 'Publication'
 } as const;
 
+// Без этого дерьма я не видел загруженную картинку
+export const readFile = (file: File) => {
+  return new Promise<string>((resolve) => {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => resolve(reader.result as string));
+    reader.readAsDataURL(file);
+  });
+};
+
 export const CreatePostModal = (props: PropsCrPostModal) => {
   const { isOpen, setOpen } = props;
 
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
+  const activeSection = useAppSelector(createPostSelectors.activeSection);
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   // const [activeSection, setActiveSection] = useState<CreatePostModalSections>(createPostModalSections.cropping);
-  const activeSection = useAppSelector(createPostSelectors.activeSection);
   const imgRef = useRef<HTMLImageElement>(null);
 
   const { navigateBtnLogic } = useNavigateBtnLogic();
 
-  const navigateBtnHandler = (direction: 'back' | 'next') => {
+  const navigateBtnHandler = (direction: CreatePostDirection) => {
     navigateBtnLogic(direction);
   };
 
@@ -75,8 +91,12 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
       return;
     }
 
+    // const imageDataUrl: any = await readFile(file);
+    // dispatch(createPostActions.addPostImgs({ imageUrl: imageDataUrl }));
+
     const imageUrl = URL.createObjectURL(file);
 
+    // createObjectURL убираем, потому что проблемы со стилями могли возникнуть (что то там про то, что размер createObjectUrl, если меняю, то в CSS нужно колдовать, поэтому вот так
     dispatch(createPostActions.addPostImgs({ imageUrl }));
 
     e.target.value = '';
@@ -88,15 +108,15 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     <Modal
       backButton={
         allPostImages.length ? (
-          <Button onClick={() => navigateBtnHandler('back')} type={'button'}>
+          <Button onClick={() => navigateBtnHandler(direction.back)} type={'button'}>
             <ArrowIosBackOutline />
           </Button>
         ) : null
       }
       nextButton={
         allPostImages.length ? (
-          <Button onClick={() => navigateBtnHandler('next')} type={'button'}>
-            Next
+          <Button onClick={() => navigateBtnHandler(direction.next)} type={'button'}>
+            {direction.next}
           </Button>
         ) : null
       }
@@ -121,7 +141,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                           alt={'Post'}
                           className={s.imageElement}
                           height={500}
-                          src={img.imageUrl || ''}
+                          src={img.originalImageUrl}
                           width={500}
                         />
                       </div>

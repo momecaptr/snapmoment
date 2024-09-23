@@ -1,6 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
+import { direction, modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
+import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import getCroppedImg from '@/widget/sideBar/lib/cropImage';
 
 // interface NavigateBtnLogic {
 //   activeSection: CreatePostModalSections;
@@ -8,38 +10,62 @@ import { createPostActions, createPostSelectors } from '@/widget/sideBar/createP
 
 /**
  * HookFunction that returns function to navigate between sections of the modal
+ * Also here is logic to reset cropped area to originalImageUrl
  */
 
 export const useNavigateBtnLogic = () => {
-  // const { activeSection } = props;
-  // const setActiveSection = (section: CreatePostModalSections) => {
-  //   dispatch(createPostActions.setActiveSection({ section }));
-  // };
   const activeSection = useAppSelector(createPostSelectors.activeSection);
-
+  const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   const dispatch = useAppDispatch();
 
-  const navigateBtnLogic = (direction: 'back' | 'next') => {
+  // Из-за async функции getCroppedImg, нужно все оборачивать в async тоже, чтобы передавать в стейт не массив промисов, а значения
+  // Функция для сохранения обрезанных изображений при переходе на стадию Filters
+  const saveCropAreaToState = async () => {
+    const newImages = await Promise.all(
+      allPostImages.map(async (img) => {
+        const croppedImg = await getCroppedImg(img.imageUrl, img.croppedAreaPx);
+
+        return {
+          croppedAreaPx: img.croppedAreaPx,
+          id: img.id,
+          imageUrl: croppedImg ?? undefined
+        };
+      })
+    );
+
+    dispatch(createPostActions.setImgUrlFromCroppedToOriginalUrl(newImages));
+  };
+
+  const navigateBtnLogic = (directionValue: CreatePostDirection) => {
     switch (activeSection) {
       case modalSection.cropping:
-        if (direction === 'back') {
-          dispatch(createPostActions.setAllPostImgs({ images: [] }));
-        } else {
+        if (directionValue === direction.next) {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
+          // saveCropAreaToState().then(() => {
+          //   allPostImages.forEach((el) => {
+          //     if (el.imageUrl) {
+          //       dispatch(createPostActions.setOriginalImageUrl({ imageUrl: el.imageUrl }));
+          //       console.log({ imgUrl: el.imageUrl, originUrl: el.originalImageUrl });
+          //     }
+          //   });
+          // });
+          void saveCropAreaToState();
+        } else {
+          dispatch(createPostActions.setAllPostImgs({ images: [] }));
         }
         break;
       case modalSection.filters:
-        if (direction === 'back') {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
-        } else {
+        if (directionValue === direction.next) {
           dispatch(createPostActions.setActiveSection({ section: modalSection.publication }));
+        } else {
+          dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
         }
         break;
       case modalSection.publication:
-        if (direction === 'back') {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
-        } else {
+        if (directionValue === direction.next) {
           console.log('отправить');
+        } else {
+          dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
         }
         break;
     }

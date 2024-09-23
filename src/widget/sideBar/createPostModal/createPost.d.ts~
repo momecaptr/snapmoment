@@ -9,6 +9,7 @@ export type CreatePostImgProps = {
   aspect: AspectRatioVals;
   crop: CropInit;
   croppedAreaPx: CroppedAreaPx;
+  croppedUrl: string;
   id: string;
   imageUrl: string | undefined;
   originalImageUrl: string;

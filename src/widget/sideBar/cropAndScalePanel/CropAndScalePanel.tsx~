@@ -57,6 +57,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
           >
             <div className={s.aspectWrapper}>
               <Typography variant={'regular_text_16'}>{ratio.text}</Typography>
+              {/*{ratio.comp && <ratio.comp className={s.icon} height={24} width={24} />}*/}
               {ratio.text === 'Original' && <Picture className={s.icon} height={24} width={24} />}
               {ratio.text === '1:1' && <IconSquare className={s.icon} height={24} width={24} />}
               {ratio.text === '4:5' && <IconVerticalRectangle className={s.icon} height={24} width={24} />}

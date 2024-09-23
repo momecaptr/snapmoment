@@ -27,26 +27,26 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const onCropChange = ({ crop, id }: { crop: Point; id: string }) => {
-    dispatch(createPostActions.setCrop({ crop, id }));
+    dispatch(createPostActions.updateCrop({ crop, id }));
   };
 
   const onZoomChange = ({ id, zoom }: { id: string; zoom: number }) => {
-    dispatch(createPostActions.setZoom({ id, zoom }));
+    dispatch(createPostActions.updateZoom({ id, zoom }));
   };
 
   const onAspectChange = ({ aspect, id }: { aspect: AspectRatioVals; id: string }) => {
     if (aspect) {
-      dispatch(createPostActions.setAspect({ aspect, id }));
+      dispatch(createPostActions.updateAspect({ aspect, id }));
       if (aspect.text === aspectRatios[0].text) {
-        dispatch(createPostActions.setZoom({ id, zoom: 1 }));
-        dispatch(createPostActions.setCrop({ crop: { x: 0, y: 0 }, id }));
+        dispatch(createPostActions.updateZoom({ id, zoom: 1 }));
+        dispatch(createPostActions.updateCrop({ crop: { x: 0, y: 0 }, id }));
       }
     }
   };
 
   const onCropComplete = (id: string) => (croppedArea: Area, croppedAreaPixels: Area) => {
     dispatch(
-      createPostActions.setCroppedAreaPixels({
+      createPostActions.updateCroppedAreaPixels({
         croppedAreaPx: croppedAreaPixels,
         id
       })

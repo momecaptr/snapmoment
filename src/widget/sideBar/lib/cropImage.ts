@@ -20,7 +20,7 @@ function getRadianAngle(degreeValue: number): number {
  * @param {number} rotation - optional rotation parameter
  */
 export default async function getCroppedImg(
-  imageSrc: null | string,
+  imageSrc: null | string | undefined,
   pixelCrop: { height: number; width: number; x: number; y: number } | null,
   rotation = 0
 ): Promise<null | string> {

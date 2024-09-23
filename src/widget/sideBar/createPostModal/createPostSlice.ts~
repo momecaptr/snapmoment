@@ -89,7 +89,6 @@ const slice = createSlice({
         }
       });
     },
-    // Вот этот action я убрал, потому что он нужен только для того, чтобы сделать лишнее действие для сэта нового imageUrl каждого элемента. Это действие можно выполнить в  setImgUrlFromCroppedToOriginalUrl
     // setOriginalImageUrl(state, action: PayloadAction<{ imageUrl: string }>) {
     //   state.allPostImages.map((img) =>
     //     img.imageUrl === action.payload.imageUrl ? { ...img, originalImageUrl: action.payload.imageUrl } : img
