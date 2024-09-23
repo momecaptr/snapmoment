@@ -40,7 +40,7 @@
   object-fit: contain;
 }
 
-.customSwiperSide {
+.customSwiperSide{
   background: var(--accent-300);
 }
 
@@ -90,6 +90,7 @@
   background-color: var(--danger-900);
   border: 1px solid var(--danger-300);
 }
+
 
 .leftContent {
   max-width: 50%;

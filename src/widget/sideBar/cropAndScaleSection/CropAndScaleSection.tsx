@@ -64,7 +64,7 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
       },
       mediaStyle: {
         height: '100%',
-        objectFit: 'contain'
+        objectFit: 'cover'
       }
     }
   };

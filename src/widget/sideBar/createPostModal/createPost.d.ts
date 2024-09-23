@@ -11,7 +11,7 @@ export type CreatePostImgProps = {
   croppedAreaPx: CroppedAreaPx;
   id: string;
   imageUrl: string | undefined;
-  originalImageUrl: string;
+  url: string;
   zoom: number;
 };
 

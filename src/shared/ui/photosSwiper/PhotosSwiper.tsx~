@@ -114,7 +114,10 @@ export const PhotosSwiper = <T extends HasUrl>({
           <button className={clsx(s.swiperButtonPrev, currentIndex === 0 && s.hidden)} ref={prevRef}>
             <ArrowIosBack />
           </button>
-          <button className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)} ref={nextRef}>
+          <button
+            className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)}
+            ref={nextRef}
+          >
             <ArrowIosForward />
           </button>
           <div className={s.swiperPagination}></div>

@@ -53,10 +53,6 @@
       background-color: var(--dark-300);
     }
 
-    &.hidden {
-      display: none;
-    }
-
     svg {
       z-index: 2;
       width: 100%;

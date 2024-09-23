@@ -16,8 +16,8 @@ const slice = createSlice({
   },
   name: 'createPost',
   reducers: {
-    addPostImgs(state, action: PayloadAction<{ imageUrl: string }>) {
-      // const existingPhoto = state.allPostImages.find((img) => img.imageUrl === action.payload.imageUrl);
+    addPostImgs(state, action: PayloadAction<{ url: string }>) {
+      // const existingPhoto = state.allPostImages.find((img) => img.url === action.payload.url);
 
       // if (!existingPhoto) {
       const imgDataToSave: CreatePostImgProps = {
@@ -25,8 +25,8 @@ const slice = createSlice({
         crop: { x: 0, y: 0 },
         croppedAreaPx: null,
         id: v1(),
-        imageUrl: action.payload.imageUrl,
-        originalImageUrl: '',
+        imageUrl: action.payload.url,
+        url: '',
         zoom: 1
       };
 
@@ -71,28 +71,28 @@ const slice = createSlice({
     },
     setImgUrlFromCroppedToOriginalUrl(
       state,
-      action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; imageUrl: string | undefined }[]>
+      action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: string | undefined }[]>
     ) {
       const payload = action.payload;
 
       payload.forEach((photo) => {
-        const { croppedAreaPx, id, imageUrl } = photo;
+        const { croppedAreaPx, id, url } = photo;
         const index = state.allPostImages.findIndex((img) => img.id === id);
 
         if (index !== -1) {
-          if (imageUrl != null) {
-            // Тут нужно засэтать либо originalImageUrl, либо imageUrl, либо оба.
+          if (url != null) {
+            // Тут нужно засэтать либо originalImageUrl, либо url, либо оба.
             // Если только originalImageUrl, то это обеспечит нам дать пользователю возможность сделать шаг "назад" и выбрать другую область для кропа исходя из оригинально загруженного. Поэтому я так и сделаю.
-            state.allPostImages[index].originalImageUrl = imageUrl;
+            state.allPostImages[index].url = url;
           }
           state.allPostImages[index].croppedAreaPx = croppedAreaPx;
         }
       });
     },
-    // Вот этот action я убрал, потому что он нужен только для того, чтобы сделать лишнее действие для сэта нового imageUrl каждого элемента. Это действие можно выполнить в  setImgUrlFromCroppedToOriginalUrl
-    // setOriginalImageUrl(state, action: PayloadAction<{ imageUrl: string }>) {
+    // Вот этот action я убрал, потому что он нужен только для того, чтобы сделать лишнее действие для сэта нового url каждого элемента. Это действие можно выполнить в  setImgUrlFromCroppedToOriginalUrl
+    // setOriginalImageUrl(state, action: PayloadAction<{ url: string }>) {
     //   state.allPostImages.map((img) =>
-    //     img.imageUrl === action.payload.imageUrl ? { ...img, originalImageUrl: action.payload.imageUrl } : img
+    //     img.url === action.payload.url ? { ...img, originalImageUrl: action.payload.url } : img
     //   );
     // },
     setZoom(state, action: PayloadAction<UpdateImgZoom>) {

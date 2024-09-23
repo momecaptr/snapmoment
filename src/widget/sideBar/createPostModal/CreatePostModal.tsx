@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { Button, Modal } from '@/shared/ui';
+import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
@@ -12,7 +12,6 @@ import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
 import clsx from 'clsx';
-import Image from 'next/image';
 
 import s from './CreatePostModal.module.scss';
 
@@ -32,7 +31,7 @@ export const modalSection = {
   publication: 'Publication'
 } as const;
 
-// Это на случай, если понадобится FileReader
+// ! Это на случай, если понадобится FileReader
 export const readFile = (file: File) => {
   return new Promise<string>((resolve) => {
     const reader = new FileReader();
@@ -92,16 +91,16 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     }
 
     // const imageDataUrl: any = await readFile(file);
-    // dispatch(createPostActions.addPostImgs({ imageUrl: imageDataUrl }));
+    // dispatch(createPostActions.addPostImgs({ url: imageDataUrl }));
 
-    const imageUrl = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
 
     // createObjectURL убираем, потому что проблемы со стилями могли возникнуть (что то там про то, что размер createObjectUrl, если меняю, то в CSS нужно колдовать, поэтому вот так
-    dispatch(createPostActions.addPostImgs({ imageUrl }));
+    dispatch(createPostActions.addPostImgs({ url }));
 
     e.target.value = '';
 
-    return () => URL.revokeObjectURL(imageUrl);
+    return () => URL.revokeObjectURL(url);
   };
 
   return (
@@ -133,21 +132,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
             {activeSection === modalSection.cropping && <CropAndScaleSection onSelectFile={onSelectFile} />}
             {activeSection !== modalSection.cropping && (
               <>
-                <div className={s.leftContent}>
-                  {allPostImages.map((img) => (
-                    <div className={s.imageWrapper} key={img.id}>
-                      <div className={s.imageSubWrapper}>
-                        <Image
-                          alt={'Post'}
-                          className={s.imageElement}
-                          height={500}
-                          src={img.originalImageUrl}
-                          width={500}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <PhotosSwiper className={s.leftContent} classNameImage={s.imageElement} sliders={allPostImages} />
                 <div
                   className={clsx(
                     s.rightContent,

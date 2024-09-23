@@ -28,7 +28,7 @@ export const useNavigateBtnLogic = () => {
         return {
           croppedAreaPx: img.croppedAreaPx,
           id: img.id,
-          imageUrl: croppedImg ?? undefined
+          url: croppedImg ?? undefined
         };
       })
     );
@@ -43,9 +43,9 @@ export const useNavigateBtnLogic = () => {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
           // saveCropAreaToState().then(() => {
           //   allPostImages.forEach((el) => {
-          //     if (el.imageUrl) {
-          //       dispatch(createPostActions.setOriginalImageUrl({ imageUrl: el.imageUrl }));
-          //       console.log({ imgUrl: el.imageUrl, originUrl: el.originalImageUrl });
+          //     if (el.url) {
+          //       dispatch(createPostActions.setOriginalImageUrl({ url: el.url }));
+          //       console.log({ imgUrl: el.url, originUrl: el.originalImageUrl });
           //     }
           //   });
           // });

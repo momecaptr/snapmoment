@@ -10,7 +10,7 @@ import getCroppedImg from '@/widget/sideBar/lib/cropImage';
 
 /**
  * HookFunction that returns function to navigate between sections of the modal
- * Also here is logic to reset cropped to originalImageUrl
+ * Also here is logic to reset cropped area to originalImageUrl
  */
 
 export const useNavigateBtnLogic = () => {
@@ -23,12 +23,12 @@ export const useNavigateBtnLogic = () => {
   const saveCropAreaToState = async () => {
     const newImages = await Promise.all(
       allPostImages.map(async (img) => {
-        const croppedImg = await getCroppedImg(img.imageUrl, img.croppedAreaPx);
+        const croppedImg = await getCroppedImg(img.url, img.croppedAreaPx);
 
         return {
           croppedAreaPx: img.croppedAreaPx,
           id: img.id,
-          imageUrl: croppedImg ?? undefined
+          url: croppedImg ?? undefined
         };
       })
     );
@@ -43,9 +43,9 @@ export const useNavigateBtnLogic = () => {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
           // saveCropAreaToState().then(() => {
           //   allPostImages.forEach((el) => {
-          //     if (el.imageUrl) {
-          //       dispatch(createPostActions.setOriginalImageUrl({ imageUrl: el.imageUrl }));
-          //       console.log({ imgUrl: el.imageUrl, originUrl: el.originalImageUrl });
+          //     if (el.url) {
+          //       dispatch(createPostActions.setOriginalImageUrl({ url: el.url }));
+          //       console.log({ imgUrl: el.url, originUrl: el.originalImageUrl });
           //     }
           //   });
           // });
