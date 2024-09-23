@@ -28,14 +28,18 @@ type Props<T extends HasUrl> = {
   className?: string;
   classNameImage?: string;
   classNameSwiperSlide?: string;
+  getIndex?: (val: number) => void;
   sliders: T[];
+  styles?: string;
 };
 
 export const PhotosSwiper = <T extends HasUrl>({
   className,
   classNameImage,
   classNameSwiperSlide,
-  sliders
+  getIndex,
+  sliders,
+  styles
 }: Props<T>) => {
   const nextRef = useRef<HTMLButtonElement>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
@@ -48,8 +52,10 @@ export const PhotosSwiper = <T extends HasUrl>({
   };
 
   const handleSlideChange = (swiper: SwiperProps) => {
-    // Передаем id картинки с которой работаем, когда свайпнулись
+    // Передаем index картинки с которой работаем, когда свайпнулись
     setCurrentIndex(swiper.realIndex);
+    // Передаем index картинки наружу
+    getIndex?.(swiper.realIndex);
     updateActiveBullet(swiper);
   };
 
@@ -91,6 +97,7 @@ export const PhotosSwiper = <T extends HasUrl>({
                 className={clsx(classNameImage)}
                 height={100}
                 src={photo.url || ''}
+                style={{ styles }}
                 width={100}
                 unoptimized
               />
@@ -114,10 +121,7 @@ export const PhotosSwiper = <T extends HasUrl>({
           <button className={clsx(s.swiperButtonPrev, currentIndex === 0 && s.hidden)} ref={prevRef}>
             <ArrowIosBack />
           </button>
-          <button
-            className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)}
-            ref={nextRef}
-          >
+          <button className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)} ref={nextRef}>
             <ArrowIosForward />
           </button>
           <div className={s.swiperPagination}></div>

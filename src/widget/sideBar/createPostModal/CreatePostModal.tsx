@@ -8,6 +8,7 @@ import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
+import { FiltersSection } from '@/widget/sideBar/filtersSection/FiltersSection';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
@@ -49,6 +50,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   const activeSection = useAppSelector(createPostSelectors.activeSection);
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
+  const [activeSwiperImgId, setActiveSwiperImgId] = useState(0);
   // const [activeSection, setActiveSection] = useState<CreatePostModalSections>(createPostModalSections.cropping);
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -56,6 +58,10 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const navigateBtnHandler = (direction: CreatePostDirection) => {
     navigateBtnLogic(direction);
+  };
+
+  const getIndexFromSwiper = (index: number) => {
+    setActiveSwiperImgId(index);
   };
 
   const {
@@ -132,14 +138,20 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
             {activeSection === modalSection.cropping && <CropAndScaleSection onSelectFile={onSelectFile} />}
             {activeSection !== modalSection.cropping && (
               <>
-                <PhotosSwiper className={s.leftContent} classNameImage={s.imageElement} sliders={allPostImages} />
+                <PhotosSwiper
+                  className={s.leftContent}
+                  classNameImage={s.imageElement}
+                  getIndex={getIndexFromSwiper}
+                  sliders={allPostImages}
+                  styles={allPostImages[activeSwiperImgId].filter}
+                />
                 <div
                   className={clsx(
                     s.rightContent,
                     activeSection === modalSection.filters ? s.filtersPanel : s.publicationPanel
                   )}
                 >
-                  {activeSection === modalSection.filters && <div>Тут фильтры</div>}
+                  {activeSection === modalSection.filters && <FiltersSection imgIndex={activeSwiperImgId} />}
                   {activeSection === modalSection.publication && (
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div>Описание и прочая срань</div>

@@ -18,10 +18,14 @@
   align-items: center;
   justify-content: center;
 
+  box-sizing: border-box;
   min-width: 50vw;
   max-width: 60vw;
+
+  // width: 60vw;
   min-height: 40vh;
-  max-height: 80vh;
+
+  // max-height: 80vh;
 
   &.fullWidth {
     flex-direction: column;
@@ -29,8 +33,12 @@
 
   &.splitContent {
     flex-direction: row;
+    justify-content: space-evenly;
+
+    // padding: 10px;
     width: 100%;
     max-width: unset;
+    min-height: unset;
   }
 }
 
@@ -57,8 +65,19 @@
 .filtersPanel,
 .publicationPanel {
   width: 50%;
-  height: 100%;
+
+  // height: 100%;
+  // flex: 1;
+  // aspect-ratio: 1 / 1;
   padding: 10px;
+}
+
+.filtersPanel {
+  padding: 0 40px;
+
+  // padding: 5rem;
+  // aspect-ratio: unset;
+  // max-height: 50%;
 }
 
 .imageWrapper {
@@ -92,5 +111,6 @@
 }
 
 .leftContent {
-  max-width: 50%;
+  // max-width: 50%;
+  width: 50%;
 }

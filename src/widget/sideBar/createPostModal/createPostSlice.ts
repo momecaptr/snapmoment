@@ -24,6 +24,7 @@ const slice = createSlice({
         aspect: { text: '1:1', value: 1 },
         crop: { x: 0, y: 0 },
         croppedAreaPx: null,
+        filter: '',
         id: v1(),
         imageUrl: action.payload.url,
         url: '',
@@ -69,6 +70,18 @@ const slice = createSlice({
         img.croppedAreaPx = action.payload.croppedAreaPx;
       }
     },
+    setFilter(state, action: PayloadAction<{ imgFilter: string; imgIndex: number }>) {
+      const { imgFilter, imgIndex } = action.payload;
+
+      if (imgIndex < state.allPostImages.length) {
+        state.allPostImages[imgIndex] = { ...state.allPostImages[imgIndex], filter: imgFilter };
+      }
+    },
+    // Вот этот action я убрал, потому что он нужен только для того, чтобы сделать лишнее действие для сэта нового url каждого элемента. Это действие можно выполнить в  setImgUrlFromCroppedToOriginalUrl
+    // setOriginalImageUrl(state, action: PayloadAction<{ url: string }>) {
+    //   state.allPostImages.map((img) =>
+    //     img.url === action.payload.url ? { ...img, originalImageUrl: action.payload.url } : img
+    //   );
     setImgUrlFromCroppedToOriginalUrl(
       state,
       action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: string | undefined }[]>
@@ -89,11 +102,6 @@ const slice = createSlice({
         }
       });
     },
-    // Вот этот action я убрал, потому что он нужен только для того, чтобы сделать лишнее действие для сэта нового url каждого элемента. Это действие можно выполнить в  setImgUrlFromCroppedToOriginalUrl
-    // setOriginalImageUrl(state, action: PayloadAction<{ url: string }>) {
-    //   state.allPostImages.map((img) =>
-    //     img.url === action.payload.url ? { ...img, originalImageUrl: action.payload.url } : img
-    //   );
     // },
     setZoom(state, action: PayloadAction<UpdateImgZoom>) {
       const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);
