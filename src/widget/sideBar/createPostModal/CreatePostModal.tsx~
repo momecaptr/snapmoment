@@ -142,7 +142,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                   <PhotosSwiper
                     className={s.leftContentSwiper}
                     classNameImage={s.imageElement}
-                    classNameSwiperSlide={s.swiperBackground}
+                    classNameSwiperSlide={s.customSwiperSide}
                     getIndex={getIndexFromSwiper}
                     sliders={allPostImages}
                     styles={allPostImages[activeSwiperImgId].filter ?? 'none'}

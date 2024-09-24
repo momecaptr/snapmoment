@@ -8,9 +8,8 @@
 .createPostModal {
   overflow: unset;
 
-  // !  ЕСЛИ МЕНЯТЬ ЭТО, то менять это еще и в leftContentSwiper и boxContent
-  // МОЖЕТ ТОГДА В МИКСИН ПОЛОЖИТЬ???
-  height: 54vh;
+  @include modal-height;
+
   padding: 0;
 }
 
@@ -23,10 +22,13 @@
   justify-content: center;
 
   box-sizing: border-box;
-  height: 54vh;
 
-  // min-width: 50vw;
-  // max-width: 60vw;
+  // height: 54vh;
+  @include modal-height;
+
+  min-width: 50vw;
+  max-width: 60vw;
+
   // min-height: 40vh;
 
   &.fullWidth {
@@ -47,6 +49,8 @@
 
     .leftContentSwiper {
       height: 54vh;
+
+      @include modal-height;
     }
   }
 }

@@ -7,18 +7,12 @@
 
 .createPostModal {
   overflow: unset;
-  padding: 0;
+
   // !  ЕСЛИ МЕНЯТЬ ЭТО, то менять это еще и в leftContentSwiper и boxContent
-  // МОЖЕТ ТОГДА В МИКСИН ПОЛОЖИТЬ???
-  height: 54vh;
+  @include modal-height;
+  padding: 0;
 }
 
-.leftContent {
-  width: 50%;
-  .leftContentSwiper{
-    height: 54vh;
-  }
-}
 .boxContent {
   position: relative;
 
@@ -28,10 +22,11 @@
   justify-content: center;
 
   box-sizing: border-box;
-  height: 54vh;
+  // height: 54vh;
+  @include modal-height;
 
-  // min-width: 50vw;
-  // max-width: 60vw;
+  min-width: 50vw;
+  max-width: 60vw;
   // min-height: 40vh;
 
   &.fullWidth {
@@ -41,9 +36,19 @@
   &.splitContent {
     flex-direction: row;
     justify-content: space-evenly;
+
     width: 100%;
     max-width: unset;
     min-height: unset;
+  }
+
+  .leftContent {
+    width: 50%;
+
+    .leftContentSwiper {
+      height: 54vh;
+      @include modal-height;
+    }
   }
 }
 
@@ -52,6 +57,7 @@
   height: 100%;
   object-fit: contain;
 }
+
 .rightContent {
   // empty
 }
@@ -69,9 +75,9 @@
 }
 
 .filtersPanel {
-  padding: 10px 55px;
   display: flex;
   height: 100%;
+  padding: 10px 55px;
 }
 
 .imageWrapper {
@@ -103,4 +109,3 @@
   background-color: var(--danger-900);
   border: 1px solid var(--danger-300);
 }
-

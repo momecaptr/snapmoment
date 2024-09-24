@@ -93,7 +93,7 @@ export const PhotosSwiper = <T extends HasUrl>({
                 className={clsx(classNameImage)}
                 height={100}
                 src={photo.url || ''}
-                style={{ filter: styles }}
+                style={styles ? { filter: styles } : {}}
                 width={100}
                 unoptimized
               />
@@ -106,6 +106,7 @@ export const PhotosSwiper = <T extends HasUrl>({
               className={clsx(classNameImage)}
               height={100}
               src={sliders[0]?.url || avatarMock}
+              style={styles ? { filter: styles } : {}}
               width={100}
               unoptimized
             />
@@ -114,10 +115,14 @@ export const PhotosSwiper = <T extends HasUrl>({
       </Swiper>
       {sliders.length > 1 && (
         <>
-          <button className={clsx(s.swiperButtonPrev, currentIndex === 0 && s.hidden)} ref={prevRef}>
+          <button className={clsx(s.swiperButtonPrev, currentIndex === 0 && s.hidden)} ref={prevRef} type={'button'}>
             <ArrowIosBack />
           </button>
-          <button className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)} ref={nextRef}>
+          <button
+            className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)}
+            ref={nextRef}
+            type={'button'}
+          >
             <ArrowIosForward />
           </button>
           <div className={s.swiperPagination}></div>

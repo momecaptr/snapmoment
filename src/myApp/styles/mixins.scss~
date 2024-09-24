@@ -36,7 +36,7 @@
 }
 
 /**
- * /// Modal createPost height ///
+ * Высота модалки createPost
  */
 @mixin modal-height {
   height: 54vh;

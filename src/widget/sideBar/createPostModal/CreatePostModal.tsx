@@ -145,7 +145,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                     classNameSwiperSlide={s.customSwiperSide}
                     getIndex={getIndexFromSwiper}
                     sliders={allPostImages}
-                    styles={allPostImages[activeSwiperImgId].filter ?? 'none'}
+                    styles={allPostImages[activeSwiperImgId].filter ? allPostImages[activeSwiperImgId].filter : 'none'}
                   />
                 </div>
                 <div

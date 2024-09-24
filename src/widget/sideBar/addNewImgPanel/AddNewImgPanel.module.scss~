@@ -23,6 +23,7 @@
     justify-content: space-between;
 
     width: 100%;
+    // height: 7vh;
     max-height: 10vh;
     padding: 0 10px;
 
@@ -30,8 +31,8 @@
     border-radius: 7px;
 
     &:hover {
-      cursor: unset;
       background-color: var(--dark-500);
+      cursor: unset;
     }
 
     .imgs {
@@ -41,6 +42,9 @@
 
       .imgWrapper {
         position: relative;
+
+        // width: 5vw;
+        // height: 5vh;
 
         width: 6vw;
         height: 6vh;
@@ -57,9 +61,8 @@
           height: 100%;
           opacity: 0.9;
           object-fit: contain;
-
           &:hover {
-            cursor: pointer;
+            cursor: pointer ;
           }
         }
 
@@ -91,13 +94,24 @@
       align-items: center;
 
       width: 3vw;
+      // height: 1vw;
+
       padding: 0;
-
       border: none;
-
-      &:hover {
+      &:hover {;
         cursor: pointer;
       }
+
+      // border: none;
+
+      // display: flex;
+      // align-items: flex-start;
+
+      // width: 30px;
+      // height: 90%;
+      // padding: 0;
+      //
+      // border: none;
     }
   }
 }

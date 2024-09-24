@@ -136,11 +136,6 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
                   {...cropperExtraStyles}
                 />
               </div>
-              {/*<CropAndScalePanel*/}
-              {/*  id={img.id}*/}
-              {/*  onAspectChange={({ aspect }) => onAspectChange({ aspect, id: img.id })}*/}
-              {/*  onZoomChange={({ zoom }) => onZoomChange({ id: img.id, zoom })}*/}
-              {/*/>*/}
             </SwiperSlide>
           ))}
         </Swiper>

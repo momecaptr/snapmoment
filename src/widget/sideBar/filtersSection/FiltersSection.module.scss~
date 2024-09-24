@@ -23,7 +23,6 @@
   width: 100%;
 
   &.active {
-    border-radius: 7px;
     outline: 3px solid var(--accent-100);
   }
 }
