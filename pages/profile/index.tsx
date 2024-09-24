@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getBaseLayout } from '@/shared/providers';
+import { getAuthorizedLayout } from '@/shared/providers';
 import { MyProfile } from '@/widget';
 
 export default function Page() {
@@ -11,4 +11,4 @@ export default function Page() {
   );
 }
 
-Page.getLayout = getBaseLayout;
+Page.getLayout = getAuthorizedLayout;

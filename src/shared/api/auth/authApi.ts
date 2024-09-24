@@ -49,11 +49,11 @@ export const authApi = snapmomentAPI.injectEndpoints({
       })
     }),
     login: builder.mutation<LoginResponse, LoginArgs>({
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      async onQueryStarted(args, { queryFulfilled }) {
         const res = await queryFulfilled;
 
         localStorage.setItem('accessToken', res.data.accessToken);
-        dispatch(authApi.util.invalidateTags(['Me']));
+        // dispatch(authApi.util.invalidateTags(['Me']));
 
         // ! можно редирект тут делать или там где логиним пользователя
         // Router.replace('/profile')
@@ -116,6 +116,7 @@ export const {
   useConfirmRegistrationMutation,
   useCreateNewPasswordMutation,
   useGoogleOAuthMutation,
+  useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,

@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Congratulations, useConfirmRegistration } from '@/pagesComponents';
 import { ResendVerificationLink } from '@/pagesComponents/resendVerificationLink/ResendVerificationLink';
-import { getAuthLayout } from '@/shared/providers';
+import { getNonAuthorizedLayout } from '@/shared/providers';
 
 export default function Page() {
   const { isError, isLoading, isSuccess } = useConfirmRegistration();
 
-  return getAuthLayout(
+  return getNonAuthorizedLayout(
     <>
       {isError && <ResendVerificationLink />}
       {isLoading && <div>Loading...</div>}

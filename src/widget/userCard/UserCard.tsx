@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import * as React from 'react';
+import { useState } from 'react';
 
 import Block from '@/../public/assets/components/Block';
 import avatarMock from '@/../public/avatar-mock.jpg';
 import { Author } from '@/entities';
-import { ToggleDescription } from '@/features';
-import { TimeAgo } from '@/features/timeAgo/TimeAgo';
+import { TimeAgo, ToggleDescription } from '@/features';
 import { Item } from '@/shared/api/public/publicTypes';
 import { Button, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
@@ -14,22 +13,18 @@ import Image from 'next/image';
 import s from './UserCard.module.scss';
 
 type Props = {
-  lazyOpenModalHandler: (userId: number, isOpen: boolean) => void;
   post: Item;
+  showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
 
-export const UserCard = ({ lazyOpenModalHandler, post }: Props) => {
+export const UserCard = ({ post, showPostModalHandler }: Props) => {
   const [isShowText, setIsShowText] = useState(false);
-
-  const showViewPhotoHandler = () => {
-    lazyOpenModalHandler(post.id, true);
-  };
 
   const toggleShowText = () => setIsShowText(!isShowText);
 
   return (
     <div className={s.card}>
-      <div className={s.photo} onClick={showViewPhotoHandler}>
+      <div className={s.photo} onClick={() => showPostModalHandler(true, post.id)}>
         <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />
       </div>
 
@@ -51,7 +46,7 @@ export const UserCard = ({ lazyOpenModalHandler, post }: Props) => {
         </Typography>
 
         <ToggleDescription
-          isLength={post.description.length > 20}
+          isLength={post.description.length > 100}
           isShowText={isShowText}
           toggleShowText={toggleShowText}
         />

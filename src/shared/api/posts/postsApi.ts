@@ -33,4 +33,4 @@ export const postsApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { useGetAnswersWithPaginationQuery, useLazyGetPostLikesQuery, useUpdateLikePostMutation } = postsApi;
+export const { useGetAnswersWithPaginationQuery, useGetPostLikesQuery, useUpdateLikePostMutation } = postsApi;

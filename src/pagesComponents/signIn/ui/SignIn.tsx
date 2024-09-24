@@ -9,7 +9,7 @@ import Link from 'next/link';
 import s from './SignIn.module.scss';
 
 export const SignIn = () => {
-  const { control, errors, handleSubmit, isError, isLoading, isValid, onSubmit } = useSignInForm();
+  const { control, handleSubmit, isError, isLoading, isValid, onSubmit } = useSignInForm();
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://inctagram.work/api/',
   credentials: 'include',
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('accessToken');
+    const token = (typeof window !== 'undefined' && localStorage.getItem('accessToken')) || null;
 
     // console.log({ token });
     if (headers.get('Authorization')) {

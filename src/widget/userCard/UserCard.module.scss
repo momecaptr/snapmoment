@@ -28,7 +28,8 @@
   transition: transform 0.5s ease;
 
   &.expanded {
-    transform: translateY(-117px);
+    // на сколько px поднять (для анимации)
+    transform: translateY(0);
   }
 }
 
@@ -60,6 +61,7 @@
   max-height: 72px;
 
   text-overflow: ellipsis;
+  word-wrap: break-word;
 
   &.expanded {
     display: initial;

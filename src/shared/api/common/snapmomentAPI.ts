@@ -6,3 +6,5 @@ export const snapmomentAPI = createApi({
   endpoints: () => ({}),
   tagTypes: ['Me', 'UserProfile', 'MainPhotoProfile', 'PersonalInformation', 'publicPost', 'publicPostLikes']
 });
+
+export const { getRunningQueriesThunk } = snapmomentAPI.util;
