@@ -1,0 +1,28 @@
+.container {
+  height: 500px;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--dark-100);
+
+  .userData {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--light-900);
+      border-radius: 50%;
+    }
+  }
+}
+
+.textArea {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--dark-100);
+}
+
+.locationBox {
+  padding: 1.5rem;
+}

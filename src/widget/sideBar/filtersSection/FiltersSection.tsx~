@@ -32,20 +32,18 @@ export const FiltersSection = (props: Props) => {
         const isSelected = selectedFilter === filter.style;
 
         return (
-          <div className={clsx(s.wrapper, isSelected && s.active)} key={filter.name}>
-            <div className={s.imageWrapper}>
-              <Image
-                alt={`Photo # ${imgIndex}`}
-                className={s.image}
-                height={100}
-                onClick={() => handleFilterChange(filter.style)}
-                src={allPostImages[imgIndex].url}
-                style={{ filter: filter.style }}
-                width={100}
-                priority
-              />
-            </div>
-
+          <div className={s.wrapper} key={filter.name}>
+            <Image
+              alt={`Photo # ${imgIndex}`}
+              className={clsx(s.image, isSelected && s.active)}
+              height={100}
+              onClick={() => handleFilterChange(filter.style)}
+              src={allPostImages[imgIndex].url}
+              style={{ filter: filter.style }}
+              width={100}
+              priority
+              unoptimized
+            />
             <Typography className={s.text} variant={'regular_text_16'}>
               {filter.name}
             </Typography>

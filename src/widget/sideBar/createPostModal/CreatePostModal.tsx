@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
@@ -12,6 +11,7 @@ import { FiltersSection } from '@/widget/sideBar/filtersSection/FiltersSection';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
+import { PublicationSection } from '@/widget/sideBar/publicationSection/PublicationSection';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
@@ -62,17 +62,6 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const getIndexFromSwiper = (index: number) => {
     setActiveSwiperImgId(index);
-  };
-
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    register
-  } = useForm();
-
-  const onSubmit = (data: any) => {
-    console.log(data);
   };
 
   const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -156,9 +145,10 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                 >
                   {activeSection === modalSection.filters && <FiltersSection imgIndex={activeSwiperImgId} />}
                   {activeSection === modalSection.publication && (
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <div>Описание и прочая срань</div>
-                    </form>
+                    // <form onSubmit={handleSubmit(onSubmit)}>
+                    //   <div>Описание и прочая срань</div>
+                    // </form>
+                    <PublicationSection />
                   )}
                 </div>
               </>

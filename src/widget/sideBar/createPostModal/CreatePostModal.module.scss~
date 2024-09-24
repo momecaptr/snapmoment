@@ -2,14 +2,16 @@
 @import '../../../myApp/styles/mixins';
 
 .card {
-  width: 80vw;
+  // width: 70vw;
+  @include create-post-modal-card-width;
 }
 
 .createPostModal {
   overflow: unset;
 
-  // !  ЕСЛИ МЕНЯТЬ ЭТО, то менять это еще и в leftContentSwiper и boxContent
-  @include modal-height;
+  // @include create-post-modal-height;
+  @include create-post-modal-height;
+
   padding: 0;
 }
 
@@ -22,11 +24,14 @@
   justify-content: center;
 
   box-sizing: border-box;
-  // height: 54vh;
-  @include modal-height;
 
-  min-width: 50vw;
-  max-width: 60vw;
+  // height: 54vh;
+  @include create-post-modal-height;
+
+  // min-width: 50vw;
+  // max-width: 60vw;
+  @include createPost-min-max-modal-width;
+
   // min-height: 40vh;
 
   &.fullWidth {
@@ -46,51 +51,40 @@
     width: 50%;
 
     .leftContentSwiper {
-      height: 54vh;
-      @include modal-height;
+      // height: 54vh;
+
+      @include create-post-modal-height;
+    }
+  }
+
+  .rightContent {
+    // empty
+    width: 50%;
+    padding: 1%;
+    border-left: 1px solid var(--color-dark-100);
+
+    &.filtersPanel,
+    &.publicationPanel {
+      // width: 50%;
+    }
+
+    &.filtersPanel {
+      display: flex;
+
+       // height: 100%;
+      align-items: center;
+
+      // padding: 10px 55px;
+      // padding-inline: 55px;
+      padding-inline: 4%;
     }
   }
 }
 
 .imageElement {
   width: 100%;
-  height: 100%;
+   height: 100%;
   object-fit: contain;
-}
-
-.rightContent {
-  // empty
-}
-
-.addImg {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-.filtersPanel,
-.publicationPanel {
-  width: 50%;
-  padding: 10px;
-}
-
-.filtersPanel {
-  display: flex;
-  height: 100%;
-  padding: 10px 55px;
-}
-
-.imageWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-
-  &.splitContent {
-    width: 50%;
-  }
 }
 
 .boxErrorMessage {
