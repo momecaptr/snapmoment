@@ -28,18 +28,18 @@ export const FiltersSection = (props: Props) => {
       {createPostModalFilters.map((filter) => {
         return (
           <div className={s.wrapper} key={filter.name}>
-            {/*<div>*/}
-            <Image
-              alt={`Photo # ${imgIndex}`}
-              className={s.image}
-              height={100}
-              onClick={() => handleFilterChange(filter.style)}
-              src={allPostImages[imgIndex].url}
-              style={{ filter: filter.style, objectFit: 'contain' }}
-              width={100}
-              priority
-            />
-            {/*</div>*/}
+            <div className={s.imageWrapper}>
+              <Image
+                alt={`Photo # ${imgIndex}`}
+                className={s.image}
+                height={100}
+                onClick={() => handleFilterChange(filter.style)}
+                src={allPostImages[imgIndex].url}
+                style={{ filter: filter.style }}
+                width={100}
+                priority
+              />
+            </div>
 
             <Typography className={s.text} variant={'regular_text_16'}>
               {filter.name}

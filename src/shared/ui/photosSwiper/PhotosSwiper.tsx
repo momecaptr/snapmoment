@@ -17,17 +17,13 @@ import 'swiper/scss/pagination';
 
 import s from './PhotosSwiper.module.scss';
 
-// type Props = {
-//   sliders: GetPostsCommentArgsImages[] | ImageType[];
-// };
-//
-// export const PhotosSwiper: React.FC<Props> = ({ sliders }) => {
+// Ниже экстенд от этого типа, что гарантирует, что передаваемый массив объектов будет принят без ошибок, если в нем есть свойство url
 type HasUrl = { url: string | undefined };
 
 type Props<T extends HasUrl> = {
   className?: string;
   classNameImage?: string;
-  classNameSwiperSlide?: string;
+  classNameSwiperSlide?: string; // ! ВОТ ЭТО НИХРЕНА НЕ РАБОТАЕТ!
   getIndex?: (val: number) => void;
   sliders: T[];
   styles?: string;
@@ -91,7 +87,7 @@ export const PhotosSwiper = <T extends HasUrl>({
       >
         {sliders.length > 1 ? (
           sliders.map((photo, i) => (
-            <SwiperSlide className={s.swiperSlide} key={i}>
+            <SwiperSlide className={clsx(s.swiperSlide, classNameSwiperSlide)} key={i}>
               <Image
                 alt={`post photo ${i}`}
                 className={clsx(classNameImage)}
@@ -104,7 +100,7 @@ export const PhotosSwiper = <T extends HasUrl>({
             </SwiperSlide>
           ))
         ) : (
-          <SwiperSlide className={s.swiperSlide}>
+          <SwiperSlide className={clsx(s.swiperSlide, classNameSwiperSlide)}>
             <Image
               alt={'post photo'}
               className={clsx(classNameImage)}

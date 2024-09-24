@@ -7,18 +7,18 @@
   .photosSwiper {
     height: 100%;
 
-    .swiperSlide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      width: 100%;
-
-      font-size: 18px;
-      text-align: center;
-
-      background: var(--light-900);
-    }
+    //.swiperSlide {
+    //  display: flex;
+    //  align-items: center;
+    //  justify-content: center;
+    //
+    //  width: 100%;
+    //
+    //  font-size: 18px;
+    //  text-align: center;
+    //
+    //  background: var(--dark-300);
+    //}
   }
 
   .swiperButtonPrev,
@@ -51,6 +51,10 @@
 
       opacity: 0.2;
       background-color: var(--dark-300);
+    }
+
+    &.hidden {
+      display: none;
     }
 
     svg {
@@ -104,4 +108,17 @@
       background: var(--accent-500);
     }
   }
+}
+
+.swiperSlide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  font-size: 18px;
+  text-align: center;
+
+  //background: var(--dark-300);
 }

@@ -56,7 +56,7 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
   const cropperExtraStyles = {
     style: {
       containerStyle: {
-        backgroundColor: '#4C4C4C', // '#D5DAE0'
+        backgroundColor: '#8D9094', // '#D5DAE0'
         backgroundPosition: 'center'
       },
       cropAreaStyle: {

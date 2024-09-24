@@ -13,8 +13,8 @@ function getRadianAngle(degreeValue: number): number {
 }
 
 /**
- * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  * Я спиздил вот отсюда -https://github.com/CodingWith-Adam/react-easy-crop-tutorial/blob/main/src/cropImage.js и добавил типизацию
+ * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  * @param {File} image - Image File url
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter

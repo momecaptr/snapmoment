@@ -2,16 +2,24 @@
 @import '../../../myApp/styles/mixins';
 
 .card {
-  width: 70vw;
+  width: 80vw;
 }
 
 .createPostModal {
   overflow: unset;
   padding: 0;
+  // !  ЕСЛИ МЕНЯТЬ ЭТО, то менять это еще и в leftContentSwiper и boxContent
+  // МОЖЕТ ТОГДА В МИКСИН ПОЛОЖИТЬ???
+  height: 54vh;
 }
 
+.leftContent {
+  width: 50%;
+  .leftContentSwiper{
+    height: 54vh;
+  }
+}
 .boxContent {
-  box-sizing: border-box;
   position: relative;
 
   display: flex;
@@ -19,11 +27,12 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 50vw;
-  max-width: 60vw;
-  //width: 60vw;
-  min-height: 40vh;
-  //max-height: 80vh;
+  box-sizing: border-box;
+  height: 54vh;
+
+  // min-width: 50vw;
+  // max-width: 60vw;
+  // min-height: 40vh;
 
   &.fullWidth {
     flex-direction: column;
@@ -31,24 +40,18 @@
 
   &.splitContent {
     flex-direction: row;
-    //padding: 10px;
+    justify-content: space-evenly;
     width: 100%;
     max-width: unset;
-    justify-content: space-evenly;
     min-height: unset;
   }
 }
 
 .imageElement {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: contain;
 }
-
-.customSwiperSide {
-  background: var(--accent-300);
-}
-
 .rightContent {
   // empty
 }
@@ -62,16 +65,13 @@
 .filtersPanel,
 .publicationPanel {
   width: 50%;
-  //height: 100%;
-  //flex: 1;
-  //aspect-ratio: 1 / 1;
   padding: 10px;
 }
+
 .filtersPanel {
-  padding: 0 40px;
-  //padding: 5rem;
-  //aspect-ratio: unset;
-  //max-height: 50%;
+  padding: 10px 55px;
+  display: flex;
+  height: 100%;
 }
 
 .imageWrapper {
@@ -104,7 +104,3 @@
   border: 1px solid var(--danger-300);
 }
 
-.leftContent {
-  //max-width: 50%;
-  width: 50%;
-}

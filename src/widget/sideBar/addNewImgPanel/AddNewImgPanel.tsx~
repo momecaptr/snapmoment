@@ -2,7 +2,7 @@ import React, { ChangeEvent, useRef } from 'react';
 
 import Close from '@/../public/assets/components/Close';
 import PictureOutline from '@/../public/assets/components/PictureOutline';
-import PlusCircleOutline from '@/../public/assets/components/PlusCircleOutline';
+import PlusCircle from '@/../public/assets/components/PlusCircle';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Button, CustomDropdownItem, CustomDropdownWrapper } from '@/shared/ui';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
@@ -65,7 +65,7 @@ export const AddNewImgPanel = (props: Props) => {
             type={'button'}
             variant={'outlined'}
           >
-            <PlusCircleOutline style={{ height: '24px', width: '24px' }} />
+            <PlusCircle style={{ height: '24px', width: '24px' }} />
           </Button>
           <input
             accept={'image/jpeg, image/png'}

@@ -24,7 +24,7 @@ const slice = createSlice({
         aspect: { text: '1:1', value: 1 },
         crop: { x: 0, y: 0 },
         croppedAreaPx: null,
-        filter: 'none',
+        filter: '',
         id: v1(),
         imageUrl: action.payload.url,
         url: '',

@@ -27,7 +27,7 @@ type HasUrl = { url: string | undefined };
 type Props<T extends HasUrl> = {
   className?: string;
   classNameImage?: string;
-  classNameSwiperSlide?: string;
+  classNameSwiperSlide?: string; // ! ВОТ ЭТО НИХРЕНА НЕ РАБОТАЕТ!
   getIndex?: (val: number) => void;
   sliders: T[];
   styles?: string;
@@ -91,20 +91,20 @@ export const PhotosSwiper = <T extends HasUrl>({
       >
         {sliders.length > 1 ? (
           sliders.map((photo, i) => (
-            <SwiperSlide className={s.swiperSlide} key={i}>
+            <SwiperSlide className={clsx(s.swiperSlide, classNameSwiperSlide)} key={i}>
               <Image
                 alt={`post photo ${i}`}
                 className={clsx(classNameImage)}
                 height={100}
                 src={photo.url || ''}
-                style={{ styles }}
+                style={{ filter: styles }}
                 width={100}
                 unoptimized
               />
             </SwiperSlide>
           ))
         ) : (
-          <SwiperSlide className={s.swiperSlide}>
+          <SwiperSlide className={clsx(s.swiperSlide, classNameSwiperSlide)}>
             <Image
               alt={'post photo'}
               className={clsx(classNameImage)}

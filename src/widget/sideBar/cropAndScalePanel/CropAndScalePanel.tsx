@@ -5,7 +5,7 @@ import IconHorizontalRectangle from '@/../public/assets/components/IconHorizonta
 import IconSquare from '@/../public/assets/components/IconSquare';
 import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRectangle';
 import Picture from '@/../public/assets/components/PictureOutline';
-import PlusCircleOutline from '@/../public/assets/components/PlusCircleOutline';
+import ZoomIcon from '@/../public/assets/components/ZoomIcon';
 import { useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
 import { AspectRatioVals } from '@/widget/sideBar/createPostModal/createPost';
@@ -40,7 +40,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <Expand style={{ height: '36px', width: '36px' }} />
+            <Expand style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'start'}
@@ -68,7 +68,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <PlusCircleOutline style={{ height: '36px', width: '36px' }} />
+            <ZoomIcon style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'start'}

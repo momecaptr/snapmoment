@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Expand from '@/../public/assets/components/Expand';
+import ZoomIcon from '@/../public/assets/components/ZoomIcon';
 import IconHorizontalRectangle from '@/../public/assets/components/IconHorizontalRectangle';
 import IconSquare from '@/../public/assets/components/IconSquare';
 import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRectangle';
 import Picture from '@/../public/assets/components/PictureOutline';
-import PlusCircleOutline from '@/../public/assets/components/PlusCircleOutline';
 import { useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
 import { AspectRatioVals } from '@/widget/sideBar/createPostModal/createPost';
@@ -40,7 +40,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <Expand style={{ height: '36px', width: '36px' }} />
+            <Expand style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'start'}
@@ -57,7 +57,6 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
           >
             <div className={s.aspectWrapper}>
               <Typography variant={'regular_text_16'}>{ratio.text}</Typography>
-              {/*{ratio.comp && <ratio.comp className={s.icon} height={24} width={24} />}*/}
               {ratio.text === 'Original' && <Picture className={s.icon} height={24} width={24} />}
               {ratio.text === '1:1' && <IconSquare className={s.icon} height={24} width={24} />}
               {ratio.text === '4:5' && <IconVerticalRectangle className={s.icon} height={24} width={24} />}
@@ -69,7 +68,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <PlusCircleOutline style={{ height: '36px', width: '36px' }} />
+            <ZoomIcon style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'start'}

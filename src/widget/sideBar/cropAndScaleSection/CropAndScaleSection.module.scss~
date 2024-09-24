@@ -2,7 +2,7 @@
 @import '../../../myApp/styles/mixins';
 
 .wrapper {
-  // position: relative;
+  //position: relative;
 
   .croppingBlock {
     display: flex;

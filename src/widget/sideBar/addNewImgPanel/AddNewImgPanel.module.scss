@@ -6,7 +6,6 @@
   width: 36px;
   height: 36px;
 
-  opacity: 0.8;
   background-color: var(--dark-500);
   border-radius: 2px;
 }
@@ -28,7 +27,7 @@
     padding: 0 10px;
 
     background-color: var(--dark-500);
-    border-radius: 7px 0 0 7px;
+    border-radius: 7px;
 
     &:hover {
       background-color: var(--dark-500);
