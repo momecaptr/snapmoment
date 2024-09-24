@@ -111,8 +111,6 @@ export const authApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { me } = authApi.endpoints;
-
 export const {
   useCheckRecoveryCodeMutation,
   useConfirmRegistrationMutation,

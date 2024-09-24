@@ -4,25 +4,26 @@ import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Author, Comment } from '@/entities';
 import { AddComment, MoreActions, ShowLikers, TimeAgo } from '@/features';
 import { useMeQuery } from '@/shared/api/auth/authApi';
-import { GetPostLikesResponse } from '@/shared/api/posts/postsTypes';
-import { GetPostByIdResponse, GetPostCommentsByPostIdResponse } from '@/shared/api/public/publicTypes';
+import { useGetPostLikesQuery } from '@/shared/api/posts/postsApi';
+import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
 import { ModalKey, useModal } from '@/shared/lib';
 import { Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
 import { useRouter } from 'next/router';
 
 import s from './PostModal.module.scss';
-
 type Props = {
-  postComments: GetPostCommentsByPostIdResponse;
-  postData: GetPostByIdResponse;
-  postLikes: GetPostLikesResponse;
+  postId: number;
+  showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
-
-export const PostModal = ({ postComments, postData, postLikes }: Props) => {
+export const PostModal = ({ postId, showPostModalHandler }: Props) => {
   const router = useRouter();
-  const { data: me } = useMeQuery();
   const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
+
+  const { data: me } = useMeQuery();
+  const { data: postData } = useGetPostByIdQuery({ postId: postId || null });
+  const { data: postComments } = useGetPostCommentsByPostIdQuery({ postId: postId || null });
+  const { data: postLikes } = useGetPostLikesQuery({ postId: postId || null });
 
   const isAuth = !!me?.userId;
 
@@ -31,7 +32,8 @@ export const PostModal = ({ postComments, postData, postLikes }: Props) => {
   };
 
   const setCloseModalHandler = () => {
-    router.back();
+    showPostModalHandler(false);
+    router.push('/', undefined, { shallow: true });
   };
 
   return (

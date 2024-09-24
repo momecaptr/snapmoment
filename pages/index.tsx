@@ -2,46 +2,41 @@ import React, { useEffect } from 'react';
 
 import { wrapper } from '@/myApp/store';
 import { PublicPage } from '@/pagesComponents';
-import { getPostLikes } from '@/shared/api/posts/postsApi';
-import { getPostById, getPostCommentsByPostId, getPublicPosts } from '@/shared/api/public/publicApi';
+import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
+import { getPublicPosts } from '@/shared/api/public/publicApi';
+import { Item } from '@/shared/api/public/publicTypes';
 import { ModalKey, useModal } from '@/shared/lib';
 import { getConditionLayout } from '@/shared/providers';
 import { PostModal } from '@/widget';
-import { GetServerSideProps, GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 
-export default function Home({
-  postComments,
-  postData,
-  postLikes,
-  posts
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
+  const postId = Number(router.query.id);
 
   useEffect(() => {
-    if (router.query.id) {
+    if (postId && !isOpen) {
       setOpen(true);
     }
-  }, [router.query.id]);
+  }, [postId]);
 
-  const showPostModalHandler = (postId: number) => {
-    setOpen(true);
-    router.push(`/?id=${postId}`);
+  const showPostModalHandler = (isOpen: boolean, postId?: number) => {
+    setOpen(isOpen);
+    postId && router.push(`/?id=${postId}`);
   };
 
   return getConditionLayout(
     <>
-      {isOpen && <PostModal postComments={postComments} postData={postData} postLikes={postLikes} />}
+      {isOpen && <PostModal postId={postId} showPostModalHandler={showPostModalHandler} />}
       <PublicPage posts={posts} showPostModalHandler={showPostModalHandler} />
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context: GetServerSidePropsContext) => {
-    const postId = Number(context.query.id);
-
+export const getStaticProps = wrapper.getStaticProps(
+  (store) => async (): Promise<GetStaticPropsResult<{ posts: Item[] }>> => {
     const posts = await store.dispatch(
       getPublicPosts.initiate({
         pageSize: 4,
@@ -50,42 +45,17 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
       })
     );
 
-    let postData = null;
-    let postComments = null;
-    let postLikes = null;
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
 
-    try {
-      if (postId) {
-        const [postPromise, postCommentsPromise, postLikesPromise] = await Promise.all([
-          store.dispatch(getPostById.initiate({ postId })),
-          store.dispatch(getPostCommentsByPostId.initiate({ postId })),
-          store.dispatch(getPostLikes.initiate({ postId }))
-        ]);
-
-        postData = postPromise.data || null;
-        postComments = postCommentsPromise.data || null;
-        postLikes = postLikesPromise.data || null;
-      }
-
-      return {
-        props: {
-          postComments,
-          postData,
-          postLikes,
-          posts: posts?.data?.items
-        }
-      };
-    } catch (error) {
-      console.error('Abort fetching post data:', error);
-
-      return {
-        props: {
-          postComments: null,
-          postData: null,
-          postLikes: null,
-          posts: []
-        }
-      };
+    if (!posts || !posts.data) {
+      return { props: { posts: [] }, revalidate: 60 };
     }
+
+    return {
+      props: {
+        posts: posts.data.items
+      },
+      revalidate: 60
+    };
   }
 );

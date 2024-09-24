@@ -7,7 +7,7 @@ import { UserCard } from '@/widget';
 import s from '@/pagesComponents/publicPage/ui/PublicPage.module.scss';
 
 type Props = {
-  onOpenModal: (postId: number) => Promise<void>;
+  onOpenModal: (isOpen: boolean, postId?: number) => void;
 };
 
 //todo: добавить тернарник этим константам, например, в зависимости от размеров экрана
