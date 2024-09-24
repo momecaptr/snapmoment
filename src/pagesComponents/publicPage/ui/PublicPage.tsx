@@ -9,7 +9,7 @@ import s from './PublicPage.module.scss';
 
 type Props = {
   posts: Item[];
-  showPostModalHandler: (postId: number) => void;
+  showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
 
 export default function PublicPage({ posts, showPostModalHandler }: Props) {

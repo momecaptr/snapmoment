@@ -14,7 +14,7 @@ import s from './UserCard.module.scss';
 
 type Props = {
   post: Item;
-  showPostModalHandler: (id: number) => void;
+  showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
 
 export const UserCard = ({ post, showPostModalHandler }: Props) => {
@@ -24,7 +24,7 @@ export const UserCard = ({ post, showPostModalHandler }: Props) => {
 
   return (
     <div className={s.card}>
-      <div className={s.photo} onClick={() => showPostModalHandler(post.id)}>
+      <div className={s.photo} onClick={() => showPostModalHandler(true, post.id)}>
         <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />
       </div>
 
