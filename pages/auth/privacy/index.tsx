@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getAuthLayout } from '@/shared/providers';
+import { getNonAuthorizedLayout } from '@/shared/providers';
 import { Privacy } from '@/shared/ui';
 
 export default function Page() {
@@ -10,4 +10,4 @@ export default function Page() {
     </>
   );
 }
-Page.getLayout = getAuthLayout;
+Page.getLayout = getNonAuthorizedLayout;

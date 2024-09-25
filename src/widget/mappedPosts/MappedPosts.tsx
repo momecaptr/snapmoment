@@ -7,7 +7,7 @@ import { UserCard } from '@/widget';
 import s from '@/pagesComponents/publicPage/ui/PublicPage.module.scss';
 
 type Props = {
-  onOpenModal: (postId: number, isOpen: boolean) => Promise<void>;
+  onOpenModal: (isOpen: boolean, postId?: number) => void;
 };
 
 //todo: добавить тернарник этим константам, например, в зависимости от размеров экрана
@@ -44,7 +44,7 @@ export const MappedPosts = (props: Props) => {
   return (
     <div>
       <div className={s.cards}>
-        {publicPosts?.items.map((post) => <UserCard key={post.id} lazyOpenModalHandler={onOpenModal} post={post} />)}
+        {publicPosts?.items.map((post) => <UserCard key={post.id} post={post} showPostModalHandler={onOpenModal} />)}
       </div>
       <div ref={triggerRef}></div>
     </div>

@@ -1,51 +1,31 @@
 import * as React from 'react';
-import { useCallback } from 'react';
+import { Fragment } from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
-import { useMeQuery } from '@/shared/api/auth/authApi';
-import { useLazyGetPostLikesQuery } from '@/shared/api/posts/postsApi';
-import { useLazyGetPostByIdQuery, useLazyGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
-import { ModalKey, useModal } from '@/shared/lib';
-import { MappedPosts } from '@/widget';
-import { ViewPostModal } from '@/widget/modals/viewPostModal/ViewPostModal';
+import { Item } from '@/shared/api/public/publicTypes';
+import { UserCard } from '@/widget';
 
 import s from './PublicPage.module.scss';
 
-export const PublicPage = () => {
-  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-  const { data: me } = useMeQuery();
-  const [getPostById, { data: postData, isFetching: isFetchingPostData }] = useLazyGetPostByIdQuery();
-  const [getPostCommentsByPostId, { data: postComments, isFetching: isFetchingPostComments }] =
-    useLazyGetPostCommentsByPostIdQuery();
-  const [getPostLikes, { data: postLikes, isFetching: isFetchingPostLikes }] = useLazyGetPostLikesQuery();
+type Props = {
+  posts: Item[];
+  showPostModalHandler: (isOpen: boolean, postId?: number) => void;
+};
 
-  const lazyOpenModalHandler = useCallback(
-    async (postId: number, isOpen: boolean) => {
-      setOpen(isOpen);
-      getPostById({ postId: postId });
-      getPostCommentsByPostId({ postId: postId });
-      getPostLikes({ postId: postId });
-    },
-    [getPostById, getPostCommentsByPostId, getPostLikes, setOpen]
-  );
-  const isDataFetching = isFetchingPostData && isFetchingPostComments && isFetchingPostLikes;
-
+export default function PublicPage({ posts, showPostModalHandler }: Props) {
   return (
-    <div>
-      <ViewPostModal
-        isAuth={!!me?.userId}
-        isFetching={isDataFetching}
-        openViewPhoto={isOpen}
-        postComments={postComments}
-        postData={postData}
-        postLikes={postLikes}
-        setOpenViewPhoto={setOpen}
-      />
-
+    <>
       <section className={s.container}>
         <RegisteredUsersCounter />
-        <MappedPosts onOpenModal={lazyOpenModalHandler} />
+
+        <div className={s.cards}>
+          {posts?.map((post) => (
+            <Fragment key={post.id}>
+              <UserCard post={post} showPostModalHandler={showPostModalHandler} />
+            </Fragment>
+          ))}
+        </div>
       </section>
-    </div>
+    </>
   );
-};
+}

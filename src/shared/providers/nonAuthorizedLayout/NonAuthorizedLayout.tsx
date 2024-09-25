@@ -4,9 +4,12 @@ import StoreProvider from '@/myApp/StoreProvider';
 import { Header } from '@/widget';
 import { NextPage } from 'next';
 
-import s from './AuthLayout.module.scss';
+import s from './NonAuthorizedLayout.module.scss';
 
-export const AuthLayout: NextPage<PropsWithChildren> = (props) => {
+/**
+ * Layout for non-authorized users.
+ */
+export const NonAuthorizedLayout: NextPage<PropsWithChildren> = (props) => {
   const { children } = props;
 
   return (
@@ -19,10 +22,13 @@ export const AuthLayout: NextPage<PropsWithChildren> = (props) => {
   );
 };
 
-export const getAuthLayout = (page: ReactElement) => {
+/**
+ * Layout for non-authorized users.
+ */
+export const getNonAuthorizedLayout = (page: ReactElement) => {
   return (
     <StoreProvider>
-      <AuthLayout>{page}</AuthLayout>
+      <NonAuthorizedLayout>{page}</NonAuthorizedLayout>
     </StoreProvider>
   );
 };

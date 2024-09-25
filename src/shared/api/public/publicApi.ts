@@ -5,6 +5,8 @@ import {
   GetPostCommentsByPostIdResponse,
   GetPostsArgs,
   GetPostsResponse,
+  GetPublicPostsUserArgs,
+  GetPublicUserProfileResponse,
   GetTotalUsersCountProps,
   getPostCommentsByPostIdArgs
 } from '@/shared/api/public/publicTypes';
@@ -17,7 +19,6 @@ export const publicApi = snapmomentAPI.injectEndpoints({
         url: `v1/public-posts/${postId}`
       })
     }),
-
     getPostCommentsByPostId: builder.query<GetPostCommentsByPostIdResponse, getPostCommentsByPostIdArgs>({
       query: ({ postId }) => ({
         url: `v1/public-posts/${postId}/comments`
@@ -34,6 +35,20 @@ export const publicApi = snapmomentAPI.injectEndpoints({
         url: 'v1/public-posts/all/'
       })
     }),
+    getPublicPostsUser: builder.query<GetPostsResponse, GetPublicPostsUserArgs>({
+      query: ({ endCursorPostId, pageSize, userId }) => ({
+        params: {
+          pageSize,
+          sortBy: 'createdAt',
+          sortDirection: 'desc'
+        },
+        url: `v1/public-posts/user/${userId}/${endCursorPostId}`
+      })
+    }),
+
+    getPublicUserProfile: builder.query<GetPublicUserProfileResponse, { profileId: number }>({
+      query: ({ profileId }) => `v1/public-user/profile/${profileId}`
+    }),
     getTotalUsersCount: builder.query<GetTotalUsersCountProps, void>({
       query: () => ({
         url: 'v1/public-user'
@@ -42,10 +57,12 @@ export const publicApi = snapmomentAPI.injectEndpoints({
   })
 });
 
+export const { getPublicPosts, getPublicPostsUser, getPublicUserProfile } = publicApi.endpoints;
+
 export const {
+  useGetPostByIdQuery,
+  useGetPostCommentsByPostIdQuery,
   useGetPublicPostsQuery,
   useGetTotalUsersCountQuery,
-  useLazyGetPostByIdQuery,
-  useLazyGetPostCommentsByPostIdQuery,
   useLazyGetPublicPostsQuery
 } = publicApi;

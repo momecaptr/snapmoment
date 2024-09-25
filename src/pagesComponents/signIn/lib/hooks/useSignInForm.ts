@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useLoginMutation } from '@/shared/api/auth/authApi';
+import { useLazyMeQuery, useLoginMutation } from '@/shared/api/auth/authApi';
+import { useCustomToast } from '@/shared/lib';
 import { SignInSchemaType, signInSchema } from '@/shared/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import Router from 'next/router';
 
 export const useSignInForm = () => {
   const {
@@ -14,15 +16,30 @@ export const useSignInForm = () => {
     mode: 'onChange',
     resolver: zodResolver(signInSchema)
   });
-
-  const router = useRouter();
-
-  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
+  const [loading, setLoading] = useState(false);
+  const [login, { isError }] = useLoginMutation();
+  const [getMe] = useLazyMeQuery();
+  const { showToast } = useCustomToast();
 
   const onSubmit = async (data: SignInSchemaType) => {
-    await login(data);
-    // ! Редиректить нужно с await! + переадресацию можно сделать в authApi login
-    router.replace('/profile');
+    setLoading(true);
+    try {
+      await login(data).unwrap();
+
+      const resMe = await getMe().unwrap();
+
+      if (resMe.userId) {
+        await Router.replace(`/profile/${resMe.userId}`);
+
+        showToast({ message: 'Success login', type: 'success' });
+      } else {
+        showToast({ message: 'User ID not found in response.', type: 'error' });
+      }
+    } catch (error) {
+      showToast({ message: 'Error during login or fetching user data', type: 'error' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
@@ -30,7 +47,7 @@ export const useSignInForm = () => {
     errors,
     handleSubmit,
     isError,
-    isLoading,
+    isLoading: loading,
     isValid,
     onSubmit
   };
