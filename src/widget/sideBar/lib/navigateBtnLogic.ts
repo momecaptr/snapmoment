@@ -41,14 +41,6 @@ export const useNavigateBtnLogic = () => {
       case modalSection.cropping:
         if (directionValue === direction.next) {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
-          // saveCropAreaToState().then(() => {
-          //   allPostImages.forEach((el) => {
-          //     if (el.url) {
-          //       dispatch(createPostActions.setOriginalImageUrl({ url: el.url }));
-          //       console.log({ imgUrl: el.url, originUrl: el.originalImageUrl });
-          //     }
-          //   });
-          // });
           void saveCropAreaToState();
         } else {
           dispatch(createPostActions.setAllPostImgs({ images: [] }));

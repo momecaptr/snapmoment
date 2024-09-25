@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useRef } from 'react';
 
 import Close from '@/../public/assets/components/Close';
-import PictureOutline from '@/../public/assets/components/PictureOutline';
 import PlusCircleOutline from '@/../public/assets/components/PlusCircleOutline';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Button, CustomDropdownItem, CustomDropdownWrapper } from '@/shared/ui';
@@ -11,12 +10,21 @@ import Image from 'next/image';
 
 import s from './AddNewImgPanel.module.scss';
 
+import ImageIcon from '../../../../public/assets/components/Image';
+import ImageOutline from '../../../../public/assets/components/ImageOutline';
+
 type Props = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
   onSelectImageSwiper: (index: number) => void;
   swiperIndex?: number;
 };
-
+/**
+ * Компонент `AddNewImgPanel` — панель для добавления новых изображений с возможностью выбора и удаления изображений.
+ *
+ * @param {function} onSelectFile - Обработчик события изменения файла, вызываемый при выборе изображения.
+ * @param {function} onSelectImageSwiper - Функция обратного вызова, вызываемая при выборе изображения из карусели, с передачей индекса выбранного изображения.
+ * @param {number} [swiperIndex] - Индекс текущего изображения в карусели (если применимо).
+ */
 export const AddNewImgPanel = (props: Props) => {
   const { onSelectFile, onSelectImageSwiper, swiperIndex } = props;
   const selectImgInputRef = () => inputRef.current?.click();
@@ -33,7 +41,12 @@ export const AddNewImgPanel = (props: Props) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <PictureOutline style={{ height: '24px', width: '24px' }} />
+            <ImageOutline style={{ height: '24px', width: '24px' }} />
+          </div>
+        }
+        triggerActive={
+          <div className={s.openerActive}>
+            <ImageIcon style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'end'}
@@ -63,7 +76,7 @@ export const AddNewImgPanel = (props: Props) => {
             disabled={allPostImages.length === 10}
             onClick={selectImgInputRef}
             type={'button'}
-            variant={'outlined'}
+            variant={'text'}
           >
             <PlusCircleOutline style={{ height: '24px', width: '24px' }} />
           </Button>

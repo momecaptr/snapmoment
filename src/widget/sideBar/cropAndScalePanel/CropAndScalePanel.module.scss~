@@ -3,19 +3,21 @@
   z-index: 100;
   bottom: 15px;
   left: 15px;
-  opacity: 0.8;
 
   display: flex;
   justify-content: space-between;
 
-  .opener {
+  opacity: 0.8;
+
+  .opener,
+  .openerActive {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
 
     width: 36px;
     height: 36px;
+    margin-right: 10px;
 
     background-color: var(--dark-500);
     border-radius: 5px;
@@ -24,14 +26,20 @@
       cursor: pointer;
     }
   }
+  .openerActive {
+    color: var(--accent-500)
+  }
 }
 
 .contentAspectsWrapper,
 .contentZoomWrapper {
   padding: 5px;
+  opacity: 0.8;
   background-color: var(--dark-500);
   border-radius: 7px;
-  opacity: 0.9;
+}
+.ratioActive {
+  color: var(--accent-500)
 }
 
 .contentAspects {
@@ -40,7 +48,8 @@
 
   &:hover {
     cursor: pointer;
-    outline: 3px solid var(--accent-100);
+    outline: 3px solid var(--accent-300);
+    border-radius: 2px;
     outline-offset: -3px;
   }
 

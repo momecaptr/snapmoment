@@ -9,7 +9,8 @@
 
   opacity: 0.8;
 
-  .opener {
+  .opener,
+  .openerActive {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,6 +26,10 @@
       cursor: pointer;
     }
   }
+
+  .openerActive {
+    color: var(--accent-500);
+  }
 }
 
 .contentAspectsWrapper,
@@ -35,13 +40,18 @@
   border-radius: 7px;
 }
 
+.ratioActive {
+  color: var(--accent-500);
+}
+
 .contentAspects {
   display: flex;
   padding: 0;
 
   &:hover {
     cursor: pointer;
-    outline: 3px solid var(--accent-100);
+    border-radius: 4px;
+    outline: 3px solid var(--accent-300);
     outline-offset: -3px;
   }
 

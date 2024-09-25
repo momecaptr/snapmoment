@@ -13,7 +13,7 @@ type Props = {
 };
 export const PublicationSection = (props: Props) => {
   const { className } = props;
-  const [wordCount, setWordCount] = useState(0);
+  const [textArea, setTextArea] = useState('');
   // todo Сделать запрос за данными о пользователе (Me запрос, полагаю, где должны быть userName, avatar, может email
 
   // Здесь и отправлять запрос на публикацию
@@ -28,7 +28,7 @@ export const PublicationSection = (props: Props) => {
   const handleChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
 
-    setWordCount(value.length);
+    setTextArea(value);
   };
 
   const onSubmit = (data: any) => {
@@ -36,8 +36,8 @@ export const PublicationSection = (props: Props) => {
   };
 
   return (
-    <div>
-      <div className={s.container}>
+    <div className={s.container}>
+      <div className={s.upperSection}>
         <div className={s.userData}>
           {/*{profileData?.avatars[0] ? (*/}
           {/*  <Image alt={'postImg'} className={s.avatar} src={profileData.avatars[0].url} />*/}
@@ -49,17 +49,18 @@ export const PublicationSection = (props: Props) => {
           <Typography variant={'h3'}>ИМЯ ПОЛЬЗОВАТЕЛЯ</Typography>
         </div>
 
-        <TextArea
-          className={s.textArea}
-          label={'Add publication descriptions'}
-          maxLength={500}
-          onChange={handleChangeText}
-          placeholder={'Text-area'}
-          style={{ height: '80px', resize: 'none' }}
-        />
-        <Typography style={{ color: '#8d9094', textAlign: 'end' }} variant={'small_text'}>
-          {wordCount}/500
-        </Typography>
+        <div className={s.textAreaWrapper}>
+          <TextArea
+            classNameTextAreaSize={s.textAreaSize}
+            counterValue={`${textArea.length}/500`}
+            label={'Add publication descriptions'}
+            maxLength={500}
+            onChange={handleChangeText}
+            placeholder={'Text-area'}
+            value={textArea}
+            resize
+          />
+        </div>
       </div>
       <div className={s.locationBox}>
         <Input

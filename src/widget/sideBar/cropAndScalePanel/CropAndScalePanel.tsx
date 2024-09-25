@@ -5,7 +5,6 @@ import IconHorizontalRectangle from '@/../public/assets/components/IconHorizonta
 import IconSquare from '@/../public/assets/components/IconSquare';
 import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRectangle';
 import Picture from '@/../public/assets/components/PictureOutline';
-import ZoomIcon from '@/../public/assets/components/ZoomIcon';
 import { useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
 import { AspectRatioVals } from '@/widget/sideBar/createPostModal/createPost';
@@ -13,6 +12,9 @@ import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPost
 import { clsx } from 'clsx';
 
 import s from './CropAndScalePanel.module.scss';
+
+import Maximize from '../../../../public/assets/components/Maximize';
+import MaximizeOutline from '../../../../public/assets/components/MaximizeOutline';
 
 export const aspectRatios: AspectRatioVals[] = [
   { text: 'Original', value: 1 / 1 },
@@ -26,6 +28,14 @@ type PropsCropAndScale = {
   onAspectChange: ({ aspect }: { aspect: AspectRatioVals }) => void;
   onZoomChange: ({ zoom }: { zoom: number }) => void;
 };
+
+/**
+ * Компонент `CropAndScalePanel` — панель для изменения соотношения сторон и масштабирования изображений.
+ *
+ * @param {string} id - Уникальный идентификатор текущего изображения, используемый для получения состояния изображения из Redux.
+ * @param {function} onAspectChange - Функция обратного вызова, вызываемая при изменении соотношения сторон изображения. Принимает объект с полем `aspect`, содержащим новое значение соотношения сторон.
+ * @param {function} onZoomChange - Функция обратного вызова, вызываемая при изменении масштаба изображения. Принимает объект с полем `zoom`, содержащим новое значение масштаба.
+ */
 export const CropAndScalePanel = (props: PropsCropAndScale) => {
   const { id, onAspectChange, onZoomChange } = props;
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
@@ -45,6 +55,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
         }
         align={'start'}
         className={s.contentAspectsWrapper}
+        classNameTriggerActive={s.ratioActive}
         isArrow={false}
         side={'top'}
         sideOffset={2}
@@ -68,7 +79,12 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <ZoomIcon style={{ height: '24px', width: '24px' }} />
+            <MaximizeOutline style={{ height: '24px', width: '24px' }} />
+          </div>
+        }
+        triggerActive={
+          <div className={s.openerActive}>
+            <Maximize style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'start'}

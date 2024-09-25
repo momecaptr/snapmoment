@@ -3,7 +3,7 @@ import React, { ChangeEvent, useRef, useState } from 'react';
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { Button, Modal, PhotosSwiper } from '@/shared/ui';
+import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
 import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
@@ -58,6 +58,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const navigateBtnHandler = (direction: CreatePostDirection) => {
     navigateBtnLogic(direction);
+    activeSection === modalSection.publication && console.log('Эхай, блят');
   };
 
   const getIndexFromSwiper = (index: number) => {
@@ -102,15 +103,22 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     <Modal
       backButton={
         allPostImages.length ? (
-          <Button onClick={() => navigateBtnHandler(direction.back)} type={'button'}>
+          <Button
+            className={s.prevBtn}
+            onClick={() => navigateBtnHandler(direction.back)}
+            type={'button'}
+            variant={'text'}
+          >
             <ArrowIosBackOutline />
           </Button>
         ) : null
       }
       nextButton={
         allPostImages.length ? (
-          <Button onClick={() => navigateBtnHandler(direction.next)} type={'button'}>
-            {direction.next}
+          <Button onClick={() => navigateBtnHandler(direction.next)} type={'button'} variant={'text'}>
+            <Typography className={s.nextBtnTxt} variant={'h3'}>
+              {activeSection === modalSection.publication ? 'Publish' : direction.next}
+            </Typography>
           </Button>
         ) : null
       }

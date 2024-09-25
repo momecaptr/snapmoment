@@ -25,7 +25,7 @@ export type InputProps = {
  *
  * @param {function} callback - Функция обратного вызова, вызываемая при изменении значения поля ввода.
  * @param {string} currentValue - Текущее значение поля ввода (по умолчанию пустая строка).
- * @param {string | undefined} error - Сообщение об ошибке, которое отображается под полем ввода (если есть).
+ * @param {string | undefined} `error` - Сообщение об ошибке, которое отображается под полем ввода (если есть).
  * @param {string} label - Метка, отображаемая над полем ввода.
  * @param {React.InputHTMLAttributes<HTMLInputElement>} restProps - Остальные атрибуты для элемента <input>,
  * которые могут быть переданы, включая `type`, `placeholder` и т.д.

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Expand from '@/../public/assets/components/Expand';
-import ZoomIcon from '@/../public/assets/components/ZoomIcon';
 import IconHorizontalRectangle from '@/../public/assets/components/IconHorizontalRectangle';
 import IconSquare from '@/../public/assets/components/IconSquare';
 import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRectangle';
@@ -13,6 +12,9 @@ import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPost
 import { clsx } from 'clsx';
 
 import s from './CropAndScalePanel.module.scss';
+
+import Maximize from '../../../../public/assets/components/Maximize';
+import MaximizeOutline from '../../../../public/assets/components/MaximizeOutline';
 
 export const aspectRatios: AspectRatioVals[] = [
   { text: 'Original', value: 1 / 1 },
@@ -45,6 +47,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
         }
         align={'start'}
         className={s.contentAspectsWrapper}
+        classNameTriggerActive={s.ratioActive}
         isArrow={false}
         side={'top'}
         sideOffset={2}
@@ -68,7 +71,12 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
       <CustomDropdownWrapper
         trigger={
           <div className={s.opener}>
-            <ZoomIcon style={{ height: '24px', width: '24px' }} />
+            <MaximizeOutline style={{ height: '24px', width: '24px' }} />
+          </div>
+        }
+        triggerActive={
+          <div className={s.openerActive}>
+            <Maximize style={{ height: '24px', width: '24px' }} />
           </div>
         }
         align={'start'}

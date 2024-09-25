@@ -29,6 +29,17 @@ type Props<T extends HasUrl> = {
   styles?: string;
 };
 
+/**
+ * Компонент `PhotosSwiper` — карусель изображений с поддержкой навигации и пагинации.
+ *
+ * @template T - Тип, который расширяет интерфейс `HasUrl`. HasUrl - тип с параметром url: string. Короче, принимает массив любых объектов, но обязательно должен быть url
+ * @param {string} className - Дополнительные классы для стилизации контейнера карусели.
+ * @param {string} classNameImage - Дополнительные классы для стилизации изображений.
+ * @param {string} classNameSwiperSlide - Дополнительные классы для стилизации слайдов карусели.
+ * @param {function} getIndex - Функция обратного вызова, вызываемая при изменении активного слайда с индексом текущего слайда.
+ * @param {T[]} sliders - Массив объектов с изображениями, содержащими URL. Короче, принимает массив любых объектов, но обязательно должен быть url
+ * @param {string} styles - Стиль фильтра, применяемый к изображению.
+ */
 export const PhotosSwiper = <T extends HasUrl>({
   className,
   classNameImage,
@@ -90,7 +101,7 @@ export const PhotosSwiper = <T extends HasUrl>({
             <SwiperSlide className={clsx(s.swiperSlide, classNameSwiperSlide)} key={i}>
               <Image
                 alt={`post photo ${i}`}
-                className={clsx(classNameImage)}
+                className={classNameImage}
                 height={100}
                 src={photo.url || ''}
                 style={styles ? { filter: styles } : {}}
@@ -118,7 +129,11 @@ export const PhotosSwiper = <T extends HasUrl>({
           <button className={clsx(s.swiperButtonPrev, currentIndex === 0 && s.hidden)} ref={prevRef} type={'button'}>
             <ArrowIosBack />
           </button>
-          <button className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)} ref={nextRef} type={'button'}>
+          <button
+            className={clsx(s.swiperButtonNext, currentIndex === sliders.length - 1 && s.hidden)}
+            ref={nextRef}
+            type={'button'}
+          >
             <ArrowIosForward />
           </button>
           <div className={s.swiperPagination}></div>

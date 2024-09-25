@@ -2,17 +2,26 @@
 @import '../../../myApp/styles/mixins';
 
 .card {
-  // width: 70vw;
   @include create-post-modal-card-width;
 }
 
 .createPostModal {
   overflow: unset;
 
-  // @include create-post-modal-height;
   @include create-post-modal-height;
 
   padding: 0;
+}
+.prevBtn {
+  height: 24px;
+  width: 24px;
+  svg{
+    width: 100%;
+    height: 100%;
+  }
+}
+.nextBtnTxt {
+  color: var(--accent-500)
 }
 
 .boxContent {
@@ -25,14 +34,8 @@
 
   box-sizing: border-box;
 
-  // height: 54vh;
   @include create-post-modal-height;
-
-  // min-width: 50vw;
-  // max-width: 60vw;
-  @include createPost-min-max-modal-width;
-
-  // min-height: 40vh;
+  @include create-post-min-max-modal-width;
 
   &.fullWidth {
     flex-direction: column;
@@ -51,8 +54,6 @@
     width: 50%;
 
     .leftContentSwiper {
-      // height: 54vh;
-
       @include create-post-modal-height;
     }
   }
@@ -71,19 +72,23 @@
     &.filtersPanel {
       display: flex;
 
-       // height: 100%;
+      // height: 100%;
       align-items: center;
 
       // padding: 10px 55px;
       // padding-inline: 55px;
       padding-inline: 4%;
     }
+    &.publicationPanel{
+      height: 500px;
+      padding: 0;
+    }
   }
 }
 
 .imageElement {
   width: 100%;
-   height: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
