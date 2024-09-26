@@ -1,4 +1,4 @@
-import { AnswerItems, Item, UserFollowingFollowersProps } from '@/shared/api/public/publicTypes';
+import { AnswerItems, UserFollowingFollowersProps } from '@/shared/api/public/publicTypes';
 
 export type GetAnswersWithPaginationArgs = {
   commentId: number;

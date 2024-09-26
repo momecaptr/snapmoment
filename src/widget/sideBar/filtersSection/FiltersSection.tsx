@@ -58,7 +58,7 @@ export const FiltersSection = (props: Props) => {
       const img = allPostImages[imgIndex];
 
       transformImage(img).then((transformedImage) => {
-        console.log(transformedImage);
+        console.log({ transformedImage });
         dispatch(createPostActions.setFinalBuferImg({ imgIndex, transformedImage }));
       });
     }

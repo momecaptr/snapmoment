@@ -1,4 +1,3 @@
-import { BaseResponseType } from '@/shared/api/common/model/api.types';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import {
   GetUserProfileResponse,
@@ -14,20 +13,41 @@ export const profileApi = snapmomentAPI.injectEndpoints({
       providesTags: ['UserProfile'],
       query: () => 'v1/users/profile'
     }),
-    publishPosts: builder.mutation<BaseResponseType | Item, PublishPostsArgs>({
+    publishPosts: builder.mutation<Item, PublishPostsArgs>({
       query: (data) => ({
         body: data,
         method: 'POST',
         url: 'v1/posts'
       })
     }),
-    publishPostsImage: builder.mutation<BaseResponseType | PublishPostsImageResponse, string[]>({
+    // publishPostsImage: builder.mutation<PublishPostsImageResponse, string[]>({
+    //   invalidatesTags: ['PostsByUserName'],
+    //   query: (data) => {
+    //     const formData = new FormData();
+    //
+    //     data.forEach((file: string) => {
+    //       formData.append('file', file);
+    //     });
+    //
+    //     console.log({ apiFormData: formData });
+    //
+    //     return {
+    //       body: formData,
+    //       method: 'POST',
+    //       url: 'v1/posts/image'
+    //     };
+    //   }
+    // }),
+    publishPostsImage: builder.mutation<PublishPostsImageResponse, File[]>({
+      invalidatesTags: ['PostsByUserName'],
       query: (data) => {
         const formData = new FormData();
 
-        data.forEach((file: string) => {
+        data.forEach((file: File) => {
           formData.append('file', file);
         });
+
+        console.log({ apiFormData: formData });
 
         return {
           body: formData,
@@ -36,6 +56,7 @@ export const profileApi = snapmomentAPI.injectEndpoints({
         };
       }
     }),
+
     updateUserProfile: builder.mutation<any, UpdateUserProfileArgs>({
       invalidatesTags: ['UserProfile'],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {

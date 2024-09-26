@@ -65,8 +65,8 @@ export const FiltersSection = (props: Props) => {
   }, [selectedFilter]);
 
   const handleFilterChange = (style: string) => {
-    // Сохраняем значение фильтра в стейте на всякий случай
     setSelectedFilter(style);
+    // Сохраняем значение фильтра в стейте на всякий случай
     dispatch(createPostActions.setFilter({ imgFilter: style, imgIndex }));
   };
 
