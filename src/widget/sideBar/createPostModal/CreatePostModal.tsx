@@ -5,12 +5,11 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
 import { CloseCreatePostModal } from '@/widget/sideBar/closeCreatePostModal/CloseCreatePostModal';
-import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
+import { NextBackDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
 import { FiltersSection } from '@/widget/sideBar/filtersSection/FiltersSection';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
-import { useModalTitle } from '@/widget/sideBar/lib/useModalTitle';
 import { useSelectFilesAndShowError } from '@/widget/sideBar/lib/useSelectFilesAndShowError';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
 import { PublicationSection } from '@/widget/sideBar/publicationSection/PublicationSection';
@@ -29,6 +28,7 @@ export const direction = {
 } as const;
 
 export const modalSection = {
+  addPost: 'Add Post',
   cropping: 'Cropping',
   filters: 'Filters',
   publication: 'Publication'
@@ -56,12 +56,34 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const { isOpen: isCloseModalOpen, setOpen: setIsCloseModalOpen } = useModal(ModalKey.CreatePostOnBlur);
   const { navigateBtnLogic } = useNavigateBtnLogic();
-  const { showToast } = useCustomToast();
+  const { showPromiseToast, showToast } = useCustomToast();
   const { onSelectFile } = useSelectFilesAndShowError(setErrorMessage);
 
-  const modalTitle = useModalTitle();
+  const pseudoPromise = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const random = Math.random();
 
-  const navigateBtnHandler = (direction: CreatePostDirection) => {
+        if (random > 0.5) {
+          resolve('Success data');
+        } else {
+          reject('Error data');
+        }
+      }, 1000);
+    });
+  };
+
+  const handleClick = () => {
+    const promise = pseudoPromise();
+
+    showPromiseToast(promise, {
+      error: 'Error occurred',
+      loading: 'Loading...',
+      success: 'Success'
+    });
+  };
+
+  const navigateBtnHandler = (direction: NextBackDirection) => {
     navigateBtnLogic(direction);
   };
 
@@ -100,19 +122,28 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
       <CloseCreatePostModal isOpen={isCloseModalOpen} setOpen={setIsCloseModalOpen} />
       <Modal
         backButton={prevButton}
-        className={clsx(activeSection !== modalSection.cropping && s.card)}
+        className={clsx(activeSection !== modalSection.cropping && activeSection !== modalSection.addPost && s.card)}
         classNameContent={s.createPostModal}
         nextButton={nextButton}
         onOpenChange={() => setIsCloseModalOpen(true)}
         open={isOpen}
         showCloseButton={!allPostImages.length}
-        title={modalTitle()}
+        title={activeSection}
       >
-        <div className={clsx(s.boxContent, activeSection === modalSection.cropping ? s.fullWidth : s.splitContent)}>
+        <button onClick={handleClick}>Некоторый клик</button>
+        <div
+          className={clsx(
+            s.boxContent,
+            activeSection === modalSection.cropping || activeSection === modalSection.addPost
+              ? s.fullWidth
+              : s.splitContent
+          )}
+        >
+          {/*<button onClick={handleClick}>ALALALALA</button>*/}
           {allPostImages.length !== 0 ? (
             <>
               {activeSection === modalSection.cropping && <CropAndScaleSection onSelectFile={onSelectFile} />}
-              {activeSection !== modalSection.cropping && (
+              {activeSection !== modalSection.cropping && activeSection !== modalSection.addPost && (
                 <>
                   <div className={s.leftContent}>
                     <PhotosSwiper

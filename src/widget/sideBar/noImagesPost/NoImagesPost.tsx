@@ -15,6 +15,7 @@ export const NoImagesPost = (props: NoImagesPostType) => {
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
+  const activeSection = useAppSelector(createPostSelectors.activeSection);
   const { showToast } = useCustomToast();
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     localStorage.removeItem('createPost');
@@ -23,7 +24,8 @@ export const NoImagesPost = (props: NoImagesPostType) => {
 
   const handleOpenDraft = () => {
     if (!allPostImages.length && localStorage.getItem('createPost')) {
-      dispatch(createPostActions.setAllPostImgs({ images: JSON.parse(localStorage.getItem('createPost') || '') }));
+      dispatch(createPostActions.setActiveSection({ section: 'Cropping' }));
+      dispatch(createPostActions.setAllPostImgs({ images: JSON.parse(localStorage.getItem('createPost') as string) }));
     } else {
       showToast({ message: 'No images saved', type: 'error' });
     }
@@ -47,9 +49,11 @@ export const NoImagesPost = (props: NoImagesPostType) => {
           Select from Computer
         </Typography>
       </div>
-      <Button className={s.draftBtn} onClick={handleOpenDraft} variant={'outlined'}>
-        <Typography className={s.draftTxt}>Open Draft</Typography>
-      </Button>
+      {localStorage.getItem('createPost') && (
+        <Button className={s.draftBtn} onClick={handleOpenDraft} variant={'outlined'}>
+          <Typography className={s.draftTxt}>Open Draft</Typography>
+        </Button>
+      )}
     </>
   );
 };

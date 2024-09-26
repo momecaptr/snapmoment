@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
 
-import { closeAllModals } from '@/myApp/model/appSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Button, Modal, Typography } from '@/shared/ui';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { useRefreshPostCreationData } from '@/widget/sideBar/lib/useRefreshPostCreationData';
 import clsx from 'clsx';
 
 import s from './CloseCreatePostModal.module.scss';
@@ -18,21 +18,22 @@ export const CloseCreatePostModal = (props: Props) => {
   const { className, isOpen, setOpen } = props;
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
+  const refreshPostCreationData = useRefreshPostCreationData();
 
-  const handleDiscard = () => setOpen(false);
+  const handleDiscard = () => {
+    refreshPostCreationData();
+  };
   const handleSaveDraft = () => {
     // todo Добавить сохранение allPostImages в localStorage или в indexedDb
-    localStorage.setItem('createPost', JSON.stringify(allPostImages));
-    // Сбрасываем стейт названия модалки на Add Post (когда будем открывать модалку вновь, у нас все должно быть пусто)
-    dispatch(createPostActions.setActiveSection({ section: 'Cropping' }));
-    dispatch(closeAllModals());
+    allPostImages.length && localStorage.setItem('createPost', JSON.stringify(allPostImages));
+    refreshPostCreationData();
   };
 
   return (
     <Modal
       className={clsx(s.card)}
       classNameContent={s.createPostModal}
-      onOpenChange={handleDiscard}
+      onOpenChange={() => setOpen(false)}
       open={isOpen}
       title={'Close'}
     >
@@ -42,7 +43,7 @@ export const CloseCreatePostModal = (props: Props) => {
         </Typography>
         <div className={s.buttonsWrapper}>
           <Button onClick={handleDiscard}>
-            <Typography variant={'h3'}>Discard</Typography>
+            <Typography variant={'h3'}>Yes, I want</Typography>
           </Button>
           <Button onClick={handleSaveDraft}>
             <Typography variant={'h3'}>Save draft</Typography>

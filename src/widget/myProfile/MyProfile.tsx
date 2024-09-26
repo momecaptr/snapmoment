@@ -17,22 +17,13 @@ interface Props {
 export const MyProfile = ({ postsUser, user }: Props) => {
   // const { data } = useGetPersonalInformationUserQuery();
 
-  const { data: publicPostsByUserId } = useGetPublicPostsUserQuery(
-    // { userId: user?.id || data?.id },
-    // { skip: !user?.id && !data?.id }
-    { userId: user?.id! },
-    { skip: !user?.id }
-  );
+  const { data: publicPostsByUserId } = useGetPublicPostsUserQuery({ userId: user?.id! }, { skip: !user?.id });
   const { data: postsByUserName } = useGetPostsByUserNameQuery(
-    // { userName: user?.userName || data?.userName || '' },
-    // { skip: !user?.userName && !data?.userName }
     { userName: user?.userName || '' },
     { skip: !user?.userName }
   );
 
-  console.log({ userNamePosts: postsByUserName }); // Данные получилось получить только тут, но нет Images
-  console.log({ publicPostsByUserId: publicPostsByUserId });
-  console.log({ postsUser });
+  console.log({ userNamePosts: postsByUserName }); // Данные получилось получить только тут, но нет Images А ОНИ ПОЯВИЛИСЬ В ЛОГАХ (ЛЕНЯ ШУЛЯК КОЛДУН)
 
   return (
     <Wrapper className={s.wrapper}>
@@ -74,6 +65,11 @@ export const MyProfile = ({ postsUser, user }: Props) => {
         {/* Однажды на мгновение увидел пост от publicPostsByUserId */}
         <div className={s.post}>
           {publicPostsByUserId?.items.map((post) => {
+            return <Post key={post.id} post={post} />;
+          })}
+        </div>
+        <div className={s.post}>
+          {postsByUserName?.items?.map((post) => {
             return <Post key={post.id} post={post} />;
           })}
         </div>

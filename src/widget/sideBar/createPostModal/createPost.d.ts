@@ -45,6 +45,4 @@ type UpdateImgAspect = {
 
 // export type Sections = 'Cropping' | 'Filters' | 'Publication';
 export type CreatePostModalSections = (typeof modalSection)[keyof typeof modalSection];
-export type CreatePostDirection = (typeof direction)[keyof typeof direction];
-
-export type ModalTitle = 'Add Post' | CreatePostModalSections;
+export type NextBackDirection = (typeof direction)[keyof typeof direction];

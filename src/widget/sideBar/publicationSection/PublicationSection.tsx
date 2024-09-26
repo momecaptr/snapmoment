@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import PersonOutline from '@/../public/assets/components/PersonOutline';
@@ -12,7 +11,8 @@ import {
 import { publicApi } from '@/shared/api/public/publicApi';
 import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { FormTextfield, FormTextfieldArea, Typography } from '@/shared/ui';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { useRefreshPostCreationData } from '@/widget/sideBar/lib/useRefreshPostCreationData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { z } from 'zod';
@@ -24,7 +24,11 @@ type Props = {
   submitRef: React.RefObject<HTMLButtonElement>;
 };
 const addPostSchema = z.object({
-  description: z.string().max(500, { message: 'Description should be less than 500 characters' }).optional(),
+  description: z
+    .string()
+    .min(1, { message: 'Description is required' })
+    .max(500, { message: 'Description should be less than 500 characters' })
+    .optional(),
   // todo ДОБАВИТЬ ЛОКАЦИЮ???
   location: z.string().optional()
 });
@@ -33,11 +37,11 @@ export type AddPostType = z.infer<typeof addPostSchema>;
 
 export const PublicationSection = (props: Props) => {
   const { className, submitRef } = props;
-  const [textArea, setTextArea] = useState('');
 
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
-  const { showToast } = useCustomToast();
+  const { showPromiseToast, showToast } = useCustomToast();
+  const refreshPostCreationData = useRefreshPostCreationData();
 
   const { data: profileData } = useGetUserProfileQuery();
   const [publishPostImages, { isLoading: isLoadingImages }] = usePublishPostsImageMutation();
@@ -49,7 +53,8 @@ export const PublicationSection = (props: Props) => {
       setTimeout(res, 1000);
     }).then(() => {
       dispatch(publicApi.util.resetApiState()); // Сбрасываем кэш => перезагружаем запросы.
-      dispatch(createPostActions.setAllPostImgs({ images: [] }));
+      refreshPostCreationData();
+      showToast({ message: 'Post created', type: 'success' });
     });
   };
 
@@ -61,68 +66,65 @@ export const PublicationSection = (props: Props) => {
     watch
   } = useForm<AddPostType>({ mode: 'onSubmit', resolver: zodResolver(addPostSchema) });
 
-  // const onSubmit = (data: AddPostType) => {
-  //   console.log({ data });
-  //   // todo Отправляем на сервер данные
-  //   publishPostImages(
-  //     allPostImages.map((el) => {
-  //       console.log(el.buferUrl);
+  // const onSubmit = async (data: AddPostType) => {
+  //   try {
+  //     const files = await Promise.all(
+  //       allPostImages.map(async (el) => {
+  //         const response = await fetch(el.buferUrl);
+  //         const blob = await response.blob();
   //
-  //       return el.buferUrl;
-  //     })
-  //   )
-  //     .unwrap()
-  //     .then((res) => {
-  //       console.log(res);
-  //       const childrenMetadata = res.images.map((el) => ({ uploadId: el.uploadId }));
+  //         // Создаем объект File, используя Blob
+  //         return new File([blob], `${el.id}.jpg`, { type: blob.type }); // Имя файла можно задать по вашему усмотрению
+  //       })
+  //     );
   //
-  //       console.log({ childrenMetadata });
+  //     // Отправляем файлы на сервер
+  //     const res = await publishPostImages(files).unwrap();
   //
-  //       console.log('response post images');
+  //     const childrenMetadata = res.images.map((el) => ({ uploadId: el.uploadId }));
   //
-  //       publishPostDescription({ childrenMetadata, description: data.description as string });
-  //     })
-  //     .then(() => {
-  //       console.log('response postS received');
-  //       // ОБНОВЛЯЕМ ВСЕ C ЗАДЕРЖКОЙ В 1 сек
-  //       // refresh();
-  //     })
-  //     .catch((error) => {
-  //       showToast({ message: `${error}`, type: 'error' });
-  //     });
-  // };
-
+  //     await publishPostDescription({ childrenMetadata, description: data.description as string });
+  //
+  //     refresh(); // обновляем все с задержкой в 1 сек
+  //
+  //     return 'Post successfully published';
+  //   } catch (error) {
+  //     throw new Error(`${error}`);
+  //   }
+  // }
   const onSubmit = async (data: AddPostType) => {
-    console.log({ data });
+    const promise = (async () => {
+      try {
+        const files = await Promise.all(
+          allPostImages.map(async (el) => {
+            const response = await fetch(el.buferUrl);
+            const blob = await response.blob();
 
-    try {
-      const files = await Promise.all(
-        allPostImages.map(async (el) => {
-          const response = await fetch(el.buferUrl);
-          const blob = await response.blob();
+            // Создаем объект File, используя Blob
+            return new File([blob], `${el.id}.jpg`, { type: blob.type }); // Имя файла можно задать по вашему усмотрению
+          })
+        );
 
-          // Создаем объект File, используя Blob
-          return new File([blob], `${el.id}.jpg`, { type: blob.type }); // Имя файла можно задать по вашему усмотрению
-        })
-      );
+        // Отправляем файлы на сервер
+        const res = await publishPostImages(files).unwrap();
 
-      // Отправляем файлы на сервер
-      const res = await publishPostImages(files).unwrap();
+        const childrenMetadata = res.images.map((el) => ({ uploadId: el.uploadId }));
 
-      console.log(res);
-      const childrenMetadata = res.images.map((el) => ({ uploadId: el.uploadId }));
+        await publishPostDescription({ childrenMetadata, description: data.description as string });
 
-      console.log({ childrenMetadata });
-      console.log('response post images');
+        refresh(); // обновляем все с задержкой в 1 сек
 
-      await publishPostDescription({ childrenMetadata, description: data.description as string });
+        return 'Post successfully published';
+      } catch (error) {
+        throw new Error(`${error}`);
+      }
+    })();
 
-      console.log('response postS received');
-      // refresh(); // обновляем все с задержкой в 1 сек
-    } catch (error) {
-      console.error('Ошибка загрузки изображений:', error);
-      showToast({ message: `${error}`, type: 'error' });
-    }
+    showPromiseToast(promise, {
+      error: 'Error occurred while publishing post',
+      loading: 'Publishing post...',
+      success: 'Success'
+    });
   };
 
   return (
@@ -145,10 +147,10 @@ export const PublicationSection = (props: Props) => {
             <FormTextfieldArea
               classNameTextAreaSize={s.textAreaSize}
               control={control}
-              counterValue={`${watch('description')?.length}/500`}
+              counterValue={`${watch('description')?.length || 0}/500`}
               error={errors.description?.message}
               label={'Add publication descriptions'}
-              maxLength={501}
+              maxLength={500}
               name={'description'}
               placeholder={'Text-area'}
               resize

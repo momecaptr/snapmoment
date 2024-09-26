@@ -9,7 +9,6 @@ import { createPostActions, createPostSelectors } from '@/widget/sideBar/createP
 import { createPostModalFilters } from '@/widget/sideBar/lib/createPostModalFilters';
 import { createImage } from '@/widget/sideBar/lib/cropImage';
 import { clsx } from 'clsx';
-import Image from 'next/image';
 
 import s from './FiltersSection.module.scss';
 
@@ -78,7 +77,8 @@ export const FiltersSection = (props: Props) => {
         return (
           // <div className={s.wrapper} key={filter.name}>
           <div key={filter.name}>
-            <Image
+            {/* ! Использую не <Image, а img, иначе ошибка гидрации в консоли, или с параметром suppressHydrationWarning*/}
+            <img
               alt={`Photo # ${imgIndex}`}
               className={clsx(s.image, isSelected && s.active)}
               height={100}
@@ -86,8 +86,6 @@ export const FiltersSection = (props: Props) => {
               src={allPostImages[imgIndex].url}
               style={{ filter: filter.style }}
               width={100}
-              priority
-              unoptimized
             />
             <Typography className={s.text} variant={'regular_text_16'}>
               {filter.name}

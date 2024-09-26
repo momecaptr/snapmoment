@@ -4,7 +4,7 @@ import CloseOutline from '../../../../public/assets/components/CloseOutline';
 
 export type CustomToastProps = {
   message: string;
-  type: 'error' | 'success';
+  type: 'error' | 'loading' | 'success';
 };
 
 export const CustomToast = ({ message, type }: CustomToastProps) => {

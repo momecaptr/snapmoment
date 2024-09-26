@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 
 import { useAppDispatch } from '@/shared/lib';
+import { modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
 import { createPostActions } from '@/widget/sideBar/createPostModal/createPostSlice';
 
 export const useSelectFilesAndShowError = (setErrorMessage: (value: string) => void) => {
@@ -33,6 +34,8 @@ export const useSelectFilesAndShowError = (setErrorMessage: (value: string) => v
 
     // createObjectURL убираем, потому что проблемы со стилями могли возникнуть (что то там про то, что размер createObjectUrl, если меняю, то в CSS нужно колдовать, поэтому вот так
     dispatch(createPostActions.addPostImgs({ url }));
+    // Обновляем activeSection на cropping
+    dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
 
     e.target.value = '';
 

@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { direction, modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
-import { NextBackDirection } from '@/widget/sideBar/createPostModal/createPost';
+import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import getCroppedImg from '@/widget/sideBar/lib/cropImage';
 
@@ -38,7 +38,7 @@ export const useNavigateBtnLogic = () => {
     dispatch(createPostActions.updateUrlAndBuferWithCropped(newImages));
   };
 
-  const navigateBtnLogic = (directionValue: NextBackDirection) => {
+  const navigateBtnLogic = (directionValue: CreatePostDirection) => {
     switch (activeSection) {
       case modalSection.addPost:
         if (directionValue === direction.next) {

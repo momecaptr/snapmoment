@@ -1,18 +1,22 @@
 import { useCallback } from 'react';
 
-import { CustomToast, CustomToastProps } from '@/shared/ui';
+import { CustomToast } from '@/shared/ui';
 import { toast } from 'sonner';
 
 export const useCustomToast = () => {
-  const showToast = useCallback(({ message, type }: CustomToastProps) => {
+  const showToast = useCallback(({ message, type }: { message: string; type: 'error' | 'loading' | 'success' }) => {
     toast.custom(() => <CustomToast message={message} type={type} />);
   }, []);
 
   const showPromiseToast = useCallback(
-    (promise: Promise<any>, messages: { error: string; loading: string; success: (data: any) => string }) => {
+    (
+      promise: (() => Promise<unknown>) | Promise<unknown>,
+      messages: { error: string; loading: string; success: string }
+    ) => {
       toast.promise(promise, {
         error: <CustomToast message={messages.error} type={'error'} />,
-        success: (data) => <CustomToast message={messages.success(data)} type={'success'} />
+        loading: <CustomToast message={messages.loading} type={'loading'} />,
+        success: <CustomToast message={messages.success} type={'success'} />
       });
     },
     []
