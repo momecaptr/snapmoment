@@ -12,6 +12,7 @@ export const useCustomToast = () => {
     (promise: Promise<any>, messages: { error: string; loading: string; success: (data: any) => string }) => {
       toast.promise(promise, {
         error: <CustomToast message={messages.error} type={'error'} />,
+        loading: <CustomToast message={messages.loading} type={'loading'} />,
         success: (data) => <CustomToast message={messages.success(data)} type={'success'} />
       });
     },

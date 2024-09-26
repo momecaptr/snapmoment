@@ -64,7 +64,7 @@ export const AddNewImgPanel = (props: Props) => {
                 key={photo.id}
                 onClick={() => onSelectImageSwiper(index)}
               >
-                <Image alt={''} className={s.img} height={82} src={photo.imageUrl || ''} width={80} />
+                <Image alt={''} className={s.img} height={82} src={photo.originUrl || ''} width={80} />
                 <div className={s.deleteImg} onClick={() => handleDeletePhoto(photo.id)}>
                   <Close className={s.deleteIcon} />
                 </div>

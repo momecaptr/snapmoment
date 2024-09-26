@@ -1,0 +1,52 @@
+import { useAppSelector } from '@/shared/lib';
+import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { createImage } from '@/widget/sideBar/lib/cropImage';
+
+export const useGetTransformedImgs = () => {
+  const allPostImages = useAppSelector(createPostSelectors.allPostImages);
+  const transformedImgs = await Promise.all(
+    allPostImages.map(async (img) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      // Теперь тут, когда все манипуляции с картинками сделали, НУЖНО ОБНОВИТЬ url, то есть к обрезанному изображению добавить фильтры!
+      // НО С ДРУГОЙ СТОРОНЫ, мы показываем эту картинку. То есть мы отображаем url и будем применять к нему фильтры. А есть же место, где мы уже добавляли фильтры. ТОГДА ПОВЕРХ ТЕХ ФИЛЬТРОВ МЫ ПОЛЬЗОВАТЕЛЮ НАЛОЖЕМ ЕЩЕ ФИЛЬРЫ.
+      // Так нельзя. Значит 3 варианта: 1 - в url и сразу закрываем модалку. НО ВАЛИДАЦИЯ ВДРУГ НЕ ПРОЙДЕТ. Тогда будет некрасиво
+      // 2 -- сохранять в originURL и originURL отправлять на сервер. Но чет мне не нравится этот вариант, потому что изменения кроппирования должны произойти для originUrl тоже
+      // 3 -- сделаем еще один стейт buferURL, где сохраним изменения на этапе кроппирования, как бы буферная зона, то то сохраняет все изменения, но нигдк не показывается. ЭТО И БУДЕМ ОТПРАВЛЯТЬ НА СЕРВЕР
+      const modifiedImage = await createImage(img.url as string);
+
+      canvas.width = modifiedImage.width;
+      canvas.height = modifiedImage.height;
+
+      ctx?.drawImage(modifiedImage, 0, 0, modifiedImage.width, modifiedImage.height);
+
+      if (ctx) {
+        ctx.filter = img.filter;
+      }
+
+      ctx?.drawImage(modifiedImage, 0, 0, modifiedImage.width, modifiedImage.height);
+
+      // const newImage = new Image();
+      //
+      // newImage.src = canvas.toDataURL();
+      //
+      // const base64Data = canvas.toDataURL('image/jpeg');
+      const blob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob((result) => resolve(result), 'image/jpeg')
+      );
+
+      // Создание объектного URL из Blob
+      const objectUrl = blob ? URL.createObjectURL(blob) : null;
+
+      return {
+        croppedAreaPx: img.croppedAreaPx,
+        id: img.id,
+        url: objectUrl
+      };
+    })
+  );
+
+  return {
+    transformedImgs
+  };
+};

@@ -22,11 +22,12 @@ const slice = createSlice({
       // if (!existingPhoto) {
       const imgDataToSave: CreatePostImgProps = {
         aspect: { text: '1:1', value: 1 },
+        buferUrl: '',
         crop: { x: 0, y: 0 },
         croppedAreaPx: null,
         filter: 'none',
         id: v1(),
-        imageUrl: action.payload.url,
+        originUrl: action.payload.url,
         url: '',
         zoom: 1
       };
@@ -77,12 +78,61 @@ const slice = createSlice({
         state.allPostImages[imgIndex] = { ...state.allPostImages[imgIndex], filter: imgFilter };
       }
     },
-    // Вот этот action я убрал, потому что он нужен только для того, чтобы сделать лишнее действие для сэта нового url каждого элемента. Это действие можно выполнить в  setImgUrlFromCroppedToOriginalUrl
-    // setOriginalImageUrl(state, action: PayloadAction<{ url: string }>) {
-    //   state.allPostImages.map((img) =>
-    //     img.url === action.payload.url ? { ...img, originalImageUrl: action.payload.url } : img
+    setFinalBuferImg(
+      state,
+      action: PayloadAction<{
+        imgIndex: number;
+        transformedImage: {
+          croppedAreaPx: CroppedAreaPx;
+          id: string;
+          url: null | string;
+        };
+      }>
+    ) {
+      console.log('Оппа');
+
+      const { imgIndex, transformedImage } = action.payload;
+      const index = state.allPostImages.findIndex((img) => img.id === transformedImage.id);
+
+      if (index !== -1) {
+        // Обновляем url и imageUrl
+        state.allPostImages[index] = {
+          ...state.allPostImages[index],
+          buferUrl: transformedImage.url as string, // Обновляем imageUrl
+          croppedAreaPx: transformedImage.croppedAreaPx
+        };
+      }
+    },
+    setZoom(state, action: PayloadAction<UpdateImgZoom>) {
+      const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);
+
+      if (imgIndex !== -1) {
+        state.allPostImages[imgIndex] = {
+          ...state.allPostImages[imgIndex],
+          zoom: action.payload.zoom
+        };
+      }
+    },
+    updateBuferImageUrlWithFiltered(
+      state,
+      action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: null | string }[]>
+    ) {
+      action.payload.forEach((photo) => {
+        const { croppedAreaPx, id, url } = photo;
+        const index = state.allPostImages.findIndex((img) => img.id === id);
+
+        if (index !== -1) {
+          // Обновляем url и imageUrl
+          state.allPostImages[index] = {
+            ...state.allPostImages[index],
+            buferUrl: url as string, // Обновляем imageUrl
+            croppedAreaPx
+          };
+        }
+      });
+    },
     //   );
-    setImgUrlFromCroppedToOriginalUrl(
+    updateUrlAndBuferWithCropped(
       state,
       action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: string | undefined }[]>
     ) {
@@ -93,25 +143,13 @@ const slice = createSlice({
         const index = state.allPostImages.findIndex((img) => img.id === id);
 
         if (index !== -1) {
-          if (url != null) {
-            // Тут нужно засэтать либо originalImageUrl, либо url, либо оба.
-            // Если только originalImageUrl, то это обеспечит нам дать пользователю возможность сделать шаг "назад" и выбрать другую область для кропа исходя из оригинально загруженного. Поэтому я так и сделаю.
+          if (url !== null && url !== undefined) {
             state.allPostImages[index].url = url;
+            state.allPostImages[index].buferUrl = url;
           }
           state.allPostImages[index].croppedAreaPx = croppedAreaPx;
         }
       });
-    },
-    // },
-    setZoom(state, action: PayloadAction<UpdateImgZoom>) {
-      const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);
-
-      if (imgIndex !== -1) {
-        state.allPostImages[imgIndex] = {
-          ...state.allPostImages[imgIndex],
-          zoom: action.payload.zoom
-        };
-      }
     }
   },
   selectors: {

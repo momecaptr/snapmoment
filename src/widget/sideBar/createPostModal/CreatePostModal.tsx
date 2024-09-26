@@ -1,8 +1,11 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
+import { usePublishPostsImageMutation, usePublishPostsMutation } from '@/shared/api/profile/profileApi';
+import { publicApi } from '@/shared/api/public/publicApi';
+import { Image } from '@/shared/api/public/publicTypes';
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
-import { useAppDispatch, useAppSelector } from '@/shared/lib';
+import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
 import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
@@ -10,8 +13,9 @@ import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAn
 import { FiltersSection } from '@/widget/sideBar/filtersSection/FiltersSection';
 import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
+import { useSelectFilesAndShowError } from '@/widget/sideBar/lib/useSelectFilesAndShowError';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
-import { PublicationSection } from '@/widget/sideBar/publicationSection/PublicationSection';
+import { AddPostType, PublicationSection } from '@/widget/sideBar/publicationSection/PublicationSection';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
@@ -50,80 +54,95 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   const activeSection = useAppSelector(createPostSelectors.activeSection);
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
+  const [data, setData] = useState<AddPostType>({
+    description: '',
+    location: ''
+  });
   const [activeSwiperImgId, setActiveSwiperImgId] = useState(0);
   // const [activeSection, setActiveSection] = useState<CreatePostModalSections>(createPostModalSections.cropping);
   const imgRef = useRef<HTMLImageElement>(null);
 
+  const [publishPostImages, { isLoading: isLoadingImages }] = usePublishPostsImageMutation();
+  const [publishPostDescription, { isLoading: isLoadingDescription }] = usePublishPostsMutation();
+
   const { navigateBtnLogic } = useNavigateBtnLogic();
+
+  const { showPromiseToast, showToast } = useCustomToast();
+
+  const handleFormSubmit = (value: AddPostType) => {
+    console.log({ data, imageToSend: allPostImages[0].buferUrl });
+    setData(value);
+  };
+
+  const pushToSend = () => {
+    // todo Отправляем на сервер изменения
+    publishPostImages(allPostImages.map((el) => el.buferUrl))
+      .unwrap()
+      .then((res) => {
+        const images = res as unknown as Image[];
+        const childrenMetadata = images.map((el) => ({ uploadId: el.uploadId }));
+
+        publishPostDescription({ childrenMetadata, description: data.description as string });
+      })
+      .then(() => {
+        refresh();
+      })
+      .catch((error) => {
+        showToast({ message: `${error}`, type: 'error' });
+      });
+  };
 
   const navigateBtnHandler = (direction: CreatePostDirection) => {
     navigateBtnLogic(direction);
-    activeSection === modalSection.publication && console.log('Эхай, блят');
+    // activeSection === modalSection.publication && console.log('Эхай, блят');
+    //   todo Когда нажали на publish, нужно взять постовские фотографии, обновить, поменяв url картинки на новый. Этот url мы и будем отправлять на сервер
+  };
+
+  const refresh = () => {
+    new Promise((res) => {
+      setTimeout(res, 1000);
+    }).then(() => {
+      dispatch(publicApi.util.resetApiState()); // Сбрасываем кэш => перезагружаем запросы.
+      dispatch(createPostActions.setAllPostImgs({ images: [] }));
+    });
   };
 
   const getIndexFromSwiper = (index: number) => {
     setActiveSwiperImgId(index);
   };
 
-  const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    const acceptedTypes = ['image/jpeg', 'image/png'];
-    const maxSizeBytes = 20 * 1024 * 1024; // 20 MB Max
+  const { onSelectFile } = useSelectFilesAndShowError(setErrorMessage);
 
-    if (!file) {
-      return;
-    }
+  const nextButton = allPostImages.length ? (
+    <Button
+      onClick={() => {
+        navigateBtnHandler(direction.next);
+        console.log('А это в createPostModal');
+        console.log({ data });
+      }}
+      type={activeSection === modalSection.publication ? 'submit' : 'button'}
+      variant={'text'}
+    >
+      <Typography className={s.nextBtnTxt} variant={'h3'}>
+        {activeSection === modalSection.publication ? 'Publish' : direction.next}
+      </Typography>
+    </Button>
+  ) : null;
 
-    if (!acceptedTypes.includes(file.type)) {
-      setErrorMessage('Wrong file type');
+  const prevButton = allPostImages.length ? (
+    <Button className={s.prevBtn} onClick={() => navigateBtnHandler(direction.back)} type={'button'} variant={'text'}>
+      <ArrowIosBackOutline />
+    </Button>
+  ) : null;
 
-      return;
-    }
-
-    if (file.size > maxSizeBytes) {
-      setErrorMessage('Max file size should be less than 20 MB');
-
-      return;
-    }
-
-    // const imageDataUrl: any = await readFile(file);
-    // dispatch(createPostActions.addPostImgs({ url: imageDataUrl }));
-
-    const url = URL.createObjectURL(file);
-
-    // createObjectURL убираем, потому что проблемы со стилями могли возникнуть (что то там про то, что размер createObjectUrl, если меняю, то в CSS нужно колдовать, поэтому вот так
-    dispatch(createPostActions.addPostImgs({ url }));
-
-    e.target.value = '';
-
-    return () => URL.revokeObjectURL(url);
-  };
+  errorMessage && showToast({ message: `${errorMessage}`, type: 'error' });
 
   return (
     <Modal
-      backButton={
-        allPostImages.length ? (
-          <Button
-            className={s.prevBtn}
-            onClick={() => navigateBtnHandler(direction.back)}
-            type={'button'}
-            variant={'text'}
-          >
-            <ArrowIosBackOutline />
-          </Button>
-        ) : null
-      }
-      nextButton={
-        allPostImages.length ? (
-          <Button onClick={() => navigateBtnHandler(direction.next)} type={'button'} variant={'text'}>
-            <Typography className={s.nextBtnTxt} variant={'h3'}>
-              {activeSection === modalSection.publication ? 'Publish' : direction.next}
-            </Typography>
-          </Button>
-        ) : null
-      }
+      backButton={prevButton}
       className={clsx(activeSection !== modalSection.cropping && s.card)}
       classNameContent={s.createPostModal}
+      nextButton={nextButton}
       onOpenChange={() => setOpen(false)}
       open={isOpen}
       showCloseButton={!allPostImages.length}
@@ -132,7 +151,12 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
       <div className={clsx(s.boxContent, activeSection === modalSection.cropping ? s.fullWidth : s.splitContent)}>
         {allPostImages.length !== 0 ? (
           <>
-            {activeSection === modalSection.cropping && <CropAndScaleSection onSelectFile={onSelectFile} />}
+            {activeSection === modalSection.cropping && (
+              <CropAndScaleSection
+                // errorMessage={errorMessage}
+                onSelectFile={onSelectFile}
+              />
+            )}
             {activeSection !== modalSection.cropping && (
               <>
                 <div className={s.leftContent}>
@@ -153,10 +177,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                 >
                   {activeSection === modalSection.filters && <FiltersSection imgIndex={activeSwiperImgId} />}
                   {activeSection === modalSection.publication && (
-                    // <form onSubmit={handleSubmit(onSubmit)}>
-                    //   <div>Описание и прочая срань</div>
-                    // </form>
-                    <PublicationSection />
+                    <PublicationSection onSubmitHandler={handleFormSubmit} />
                   )}
                 </div>
               </>
@@ -169,3 +190,66 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     </Modal>
   );
 };
+
+// const pushToSend = async () => {
+//   const transformedImgs = await Promise.all(
+//     allPostImages.map(async (img) => {
+//       const canvas = document.createElement('canvas');
+//       const ctx = canvas.getContext('2d');
+//       // Теперь тут, когда все манипуляции с картинками сделали, НУЖНО ОБНОВИТЬ url, то есть к обрезанному изображению добавить фильтры!
+//       // НО С ДРУГОЙ СТОРОНЫ, мы показываем эту картинку. То есть мы отображаем url и будем применять к нему фильтры. А есть же место, где мы уже добавляли фильтры. ТОГДА ПОВЕРХ ТЕХ ФИЛЬТРОВ МЫ ПОЛЬЗОВАТЕЛЮ НАЛОЖЕМ ЕЩЕ ФИЛЬРЫ.
+//       // Так нельзя. Значит 3 варианта: 1 - в url и сразу закрываем модалку. НО ВАЛИДАЦИЯ ВДРУГ НЕ ПРОЙДЕТ. Тогда будет некрасиво
+//       // 2 -- сохранять в originURL и originURL отправлять на сервер. Но чет мне не нравится этот вариант, потому что изменения кроппирования должны произойти для originUrl тоже
+//       // 3 -- сделаем еще один стейт buferURL, где сохраним изменения на этапе кроппирования, как бы буферная зона, то то сохраняет все изменения, но нигдк не показывается. ЭТО И БУДЕМ ОТПРАВЛЯТЬ НА СЕРВЕР
+//       const modifiedImage = await createImage(img.url as string);
+//
+//       canvas.width = modifiedImage.width;
+//       canvas.height = modifiedImage.height;
+//
+//       ctx?.drawImage(modifiedImage, 0, 0, modifiedImage.width, modifiedImage.height);
+//
+//       if (ctx) {
+//         ctx.filter = img.filter;
+//       }
+//
+//       ctx?.drawImage(modifiedImage, 0, 0, modifiedImage.width, modifiedImage.height);
+//
+//       // const newImage = new Image();
+//       //
+//       // newImage.src = canvas.toDataURL();
+//       //
+//       // const base64Data = canvas.toDataURL('image/jpeg');
+//       const blob = await new Promise<Blob | null>((resolve) =>
+//         canvas.toBlob((result) => resolve(result), 'image/jpeg')
+//       );
+//
+//       // Создание объектного URL из Blob
+//       const objectUrl = blob ? URL.createObjectURL(blob) : null;
+//
+//       return {
+//         croppedAreaPx: img.croppedAreaPx,
+//         id: img.id,
+//         url: objectUrl
+//       };
+//     })
+//   );
+//
+//   //  Сохраняем то что получилось в buferUrl. Потом будем это отправлять в запросе
+//   dispatch(createPostActions.updateBuferImageUrlWithFiltered(transformedImgs));
+//
+//   // todo Отправляем на сервер изменения
+//   await publishPostImages(allPostImages.map((el) => el.buferUrl))
+//     .unwrap()
+//     .then((res) => {
+//       const images = res as unknown as Image[];
+//       const childrenMetadata = images.map((el) => ({ uploadId: el.uploadId }));
+//
+//       publishPostDescription({ childrenMetadata, description: data.description as string });
+//     })
+//     .then(() => {
+//       refresh();
+//     })
+//     .catch((error) => {
+//       showToast({ message: `${error}`, type: 'error' });
+//     });
+// };

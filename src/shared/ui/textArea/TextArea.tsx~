@@ -5,49 +5,32 @@ import clsx from 'clsx';
 import s from './TextArea.module.scss';
 
 export type TextAreaProps = {
-  /**
-   * Optional callback function to handle text input changes.
-   * Receives the current text value as an argument.
-   */
   callback?: (text: string) => void;
-
-  /**
-   * Optional additional class name for customizing the textarea size.
-   */
-  classNameTextAreaSize?: string;
-
-  /**
-   * Optional string value for displaying a character counter or other indicator.
-   */
-  counterValue?: string;
-
-  /**
-   * The current value of the textarea. Can be controlled externally.
-   */
+  classNameTextAreaSize?: string; // ! ДОБАВИЛ
+  counterValue?: string; // ! ДОБАВИЛ
   currentValue?: string;
-
-  /**
-   * Error message to display under the textarea, or undefined if no error exists.
-   */
   error?: string | undefined;
-
-  /**
-   * Label text to display above the textarea.
-   */
   label?: string;
-
-  /**
-   * Boolean flag to indicate whether the textarea should be resizable.
-   */
   resize?: boolean;
 } & ComponentPropsWithoutRef<'textarea'>;
 
 /**
- * A customizable textarea component with support for labels, error messages,
- * resizing, and an optional character counter.
+ * Компонент `TextArea` — это расширяемое текстовое поле с поддержкой:
+ * - кастомного размера через `classNameTextAreaSize`
+ * - счетчика символов с помощью `counterValue`
+ * - управления значением через `currentValue`
+ * - отображения ошибки через `error`
+ * - отображения заголовка через `label`
+ * - настройки возможности изменения размера через `resize`
  *
- * @param props The component props, including optional callback, currentValue, and error state.
- * @param ref A forwarded ref to the textarea element.
+ * @param {function} callback - Опциональная функция для обработки изменения текста.
+ * @param {string} classNameTextAreaSize - Дополнительный класс для изменения размера textarea.
+ * @param {string} counterValue - Значение для отображения счетчика символов.
+ * @param {string} currentValue - Текущее значение textarea.
+ * @param {string} error - Ошибка для отображения под textarea.
+ * @param {string} label - Заголовок, отображаемый над textarea.
+ * @param {boolean} resize - Включение/выключение возможности изменения размера textarea.
+ * @param {ComponentPropsWithoutRef<'textarea'>} restProps - Остальные стандартные свойства элемента <textarea>.
  */
 export const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: TextAreaProps, ref) => {
   const {
@@ -105,6 +88,7 @@ export const TextArea = forwardRef<HTMLInputElement, TextAreaProps>((props: Text
           id={id ?? generatedId}
           onChange={handleChange}
           placeholder={placeholder}
+          ref={ref}
           value={inputValue}
         />
         {/* ! ДОБАВИЛ counter */}

@@ -11,11 +11,15 @@
       align-items: center;
       margin-bottom: 30px;
 
-      .avatar {
+      .avatar,
+      .avatarBordered {
         width: 36px;
         height: 36px;
-        border: 3px solid var(--light-900);
         border-radius: 50%;
+      }
+
+      .avatarBordered {
+        border: 3px solid var(--light-900);
       }
     }
 

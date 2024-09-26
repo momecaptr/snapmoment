@@ -7,11 +7,12 @@ export type AspectRatioVals = {
 
 export type CreatePostImgProps = {
   aspect: AspectRatioVals;
+  buferUrl: string;
   crop: CropInit;
   croppedAreaPx: CroppedAreaPx;
   filter: string;
   id: string;
-  imageUrl: string | undefined;
+  originUrl: string | undefined;
   url: string;
   zoom: number;
 };

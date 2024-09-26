@@ -21,6 +21,11 @@
     border: 1px solid var(--danger-500);
   }
 
+  &.loading {
+    background: var(--warning-900);
+    border: 1px solid var(--warning-500);
+  }
+
   svg {
     width: 24px;
     height: 24px;

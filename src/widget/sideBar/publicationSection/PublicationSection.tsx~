@@ -14,7 +14,7 @@ import s from './PublicationSection.module.scss';
 
 type Props = {
   className?: string;
-  onSubmitHandler: (value: AddPostType) => void;
+  onSubmitHandler: ({ description, location }: AddPostType) => void;
 };
 const addPostSchema = z.object({
   description: z.string().max(500, { message: 'Description should be less than 500 characters' }).optional(),

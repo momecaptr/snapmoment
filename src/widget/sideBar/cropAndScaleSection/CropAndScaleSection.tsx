@@ -16,11 +16,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import s from './CropAndScaleSection.module.scss';
 
 type CropAndScaleSectionType = {
+  errorMessage?: null | string;
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
-  const { onSelectFile } = props;
+  const { errorMessage, onSelectFile } = props;
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   // Для передачи в slider с какой id картинки работаем
@@ -127,7 +128,7 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
                 <Cropper
                   aspect={img.aspect.value}
                   crop={img.crop}
-                  image={img.imageUrl}
+                  image={img.originUrl}
                   onCropChange={(crop) => onCropChange({ crop, id: img.id })}
                   onCropComplete={onCropComplete(img.id)}
                   onZoomChange={(zoom) => onZoomChange({ id: img.id, zoom })}

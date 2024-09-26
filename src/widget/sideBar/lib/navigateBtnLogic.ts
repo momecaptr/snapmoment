@@ -20,10 +20,12 @@ export const useNavigateBtnLogic = () => {
 
   // Из-за async функции getCroppedImg, нужно все оборачивать в async тоже, чтобы передавать в стейт не массив промисов, а значения
   // Функция для сохранения обрезанных изображений при переходе на стадию Filters
-  const saveCropAreaToState = async () => {
+  const saveCropImgToUrl = async () => {
     const newImages = await Promise.all(
       allPostImages.map(async (img) => {
-        const croppedImg = await getCroppedImg(img.imageUrl, img.croppedAreaPx);
+        // Передаем в getCroppedImg originUrl, то есть оригинальную картинку.
+        const croppedImg = await getCroppedImg(img.originUrl, img.croppedAreaPx);
+        // А тут возвращаем в url (НЕ В OriginImageURL, то есть не в оригинал, а в обрабатываемый url).
 
         return {
           croppedAreaPx: img.croppedAreaPx,
@@ -33,7 +35,7 @@ export const useNavigateBtnLogic = () => {
       })
     );
 
-    dispatch(createPostActions.setImgUrlFromCroppedToOriginalUrl(newImages));
+    dispatch(createPostActions.updateUrlAndBuferWithCropped(newImages));
   };
 
   const navigateBtnLogic = (directionValue: CreatePostDirection) => {
@@ -41,7 +43,8 @@ export const useNavigateBtnLogic = () => {
       case modalSection.cropping:
         if (directionValue === direction.next) {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
-          void saveCropAreaToState();
+          // Сохраняем обрезанные изображения
+          void saveCropImgToUrl();
         } else {
           dispatch(createPostActions.setAllPostImgs({ images: [] }));
         }
@@ -56,6 +59,10 @@ export const useNavigateBtnLogic = () => {
       case modalSection.publication:
         if (directionValue === direction.next) {
           console.log('отправить');
+
+          // pushToSend().then(() => {
+          //   console.log({ final: allPostImages[0].buferUrl });
+          // });
         } else {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
         }
