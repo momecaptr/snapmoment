@@ -2,6 +2,7 @@ import {
   CreatePostImgProps,
   CreatePostModalSections,
   CroppedAreaPx,
+  ModalTitle,
   UpdateImgAspect,
   UpdateImgCrop,
   UpdateImgZoom
@@ -12,7 +13,8 @@ import { v1 } from 'uuid';
 const slice = createSlice({
   initialState: {
     activeSection: 'Cropping' as CreatePostModalSections,
-    allPostImages: [] as CreatePostImgProps[]
+    allPostImages: [] as CreatePostImgProps[],
+    modalTitle: 'App Post' as ModalTitle
   },
   name: 'createPost',
   reducers: {
@@ -102,6 +104,9 @@ const slice = createSlice({
           croppedAreaPx: transformedImage.croppedAreaPx
         };
       }
+    },
+    setModalTitle(state, action: PayloadAction<ModalTitle>) {
+      state.modalTitle = action.payload;
     },
     setZoom(state, action: PayloadAction<UpdateImgZoom>) {
       const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);

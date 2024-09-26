@@ -23,7 +23,7 @@ export const CloseCreatePostModal = (props: Props) => {
   const handleSaveDraft = () => {
     // todo Добавить сохранение allPostImages в localStorage или в indexedDb
     localStorage.setItem('createPost', JSON.stringify(allPostImages));
-    // Сбрасываем стейт названия модалки на Add Post (когда будем открывать модалку вновь, у нас все должно быть пусто)
+    // Сбрасываем стейт названия модалки на Add Post (когда будем открывать модалку вновь, у нас все должно быть пусто
     dispatch(createPostActions.setActiveSection({ section: 'Cropping' }));
     dispatch(closeAllModals());
   };

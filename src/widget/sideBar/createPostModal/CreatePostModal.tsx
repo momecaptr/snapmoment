@@ -9,8 +9,8 @@ import { CreatePostDirection } from '@/widget/sideBar/createPostModal/createPost
 import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
 import { FiltersSection } from '@/widget/sideBar/filtersSection/FiltersSection';
-import { modalTitle } from '@/widget/sideBar/lib/modalTitle';
 import { useNavigateBtnLogic } from '@/widget/sideBar/lib/navigateBtnLogic';
+import { useModalTitle } from '@/widget/sideBar/lib/useModalTitle';
 import { useSelectFilesAndShowError } from '@/widget/sideBar/lib/useSelectFilesAndShowError';
 import { NoImagesPost } from '@/widget/sideBar/noImagesPost/NoImagesPost';
 import { PublicationSection } from '@/widget/sideBar/publicationSection/PublicationSection';
@@ -59,6 +59,8 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   const { showToast } = useCustomToast();
   const { onSelectFile } = useSelectFilesAndShowError(setErrorMessage);
 
+  const modalTitle = useModalTitle();
+
   const navigateBtnHandler = (direction: CreatePostDirection) => {
     navigateBtnLogic(direction);
   };
@@ -104,7 +106,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         onOpenChange={() => setIsCloseModalOpen(true)}
         open={isOpen}
         showCloseButton={!allPostImages.length}
-        title={modalTitle({ activeSection, allPostImages })}
+        title={modalTitle()}
       >
         <div className={clsx(s.boxContent, activeSection === modalSection.cropping ? s.fullWidth : s.splitContent)}>
           {allPostImages.length !== 0 ? (
