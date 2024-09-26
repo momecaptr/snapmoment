@@ -91,6 +91,10 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     </Button>
   ) : null;
 
+  const handleOpenModal = () => {
+    setIsCloseModalOpen(true);
+  };
+
   errorMessage && showToast({ message: `${errorMessage}`, type: 'error' });
 
   return (
@@ -101,7 +105,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         className={clsx(activeSection !== modalSection.cropping && s.card)}
         classNameContent={s.createPostModal}
         nextButton={nextButton}
-        onOpenChange={() => setIsCloseModalOpen(true)}
+        onOpenChange={handleOpenModal}
         open={isOpen}
         showCloseButton={!allPostImages.length}
         title={modalTitle({ activeSection, allPostImages })}
