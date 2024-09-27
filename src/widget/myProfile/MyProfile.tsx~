@@ -69,7 +69,7 @@ export const MyProfile = ({ postsUser, user }: Props) => {
           })}
         </div>
         <div className={s.post}>
-          {postsByUserName?.items.map((post) => {
+          {postsByUserName?.items?.map((post) => {
             return <Post key={post.id} post={post} />;
           })}
         </div>

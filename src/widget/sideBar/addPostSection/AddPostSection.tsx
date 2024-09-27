@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 
-import s from './NoImagesPost.module.scss';
+import s from './AddPostSection.module.scss';
 
-type NoImagesPostType = {
+type AddImgSectionType = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
 };
-export const NoImagesPost = (props: NoImagesPostType) => {
+export const AddPostSection = (props: AddImgSectionType) => {
   const { onSelectFile } = props;
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();

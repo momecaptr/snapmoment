@@ -27,9 +27,14 @@ export const useSelectFilesAndShowError = (setErrorMessage: (value: string) => v
       return;
     }
 
+    // const imageDataUrl: any = await readFile(file);
+    // dispatch(createPostActions.addPostImgs({ url: imageDataUrl }));
+
     const url = URL.createObjectURL(file);
 
+    // createObjectURL убираем, потому что проблемы со стилями могли возникнуть (что то там про то, что размер createObjectUrl, если меняю, то в CSS нужно колдовать, поэтому вот так
     dispatch(createPostActions.addPostImgs({ url }));
+    // Обновляем activeSection на cropping
     dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
 
     e.target.value = '';

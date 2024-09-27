@@ -38,7 +38,7 @@ type Props<T extends HasUrl> = {
  * @param {string} classNameSwiperSlide - Дополнительные классы для стилизации слайдов карусели.
  * @param {function} getIndex - Функция обратного вызова, вызываемая при изменении активного слайда с индексом текущего слайда.
  * @param {T[]} sliders - Массив объектов с изображениями, содержащими URL. Короче, принимает массив любых объектов, но обязательно должен быть url
- * @param {string} styles - Стиль фильтра, применяемый к изображению.
+ * @param {string} styles - Стиль фильтра, применяемый к изображению. ИНЛАЙНОВЫЙ
  */
 export const PhotosSwiper = <T extends HasUrl>({
   className,

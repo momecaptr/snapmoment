@@ -13,5 +13,5 @@ export const useRefreshPostCreationData = () => {
     dispatch(closeAllModals());
   };
 
-  return refreshPostCreationData;
+  return { refreshPostCreationData };
 };

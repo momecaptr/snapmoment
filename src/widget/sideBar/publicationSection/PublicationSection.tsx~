@@ -39,7 +39,7 @@ export const PublicationSection = (props: Props) => {
 
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
-  const { showToast } = useCustomToast();
+  const { showPromiseToast, showToast } = useCustomToast();
   const { refreshPostCreationData } = useRefreshPostCreationData();
 
   const { data: profileData } = useGetUserProfileQuery();

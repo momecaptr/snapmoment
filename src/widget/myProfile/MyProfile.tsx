@@ -58,18 +58,8 @@ export const MyProfile = ({ postsUser, user }: Props) => {
             </div>
           </div>
         </div>
-        {/* ! Почему postsUser?.items.map ничего не отображается??*/}
-        {/*  {postsUser?.items.map((post) => {*/}
-        {/* ! Да и тут ничего нет, массив IMAGES undefined от GETPOSTSBY USERNAME*/}
-        {/*  {postsByUserName?.items?.map((post) => {*/}
-        {/* Однажды на мгновение увидел пост от publicPostsByUserId */}
         <div className={s.post}>
           {publicPostsByUserId?.items.map((post) => {
-            return <Post key={post.id} post={post} />;
-          })}
-        </div>
-        <div className={s.post}>
-          {postsByUserName?.items?.map((post) => {
             return <Post key={post.id} post={post} />;
           })}
         </div>

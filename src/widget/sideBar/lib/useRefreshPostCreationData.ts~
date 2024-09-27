@@ -1,6 +1,6 @@
 import { closeAllModals } from '@/myApp/model/appSlice';
-import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { useAppDispatch } from '@/shared/lib';
+import { createPostActions } from '@/widget/sideBar/createPostModal/createPostSlice';
 
 export const useRefreshPostCreationData = () => {
   const dispatch = useAppDispatch();

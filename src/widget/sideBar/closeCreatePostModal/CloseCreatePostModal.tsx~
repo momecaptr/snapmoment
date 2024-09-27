@@ -43,7 +43,7 @@ export const CloseCreatePostModal = (props: Props) => {
         </Typography>
         <div className={s.buttonsWrapper}>
           <Button onClick={handleDiscard}>
-            <Typography variant={'h3'}>Yes</Typography>
+            <Typography variant={'h3'}>Yes, I want</Typography>
           </Button>
           <Button onClick={handleSaveDraft}>
             <Typography variant={'h3'}>Save draft</Typography>
