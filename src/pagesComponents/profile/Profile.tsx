@@ -36,6 +36,7 @@ export const Profile = ({ postsUser, user }: Props) => {
   //   //   lastName: profileData?.lastName ?? ''
   //   // }
   // });
+  console.log({ postsUser });
 
   return (
     <div className={s.container}>

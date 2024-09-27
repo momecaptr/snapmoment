@@ -2,7 +2,7 @@ import { ComponentProps, ElementType, ReactNode, memo } from 'react';
 
 import s from './Typography.module.scss';
 
-type TypographyVariant =
+export type TypographyVariant =
   | 'bold_text_14'
   | 'bold_text_16'
   | 'h1'

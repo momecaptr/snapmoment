@@ -1,0 +1,110 @@
+// @import '@/myApp/styles/mixins';
+@import '../../../myApp/styles/mixins';
+
+.card {
+  @include create-post-modal-card-width;
+}
+
+.createPostModal {
+  overflow: unset;
+
+  @include create-post-modal-height;
+
+  padding: 0;
+}
+.prevBtn {
+  height: 24px;
+  width: 24px;
+  svg{
+    width: 100%;
+    height: 100%;
+  }
+}
+.nextBtnTxt {
+  color: var(--accent-500)
+}
+
+.boxContent {
+  position: relative;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  @include create-post-modal-height;
+  @include create-post-min-max-modal-width;
+
+  &.fullWidth {
+    flex-direction: column;
+  }
+
+  &.splitContent {
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width: 100%;
+    max-width: unset;
+    min-height: unset;
+  }
+
+  .leftContent {
+    width: 50%;
+
+    .leftContentSwiper {
+      @include create-post-modal-height;
+    }
+  }
+
+  .rightContent {
+    // empty
+    width: 50%;
+    padding: 1%;
+    border-left: 1px solid var(--color-dark-100);
+
+    &.filtersPanel,
+    &.publicationPanel {
+      // width: 50%;
+    }
+
+    &.filtersPanel {
+      display: flex;
+
+      // height: 100%;
+      align-items: center;
+
+      // padding: 10px 55px;
+      // padding-inline: 55px;
+      padding-inline: 4%;
+    }
+    &.publicationPanel{
+      height: 500px;
+      padding: 0;
+    }
+  }
+}
+
+.imageElement {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.boxErrorMessage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+
+.errorMessage {
+  width: 397px;
+  padding: 6px 24px;
+
+  color: var(--light-100);
+  text-align: center;
+
+  background-color: var(--danger-900);
+  border: 1px solid var(--danger-300);
+}

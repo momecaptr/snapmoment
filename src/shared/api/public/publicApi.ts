@@ -63,6 +63,7 @@ export const {
   useGetPostByIdQuery,
   useGetPostCommentsByPostIdQuery,
   useGetPublicPostsQuery,
+  useGetPublicPostsUserQuery,
   useGetTotalUsersCountQuery,
   useLazyGetPublicPostsQuery
 } = publicApi;

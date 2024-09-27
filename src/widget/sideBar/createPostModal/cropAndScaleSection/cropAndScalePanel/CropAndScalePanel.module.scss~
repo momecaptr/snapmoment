@@ -1,0 +1,72 @@
+.croppingPanel {
+  position: absolute;
+  z-index: 100;
+  bottom: 15px;
+  left: 15px;
+
+  display: flex;
+  justify-content: space-between;
+
+  opacity: 0.8;
+
+  .opener,
+  .openerActive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+
+    background-color: var(--dark-500);
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .openerActive {
+    color: var(--accent-500)
+  }
+}
+
+.contentAspectsWrapper,
+.contentZoomWrapper {
+  padding: 5px;
+  opacity: 0.8;
+  background-color: var(--dark-500);
+  border-radius: 7px;
+}
+.ratioActive {
+  color: var(--accent-500)
+}
+
+.contentAspects {
+  display: flex;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+    outline: 3px solid var(--accent-300);
+    border-radius: 2px;
+    outline-offset: -3px;
+  }
+
+  .aspectWrapper {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 6px 12px;
+  }
+}
+
+.contentZoom {
+  padding: 0;
+
+  .sliderContainer {
+    gap: 5px;
+  }
+}

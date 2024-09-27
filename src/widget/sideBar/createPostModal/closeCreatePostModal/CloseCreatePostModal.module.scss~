@@ -1,0 +1,11 @@
+.card {
+  max-width: 450px;
+  width: 100%;
+  .text {
+    margin-bottom: 24px;
+  }
+  .buttonsWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}

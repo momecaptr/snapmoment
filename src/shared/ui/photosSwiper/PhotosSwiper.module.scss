@@ -17,7 +17,7 @@
       font-size: 18px;
       text-align: center;
 
-      background: var(--light-900);
+      // background: var(--dark-300);
     }
   }
 
@@ -51,6 +51,10 @@
 
       opacity: 0.2;
       background-color: var(--dark-300);
+    }
+
+    &.hidden {
+      display: none;
     }
 
     svg {

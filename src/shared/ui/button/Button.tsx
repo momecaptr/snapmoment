@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, ReactNode, forwardRef } from 'react';
 
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 
 import s from './Button.module.scss';
 

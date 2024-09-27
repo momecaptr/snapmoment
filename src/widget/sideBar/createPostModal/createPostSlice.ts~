@@ -1,0 +1,165 @@
+import type {
+  CreatePostImgProps,
+  CreatePostModalSections,
+  CroppedAreaPx,
+  UpdateImgAspect,
+  UpdateImgCrop,
+  UpdateImgZoom
+} from './createPostSlice.d.ts';
+
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { v1 } from 'uuid';
+
+const slice = createSlice({
+  initialState: {
+    activeSection: 'Cropping' as CreatePostModalSections,
+    allPostImages: [] as CreatePostImgProps[]
+  },
+  name: 'createPost',
+  reducers: {
+    addPostImgs(state, action: PayloadAction<{ url: string }>) {
+      // const existingPhoto = state.allPostImages.find((img) => img.url === action.payload.url);
+
+      // if (!existingPhoto) {
+      const imgDataToSave: CreatePostImgProps = {
+        aspect: { text: '1:1', value: 1 },
+        buferUrl: '',
+        crop: { x: 0, y: 0 },
+        croppedAreaPx: null,
+        filter: 'none',
+        id: v1(),
+        originUrl: action.payload.url,
+        url: '',
+        zoom: 1
+      };
+
+      state.allPostImages.unshift(imgDataToSave);
+      // }
+    },
+    deletePhoto(state, action: PayloadAction<{ id: string }>) {
+      state.allPostImages = state.allPostImages.filter((img) => img.id !== action.payload.id);
+    },
+    setActiveSection(state, action: PayloadAction<{ section: CreatePostModalSections }>) {
+      state.activeSection = action.payload.section;
+    },
+    setAllPostImgs(state, action: PayloadAction<{ images: CreatePostImgProps[] }>) {
+      state.allPostImages = action.payload.images.map((el) => ({ ...el }));
+    },
+    setAspect(state, action: PayloadAction<UpdateImgAspect>) {
+      const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);
+
+      if (imgIndex !== -1) {
+        state.allPostImages[imgIndex] = {
+          ...state.allPostImages[imgIndex],
+          aspect: action.payload.aspect
+        };
+      }
+    },
+    setCrop(state, action: PayloadAction<UpdateImgCrop>) {
+      const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);
+
+      if (imgIndex !== -1) {
+        state.allPostImages[imgIndex] = {
+          ...state.allPostImages[imgIndex],
+          crop: action.payload.crop
+        };
+      }
+    },
+    setCroppedAreaPixels(state, action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string }>) {
+      const img = state.allPostImages.find((el) => el.id === action.payload.id);
+
+      if (img) {
+        img.croppedAreaPx = action.payload.croppedAreaPx;
+      }
+    },
+    setFilter(state, action: PayloadAction<{ imgFilter: string; imgIndex: number }>) {
+      const { imgFilter, imgIndex } = action.payload;
+
+      if (imgIndex < state.allPostImages.length) {
+        state.allPostImages[imgIndex] = { ...state.allPostImages[imgIndex], filter: imgFilter };
+      }
+    },
+    setFinalBuferImg(
+      state,
+      action: PayloadAction<{
+        imgIndex: number;
+        transformedImage: {
+          croppedAreaPx: CroppedAreaPx;
+          id: string;
+          url: null | string;
+        };
+      }>
+    ) {
+      console.log('Оппа');
+
+      const { imgIndex, transformedImage } = action.payload;
+      const index = state.allPostImages.findIndex((img) => img.id === transformedImage.id);
+
+      if (index !== -1) {
+        // Обновляем url и imageUrl
+        state.allPostImages[index] = {
+          ...state.allPostImages[index],
+          buferUrl: transformedImage.url as string, // Обновляем imageUrl
+          croppedAreaPx: transformedImage.croppedAreaPx
+        };
+      }
+    },
+    setZoom(state, action: PayloadAction<UpdateImgZoom>) {
+      const imgIndex = state.allPostImages.findIndex((img) => img.id === action.payload.id);
+
+      if (imgIndex !== -1) {
+        state.allPostImages[imgIndex] = {
+          ...state.allPostImages[imgIndex],
+          zoom: action.payload.zoom
+        };
+      }
+    },
+    updateBuferImageUrlWithFiltered(
+      state,
+      action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: null | string }[]>
+    ) {
+      action.payload.forEach((photo) => {
+        const { croppedAreaPx, id, url } = photo;
+        const index = state.allPostImages.findIndex((img) => img.id === id);
+
+        if (index !== -1) {
+          // Обновляем url и imageUrl
+          state.allPostImages[index] = {
+            ...state.allPostImages[index],
+            buferUrl: url as string, // Обновляем imageUrl
+            croppedAreaPx
+          };
+        }
+      });
+    },
+    //   );
+    updateUrlAndBuferWithCropped(
+      state,
+      action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: string | undefined }[]>
+    ) {
+      const payload = action.payload;
+
+      payload.forEach((photo) => {
+        const { croppedAreaPx, id, url } = photo;
+        const index = state.allPostImages.findIndex((img) => img.id === id);
+
+        if (index !== -1) {
+          if (url !== null && url !== undefined) {
+            state.allPostImages[index].url = url;
+            state.allPostImages[index].buferUrl = url;
+          }
+          state.allPostImages[index].croppedAreaPx = croppedAreaPx;
+        }
+      });
+    }
+  },
+  selectors: {
+    activeSection: (sliceState) => sliceState.activeSection,
+    allPostImages: (sliceState) => sliceState.allPostImages,
+    soloImg: (sliceState, id: string) => sliceState.allPostImages.find((el) => el.id === id)
+  }
+});
+
+export const createPostSlice = slice.reducer;
+export const createPostActions = slice.actions;
+export const createPostSelectors = slice.selectors;

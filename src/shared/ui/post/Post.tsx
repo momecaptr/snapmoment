@@ -5,6 +5,7 @@ import { clsx } from 'clsx';
 import Link from 'next/link';
 
 import s from './Post.module.scss';
+
 type Props = {
   className?: string;
   post: Item;
@@ -12,9 +13,15 @@ type Props = {
 export const Post = (props: Props) => {
   const { className, post } = props;
 
+  console.log(post);
+
   return (
     <Link className={clsx(s.box, className)} href={`public/post/${post.id}`}>
-      <img alt={'post'} src={post.images[0].url || ''} />
+      {post.images && post.images.length > 0 ? (
+        <img alt={'post'} src={post.images[0].url} />
+      ) : (
+        <div>No image available</div> // Здесь можно разместить заглушку или текст
+      )}
     </Link>
   );
 };

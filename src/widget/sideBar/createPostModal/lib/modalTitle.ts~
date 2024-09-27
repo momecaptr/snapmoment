@@ -1,0 +1,55 @@
+import { useAppSelector } from '@/shared/lib';
+import { modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
+import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
+
+// interface ModalTitle {
+//   activeSection: CreatePostModalSections;
+//   allPostImages: CreatePostImgProps[];
+// }
+
+/**
+ * Function that returns the title of the modal
+ * @param props.activeSection - current section
+ * @param props.previews - array of previewsImages
+ */
+
+export const useModalTitle = () => {
+  const modalTitle = () => {
+    const aSection = useAppSelector(createPostSelectors.activeSection);
+    const allPostImage = useAppSelector(createPostSelectors.allPostImages);
+
+    if (!allPostImages.length) {
+      return 'Add Photo' as string;
+    }
+    if (activeSection === modalSection.cropping) {
+      return modalSection.cropping as string;
+    }
+    if (activeSection === modalSection.filters) {
+      return modalSection.filters as string;
+    }
+    if (activeSection === modalSection.publication) {
+      return modalSection.publication as string;
+    }
+  };
+
+  return { modalTitle };
+};
+
+// export const modalTitle = (props: ModalTitle) => {
+//   const { activeSection, allPostImages } = props;
+//   const aSection = useAppSelector(createPostSelectors.activeSection);
+//   const allPostImage = useAppSelector(createPostSelectors.allPostImages);
+//
+//   if (!allPostImages.length) {
+//     return 'Add Photo' as string;
+//   }
+//   if (activeSection === modalSection.cropping) {
+//     return modalSection.cropping as string;
+//   }
+//   if (activeSection === modalSection.filters) {
+//     return modalSection.filters as string;
+//   }
+//   if (activeSection === modalSection.publication) {
+//     return modalSection.publication as string;
+//   }
+// };

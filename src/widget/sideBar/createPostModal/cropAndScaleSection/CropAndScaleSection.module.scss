@@ -1,0 +1,144 @@
+@import '@/myApp/styles/mixins';
+
+.wrapper {
+  // position: relative;
+
+  .croppingBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 50vw;
+    max-width: 60vw;
+
+    // height: 100%;
+    height: 54vh;
+
+    .photosSwiper {
+      height: 100%;
+
+      .swiperSlide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+
+        font-size: 18px;
+        text-align: center;
+
+        background: var(--light-900);
+      }
+    }
+
+    .swiperButtonPrev,
+    .swiperButtonNext {
+      cursor: pointer;
+
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+
+      overflow: hidden;
+      display: flex;
+
+      width: 48px;
+      height: 48px;
+
+      border-radius: 3px;
+
+      &::before {
+        content: '';
+
+        position: absolute;
+        z-index: 1;
+
+        width: 48px;
+        height: 48px;
+
+        opacity: 0.2;
+        background-color: var(--dark-300);
+      }
+
+      &.hidden {
+        display: none;
+      }
+
+      svg {
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        color: var(--light-100);
+      }
+
+      @include focus-visible-default;
+    }
+
+    .swiperButtonPrev {
+      left: 0;
+      margin-left: 12px;
+    }
+
+    .swiperButtonNext {
+      right: 0;
+      margin-right: 12px;
+    }
+
+    .swiperPagination {
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+
+      width: max-content;
+      height: 24px;
+      margin-bottom: 12px;
+      padding-inline: 8px;
+
+      background-color: var(--dark-300);
+      border-radius: 2px;
+    }
+
+    span {
+      cursor: pointer;
+
+      width: 8px;
+      height: 8px;
+
+      opacity: 1;
+      background: var(--light-100);
+
+      &.active {
+        background: var(--accent-500);
+      }
+    }
+
+    .cropperElement {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 50vw;
+      max-width: 60vw;
+      min-height: 40vh;
+      max-height: 80vh;
+    }
+  }
+
+  .addImg {
+    position: absolute;
+    z-index: 1;
+    right: 15px;
+    bottom: 15px;
+
+    opacity: 0.8;
+  }
+}

@@ -1,4 +1,4 @@
-import { Avatar } from '@/shared/api/public/publicTypes';
+import { Avatar, Image } from '@/shared/api/public/publicTypes';
 
 export interface GetUserProfileResponse {
   aboutMe: string;
@@ -20,4 +20,15 @@ export interface UpdateUserProfileArgs {
   firstName: string;
   lastName: string;
   userName: string;
+}
+
+export interface PublishPostsImageResponse {
+  images: Image[];
+}
+export interface PublishPostsArgs {
+  childrenMetadata: ChildrenMetadatum[];
+  description: string;
+}
+export interface ChildrenMetadatum {
+  uploadId: string;
 }

@@ -1,0 +1,245 @@
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+
+.DropdownMenuContent {
+  will-change: transform, opacity;
+
+  padding: 12px;
+
+  background-color: var(--color-dark-700);
+  border-radius: 6px;
+  box-shadow:
+    0 10px 38px -10px rgb(22 23 24 / 35%),
+    0 10px 20px -15px rgb(22 23 24 / 20%);
+
+  animation-name: slideDownAndFade;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DropdownMenuContentForMenu {
+  will-change: transform, opacity;
+
+  min-width: 97px;
+  padding: 12px;
+
+  background-color: var(--color-dark-700);
+  border-radius: 6px;
+  box-shadow:
+    0 10px 38px -10px rgb(22 23 24 / 35%),
+    0 10px 20px -15px rgb(22 23 24 / 20%);
+
+  animation-name: slideDownAndFade;
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DropdownMenuContent[data-side='top'],
+.DropdownMenuContentForMenu[data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+
+.DropdownMenuContent[data-side='right'],
+.DropdownMenuContentForMenu[data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+
+.DropdownMenuContent[data-side='bottom'],
+.DropdownMenuContentForMenu[data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+
+.DropdownMenuContent[data-side='left'],
+.DropdownMenuContentForMenu[data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.DropdownMenuItem p[data-highlighted] {
+  color: var(--violet-1);
+}
+
+.DropdownMenuItem {
+  cursor: pointer;
+  user-select: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: max-content;
+  height: 25px;
+
+  font-size: 13px;
+  line-height: 1;
+
+  border-radius: 3px;
+  outline: none;
+
+  &.Link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .button {
+    all: unset;
+
+    display: flex;
+    align-items: center;
+
+    padding: 6px 0;
+
+    background-color: transparent;
+
+    .button:active,
+    button:hover {
+      background: none;
+    }
+  }
+}
+
+.icon {
+  fill: #0a6638;
+}
+
+.DropdownMenuSeparator {
+  height: 1px;
+  margin: 5px 0;
+  background-color: var(--color-dark-500);
+}
+
+.DropdownMenuItemIndicator {
+  position: absolute;
+  left: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+}
+
+.DropdownMenuArrow {
+  fill: var(--color-dark-700);
+}
+
+.IconButton {
+  display: flex;
+
+  font-family: inherit;
+
+  background: none;
+  border: none;
+  border-radius: 100%;
+  outline: none;
+
+  .dropdownHeaderImg {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    stroke: var(--color-light-900);
+  }
+}
+
+.IconButton:hover {
+  cursor: pointer;
+}
+
+.IconButton[data-state='open'] img,
+.IconButton:focus-visible img {
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 8px rgb(128 255 191 / 80%);
+}
+
+.DropdownMenuItem:focus p {
+  color: var(--color-accent-500);
+}
+
+.DropdownMenuItem:focus .DDButtonImg {
+  stroke: var(--color-accent-500);
+}
+
+.header {
+  display: flex;
+  max-width: max-content;
+  margin: 6px 0 12px;
+
+  img {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+
+    object-fit: cover;
+    border-radius: 100%;
+  }
+}
+
+.dropdownTextHeader {
+  padding-left: 6px;
+}
+
+.dropdownText {
+  padding-left: 6px;
+}
+
+.DropdownMenuItemBox {
+  margin: 6px 0;
+}
+
+.dropdownHeaderImg {
+  border-radius: 50%;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    transform: translateY(2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    transform: translateX(-2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    transform: translateY(-2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    transform: translateX(2px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.Link {
+  text-decoration: none;
+}

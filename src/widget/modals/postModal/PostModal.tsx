@@ -12,10 +12,21 @@ import { PostInteractionBar, UsersLikesModal } from '@/widget';
 import { useRouter } from 'next/router';
 
 import s from './PostModal.module.scss';
+
 type Props = {
   postId: number;
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
+
+/**
+ * Компонент `PostModal` — модальное окно, отображающее информацию о посте,
+ * включая фотографии, комментарии и действия над постом.
+ *
+ * @param {number} postId - Уникальный идентификатор поста, для которого отображается модальное окно.
+ * @param {function} showPostModalHandler - Функция, отвечающая за открытие/закрытие модального окна. Принимает два параметра:
+ *  - isOpen (boolean): флаг, указывающий, открыто ли модальное окно.
+ *  - postId (number | undefined): идентификатор поста (опционально).
+ */
 export const PostModal = ({ postId, showPostModalHandler }: Props) => {
   const router = useRouter();
   const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
@@ -47,7 +58,9 @@ export const PostModal = ({ postId, showPostModalHandler }: Props) => {
           </button>
 
           <div className={s.container}>
-            <div className={s.photos}>{<PhotosSwiper sliders={postData.images} />}</div>
+            <div className={s.photos}>
+              <PhotosSwiper sliders={postData.images} />
+            </div>
 
             <div className={s.about}>
               <div className={s.authorBlock}>

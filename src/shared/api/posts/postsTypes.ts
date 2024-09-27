@@ -1,4 +1,4 @@
-import { AnswerItems, UserFollowingFollowersProps } from '@/shared/api/public/publicTypes';
+import { AnswerItems, Item, UserFollowingFollowersProps } from '@/shared/api/public/publicTypes';
 
 export type GetAnswersWithPaginationArgs = {
   commentId: number;
@@ -21,6 +21,20 @@ export type GetPostLikesArgs = {
   postId: null | number;
   search?: string;
 };
+
+export interface GetPostsByUserNameArgs {
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: string;
+  sortDirection?: string;
+  userName: string;
+}
+
+export interface GetPostsByUserNameResponse {
+  items?: Item[];
+  pageSize: number;
+  totalCount: number;
+}
 export type GetPostLikesResponse = {
   items?: UserFollowingFollowersProps[];
   pageSize: number;

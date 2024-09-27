@@ -4,6 +4,8 @@ import {
   GetAnswersWithPaginationResponse,
   GetPostLikesArgs,
   GetPostLikesResponse,
+  GetPostsByUserNameArgs,
+  GetPostsByUserNameResponse,
   UpdateLikePostArgs
 } from '@/shared/api/posts/postsTypes';
 
@@ -21,6 +23,24 @@ export const postsApi = snapmomentAPI.injectEndpoints({
         url: `v1/posts/${postId}/likes`
       })
     }),
+    getPostsByUserName: builder.query<GetPostsByUserNameResponse, GetPostsByUserNameArgs>({
+      providesTags: ['PostsByUserName'],
+      query: (args) => {
+        const { pageNumber, pageSize, sortBy, sortDirection, userName } = args;
+
+        return {
+          method: 'GET',
+          params: {
+            ...args,
+            pageNumber: pageNumber || 1,
+            pageSize: pageSize || 10,
+            sortBy: sortBy || undefined,
+            sortDirection: sortDirection || undefined
+          },
+          url: `v1/posts/${userName}`
+        };
+      }
+    }),
     updateLikePost: builder.mutation<void, UpdateLikePostArgs>({
       invalidatesTags: ['publicPost', 'publicPostLikes'],
 
@@ -33,4 +53,9 @@ export const postsApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { useGetAnswersWithPaginationQuery, useGetPostLikesQuery, useUpdateLikePostMutation } = postsApi;
+export const {
+  useGetAnswersWithPaginationQuery,
+  useGetPostLikesQuery,
+  useGetPostsByUserNameQuery,
+  useUpdateLikePostMutation
+} = postsApi;

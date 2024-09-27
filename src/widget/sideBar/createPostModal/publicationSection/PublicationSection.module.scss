@@ -1,0 +1,46 @@
+.container {
+  // height: 500px;
+
+  .upperSection {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--dark-100);
+
+    .userData {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 30px;
+
+      .avatar,
+      .avatarBordered {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+      }
+
+      .avatarBordered {
+        border: 3px solid var(--light-900);
+      }
+    }
+
+    .textAreaWrapper {
+      position: relative;
+
+      .textAreaSize {
+        height: 120px;
+        background-color: var(--dark-500);
+      }
+
+      .textAreaCharCounter {
+        position: absolute;
+        right: 0;
+        color: var(--light-900);
+        text-align: end;
+      }
+    }
+  }
+
+  .locationBox {
+    padding: 1.5rem;
+  }
+}

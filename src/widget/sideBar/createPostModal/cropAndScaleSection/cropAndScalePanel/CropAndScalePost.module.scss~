@@ -1,0 +1,49 @@
+.croppingPanel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: space-between;
+
+  //width: 100%;
+
+  .ratioAndScale {
+    position: relative;
+    display: flex;
+
+    .bottomButtons {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      background-color: red;
+    }
+
+    .ratioDialog {
+      position: absolute;
+      bottom: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .ratioButton {
+        cursor: pointer;
+        margin-bottom: 5px;
+      }
+
+      .selected {
+        color: var(--light-100);
+        background-color: var(--accent-500);
+      }
+    }
+
+    .scaleDialog {
+      position: absolute;
+      bottom: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      background-color: dimgray;
+    }
+  }
+}

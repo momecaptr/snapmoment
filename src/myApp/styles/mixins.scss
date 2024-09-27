@@ -34,3 +34,21 @@
 
   animation: slide-up-to-down $duration $delay $fill-mode;
 }
+
+/**
+ * /// Modal createPost height ///
+ */
+@mixin create-post-modal-height {
+  // height: 54vh;
+  height: 55vh;
+}
+
+@mixin create-post-modal-card-width {
+  // height: 54vh;
+  width: 70vw;
+}
+
+@mixin create-post-min-max-modal-width {
+  min-width: 50vw;
+  max-width: 60vw;
+}

@@ -100,3 +100,136 @@
 //  color: var(--light-100);
 //  stroke: none;
 // }
+
+// ! БЛОК ДЛЯ МОДАЛКИ
+
+.box {
+  position: relative;
+  width: 492px;
+  background-color: var(--dark-300);
+}
+
+.line {
+  display: flex;
+  width: 100%;
+  height: 2px;
+  background-color: var(--dark-100);
+}
+
+.boxTitleAndButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.boxContent {
+  position: relative;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 135px 60px;
+}
+
+.topButton {
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  width: 219px;
+  margin-top: 60px;
+}
+
+.customFileUpload {
+  display: none;
+}
+
+.lable {
+  padding: 6px 24px;
+  background-color: var(--accent-500);
+  border-radius: 2px;
+}
+
+.errorMessage {
+  width: 397px;
+  padding: 6px 24px;
+
+  color: var(--light-100);
+  text-align: center;
+
+  background-color: var(--danger-900);
+  border: 1px solid var(--danger-300);
+}
+
+.boxErrorMessage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+
+.changeMargin {
+  padding: 24px 135px 60px;
+}
+
+.buttonSave {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  padding: 6px 24px;
+}
+
+.photoContainer {
+  position: relative;
+
+  width: 332px;
+  height: 340px;
+  margin-bottom: 15px;
+
+  background-color: rgb(0 0 0 / 65%);
+}
+
+.photoProfileWithCircle {
+  width: 100%;
+  height: 100%;
+
+  // mask-image: radial-gradient(circle, black 65%, rgb(0 0 0 / 50%) 5%);
+}
+
+.photoProfileWithCircle::before {
+  content: '';
+
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.5;
+  background-color: black;
+}
+
+// ! БЛОК ДЛЯ КАРТИНКИ
+.boxPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 222px;
+  height: 228px;
+
+  background-color: var(--dark-500);
+
+  // border-radius: 50%;
+}
+
+.photo {
+  border-radius: 50%;
+}

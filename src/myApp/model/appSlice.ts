@@ -15,7 +15,7 @@ export const appSlice = createSlice({
   initialState: initialState,
   name: 'app',
   reducers: {
-    closeAllModals: (state, action: PayloadAction<{ key: ModalKey; open: boolean }>) => {
+    closeAllModals: (state, action: PayloadAction<void>) => {
       state.modal.modalKey = [];
     },
     isPhotoInState: (state, action: PayloadAction<boolean>) => {
@@ -41,6 +41,6 @@ export const appSlice = createSlice({
   }
 });
 
-export const { isPhotoInState, setTheme, toggleModal } = appSlice.actions;
+export const { closeAllModals, isPhotoInState, setTheme, toggleModal } = appSlice.actions;
 
 export default appSlice.reducer;
