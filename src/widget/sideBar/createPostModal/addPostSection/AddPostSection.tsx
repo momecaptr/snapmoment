@@ -3,9 +3,10 @@ import React, { ChangeEvent, useRef } from 'react';
 import PhotoStub from '@/../public/assets/components/PhotoStub';
 import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 
 import s from './AddPostSection.module.scss';
+
+import { createPostActions, createPostSelectors } from '../service/createPostSlice';
 
 type AddImgSectionType = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +16,6 @@ export const AddPostSection = (props: AddImgSectionType) => {
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
-  const activeSection = useAppSelector(createPostSelectors.activeSection);
   const { showToast } = useCustomToast();
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     localStorage.removeItem('createPost');

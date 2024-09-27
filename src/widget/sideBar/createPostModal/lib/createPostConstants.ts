@@ -1,10 +1,19 @@
+import { AspectRatioVals } from '@/widget/sideBar/createPostModal/service/createPostSliceTypes';
+
+export const aspectRatios: AspectRatioVals[] = [
+  { text: 'Original', value: 1 / 1 },
+  { text: '1:1', value: 1 / 1 },
+  { text: '4:5', value: 4 / 5 },
+  { text: '16:9', value: 16 / 9 }
+];
+
 type FilterType = {
   class: string;
   name: string;
   style: string;
 };
 
-export const createPostModalFilters = [
+export const createPostModalFilters: FilterType[] = [
   {
     class: 'filter-normal',
     name: 'Normal',
@@ -53,3 +62,15 @@ export const createPostModalFilters = [
     style: 'brightness(1.4) contrast(.95) saturate(0) sepia(.35)'
   }
 ];
+
+export const direction = {
+  back: 'Back',
+  next: 'Next'
+} as const;
+
+export const modalSection = {
+  addPost: 'Add Post',
+  cropping: 'Cropping',
+  filters: 'Filters',
+  publication: 'Publication'
+} as const;

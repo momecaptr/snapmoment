@@ -1,27 +1,22 @@
+import type { AspectRatioVals } from '../../service/createPostSliceTypes';
+
 import React from 'react';
 
 import Expand from '@/../public/assets/components/Expand';
 import IconHorizontalRectangle from '@/../public/assets/components/IconHorizontalRectangle';
 import IconSquare from '@/../public/assets/components/IconSquare';
 import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRectangle';
+import Maximize from '@/../public/assets/components/Maximize';
+import MaximizeOutline from '@/../public/assets/components/MaximizeOutline';
 import Picture from '@/../public/assets/components/PictureOutline';
 import { useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
-import { AspectRatioVals } from '@/widget/sideBar/createPostModal/createPost';
-import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { clsx } from 'clsx';
 
 import s from './CropAndScalePanel.module.scss';
 
-import Maximize from '../../../../public/assets/components/Maximize';
-import MaximizeOutline from '../../../../public/assets/components/MaximizeOutline';
-
-export const aspectRatios: AspectRatioVals[] = [
-  { text: 'Original', value: 1 / 1 },
-  { text: '1:1', value: 1 / 1 },
-  { text: '4:5', value: 4 / 5 },
-  { text: '16:9', value: 16 / 9 }
-];
+import { aspectRatios } from '../../lib/createPostConstants';
+import { createPostSelectors } from '../../service/createPostSlice';
 
 type PropsCropAndScale = {
   id: string;
@@ -35,7 +30,7 @@ type PropsCropAndScale = {
  * @description dsafds gbcz
  * @param {string} id * Уникальный идентификатор текущего изображения, используемый для получения состояния изображения из Redux.
  * @param {function} onAspectChange * Функция обратного вызова, вызываемая при изменении соотношения сторон изображения. Принимает объект с полем `aspect`, содержащим новое значение соотношения сторон.
- * @param {function} onZoomChange - * Функция обратного вызова, вызываемая при изменении масштаба изображения. Принимает объект с полем `zoom`, содержащим новое значение масштаба.
+ * @param {function} onZoomChange * Функция обратного вызова, вызываемая при изменении масштаба изображения. Принимает объект с полем `zoom`, содержащим новое значение масштаба.
  */
 export const CropAndScalePanel = (props: PropsCropAndScale) => {
   const { id, onAspectChange, onZoomChange } = props;

@@ -4,35 +4,25 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
-import { AddPostSection } from '@/widget/sideBar/addPostSection/AddPostSection';
-import { CloseCreatePostModal } from '@/widget/sideBar/closeCreatePostModal/CloseCreatePostModal';
-import { NextBackDirection } from '@/widget/sideBar/createPostModal/createPost';
-import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { CropAndScaleSection } from '@/widget/sideBar/cropAndScaleSection/CropAndScaleSection';
-import { FiltersSection } from '@/widget/sideBar/filtersSection/FiltersSection';
-import { useNavigateBtnLogic } from '@/widget/sideBar/lib/useNavigateBtnLogic';
-import { useSelectFilesAndShowError } from '@/widget/sideBar/lib/useSelectFilesAndShowError';
-import { PublicationSection } from '@/widget/sideBar/publicationSection/PublicationSection';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
+
+import { AddPostSection } from './addPostSection/AddPostSection';
+import { CloseCreatePostModal } from './closeCreatePostModal/CloseCreatePostModal';
+import { CropAndScaleSection } from './cropAndScaleSection/CropAndScaleSection';
+import { FiltersSection } from './filtersSection/FiltersSection';
+import { useNavigateBtnLogic } from './hooks/useNavigateBtnLogic';
+import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
+import { direction, modalSection } from './lib/createPostConstants';
+import { PublicationSection } from './publicationSection/PublicationSection';
+import { createPostSelectors } from './service/createPostSlice';
+import { NextBackDirection } from './service/createPostSliceTypes';
 
 type PropsCrPostModal = {
   isOpen: boolean;
   setOpen: (value: boolean) => void;
 };
-
-export const direction = {
-  back: 'Back',
-  next: 'Next'
-} as const;
-
-export const modalSection = {
-  addPost: 'Add Post',
-  cropping: 'Cropping',
-  filters: 'Filters',
-  publication: 'Publication'
-} as const;
 
 export const CreatePostModal = (props: PropsCrPostModal) => {
   const { isOpen, setOpen } = props;

@@ -4,16 +4,18 @@ import Cropper, { Area, Point } from 'react-easy-crop';
 import ArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import ArrowIosForward from '@/../public/assets/components/ArrowIosForward';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { AddNewImgPanel } from '@/widget/sideBar/addNewImgPanel/AddNewImgPanel';
-import { AspectRatioVals } from '@/widget/sideBar/createPostModal/createPost';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { CropAndScalePanel, aspectRatios } from '@/widget/sideBar/cropAndScalePanel/CropAndScalePanel';
 import { clsx } from 'clsx';
 import { Swiper as SwiperProps } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import s from './CropAndScaleSection.module.scss';
+
+import { CropAndScalePanel } from '../cropAndScaleSection/cropAndScalePanel/CropAndScalePanel';
+import { aspectRatios } from '../lib/createPostConstants';
+import { createPostActions, createPostSelectors } from '../service/createPostSlice';
+import { AspectRatioVals } from '../service/createPostSliceTypes';
+import { AddNewImgPanel } from './addNewImgPanel/AddNewImgPanel';
 
 type CropAndScaleSectionType = {
   errorMessage?: null | string;

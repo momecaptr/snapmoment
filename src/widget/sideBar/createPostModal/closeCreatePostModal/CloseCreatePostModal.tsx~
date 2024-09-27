@@ -3,8 +3,8 @@ import * as React from 'react';
 
 import { useAppSelector } from '@/shared/lib';
 import { Button, Modal, Typography } from '@/shared/ui';
-import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { useRefreshPostCreationData } from '@/widget/sideBar/lib/useRefreshPostCreationData';
+import { useRefreshPostCreationData } from '../hooks/useRefreshPostCreationData';
+import { createPostSelectors } from '../service/createPostSlice';
 import clsx from 'clsx';
 
 import s from './CloseCreatePostModal.module.scss';
@@ -18,7 +18,7 @@ type Props = {
 /**
  * Компонента модалки закрытия создания поста.
  * @constructors * Кнопка yes удаляет все из стейта,
- * а кнопка save draft ТОЖЕ ЧИСТИТ СТЕЙТ, НО сохраняет все в ЛОКАЛСТОРАДЖ
+ * * а кнопка save draft ТОЖЕ ЧИСТИТ СТЕЙТ, НО сохраняет все в ЛОКАЛСТОРАДЖ
  */
 export const CloseCreatePostModal = (props: Props) => {
   const { className, isOpen, setOpen } = props;

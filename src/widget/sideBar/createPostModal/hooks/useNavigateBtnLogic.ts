@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import { direction, modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
-import { NextBackDirection } from '@/widget/sideBar/createPostModal/createPost';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import getCroppedImg from '@/widget/sideBar/lib/cropImage';
+import getCroppedImg from '@/widget/sideBar/createPostModal/lib/cropImage';
+import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/service/createPostSlice';
+import { NextBackDirection } from '@/widget/sideBar/createPostModal/service/createPostSliceTypes';
+
+import { direction, modalSection } from '../lib/createPostConstants';
 
 // interface NavigateBtnLogic {
 //   activeSection: CreatePostModalSections;

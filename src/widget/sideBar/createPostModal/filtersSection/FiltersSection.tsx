@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Typography } from '@/shared/ui';
-import { CreatePostImgProps } from '@/widget/sideBar/createPostModal/createPost';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { createPostModalFilters } from '@/widget/sideBar/lib/createPostModalFilters';
-import { createImage } from '@/widget/sideBar/lib/cropImage';
 import { clsx } from 'clsx';
 
 import s from './FiltersSection.module.scss';
+
+import { createPostModalFilters } from '../lib/createPostConstants';
+import { createImage } from '../lib/cropImage';
+import { createPostActions, createPostSelectors } from '../service/createPostSlice';
+import { CreatePostImgProps } from '../service/createPostSliceTypes';
 
 type Props = {
   className?: string;

@@ -1,6 +1,6 @@
 import { appSlice } from '@/myApp/model/appSlice';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
-import { createPostSlice } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { createPostSlice } from '@/widget/sideBar/createPostModal/service/createPostSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 

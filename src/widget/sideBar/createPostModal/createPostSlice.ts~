@@ -1,18 +1,19 @@
-import {
+import type {
   CreatePostImgProps,
   CreatePostModalSections,
   CroppedAreaPx,
   UpdateImgAspect,
   UpdateImgCrop,
   UpdateImgZoom
-} from '@/widget/sideBar/createPostModal/createPost';
+} from './createPostSlice.d.ts';
+
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v1 } from 'uuid';
 
 const slice = createSlice({
   initialState: {
     activeSection: 'Cropping' as CreatePostModalSections,
-    allPostImages: [] as CreatePostImgProps[],
+    allPostImages: [] as CreatePostImgProps[]
   },
   name: 'createPost',
   reducers: {

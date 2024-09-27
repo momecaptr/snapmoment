@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Typography } from '@/shared/ui';
-import { CreatePostImgProps } from '@/widget/sideBar/createPostModal/createPost';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { createPostModalFilters } from '@/widget/sideBar/lib/createPostModalFilters';
-import { createImage } from '@/widget/sideBar/lib/cropImage';
+import { createPostModalFilters } from '../lib/createPostConstants';
+import { createPostActions, createPostSelectors } from '../service/createPostSlice';
+import { CreatePostImgProps } from '../service/createPostSliceTypes';
+import { createImage } from '../lib/cropImage';
 import { clsx } from 'clsx';
 
 import s from './FiltersSection.module.scss';
@@ -20,7 +20,7 @@ type Props = {
 /**
  * Компонента для применения фильтров к выбранному кроппированному изображению
  * @description Есть заранее заготовленная переменная с фильтрами. Тут мы прокидываем открытый индекс изображения (от карусели). При клике на изображение в области фильтров, применяем трансформацию к выбранному изображению (к обрезанному) из стейта НО ТОЛЬКО ДЛЯ buferUrl (не url и не originalUrl).
- * @description ПИСПОЛЬЗУЕМ useEffect для обновления фильрова картинки потому что функция сохранения картинки с фильтром асинхронная и чтобы обеспечить моментальное ее срабатывание, делаем useEffect. Когда не использовал, картинка обновляляась только на второй клик.
+ * @description Для обновления фильров картинки ИСПОЛЬЗУЕМ useEffect потому что функция сохранения картинки с фильтром асинхронная и чтобы обеспечить моментальное ее срабатывание, делаем useEffect. Когда не использовал, картинка обновляляась только на второй клик.
  * @param {number} props.imgIndex - индекс выбранного изображения (от карусели)
  */
 export const FiltersSection = (props: Props) => {

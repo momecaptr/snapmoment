@@ -12,13 +12,14 @@ import {
 import { publicApi } from '@/shared/api/public/publicApi';
 import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { FormTextfield, FormTextfieldArea, Typography } from '@/shared/ui';
-import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
-import { useRefreshPostCreationData } from '@/widget/sideBar/lib/useRefreshPostCreationData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { z } from 'zod';
 
 import s from './PublicationSection.module.scss';
+
+import { useRefreshPostCreationData } from '../hooks/useRefreshPostCreationData';
+import { createPostSelectors } from '../service/createPostSlice';
 
 type Props = {
   className?: string;
@@ -39,7 +40,6 @@ export type AddPostType = z.infer<typeof addPostSchema>;
  * @description Форма есть, НО КАК ПРИВЯЗАТЬ submit к кнопке Publish у родителя?! Правильно - используем ref.  От родителя кинули сюда, привязали к button и этот button скрыли. Также как с инпутами для файлов.
  * @description Чтобы отправить пост, нужно использовать 2 запроса. Первый - publishPostImages, отправляет чисто картинки, второй - использует ответ от первого (idКартинок - childrenMetaData) И описание из формы (НО НЕ Location). Почему без Location я ХЗ
  * @param {React.RefObject<HTMLButtonElement>} props.submitRef - ref от родителя. Нужен для того, чтобы у родителя, на кнопке Publish сделать submitRef.current.click(), - запустить процесс отправки формы
- * @constructor
  */
 export const PublicationSection = (props: Props) => {
   const { className, submitRef } = props;

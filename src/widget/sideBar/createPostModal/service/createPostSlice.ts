@@ -1,11 +1,12 @@
-import {
+import type {
   CreatePostImgProps,
   CreatePostModalSections,
   CroppedAreaPx,
   UpdateImgAspect,
   UpdateImgCrop,
   UpdateImgZoom
-} from '@/widget/sideBar/createPostModal/createPost';
+} from './createPostSliceTypes';
+
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v1 } from 'uuid';
 

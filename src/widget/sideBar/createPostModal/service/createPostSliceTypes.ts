@@ -1,4 +1,4 @@
-import { direction, modalSection } from '@/widget/sideBar/createPostModal/CreatePostModal';
+import { direction, modalSection } from '../lib/createPostConstants';
 
 export type AspectRatioVals = {
   text: string;
@@ -28,17 +28,17 @@ export type CroppedAreaPx = {
   y: number;
 } | null;
 
-type UpdateImgCrop = {
+export type UpdateImgCrop = {
   crop: CropInit;
   id: string;
 };
 
-type UpdateImgZoom = {
+export type UpdateImgZoom = {
   id: string;
   zoom: number;
 };
 
-type UpdateImgAspect = {
+export type UpdateImgAspect = {
   aspect: AspectRatioVals;
   id: string;
 };

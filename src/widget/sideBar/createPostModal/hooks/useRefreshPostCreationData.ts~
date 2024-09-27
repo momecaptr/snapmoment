@@ -1,6 +1,6 @@
 import { closeAllModals } from '@/myApp/model/appSlice';
 import { useAppDispatch } from '@/shared/lib';
-import { createPostActions } from '@/widget/sideBar/createPostModal/createPostSlice';
+import { createPostActions } from '../service/createPostSlice';
 
 /**
  * Кастомный хук, где производится:

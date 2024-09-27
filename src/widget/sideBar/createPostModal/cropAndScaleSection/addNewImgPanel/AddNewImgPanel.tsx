@@ -1,17 +1,17 @@
 import React, { ChangeEvent, useRef } from 'react';
 
 import Close from '@/../public/assets/components/Close';
+import ImageIcon from '@/../public/assets/components/Image';
+import ImageOutline from '@/../public/assets/components/ImageOutline';
 import PlusCircleOutline from '@/../public/assets/components/PlusCircleOutline';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Button, CustomDropdownItem, CustomDropdownWrapper } from '@/shared/ui';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 
 import s from './AddNewImgPanel.module.scss';
 
-import ImageIcon from '../../../../public/assets/components/Image';
-import ImageOutline from '../../../../public/assets/components/ImageOutline';
+import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
 
 type Props = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
