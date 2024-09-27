@@ -15,6 +15,7 @@ export const AddPostSection = (props: AddImgSectionType) => {
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
+  const activeSection = useAppSelector(createPostSelectors.activeSection);
   const { showToast } = useCustomToast();
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     localStorage.removeItem('createPost');

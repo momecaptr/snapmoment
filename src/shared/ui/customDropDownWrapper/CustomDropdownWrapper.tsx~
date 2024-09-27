@@ -99,6 +99,14 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
   }
 );
 
+
+type CustomDropdownItemProps = {
+  children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
+  style?: CSSProperties;
+} & ComponentPropsWithoutRef<typeof DropdownMenu.Item>;
+
 /**
  * Компонент `CustomDropdownItem` — элемент выпадающего меню, представляющий отдельный пункт.
  *
@@ -107,12 +115,6 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
  * @param {boolean} disabled - Определяет, доступен ли элемент для взаимодействия (по умолчанию `false`).
  * @param {CSSProperties} style - Дополнительные стили для элемента меню.
  */
-type CustomDropdownItemProps = {
-  children?: ReactNode;
-  className?: string;
-  disabled?: boolean;
-  style?: CSSProperties;
-} & ComponentPropsWithoutRef<typeof DropdownMenu.Item>;
 export const CustomDropdownItem = ({
   children,
   className,
@@ -138,7 +140,17 @@ type CustomDropdownItemWithIconProps = {
   variant?: TypographyVariant;
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Item> &
   Omit<CustomDropdownItemProps, 'children'>;
-
+/**
+ * Компонент `CustomDropdownItemWithIcon` — элемент выпадающего меню с иконкой и заголовком.
+ *
+ * @param {string} className - Дополнительные классы для стилизации элемента меню.
+ * @param {boolean} disabled - Определяет, доступен ли элемент для взаимодействия (по умолчанию `false`).
+ * @param {ReactNode} icon - Иконка, отображаемая рядом с заголовком пункта меню.
+ * @param {function} onSelect - Обработчик события выбора пункта меню.
+ * @param {CSSProperties} style - Дополнительные стили для элемента меню.
+ * @param {string} title - Заголовок, отображаемый в пункте меню.
+ * @param {TypographyVariant} variant - Вариант стилизации текста заголовка.
+ */
 export const CustomDropdownItemWithIcon = ({
   className,
   disabled,

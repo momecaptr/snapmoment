@@ -1,7 +1,11 @@
 .card {
-  width: 500px;
-  height: 200px;
-}
-.boxContent{
-
+  max-width: 450px;
+  width: 100%;
+  .text {
+    margin-bottom: 24px;
+  }
+  .buttonsWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
 }

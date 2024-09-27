@@ -99,6 +99,13 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
   }
 );
 
+type CustomDropdownItemProps = {
+  children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
+  style?: CSSProperties;
+} & ComponentPropsWithoutRef<typeof DropdownMenu.Item>;
+
 /**
  * Компонент `CustomDropdownItem` — элемент выпадающего меню, представляющий отдельный пункт.
  *
@@ -107,12 +114,6 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
  * @param {boolean} disabled - Определяет, доступен ли элемент для взаимодействия (по умолчанию `false`).
  * @param {CSSProperties} style - Дополнительные стили для элемента меню.
  */
-type CustomDropdownItemProps = {
-  children?: ReactNode;
-  className?: string;
-  disabled?: boolean;
-  style?: CSSProperties;
-} & ComponentPropsWithoutRef<typeof DropdownMenu.Item>;
 export const CustomDropdownItem = ({
   children,
   className,

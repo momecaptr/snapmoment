@@ -23,7 +23,8 @@ export const useNavigateBtnLogic = () => {
   const saveCropImgToUrl = async () => {
     const newImages = await Promise.all(
       allPostImages.map(async (img) => {
-        // Передаем в getCroppedImg originUrl, то есть оригинальную картинку.
+        // Эта функция нужна чтобы можно было картинку из Cropper компоненты, то есть с вырезаемой областью, СОХРАНИТЬ. То есть можно было бы обрезаемое изображение пересохранить.
+        // Мы не будем менять оригинал, мы сохраним это в параметре url и buferUrl
         const croppedImg = await getCroppedImg(img.originUrl, img.croppedAreaPx);
         // А тут возвращаем в url (НЕ В OriginImageURL, то есть не в оригинал, а в обрабатываемый url).
 

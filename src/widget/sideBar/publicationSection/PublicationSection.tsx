@@ -34,6 +34,12 @@ const addPostSchema = z.object({
 
 export type AddPostType = z.infer<typeof addPostSchema>;
 
+/**
+ * Компонент для отправки запроса на сохранение поста
+ * @description Форма есть, НО КАК ПРИВЯЗАТЬ submit к кнопке Publish у родителя?! Правильно - используем ref.  От родителя кинули сюда, привязали к button и этот button скрыли. Также как с инпутами для файлов.
+ * @description Чтобы отправить пост, нужно использовать 2 запроса. Первый - publishPostImages, отправляет чисто картинки, второй - использует ответ от первого (idКартинок - childrenMetaData) И описание из формы (НО НЕ Location). Почему без Location я ХЗ
+ * @param {React.RefObject<HTMLButtonElement>} props.submitRef - ref от родителя. Нужен для того, чтобы у родителя, на кнопке Publish сделать submitRef.current.click(), - запустить процесс отправки формы
+ */
 export const PublicationSection = (props: Props) => {
   const { className, submitRef } = props;
 
@@ -46,17 +52,12 @@ export const PublicationSection = (props: Props) => {
   const [publishPostImages, { isLoading: isLoadingImages }] = usePublishPostsImageMutation();
   const [publishPostDescription, { isLoading: isLoadingDescription }] = usePublishPostsMutation();
 
-  // toastId нужен для того, чтобы вы могли управлять одним и тем же тостером в разных запросах. Если вы не используете toastId, то каждый вызов showToast будет создавать новый тостер, и вы не сможете обновлять состояние уже существующего тостера.
+  // toastId нужен для того, чтобы управлять одним и тем же тостером в разных запросах. Если не использовать toastId, то каждый вызов showToast будет создавать новый тостер.
   const [toastId, setToastId] = useState<null | number | string>(null);
 
   const refresh = () => {
-    // ОБНОВЛЯЕМ ВСЕ C ЗАДЕРЖКОЙ В 1 сек???
-    // new Promise((res) => {
-    //   setTimeout(res, 1000);
-    // }).then(() => {
-    dispatch(publicApi.util.resetApiState()); // Сбрасываем кэш => перезагружаем запросы.
-    refreshPostCreationData(); // Сбрасываеме стейт слайса
-    // });
+    dispatch(publicApi.util.resetApiState()); // Сбрасываем кэш => перезагружаем запросы. Я ХУЙ ЕГО ЗНАЕТ ЗАЧЕМ, но так рекомендовал GPT
+    refreshPostCreationData(); // Сбрасываем стейт слайса
   };
 
   const {

@@ -23,7 +23,7 @@ type CropAndScaleSectionType = {
 /**
  * Компонента СЕКЦИИ для обрезания и масштабирования картинки
  * @param {(e: ChangeEvent<HTMLInputElement>) => void} props.onSelectFile - обязательный параметр, функция для добавления изображения, которая передается в AddNewImgPanel
- * @description * Сохраняем индекс активной картинки карусели Swiper (используем тут) и передаем в AddNewImgPanel (чтобы в DropDown можно было переключаться по картинкам тоже)
+ * * Сохраняем индекс активной картинки карусели Swiper (используем тут) и передаем в AddNewImgPanel (чтобы в DropDown можно было переключаться по картинкам тоже)
  * * В Swiper отображаем Cropper компонентой от ReactEasyCrop котрая принимает crop область, aspect, zoom и функции для их изменения
  * * AddNewImgPanel - компонент для добавления новых изображений
  * * CropAndScalePanel - компонент для масштабирования и обрезания

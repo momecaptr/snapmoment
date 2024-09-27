@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 
-import { useAppDispatch, useAppSelector } from '@/shared/lib';
+import { useAppSelector } from '@/shared/lib';
 import { Button, Modal, Typography } from '@/shared/ui';
 import { createPostSelectors } from '@/widget/sideBar/createPostModal/createPostSlice';
 import { useRefreshPostCreationData } from '@/widget/sideBar/lib/useRefreshPostCreationData';
@@ -14,9 +14,14 @@ type Props = {
   isOpen: boolean;
   setOpen: (val: boolean) => void;
 };
+
+/**
+ * Компонента модалки закрытия создания поста.
+ * @constructors * Кнопка yes удаляет все из стейта,
+ * * а кнопка save draft ТОЖЕ ЧИСТИТ СТЕЙТ, НО сохраняет все в ЛОКАЛСТОРАДЖ
+ */
 export const CloseCreatePostModal = (props: Props) => {
   const { className, isOpen, setOpen } = props;
-  const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   const { refreshPostCreationData } = useRefreshPostCreationData();
 
@@ -24,31 +29,25 @@ export const CloseCreatePostModal = (props: Props) => {
     refreshPostCreationData();
   };
   const handleSaveDraft = () => {
-    // todo Добавить сохранение allPostImages в localStorage или в indexedDb
     allPostImages.length && localStorage.setItem('createPost', JSON.stringify(allPostImages));
     refreshPostCreationData();
   };
 
   return (
-    <Modal
-      className={clsx(s.card)}
-      classNameContent={s.createPostModal}
-      onOpenChange={() => setOpen(false)}
-      open={isOpen}
-      title={'Close'}
-    >
-      <div className={s.boxContent}>
-        <Typography variant={'regular_text_16'}>
-          Do you really want to close the creation of a publication? If you close everything will be deleted
-        </Typography>
-        <div className={s.buttonsWrapper}>
-          <Button onClick={handleDiscard}>
-            <Typography variant={'h3'}>Yes</Typography>
-          </Button>
-          <Button onClick={handleSaveDraft}>
-            <Typography variant={'h3'}>Save draft</Typography>
-          </Button>
-        </div>
+    <Modal className={clsx(s.card)} onOpenChange={() => setOpen(false)} open={isOpen} title={'Close'}>
+      <div className={s.text}>
+        <Typography variant={'regular_text_16'}>Do you really want to close the creation of a publication?</Typography>
+        <Typography variant={'regular_text_16'}>If you close everything will be deleted</Typography>
+      </div>
+      <div className={s.buttonsWrapper}>
+        <Button onClick={handleDiscard} variant={'outlined'}>
+          <Typography className={s.yes} variant={'h3'}>
+            Yes
+          </Typography>
+        </Button>
+        <Button onClick={handleSaveDraft}>
+          <Typography variant={'h3'}>Save draft</Typography>
+        </Button>
       </div>
     </Modal>
   );

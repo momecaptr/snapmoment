@@ -2,6 +2,12 @@ import { closeAllModals } from '@/myApp/model/appSlice';
 import { useAppDispatch } from '@/shared/lib';
 import { createPostActions } from '@/widget/sideBar/createPostModal/createPostSlice';
 
+/**
+ * Кастомный хук, где производится:
+ * @constructors * массив картинок затирается в пустой массив,
+ * * переводим стейт ЗАГОЛОВКА модалки / секции в Add Post (начало)
+ * * закрываем все модалки
+ */
 export const useRefreshPostCreationData = () => {
   const dispatch = useAppDispatch();
 

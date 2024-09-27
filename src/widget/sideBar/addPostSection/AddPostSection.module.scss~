@@ -5,29 +5,28 @@
 
   width: 222px;
   height: 228px;
-  margin-bottom: 60px;
 
   background-color: var(--dark-500);
+  margin-bottom: 60px;
+
 }
 
 .buttonsWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  width: 219px;
-
   text-align: center;
+  justify-content: center;
+  width: 219px;
 
   .upload {
     display: none;
   }
 
   .label {
-    margin-bottom: 24px;
     padding: 6px 24px;
     background-color: var(--accent-500);
     border-radius: 2px;
+    margin-bottom: ;
   }
 }
 

@@ -28,6 +28,15 @@ type PropsCropAndScale = {
   onAspectChange: ({ aspect }: { aspect: AspectRatioVals }) => void;
   onZoomChange: ({ zoom }: { zoom: number }) => void;
 };
+
+/**
+ * Компонент `CropAndScalePanel` — панель для изменения соотношения сторон и масштабирования изображений.
+ *
+ * @description dsafds gbcz
+ * @param {string} id * Уникальный идентификатор текущего изображения, используемый для получения состояния изображения из Redux.
+ * @param {function} onAspectChange * Функция обратного вызова, вызываемая при изменении соотношения сторон изображения. Принимает объект с полем `aspect`, содержащим новое значение соотношения сторон.
+ * @param {function} onZoomChange - * Функция обратного вызова, вызываемая при изменении масштаба изображения. Принимает объект с полем `zoom`, содержащим новое значение масштаба.
+ */
 export const CropAndScalePanel = (props: PropsCropAndScale) => {
   const { id, onAspectChange, onZoomChange } = props;
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
