@@ -12,6 +12,11 @@ type Props = {
   isOpen: boolean;
   setOpen: (val: boolean) => void;
 };
+
+/**
+ *
+ * @param editModalHandler - если передано, то для перевода наружнего состояния из edit true в false
+ */
 export const CloseEditModal = (props: Props) => {
   const { className, editModeHandler, isOpen, setOpen } = props;
   const yesHandler = () => {

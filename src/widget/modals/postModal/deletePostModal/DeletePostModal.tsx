@@ -15,7 +15,7 @@ type Props = {
 
 /**
  *
- * @param props.deletePost - функция для удаления поста (там сначала картинки, потом сам пост удаляется)
+ * @param deletePost - функция для удаления поста (там сначала картинки, потом сам пост удаляется)
  */
 export const DeletePostModal = (props: Props) => {
   const { className, deletePost, isOpen, setOpen } = props;

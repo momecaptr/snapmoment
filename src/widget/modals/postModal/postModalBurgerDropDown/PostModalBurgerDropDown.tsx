@@ -11,18 +11,16 @@ import s from './PostModalBurgerDropDown.module.scss';
 type Props = {
   changeEditMode: () => void;
   className?: string;
-  deleteHandler: () => void;
+  deleteModalHandler: () => void;
 };
+
+/**
+ *
+ * @param changeEditMode - функция для изменения режима редактирования поста из edit true в false
+ * @param deleteModalHandler - функция для открытия модалки удаления поста
+ */
 export const PostModalBurgerDropDown = (props: Props) => {
-  const { changeEditMode, className, deleteHandler } = props;
-
-  const editHandler = () => {
-    changeEditMode();
-  };
-
-  const handleDelete = () => {
-    deleteHandler();
-  };
+  const { changeEditMode, className, deleteModalHandler } = props;
 
   return (
     <div>
@@ -37,13 +35,13 @@ export const PostModalBurgerDropDown = (props: Props) => {
       >
         <CustomDropdownItem className={s.content} onSelect={(event) => event.preventDefault()}>
           <div className={s.dropDownContentWrapper}>
-            <div className={s.dropDownItem} onClick={editHandler}>
+            <div className={s.dropDownItem} onClick={changeEditMode}>
               <Button className={s.button} type={'button'} variant={'text'}>
                 <Edit2Outline style={{ height: '24px', width: '24px' }} />
               </Button>
               <Typography className={s.text}>Edit Post</Typography>
             </div>
-            <div className={s.dropDownItem} onClick={handleDelete}>
+            <div className={s.dropDownItem} onClick={deleteModalHandler}>
               <Button className={s.button} type={'button'} variant={'text'}>
                 <TrashOutline style={{ height: '24px', width: '24px' }} />
               </Button>

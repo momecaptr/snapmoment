@@ -42,7 +42,6 @@ type Props = {
 export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) => {
   const submitRef = useRef<HTMLButtonElement>(null);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [toastId, setToastId] = useState<null | number | string>(null);
 
   const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
   const { isOpen: isDeleteModalOpen, setOpen: setIsDeleteModalOpen } = useModal(ModalKey.DeletePost);
@@ -65,9 +64,7 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
     setOpen(true);
   };
 
-  {
-    /* Функция для редактирования поста */
-  }
+  // * Функция для редактирования поста
   const newDescriptionHandler = async (newDescription: string) => {
     if (newDescription !== postData?.description) {
       showToast({ message: 'Updating post...', type: 'loading' });
@@ -82,9 +79,15 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
     setIsEditMode(false);
   };
 
-  {
-    /* Функия удаления поста */
-  }
+  // * Общая функция закрытия модалки просмотра
+  const closeModalHandler = () => {
+    showPostModalHandler(false);
+    // router.push('/', undefined, { shallow: true });
+    // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
+    pathOnClose ? router.push(pathOnClose) : router.push('/', undefined, { shallow: true });
+  };
+
+  // * Функия удаления поста
   const deletePostHandler = async () => {
     if (!postData) {
       return;
@@ -95,6 +98,8 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
     showToast({ message: 'Deleting post...', type: 'loading' });
 
     try {
+      // Удаление самого поста
+      await deletePost({ postId }).unwrap();
       // Удаление изображений поста
       if (images?.length > 0) {
         const deleteImagePromises = images.map((image) => deletePostImage({ uploadId: image.uploadId }).unwrap());
@@ -102,37 +107,24 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
         await Promise.all(deleteImagePromises);
       }
 
-      // Удаление самого поста
-      await deletePost({ postId }).unwrap();
-
       // Уведомление об успешном удалении
       showToast({ message: 'Post deleted successfully', type: 'success' });
 
-      // Закрытие модального окна после удаления поста
-      showPostModalHandler(false);
-
-      // Перенаправление на указанный путь после удаления
-      // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
-      pathOnClose ? router.push(pathOnClose) : router.push('/', undefined, { shallow: true });
+      closeModalHandler();
     } catch (error) {
       // Уведомление об ошибке при удалении
       showToast({ message: `Error occurred while deleting post: ${error}`, type: 'error' });
     }
   };
 
-  {
-    /* Функция для закрытия модалки поста в целом */
-  }
+  //* Функция для закрытия модалки просмотра поста в целом
   const setCloseModalHandler = () => {
     if (isEditMode) {
       setIsCloseEditPostModalOpen(true);
 
       return;
     }
-    showPostModalHandler(false);
-    // router.push('/', undefined, { shallow: true });
-    // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
-    pathOnClose ? router.push(pathOnClose) : router.push('/', undefined, { shallow: true });
+    closeModalHandler();
   };
 
   return (
@@ -166,7 +158,7 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
                       {isAuth && (
                         <PostModalBurgerDropDown
                           changeEditMode={() => setIsEditMode(true)}
-                          deleteHandler={() => setIsDeleteModalOpen(true)}
+                          deleteModalHandler={() => setIsDeleteModalOpen(true)}
                         />
                       )}
                     </div>

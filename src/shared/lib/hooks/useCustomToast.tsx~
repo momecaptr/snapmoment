@@ -9,7 +9,7 @@ export const useCustomToast = () => {
       (
         close // Передаем close в CustomToast
       ) => (
-        <CustomToast message={message} type={type} /> // Привязываем обработчик закрытия
+        <CustomToast message={message} onClose={close} type={type} /> // Привязываем обработчик закрытия
       )
     );
 
