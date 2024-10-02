@@ -10,14 +10,13 @@ import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
 
-import { FiltersSection } from './ui/filtersSection/FiltersSection';
 import { useNavigateBtnLogic } from './hooks/useNavigateBtnLogic';
 import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
 import { direction, modalSection } from './lib/createPostConstants';
-import { PublicationSection } from './ui/publicationSection/PublicationSection';
 import { createPostSelectors } from './service/createPostSlice';
 import { NextBackDirection } from './service/createPostSliceTypes';
-import { CropAndScaleSection } from './ui/cropAndScaleSection/CropAndScaleSection';
+import { FiltersSection } from './ui/filtersSection/FiltersSection';
+import { PublicationSection } from './ui/publicationSection/PublicationSection';
 
 type PropsCrPostModal = {
   isOpen: boolean;
@@ -93,7 +92,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
           {/*<button onClick={handleClick}>ALALALALA</button>*/}
           {allPostImages.length !== 0 ? (
             <>
-              {isCroppingSection && <CropAndScaleSection onSelectFile={onSelectFile} />}
+              {isCroppingSection && <CropAn onSelectFile={onSelectFile} dScaleSection />}
               {!isAddPostSection && !isCroppingSection && (
                 <>
                   <div className={s.leftContent}>

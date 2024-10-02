@@ -35,7 +35,7 @@ type CustomDropdownWrapperProps = {
  * @param {boolean} stayOpen - Если `true`, меню остается открытым после клика по элементам (по умолчанию `false`).
  * @param {CSSProperties} style - Дополнительные стили для выпадающего меню.
  * @param {ReactNode} trigger - Элемент триггера, по которому открывается выпадающее меню.
- * @param {ReactNode} triggerActive - Элемент триггера, отображаемый, когда меню открыто.
+ * @param {ReactNode} triggerActive - Элемент триггера, отображаемый, когда меню открыто. ДЛЯ ТЕХ СЛУЧАЕВ, КОГДА ИКОНКА ДОЛЖНА ОТЛИЧАТЬСЯ ОТ ТРИГГЕРА В ЗАКРЫТОМ СОСТОЯНИИ.
  */
 export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdownWrapperProps>(
   (
@@ -44,7 +44,7 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
       children,
       className,
       classNameTriggerActive,
-      isArrow = true,
+      isArrow = false,
       side = 'bottom',
       sideOffset = 8,
       stayOpen = false,

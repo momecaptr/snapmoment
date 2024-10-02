@@ -1,6 +1,6 @@
 .card {
   width: 100%;
-  max-width: 486px;
+  max-width: 450px;
 
   .text {
     margin-bottom: 24px;

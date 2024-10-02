@@ -30,6 +30,11 @@ export interface GetPostsByUserNameArgs {
   userName: string;
 }
 
+export interface UpdateUserPostArgs {
+  description: string;
+  postId: number;
+}
+
 export interface GetPostsByUserNameResponse {
   items?: Item[];
   pageSize: number;

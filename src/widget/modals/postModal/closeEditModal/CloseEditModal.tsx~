@@ -15,10 +15,13 @@ type Props = {
 export const CloseEditModal = (props: Props) => {
   const { className, editModeHandler, isOpen, setOpen } = props;
   const yesHandler = () => {
+    console.log('YES');
+    // ! Тут еще нужно переводить EditMode в изначальное состояние
     editModeHandler?.();
     setOpen(false);
   };
   const noHandler = () => {
+    console.log('NO');
     setOpen(false);
   };
 

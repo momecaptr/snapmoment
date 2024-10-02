@@ -17,6 +17,7 @@ export const PostModalBurgerDropDown = (props: Props) => {
 
   const editHandler = () => {
     changeEditMode();
+    console.log('Edit');
   };
 
   const deleteHandler = () => {
