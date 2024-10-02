@@ -23,7 +23,7 @@ export const CloseEditModal = (props: Props) => {
   };
 
   return (
-    <Modal className={clsx(s.card)} onOpenChange={() => setOpen(false)} open={isOpen} title={'Close'}>
+    <Modal className={clsx(s.card)} onOpenChange={() => setOpen(false)} open={isOpen} title={'Close Post'}>
       <div className={s.text}>
         <Typography variant={'regular_text_16'}>Do you really want to close the edition of the publication?</Typography>
         <Typography variant={'regular_text_16'}>If you close changes won`t be saved</Typography>

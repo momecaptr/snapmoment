@@ -35,14 +35,6 @@ export interface UpdateUserPostArgs {
   postId: number;
 }
 
-export interface DeleteUsersImagePostArgs {
-  uploadId: string;
-}
-
-export interface DeleteUsersPostArgs {
-  postId: number;
-}
-
 export interface GetPostsByUserNameResponse {
   items?: Item[];
   pageSize: number;

@@ -11,16 +11,17 @@ import s from './PostModalBurgerDropDown.module.scss';
 type Props = {
   changeEditMode: () => void;
   className?: string;
+  deleteHandler: () => void;
 };
 export const PostModalBurgerDropDown = (props: Props) => {
-  const { changeEditMode, className } = props;
+  const { changeEditMode, className, deleteHandler } = props;
 
   const editHandler = () => {
     changeEditMode();
   };
 
-  const deleteHandler = () => {
-    console.log('Delete');
+  const handleDelete = () => {
+    deleteHandler();
   };
 
   return (
@@ -42,7 +43,7 @@ export const PostModalBurgerDropDown = (props: Props) => {
               </Button>
               <Typography className={s.text}>Edit Post</Typography>
             </div>
-            <div className={s.dropDownItem} onClick={deleteHandler}>
+            <div className={s.dropDownItem} onClick={handleDelete}>
               <Button className={s.button} type={'button'} variant={'text'}>
                 <TrashOutline style={{ height: '24px', width: '24px' }} />
               </Button>

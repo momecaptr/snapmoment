@@ -1,0 +1,17 @@
+.card {
+  width: 100%;
+  max-width: 378px;
+
+  .text {
+    margin-bottom: 24px;
+  }
+
+  .buttonsWrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .yes {
+      color: var(--accent-500);
+    }
+  }
+}

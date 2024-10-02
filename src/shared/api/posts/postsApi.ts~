@@ -1,5 +1,7 @@
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import {
+  DeleteUsersImagePostArgs,
+  DeleteUsersPostArgs,
   GetAnswersWithPaginationArgs,
   GetAnswersWithPaginationResponse,
   GetPostLikesArgs,
@@ -12,12 +14,26 @@ import {
 
 export const postsApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
+    deleteUsersImagePost: builder.mutation<void, DeleteUsersImagePostArgs>({
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
+      query: ({ uploadId }) => ({
+        method: 'DELETE',
+        url: `v1/posts/image/${uploadId}`
+      })
+    }),
+    deleteUsersPost: builder.mutation<void, DeleteUsersPostArgs>({
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
+      query: ({ postId }) => ({
+        method: 'DELETE',
+        url: `v1/posts/${postId}`
+      })
+    }),
+
     getAnswersWithPagination: builder.query<GetAnswersWithPaginationResponse, GetAnswersWithPaginationArgs>({
       query: ({ commentId, postId }) => ({
         url: `v1/posts/${postId}/comments/${commentId}/answers`
       })
     }),
-
     getPostLikes: builder.query<GetPostLikesResponse, GetPostLikesArgs>({
       providesTags: ['publicPostLikes'],
       query: ({ postId }) => ({
@@ -52,7 +68,7 @@ export const postsApi = snapmomentAPI.injectEndpoints({
       })
     }),
     updateUsersPost: builder.mutation<void, UpdateUserPostArgs>({
-      invalidatesTags: ['PostsByUserName', 'publicPost'],
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
       query: ({ description, postId }) => ({
         body: { description },
         method: 'PUT',
@@ -67,5 +83,7 @@ export const {
   useGetPostLikesQuery,
   useGetPostsByUserNameQuery,
   useUpdateLikePostMutation,
-  useUpdateUsersPostMutation
+  useUpdateUsersPostMutation,
+  useDeleteUsersImagePostMutation,
+  useDeleteUsersPostMutation
 } = postsApi;
