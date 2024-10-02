@@ -103,9 +103,10 @@ export const PublicationSection = (props: Props) => {
 
       return;
     }
-    const toastId = showToast({ message: 'Publishing post...', type: 'loading' });
+    // const toastId = showToast({ message: 'Publishing post...', type: 'loading' });
+    showToast({ message: 'Publishing post...', type: 'loading' });
 
-    setToastId(toastId);
+    // setToastId(toastId);
 
     try {
       const files = await Promise.all(

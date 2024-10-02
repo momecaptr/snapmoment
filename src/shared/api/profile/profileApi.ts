@@ -21,7 +21,7 @@ export const profileApi = snapmomentAPI.injectEndpoints({
       })
     }),
     publishPostsImage: builder.mutation<PublishPostsImageResponse, File[]>({
-      invalidatesTags: ['PostsByUserName'],
+      invalidatesTags: ['PostsByUserName', 'UserProfile', 'publicPost', 'PostsByUserName'],
       query: (data) => {
         const formData = new FormData();
 

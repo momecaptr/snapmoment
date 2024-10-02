@@ -3,7 +3,6 @@ import {
   GetUserProfileResponse,
   PublishPostsArgs,
   PublishPostsImageResponse,
-  UpdateUserPostArgs,
   UpdateUserProfileArgs
 } from '@/shared/api/profile/profileTypes';
 import { Item } from '@/shared/api/public/publicTypes';
@@ -22,7 +21,7 @@ export const profileApi = snapmomentAPI.injectEndpoints({
       })
     }),
     publishPostsImage: builder.mutation<PublishPostsImageResponse, File[]>({
-      invalidatesTags: ['PostsByUserName'],
+      invalidatesTags: ['PostsByUserName', 'UserProfile', 'publicPost'],
       query: (data) => {
         const formData = new FormData();
 
@@ -60,7 +59,7 @@ export const profileApi = snapmomentAPI.injectEndpoints({
         method: 'PUT',
         url: 'v1/users/profile'
       })
-    }),
+    })
   })
 });
 
