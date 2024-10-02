@@ -77,11 +77,11 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
       },
       cropAreaStyle: {
         border: 'none'
-      },
-      mediaStyle: {
-        height: '100%',
-        objectFit: 'cover'
       }
+      // mediaStyle: {
+      //   height: '100%',
+      //   objectFit: 'cover'
+      // }
     }
   };
 
@@ -128,6 +128,8 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
                   aspect={img.aspect.value}
                   crop={img.crop}
                   image={img.originUrl}
+                  initialCroppedAreaPixels={img.croppedAreaPx || { height: 0, width: 0, x: 0, y: 0 }} // Сохраняет позицию обрезаемой области
+                  objectFit={'cover'}
                   onCropChange={(crop) => onCropChange({ crop, id: img.id })}
                   onCropComplete={onCropComplete(img.id)}
                   onZoomChange={(zoom) => onZoomChange({ id: img.id, zoom })}

@@ -1,4 +1,4 @@
-import type { AspectRatioVals } from '../../lib/createPostConstants';
+import type { AspectRatioVals } from '../../service/createPostSliceTypes';
 
 import React from 'react';
 
@@ -52,9 +52,9 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
         align={'start'}
         className={s.contentAspectsWrapper}
         classNameTriggerActive={s.ratioActive}
-        isArrow={false}
         side={'top'}
         sideOffset={2}
+        isArrow={false}
       >
         {aspectRatios.map((ratio) => (
           <CustomDropdownItem

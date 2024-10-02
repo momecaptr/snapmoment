@@ -28,7 +28,11 @@ export const FiltersSection = (props: Props) => {
   const { className, imgIndex } = props;
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
-  const [selectedFilter, setSelectedFilter] = useState<string>('none');
+  const [selectedFilter, setSelectedFilter] = useState<string>(allPostImages[imgIndex]?.filter || 'none'); // Инициализируем на основе фильтра изображения
+  const [buferIndex, setBuferIndex] = useState(imgIndex);
+  const activeSection = useAppSelector(createPostSelectors.activeSection);
+
+  console.log({ imgIndex });
 
   async function transformImage(img: CreatePostImgProps) {
     const canvas = document.createElement('canvas');
@@ -61,15 +65,20 @@ export const FiltersSection = (props: Props) => {
   // ИСПОЛЬЗУЕМ useEffect потому что функция сохранения картинки с фильтром асинхронная и чтобы обеспечить моментальное ее срабатывание, делаем useEffect
   // Когда не использовал, картинка обновляляась только на второй клик.
   useEffect(() => {
-    if (selectedFilter !== 'none') {
-      const img = allPostImages[imgIndex];
+    // if (selectedFilter !== 'none') {
+    const img = allPostImages[imgIndex];
 
-      transformImage(img).then((transformedImage) => {
-        console.log({ transformedImage });
-        dispatch(createPostActions.setFinalBuferImg({ imgIndex, transformedImage }));
-      });
-    }
+    transformImage(img).then((transformedImage) => {
+      console.log({ transformedImage });
+      dispatch(createPostActions.setFinalBuferImg({ imgIndex, transformedImage }));
+    });
+    // }
   }, [selectedFilter]);
+
+  // Синхронизация selectedFilter с изменениями imgIndex
+  useEffect(() => {
+    setSelectedFilter(allPostImages[imgIndex]?.filter || 'none'); // Обновляем фильтр при смене изображения
+  }, [imgIndex, allPostImages]);
 
   const handleFilterChange = (style: string) => {
     setSelectedFilter(style);
@@ -88,7 +97,7 @@ export const FiltersSection = (props: Props) => {
             {/* ! Использую не <Image, а img, иначе ошибка гидрации в консоли, или с параметром suppressHydrationWarning*/}
             <img
               alt={`Photo # ${imgIndex}`}
-              className={clsx(s.image, isSelected && s.active)}
+              className={clsx(s.image, isSelected ? s.active : '')}
               height={100}
               onClick={() => handleFilterChange(filter.style)}
               src={allPostImages[imgIndex].url}
