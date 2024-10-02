@@ -1,22 +1,22 @@
-import type { AspectRatioVals } from '../../service/createPostSliceTypes';
+import type { AspectRatioVals } from '../../../service/createPostSliceTypes';
 
 import React from 'react';
 
-import Expand from '@/../public/assets/components/Expand';
-import IconHorizontalRectangle from '@/../public/assets/components/IconHorizontalRectangle';
-import IconSquare from '@/../public/assets/components/IconSquare';
-import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRectangle';
-import Maximize from '@/../public/assets/components/Maximize';
-import MaximizeOutline from '@/../public/assets/components/MaximizeOutline';
-import Picture from '@/../public/assets/components/PictureOutline';
 import { useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 
 import s from './CropAndScalePanel.module.scss';
 
-import { aspectRatios } from '../../lib/createPostConstants';
-import { createPostSelectors } from '../../service/createPostSlice';
+import Expand from '../../../../../../../public/assets/components/Expand';
+import IconHorizontalRectangle from '../../../../../../../public/assets/components/IconHorizontalRectangle';
+import IconSquare from '../../../../../../../public/assets/components/IconSquare';
+import IconVerticalRectangle from '../../../../../../../public/assets/components/IconVerticalRectangle';
+import Maximize from '../../../../../../../public/assets/components/Maximize';
+import MaximizeOutline from '../../../../../../../public/assets/components/MaximizeOutline';
+import Picture from '../../../../../../../public/assets/components/PictureOutline';
+import { aspectRatios } from '../../../lib/createPostConstants';
+import { createPostSelectors } from '../../../service/createPostSlice';
 
 type PropsCropAndScale = {
   id: string;

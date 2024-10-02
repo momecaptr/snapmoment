@@ -11,11 +11,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import s from './CropAndScaleSection.module.scss';
 
-import { CropAndScalePanel } from '../cropAndScaleSection/cropAndScalePanel/CropAndScalePanel';
-import { aspectRatios } from '../lib/createPostConstants';
-import { createPostActions, createPostSelectors } from '../service/createPostSlice';
-import { AspectRatioVals } from '../service/createPostSliceTypes';
+import { aspectRatios } from '../../lib/createPostConstants';
+import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
+import { AspectRatioVals } from '../../service/createPostSliceTypes';
 import { AddNewImgPanel } from './addNewImgPanel/AddNewImgPanel';
+import { CropAndScalePanel } from './cropAndScalePanel/CropAndScalePanel';
 
 type CropAndScaleSectionType = {
   errorMessage?: null | string;

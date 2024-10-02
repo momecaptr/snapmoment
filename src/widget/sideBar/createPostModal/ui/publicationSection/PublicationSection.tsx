@@ -12,13 +12,14 @@ import {
 import { publicApi } from '@/shared/api/public/publicApi';
 import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { FormTextfield, FormTextfieldArea, Typography } from '@/shared/ui';
-import { createPostSelectors } from '../service/createPostSlice';
-import { useRefreshPostCreationData } from '../hooks/useRefreshPostCreationData';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { z } from 'zod';
 
 import s from './PublicationSection.module.scss';
+
+import { useRefreshPostCreationData } from '../../hooks/useRefreshPostCreationData';
+import { createPostSelectors } from '../../service/createPostSlice';
 
 type Props = {
   className?: string;

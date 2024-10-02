@@ -9,14 +9,16 @@ import s from './Post.module.scss';
 type Props = {
   className?: string;
   post: Item;
+  setPickedId?: (id: number) => void;
 };
 export const Post = (props: Props) => {
-  const { className, post } = props;
+  const { className, post, setPickedId } = props;
 
   console.log(post);
 
   return (
-    <Link className={clsx(s.box, className)} href={`public/post/${post.id}`}>
+    // <Link className={clsx(s.box, className)} href={`public/post/${post.id}`}>
+    <Link className={clsx(s.box, className)} href={'#'}>
       {post.images && post.images.length > 0 ? (
         <img alt={'post'} src={post.images[0].url} />
       ) : (

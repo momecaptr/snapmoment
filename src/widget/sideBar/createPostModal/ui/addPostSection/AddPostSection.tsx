@@ -6,7 +6,7 @@ import { Button, Typography } from '@/shared/ui';
 
 import s from './AddPostSection.module.scss';
 
-import { createPostActions, createPostSelectors } from '../service/createPostSlice';
+import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
 
 type AddImgSectionType = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -17,16 +17,15 @@ export const AddPostSection = (props: AddImgSectionType) => {
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   const { showToast } = useCustomToast();
-  const dataFromStorage = localStorage.getItem('createPost')
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     localStorage.removeItem('createPost');
     onSelectFile(e);
   };
 
   const handleOpenDraft = () => {
-    if (!allPostImages.length && dataFromStorage) {
+    if (!allPostImages.length && localStorage.getItem('createPost')) {
       dispatch(createPostActions.setActiveSection({ section: 'Cropping' }));
-      dispatch(createPostActions.setAllPostImgs({ images: JSON.parse(dataFromStorage) }));
+      dispatch(createPostActions.setAllPostImgs({ images: JSON.parse(localStorage.getItem('createPost') as string) }));
     } else {
       showToast({ message: 'No images saved', type: 'error' });
     }

@@ -3,11 +3,12 @@ import * as React from 'react';
 
 import { useAppSelector } from '@/shared/lib';
 import { Button, Modal, Typography } from '@/shared/ui';
-import { useRefreshPostCreationData } from '../hooks/useRefreshPostCreationData';
-import { createPostSelectors } from '../service/createPostSlice';
 import clsx from 'clsx';
 
 import s from './CloseCreatePostModal.module.scss';
+
+import { useRefreshPostCreationData } from '../../hooks/useRefreshPostCreationData';
+import { createPostSelectors } from '../../service/createPostSlice';
 
 type Props = {
   className?: string;

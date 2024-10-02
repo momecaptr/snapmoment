@@ -8,10 +8,10 @@ import { clsx } from 'clsx';
 
 import s from './FiltersSection.module.scss';
 
-import { createPostModalFilters } from '../lib/createPostConstants';
-import { createImage } from '../lib/cropImage';
-import { createPostActions, createPostSelectors } from '../service/createPostSlice';
-import { CreatePostImgProps } from '../service/createPostSliceTypes';
+import { createPostModalFilters } from '../../lib/createPostConstants';
+import { createImage } from '../../lib/cropImage';
+import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
+import { CreatePostImgProps } from '../../service/createPostSliceTypes';
 
 type Props = {
   className?: string;
@@ -75,10 +75,10 @@ export const FiltersSection = (props: Props) => {
     // }
   }, [selectedFilter]);
 
-  // // Синхронизация selectedFilter с изменениями imgIndex
-  // useEffect(() => {
-  //   setSelectedFilter(allPostImages[imgIndex]?.filter || 'none'); // Обновляем фильтр при смене изображения
-  // }, [imgIndex, allPostImages]);
+  // Синхронизация selectedFilter с изменениями imgIndex
+  useEffect(() => {
+    setSelectedFilter(allPostImages[imgIndex]?.filter || 'none'); // Обновляем фильтр при смене изображения
+  }, [imgIndex, allPostImages]);
 
   const handleFilterChange = (style: string) => {
     setSelectedFilter(style);

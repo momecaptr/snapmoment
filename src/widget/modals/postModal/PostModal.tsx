@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import s from './PostModal.module.scss';
 
 type Props = {
+  pathOnClose?: string;
   postId: number;
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
@@ -27,7 +28,7 @@ type Props = {
  *  - isOpen (boolean): флаг, указывающий, открыто ли модальное окно.
  *  - postId (number | undefined): идентификатор поста (опционально).
  */
-export const PostModal = ({ postId, showPostModalHandler }: Props) => {
+export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) => {
   const router = useRouter();
   const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
 
@@ -44,7 +45,8 @@ export const PostModal = ({ postId, showPostModalHandler }: Props) => {
 
   const setCloseModalHandler = () => {
     showPostModalHandler(false);
-    router.push('/', undefined, { shallow: true });
+    // router.push('/', undefined, { shallow: true });
+    pathOnClose ? router.push(pathOnClose) : router.push('/', undefined, { shallow: true });
   };
 
   return (

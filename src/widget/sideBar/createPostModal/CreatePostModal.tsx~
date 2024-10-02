@@ -4,19 +4,20 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
+import { AddPostSection } from '@/widget/sideBar/createPostModal/ui/addPostSection/AddPostSection';
+import { CloseCreatePostModal } from '@/widget/sideBar/createPostModal/ui/closeCreatePostModal/CloseCreatePostModal';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
 
-import { AddPostSection } from './addPostSection/AddPostSection';
-import { CloseCreatePostModal } from './closeCreatePostModal/CloseCreatePostModal';
-import { CropAndScaleSection } from './cropAndScaleSection/CropAndScaleSection';
-import { FiltersSection } from './filtersSection/FiltersSection';
+import { FiltersSection } from './ui/filtersSection/FiltersSection';
 import { useNavigateBtnLogic } from './hooks/useNavigateBtnLogic';
 import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
 import { direction, modalSection } from './lib/createPostConstants';
-import { PublicationSection } from './publicationSection/PublicationSection';
+import { PublicationSection } from './ui/publicationSection/PublicationSection';
 import { createPostSelectors } from './service/createPostSlice';
+import { NextBackDirection } from './service/createPostSliceTypes';
+import { CropAndScaleSection } from './ui/cropAndScaleSection/CropAndScaleSection';
 
 type PropsCrPostModal = {
   isOpen: boolean;
