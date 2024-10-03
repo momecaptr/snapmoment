@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import ArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import ArrowIosForward from '@/../public/assets/components/ArrowIosForward';
@@ -31,7 +31,6 @@ type Props<T extends HasUrl> = {
 
 /**
  * Компонент `PhotosSwiper` — карусель изображений с поддержкой навигации и пагинации.
- *ы
  * @template T - Тип, который расширяет интерфейс `HasUrl`. HasUrl - тип с параметром url: string. Короче, принимает массив любых объектов, но обязательно должен быть url
  * @param {string} className - Дополнительные классы для стилизации контейнера карусели.
  * @param {string} classNameImage - Дополнительные классы для стилизации изображений.
@@ -62,7 +61,7 @@ export const PhotosSwiper = <T extends HasUrl>({
     // Передаем index картинки с которой работаем, когда свайпнулись
     setCurrentIndex(swiper.realIndex);
     // Передаем index картинки наружу
-    getIndex?.(swiper.realIndex);
+    // getIndex?.(swiper.realIndex);
     updateActiveBullet(swiper);
   };
 
@@ -77,6 +76,12 @@ export const PhotosSwiper = <T extends HasUrl>({
       }
     });
   };
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      getIndex?.(swiperRef.current.realIndex);
+    }
+  });
 
   return (
     <div className={clsx(s.container, className)}>

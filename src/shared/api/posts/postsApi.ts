@@ -1,22 +1,39 @@
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
 import {
+  DeleteUsersImagePostArgs,
+  DeleteUsersPostArgs,
   GetAnswersWithPaginationArgs,
   GetAnswersWithPaginationResponse,
   GetPostLikesArgs,
   GetPostLikesResponse,
   GetPostsByUserNameArgs,
   GetPostsByUserNameResponse,
-  UpdateLikePostArgs
+  UpdateLikePostArgs,
+  UpdateUserPostArgs
 } from '@/shared/api/posts/postsTypes';
 
 export const postsApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
+    deleteUsersImagePost: builder.mutation<void, DeleteUsersImagePostArgs>({
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
+      query: ({ uploadId }) => ({
+        method: 'DELETE',
+        url: `v1/posts/image/${uploadId}`
+      })
+    }),
+    deleteUsersPost: builder.mutation<void, DeleteUsersPostArgs>({
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
+      query: ({ postId }) => ({
+        method: 'DELETE',
+        url: `v1/posts/${postId}`
+      })
+    }),
+
     getAnswersWithPagination: builder.query<GetAnswersWithPaginationResponse, GetAnswersWithPaginationArgs>({
       query: ({ commentId, postId }) => ({
         url: `v1/posts/${postId}/comments/${commentId}/answers`
       })
     }),
-
     getPostLikes: builder.query<GetPostLikesResponse, GetPostLikesArgs>({
       providesTags: ['publicPostLikes'],
       query: ({ postId }) => ({
@@ -49,13 +66,24 @@ export const postsApi = snapmomentAPI.injectEndpoints({
         method: 'PUT',
         url: `v1/posts/${postId}/like-status`
       })
+    }),
+    updateUsersPost: builder.mutation<void, UpdateUserPostArgs>({
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
+      query: ({ description, postId }) => ({
+        body: { description },
+        method: 'PUT',
+        url: `v1/posts/${postId}`
+      })
     })
   })
 });
 
 export const {
+  useDeleteUsersImagePostMutation,
+  useDeleteUsersPostMutation,
   useGetAnswersWithPaginationQuery,
   useGetPostLikesQuery,
   useGetPostsByUserNameQuery,
-  useUpdateLikePostMutation
+  useUpdateLikePostMutation,
+  useUpdateUsersPostMutation
 } = postsApi;

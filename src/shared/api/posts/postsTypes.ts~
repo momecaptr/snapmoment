@@ -1,4 +1,4 @@
-import { AnswerItems, UserFollowingFollowersProps } from '@/shared/api/public/publicTypes';
+import { AnswerItems, Item, UserFollowingFollowersProps } from '@/shared/api/public/publicTypes';
 
 export type GetAnswersWithPaginationArgs = {
   commentId: number;
@@ -28,6 +28,11 @@ export interface GetPostsByUserNameArgs {
   sortBy?: string;
   sortDirection?: string;
   userName: string;
+}
+
+export interface UpdateUserPostArgs {
+  description: string;
+  postId: number;
 }
 
 export interface GetPostsByUserNameResponse {

@@ -30,6 +30,19 @@ export interface GetPostsByUserNameArgs {
   userName: string;
 }
 
+export interface UpdateUserPostArgs {
+  description: string;
+  postId: number;
+}
+
+export interface DeleteUsersImagePostArgs {
+  uploadId: string;
+}
+
+export interface DeleteUsersPostArgs {
+  postId: number;
+}
+
 export interface GetPostsByUserNameResponse {
   items?: Item[];
   pageSize: number;

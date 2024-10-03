@@ -94,3 +94,12 @@
     }
   }
 }
+
+.editButton {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+  height: 100%;
+  padding: 1.5rem;
+}

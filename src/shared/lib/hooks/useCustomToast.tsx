@@ -5,9 +5,14 @@ import { toast } from 'sonner';
 
 export const useCustomToast = () => {
   const showToast = useCallback(({ message, type }: { message: string; type: 'error' | 'loading' | 'success' }) => {
-    const toastId = toast.custom(() => <CustomToast message={message} type={type} />);
+    const toastId = toast.custom(
+      (
+        close // Передаем close в CustomToast
+      ) => (
+        <CustomToast message={message} type={type} /> // Привязываем обработчик закрытия
+      )
+    );
 
-    // toastId нужен для того, чтобы вы могли управлять одним и тем же тостером в разных запросах. Если вы не используете toastId, то каждый вызов showToast будет создавать новый тостер, и вы не сможете обновлять состояние уже существующего тостера.
     return toastId;
   }, []);
 

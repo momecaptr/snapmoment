@@ -1,6 +1,6 @@
-import s from './CustomToast.module.scss';
+import { toast } from 'sonner';
 
-import CloseOutline from '../../../../public/assets/components/CloseOutline';
+import s from './CustomToast.module.scss';
 
 export type CustomToastProps = {
   message: string;
@@ -11,7 +11,9 @@ export const CustomToast = ({ message, type }: CustomToastProps) => {
   return (
     <div className={`${s.toastContainer} ${s[type]}`}>
       <div className={s.toastMessage}>{message}</div>
-      <CloseOutline />
+      <button className={s.closeButton} onClick={() => toast.dismiss()}>
+        ✖
+      </button>
     </div>
   );
 };

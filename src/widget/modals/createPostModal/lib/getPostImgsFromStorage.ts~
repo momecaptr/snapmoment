@@ -1,0 +1,11 @@
+import { CreatePostImgProps } from '@/widget/sideBar/createPostModal/service/createPostSliceTypes';
+
+export const getImgFromStorageByIndex = (imgIndex: number): CreatePostImgProps[] | null => {
+  const imgFromLocal = localStorage.getItem('createPost');
+
+  if (imgFromLocal) {
+    return JSON.parse(imgFromLocal)[imgIndex];
+  }
+
+  return null;
+};

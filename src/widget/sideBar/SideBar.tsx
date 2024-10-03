@@ -11,12 +11,13 @@ import TrendingUp from '@/../public/assets/components/TrendingUp';
 import { useLogoutMutation, useMeQuery } from '@/shared/api/auth/authApi';
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
-import { CreatePostModal } from '@/widget/sideBar/createPostModal/CreatePostModal';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import s from './SideBar.module.scss';
+
+import { CreatePostModal } from '../modals/createPostModal/CreatePostModal';
 
 type MainLinksProps = {
   IconComponent: ElementType;

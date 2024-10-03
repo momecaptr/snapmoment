@@ -20,26 +20,8 @@ export const profileApi = snapmomentAPI.injectEndpoints({
         url: 'v1/posts'
       })
     }),
-    // publishPostsImage: builder.mutation<PublishPostsImageResponse, string[]>({
-    //   invalidatesTags: ['PostsByUserName'],
-    //   query: (data) => {
-    //     const formData = new FormData();
-    //
-    //     data.forEach((file: string) => {
-    //       formData.append('file', file);
-    //     });
-    //
-    //     console.log({ apiFormData: formData });
-    //
-    //     return {
-    //       body: formData,
-    //       method: 'POST',
-    //       url: 'v1/posts/image'
-    //     };
-    //   }
-    // }),
     publishPostsImage: builder.mutation<PublishPostsImageResponse, File[]>({
-      invalidatesTags: ['PostsByUserName'],
+      invalidatesTags: ['PostsByUserName', 'UserProfile', 'publicPost', 'PostsByUserName'],
       query: (data) => {
         const formData = new FormData();
 

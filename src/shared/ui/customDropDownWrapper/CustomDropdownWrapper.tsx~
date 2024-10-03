@@ -44,7 +44,7 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
       children,
       className,
       classNameTriggerActive,
-      isArrow = true,
+      isArrow = false,
       side = 'bottom',
       sideOffset = 8,
       stayOpen = false,
@@ -98,7 +98,6 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
     );
   }
 );
-
 
 type CustomDropdownItemProps = {
   children?: ReactNode;

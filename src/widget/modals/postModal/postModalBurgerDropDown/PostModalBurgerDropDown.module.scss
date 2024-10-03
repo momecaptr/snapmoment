@@ -1,0 +1,48 @@
+.activeTrigger {
+  color: var(--accent-500);
+}
+
+.opener {
+  cursor: pointer;
+}
+
+.content {
+  padding: 0;
+
+  .dropDownContentWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-500);
+
+    .dropDownItem {
+      display: flex;
+      padding-inline: 16px;
+
+      &:first-child {
+        padding-top: 16px;
+        padding-bottom: 8px;
+      }
+
+      &:last-child {
+        padding-top: 8px;
+        padding-bottom: 16px;
+      }
+
+      &:hover {
+        color: var(--accent-500);
+      }
+
+      .button {
+        margin-right: 16px;
+      }
+
+      .text {
+        color: inherit;
+
+        &:hover {
+          color: var(--accent-500);
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import ArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import ArrowIosForward from '@/../public/assets/components/ArrowIosForward';
@@ -60,8 +60,6 @@ export const PhotosSwiper = <T extends HasUrl>({
   const handleSlideChange = (swiper: SwiperProps) => {
     // Передаем index картинки с которой работаем, когда свайпнулись
     setCurrentIndex(swiper.realIndex);
-    // Передаем index картинки наружу
-    getIndex?.(swiper.realIndex);
     updateActiveBullet(swiper);
   };
 
@@ -76,6 +74,13 @@ export const PhotosSwiper = <T extends HasUrl>({
       }
     });
   };
+
+  useEffect(() => {
+    // Передаем index картинки наружу ЧЕРЕЗ USEEFFECT!
+    if (swiperRef.current) {
+      getIndex?.(swiperRef.current.realIndex);
+    }
+  });
 
   return (
     <div className={clsx(s.container, className)}>
