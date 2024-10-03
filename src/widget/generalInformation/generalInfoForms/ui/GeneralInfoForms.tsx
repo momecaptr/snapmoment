@@ -122,7 +122,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                   />
                 </div>
 
-                {stateData.length > 0 && (
+                {stateData.length && (
                   <div>
                     <Typography className={s.label} variant={'regular_text_14'}>
                       Select your region

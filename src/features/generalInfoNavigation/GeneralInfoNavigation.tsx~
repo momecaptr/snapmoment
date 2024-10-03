@@ -12,7 +12,6 @@ const links = ['General information', 'Devices', 'Account Management', 'My payme
 export const GeneralInfoNavigation: React.FC<GeneralInfoNavigationProps> = ({ setActiveSection }) => {
   const [activeLink, setActiveLink] = React.useState('General information');
 
-  // ! Рефактор от Шуляка -- вынос в отдельную функцию обеспечит оптимизацию. Каждый элемент от map будет ссылаться на эту функцию, а на создавать новую функцию для каждого элемента.
   // const handleClick = (link: string) => {
   //   setActiveLink(link);
   //   setActiveSection(link);
