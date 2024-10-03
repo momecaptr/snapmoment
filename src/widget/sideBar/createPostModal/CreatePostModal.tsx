@@ -47,6 +47,14 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     setActiveSwiperImgId(index);
   };
 
+  const closeGeneralModal = () => {
+    if (activeSection !== modalSection.addPost) {
+      setIsCloseModalOpen(true);
+    } else {
+      setOpen(false);
+    }
+  };
+
   const nextButton = allPostImages.length ? (
     <Button
       onClick={() => {
@@ -84,7 +92,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         className={clsx(!isAddPostSection && !isCroppingSection && s.card)}
         classNameContent={s.createPostModal}
         nextButton={nextButton}
-        onOpenChange={() => setIsCloseModalOpen(true)}
+        onOpenChange={closeGeneralModal}
         open={isOpen}
         showCloseButton={!allPostImages.length}
         title={activeSection}

@@ -12,7 +12,7 @@ import {
   useUpdateUsersPostMutation
 } from '@/shared/api/posts/postsApi';
 import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
-import { ModalKey, useAppDispatch, useCustomToast, useModal } from '@/shared/lib';
+import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
 import { CloseEditModal } from '@/widget/modals/postModal/closeEditModal/CloseEditModal';
@@ -48,7 +48,6 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
   const { isOpen: isCloseEditPostModalOpen, setOpen: setIsCloseEditPostModalOpen } = useModal(ModalKey.CloseEditPost);
   const { showToast } = useCustomToast();
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const { data: me } = useMeQuery();
   const { data: postData } = useGetPostByIdQuery({ postId: postId || null });
@@ -79,7 +78,7 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
     setIsEditMode(false);
   };
 
-  // * Общая функция закрытия модалки просмотра
+  // * Общая функция закрытия модалки просмотра поста
   const closeModalHandler = () => {
     showPostModalHandler(false);
     // router.push('/', undefined, { shallow: true });
@@ -154,7 +153,6 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
                   <div className={s.authorBlock}>
                     <div className={s.authorWrapper}>
                       <Author name={postData.userName} photo={postData.avatarOwner} />
-                      {/*{isAuth && <MoreActions />}*/}
                       {isAuth && (
                         <PostModalBurgerDropDown
                           changeEditMode={() => setIsEditMode(true)}

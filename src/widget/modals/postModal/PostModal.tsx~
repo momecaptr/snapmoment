@@ -48,7 +48,6 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
   const { isOpen: isCloseEditPostModalOpen, setOpen: setIsCloseEditPostModalOpen } = useModal(ModalKey.CloseEditPost);
   const { showToast } = useCustomToast();
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
   const { data: me } = useMeQuery();
   const { data: postData } = useGetPostByIdQuery({ postId: postId || null });
@@ -79,13 +78,13 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
     setIsEditMode(false);
   };
 
-  // * Общая функция закрытия модалки просмотра
+  // * Общая функция закрытия модалки просмотра поста
   const closeModalHandler = () => {
     showPostModalHandler(false);
     // router.push('/', undefined, { shallow: true });
     // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
     pathOnClose ? router.push(pathOnClose) : router.push('/', undefined, { shallow: true });
-  }
+  };
 
   // * Функия удаления поста
   const deletePostHandler = async () => {
@@ -110,7 +109,7 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
       // Уведомление об успешном удалении
       showToast({ message: 'Post deleted successfully', type: 'success' });
 
-      closeModalHandler()
+      closeModalHandler();
     } catch (error) {
       // Уведомление об ошибке при удалении
       showToast({ message: `Error occurred while deleting post: ${error}`, type: 'error' });
@@ -124,7 +123,7 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
 
       return;
     }
-    closeModalHandler()
+    closeModalHandler();
   };
 
   return (
@@ -154,7 +153,6 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
                   <div className={s.authorBlock}>
                     <div className={s.authorWrapper}>
                       <Author name={postData.userName} photo={postData.avatarOwner} />
-                      {/*{isAuth && <MoreActions />}*/}
                       {isAuth && (
                         <PostModalBurgerDropDown
                           changeEditMode={() => setIsEditMode(true)}

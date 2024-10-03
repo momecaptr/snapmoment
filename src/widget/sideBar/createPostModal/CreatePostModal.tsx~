@@ -15,6 +15,7 @@ import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
 import { direction, modalSection } from './lib/createPostConstants';
 import { createPostSelectors } from './service/createPostSlice';
 import { NextBackDirection } from './service/createPostSliceTypes';
+import { CropAndScaleSection } from './ui/cropAndScaleSection/CropAndScaleSection';
 import { FiltersSection } from './ui/filtersSection/FiltersSection';
 import { PublicationSection } from './ui/publicationSection/PublicationSection';
 
@@ -44,6 +45,14 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const getIndexFromSwiper = (index: number) => {
     setActiveSwiperImgId(index);
+  };
+
+  const closeGeneralModal = () => {
+    if (!modalSection.addPost) {
+      setOpen(false);
+    } else {
+      setIsCloseModalOpen(true);
+    }
   };
 
   const nextButton = allPostImages.length ? (
@@ -83,7 +92,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         className={clsx(!isAddPostSection && !isCroppingSection && s.card)}
         classNameContent={s.createPostModal}
         nextButton={nextButton}
-        onOpenChange={() => setIsCloseModalOpen(true)}
+        onOpenChange={closeGeneralModal}
         open={isOpen}
         showCloseButton={!allPostImages.length}
         title={activeSection}
@@ -92,7 +101,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
           {/*<button onClick={handleClick}>ALALALALA</button>*/}
           {allPostImages.length !== 0 ? (
             <>
-              {isCroppingSection && <CropAn onSelectFile={onSelectFile} dScaleSection />}
+              {isCroppingSection && <CropAndScaleSection onSelectFile={onSelectFile} />}
               {!isAddPostSection && !isCroppingSection && (
                 <>
                   <div className={s.leftContent}>

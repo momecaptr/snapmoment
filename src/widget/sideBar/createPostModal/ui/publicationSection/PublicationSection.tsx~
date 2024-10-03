@@ -104,7 +104,6 @@ export const PublicationSection = (props: Props) => {
 
       return;
     }
-
     showToast({ message: 'Publishing post...', type: 'loading' });
 
     try {
