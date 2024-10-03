@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import getCroppedImg from '@/widget/sideBar/createPostModal/lib/cropImage';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/service/createPostSlice';
-import { NextBackDirection } from '@/widget/sideBar/createPostModal/service/createPostSliceTypes';
 
 import { direction, modalSection } from '../lib/createPostConstants';
+import getCroppedImg from '../lib/cropImage';
+import { createPostActions, createPostSelectors } from '../service/createPostSlice';
+import { NextBackDirection } from '../service/createPostSliceTypes';
 
 // interface NavigateBtnLogic {
 //   activeSection: CreatePostModalSections;
@@ -42,13 +42,13 @@ export const useNavigateBtnLogic = () => {
 
   const navigateBtnLogic = (directionValue: NextBackDirection) => {
     switch (activeSection) {
-      // case modalSection.addPost:
-      //   if (directionValue === direction.next) {
-      //     dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
-      //   } else {
-      //     console.log('Начало');
-      //   }
-      //   break;
+      case modalSection.addPost:
+        if (directionValue === direction.next) {
+          dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
+        } else {
+          console.log('Начало');
+        }
+        break;
       case modalSection.cropping:
         if (directionValue === direction.next) {
           dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));

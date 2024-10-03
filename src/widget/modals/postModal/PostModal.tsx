@@ -15,10 +15,10 @@ import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/a
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
+import { PublicationSection } from '@/widget/modals/createPostModal/ui/publicationSection/PublicationSection';
 import { CloseEditModal } from '@/widget/modals/postModal/closeEditModal/CloseEditModal';
 import { DeletePostModal } from '@/widget/modals/postModal/deletePostModal/DeletePostModal';
 import { PostModalBurgerDropDown } from '@/widget/modals/postModal/postModalBurgerDropDown/PostModalBurgerDropDown';
-import { PublicationSection } from '@/widget/sideBar/createPostModal/ui/publicationSection/PublicationSection';
 import { useRouter } from 'next/router';
 
 import s from './PostModal.module.scss';

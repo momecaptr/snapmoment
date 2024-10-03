@@ -4,8 +4,8 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
-import { AddPostSection } from '@/widget/sideBar/createPostModal/ui/addPostSection/AddPostSection';
-import { CloseCreatePostModal } from '@/widget/sideBar/createPostModal/ui/closeCreatePostModal/CloseCreatePostModal';
+import { AddPostSection } from './ui/addPostSection/AddPostSection';
+import { CloseCreatePostModal } from './ui/closeCreatePostModal/CloseCreatePostModal';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';

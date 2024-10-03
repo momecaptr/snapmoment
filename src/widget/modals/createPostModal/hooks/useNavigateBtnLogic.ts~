@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import getCroppedImg from '@/widget/sideBar/createPostModal/lib/cropImage';
-import { createPostActions, createPostSelectors } from '@/widget/sideBar/createPostModal/service/createPostSlice';
-import { NextBackDirection } from '@/widget/sideBar/createPostModal/service/createPostSliceTypes';
+import getCroppedImg from '../lib/cropImage';
+import { createPostActions, createPostSelectors } from '../service/createPostSlice';
+import { NextBackDirection } from '../service/createPostSliceTypes';
 
 import { direction, modalSection } from '../lib/createPostConstants';
 
