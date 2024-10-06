@@ -29,7 +29,7 @@ export const ConditionLayout: NextPage<PropsWithChildren> = (props) => {
 export const getConditionLayout = (page: ReactElement) => {
   return (
     <StoreProvider>
-      <ConditionLayout>{page}</ConditionLayout>;
+      <ConditionLayout>{page}</ConditionLayout>
     </StoreProvider>
   );
 };

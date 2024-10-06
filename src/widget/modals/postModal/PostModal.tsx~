@@ -4,7 +4,11 @@ import { useRef, useState } from 'react';
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Author, Comment } from '@/entities';
 import { AddComment, ShowLikers, TimeAgo } from '@/features';
+<<<<<<< HEAD
 import { useMeQuery } from '@/shared/api/auth/authApi';
+=======
+import { MeResponse } from '@/shared/api/common/model/api.types';
+>>>>>>> refs/heads/development
 import {
   useDeleteUsersImagePostMutation,
   useDeleteUsersPostMutation,
@@ -15,15 +19,19 @@ import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/a
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
+import { PublicationSection } from '@/widget/modals/createPostModal/ui/publicationSection/PublicationSection';
 import { CloseEditModal } from '@/widget/modals/postModal/closeEditModal/CloseEditModal';
 import { DeletePostModal } from '@/widget/modals/postModal/deletePostModal/DeletePostModal';
 import { PostModalBurgerDropDown } from '@/widget/modals/postModal/postModalBurgerDropDown/PostModalBurgerDropDown';
 import { useRouter } from 'next/router';
 
 import s from './PostModal.module.scss';
-import { PublicationSection } from '@/widget/modals/createPostModal/ui/publicationSection/PublicationSection';
 
 type Props = {
+<<<<<<< HEAD
+=======
+  me: MeResponse | undefined;
+>>>>>>> refs/heads/development
   pathOnClose?: string;
   postId: number;
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
@@ -39,6 +47,7 @@ type Props = {
  *  - postId (number | undefined): идентификатор поста (опционально).
  * @param {string} props.pathOnClose Путь, на который перейдет приложение после закрытия модалки поста.
  */
+<<<<<<< HEAD
 export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) => {
   const submitRef = useRef<HTMLButtonElement>(null);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -48,8 +57,19 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
   const { isOpen: isCloseEditPostModalOpen, setOpen: setIsCloseEditPostModalOpen } = useModal(ModalKey.CloseEditPost);
   const { showToast } = useCustomToast();
   const router = useRouter();
+=======
+export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Props) => {
+  const submitRef = useRef<HTMLButtonElement>(null);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+>>>>>>> refs/heads/development
 
-  const { data: me } = useMeQuery();
+  const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
+  const { isOpen: isDeleteModalOpen, setOpen: setIsDeleteModalOpen } = useModal(ModalKey.DeletePost);
+  const { isOpen: isCloseEditPostModalOpen, setOpen: setIsCloseEditPostModalOpen } = useModal(ModalKey.CloseEditPost);
+  const { showToast } = useCustomToast();
+  const router = useRouter();
+
+  //const { data: me } = useMeQuery();
   const { data: postData } = useGetPostByIdQuery({ postId: postId || null });
   const { data: postComments } = useGetPostCommentsByPostIdQuery({ postId: postId || null });
   const { data: postLikes } = useGetPostLikesQuery({ postId: postId || null });

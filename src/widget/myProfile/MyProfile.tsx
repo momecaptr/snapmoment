@@ -17,6 +17,7 @@ interface Props {
 
 export const MyProfile = ({ postsUser, user }: Props) => {
   // const { data } = useGetPersonalInformationUserQuery();
+  const { data: me } = useMeQuery();
   const [pickedId, setPickedId] = useState<number | undefined>();
 
   // const { data: publicPostsByUserId } = useGetPublicPostsUserQuery({ userId: user?.id! }, { skip: !user?.id });
@@ -66,7 +67,12 @@ export const MyProfile = ({ postsUser, user }: Props) => {
   return (
     <>
       {isOpen && (
-        <PostModal pathOnClose={`/profile/${user.id}`} postId={pickedId!} showPostModalHandler={showPostModalHandler} />
+        <PostModal
+          me={me}
+          pathOnClose={`/profile/${user.id}`}
+          postId={pickedId!}
+          showPostModalHandler={showPostModalHandler}
+        />
       )}
       <Wrapper className={s.wrapper}>
         <div className={s.box}>
