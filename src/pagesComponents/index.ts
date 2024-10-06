@@ -6,6 +6,7 @@ export { useCreateNewPassword } from './createNewPassword/lib/hooks/useCreateNew
 export { CreateNewPassword } from './createNewPassword/ui/CreateNewPassword';
 export { EmailVerification } from './emailVerification/EmailVerification';
 export { GeneralInfo } from './generalInfo/GeneralInfo';
+export { HomePage } from './homePage/HomePage';
 export { usePasswordRecovery } from './passwordRecovery/lib/hooks/usePasswordRecovery';
 export { PasswordRecovery } from './passwordRecovery/ui/PasswordRecovery';
 export { default as PublicPage } from './publicPage/ui/PublicPage';

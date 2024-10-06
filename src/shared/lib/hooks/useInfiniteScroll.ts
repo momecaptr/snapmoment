@@ -1,5 +1,10 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 
+/**
+ * Тип для CSS-длины, который может быть 'auto', процентом, em, px или rem.
+ *
+ * @typedef {('auto' | `${number}%` | `${number}em` | `${number}px` | `${number}rem`)} CSSLength
+ */
 type CSSLength = 'auto' | `${number}%` | `${number}em` | `${number}px` | `${number}rem`;
 
 interface IObserverOptions {
@@ -8,6 +13,11 @@ interface IObserverOptions {
   threshold: number;
 }
 
+/**
+ * Интерфейс для опций, которые могут быть переданы в хук, исключая свойство 'root'.
+ *
+ * @typedef {Omit<IObserverOptions, 'root'>} PropsOptions
+ */
 type PropsOptions = Omit<IObserverOptions, 'root'>;
 
 export interface IUseInfiniteScroll extends Partial<PropsOptions> {
@@ -17,14 +27,34 @@ export interface IUseInfiniteScroll extends Partial<PropsOptions> {
 }
 
 /**
+ * Хук для реализации бесконечной прокрутки с использованием Intersection Observer API.
  *
- * @param props {callBack: () => void, rootMargin: string, threshold: number, triggerRef: MutableRefObject<HTMLDivElement>, wrapperRef?: MutableRefObject<HTMLDivElement> }
+ * @param {IUseInfiniteScroll} props - Объект с параметрами для настройки наблюдения.
+ * @param {Function} [props.callBack] - Функция, которая будет вызвана при попадании элемента в область наблюдения.
+ * @param {React.MutableRefObject<HTMLDivElement>} props.triggerRef - Элемент, который будет вызывать срабатывание callback при попадании в область наблюдения.
+ * @param {React.MutableRefObject<HTMLDivElement>} [props.wrapperRef] - Элемент, который будет использоваться как корневой элемент для наблюдения. Если не указан, то как корневой элемент будет использоваться viewport (Экран пользователя).
+ * @param {string} [props.rootMargin='100px 0px'] - Отступы к корневому элементу. Например, "100px 0px" будет вызван, когда элемент находится на 100px вниз и 0px вправо от корневого элемента.
+ * @param {number} [props.threshold=1.0] - Пороговое значение. Например, 0.5 будет вызван, когда элемент находится на 50% видимости.
  *
- * callBack - Функция, которая будет вызвана при попадании в область наблюдения.
- * triggerRef - Элемент, который будет вызывать срабатывание callback при попадании в область наблюдения.
- * wrapperRef - Элемент, который будет использоваться как корневой элемент для наблюдения. Если null, то как корневой элемент  будет использоваться viewport (Экран пользователя).
- * rootMargin - Отступы к корневому элементу. Например, rootMargin: "100px 0px" будет вызван, когда элемент находится на 100px вниз и 0px вправо от корневого элемента.
- * threshold - Пороговое значение. Например, threshold: 0.5 будет вызван, когда элемент находится на 50% видимости.
+ * @example
+ * const MyComponent = () => {
+ *   const triggerRef = useRef<HTMLDivElement>(null);
+ *   const wrapperRef = useRef<HTMLDivElement>(null);
+ *
+ *   useObserverInfiniteScroll({
+ *     callBack: () => console.log('Element is visible!'),
+ *     triggerRef,
+ *     wrapperRef,
+ *     rootMargin: '200px 0px',
+ *     threshold: 0.5
+ *   });
+ *
+ *   return (
+ *     <div ref={wrapperRef}>
+ *       <div ref={triggerRef}>Scroll down to see the magic happen!</div>
+ *     </div>
+ *   );
+ * };
  */
 
 export const useInfiniteScroll = (props: IUseInfiniteScroll) => {

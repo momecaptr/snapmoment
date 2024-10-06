@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Author, Comment } from '@/entities';
 import { AddComment, ShowLikers, TimeAgo } from '@/features';
-import { useMeQuery } from '@/shared/api/auth/authApi';
+import { MeResponse } from '@/shared/api/common/model/api.types';
 import {
   useDeleteUsersImagePostMutation,
   useDeleteUsersPostMutation,
@@ -24,6 +24,7 @@ import { useRouter } from 'next/router';
 import s from './PostModal.module.scss';
 
 type Props = {
+  me: MeResponse | undefined;
   pathOnClose?: string;
   postId: number;
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
@@ -39,7 +40,7 @@ type Props = {
  *  - postId (number | undefined): идентификатор поста (опционально).
  * @param {string} props.pathOnClose Путь, на который перейдет приложение после закрытия модалки поста.
  */
-export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) => {
+export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Props) => {
   const submitRef = useRef<HTMLButtonElement>(null);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
@@ -49,7 +50,7 @@ export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) 
   const { showToast } = useCustomToast();
   const router = useRouter();
 
-  const { data: me } = useMeQuery();
+  //const { data: me } = useMeQuery();
   const { data: postData } = useGetPostByIdQuery({ postId: postId || null });
   const { data: postComments } = useGetPostCommentsByPostIdQuery({ postId: postId || null });
   const { data: postLikes } = useGetPostLikesQuery({ postId: postId || null });

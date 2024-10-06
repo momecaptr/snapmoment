@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 
 import { wrapper } from '@/myApp/store';
 import { PublicPage } from '@/pagesComponents';
+import { HomePage } from '@/pagesComponents/homePage/HomePage';
+import { useMeQuery } from '@/shared/api/auth/authApi';
 import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
 import { getPublicPosts } from '@/shared/api/public/publicApi';
 import { Item } from '@/shared/api/public/publicTypes';
@@ -12,6 +14,7 @@ import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { data: me } = useMeQuery();
   const router = useRouter();
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
   const postId = Number(router.query.id);
@@ -29,8 +32,9 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
 
   return getConditionLayout(
     <>
-      {isOpen && <PostModal postId={postId} showPostModalHandler={showPostModalHandler} />}
-      <PublicPage posts={posts} showPostModalHandler={showPostModalHandler} />
+      {isOpen && <PostModal me={me} postId={postId} showPostModalHandler={showPostModalHandler} />}
+      {!me && <PublicPage posts={posts} showPostModalHandler={showPostModalHandler} />}
+      {me && <HomePage showPostModalHandler={showPostModalHandler} />}
     </>
   );
 }
