@@ -4,8 +4,6 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 // import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
-import { AddPostSection } from './ui/addPostSection/AddPostSection';
-import { CloseCreatePostModal } from './ui/closeCreatePostModal/CloseCreatePostModal';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
@@ -15,6 +13,8 @@ import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
 import { direction, modalSection } from './lib/createPostConstants';
 import { createPostSelectors } from './service/createPostSlice';
 import { NextBackDirection } from './service/createPostSliceTypes';
+import { AddPostSection } from './ui/addPostSection/AddPostSection';
+import { CloseCreatePostModal } from './ui/closeCreatePostModal/CloseCreatePostModal';
 import { CropAndScaleSection } from './ui/cropAndScaleSection/CropAndScaleSection';
 import { FiltersSection } from './ui/filtersSection/FiltersSection';
 import { PublicationSection } from './ui/publicationSection/PublicationSection';
@@ -48,6 +48,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   };
 
   const closeGeneralModal = () => {
+    console.log('closeGeneral');
     if (activeSection !== modalSection.addPost) {
       setIsCloseModalOpen(true);
     } else {

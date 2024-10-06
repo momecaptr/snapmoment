@@ -12,7 +12,7 @@ import { v1 } from 'uuid';
 
 const slice = createSlice({
   initialState: {
-    activeSection: 'Cropping' as CreatePostModalSections,
+    activeSection: 'Add Post' as CreatePostModalSections,
     allPostImages: [] as CreatePostImgProps[]
   },
   name: 'createPost',

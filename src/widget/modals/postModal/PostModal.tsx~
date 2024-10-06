@@ -4,11 +4,7 @@ import { useRef, useState } from 'react';
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Author, Comment } from '@/entities';
 import { AddComment, ShowLikers, TimeAgo } from '@/features';
-<<<<<<< HEAD
-import { useMeQuery } from '@/shared/api/auth/authApi';
-=======
 import { MeResponse } from '@/shared/api/common/model/api.types';
->>>>>>> refs/heads/development
 import {
   useDeleteUsersImagePostMutation,
   useDeleteUsersPostMutation,
@@ -28,10 +24,7 @@ import { useRouter } from 'next/router';
 import s from './PostModal.module.scss';
 
 type Props = {
-<<<<<<< HEAD
-=======
   me: MeResponse | undefined;
->>>>>>> refs/heads/development
   pathOnClose?: string;
   postId: number;
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
@@ -47,21 +40,9 @@ type Props = {
  *  - postId (number | undefined): идентификатор поста (опционально).
  * @param {string} props.pathOnClose Путь, на который перейдет приложение после закрытия модалки поста.
  */
-<<<<<<< HEAD
-export const PostModal = ({ pathOnClose, postId, showPostModalHandler }: Props) => {
-  const submitRef = useRef<HTMLButtonElement>(null);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
-  const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
-  const { isOpen: isDeleteModalOpen, setOpen: setIsDeleteModalOpen } = useModal(ModalKey.DeletePost);
-  const { isOpen: isCloseEditPostModalOpen, setOpen: setIsCloseEditPostModalOpen } = useModal(ModalKey.CloseEditPost);
-  const { showToast } = useCustomToast();
-  const router = useRouter();
-=======
 export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Props) => {
   const submitRef = useRef<HTMLButtonElement>(null);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
->>>>>>> refs/heads/development
 
   const { isOpen, setOpen } = useModal(ModalKey.ViewLikes);
   const { isOpen: isDeleteModalOpen, setOpen: setIsDeleteModalOpen } = useModal(ModalKey.DeletePost);
@@ -100,6 +81,7 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
 
   // * Общая функция закрытия модалки просмотра поста
   const closeModalHandler = () => {
+    console.log('Удаляем');
     showPostModalHandler(false);
     // router.push('/', undefined, { shallow: true });
     // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
