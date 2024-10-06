@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, forwardRef, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ElementRef, ElementType, ForwardedRef, ReactNode, forwardRef } from 'react';
 
 import { clsx } from 'clsx';
 
@@ -23,4 +23,4 @@ export const Button = forwardRef(ButtonPolymorph) as <T extends ElementType = 'b
     ref?: ForwardedRef<ElementRef<T>>;
   } & ButtonProps<T> &
     Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
-) => ReturnType<typeof ButtonPolymorph>;
+) => ReturnType<typeof ButtonPolymorph>; 

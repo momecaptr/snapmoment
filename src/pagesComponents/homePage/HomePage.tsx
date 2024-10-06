@@ -4,18 +4,18 @@ import { useLazyGetPublicPostsQuery } from '@/shared/api/public/publicApi';
 import { IUseInfiniteScroll, useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll';
 import { UserCard } from '@/widget';
 
-import s from '@/pagesComponents/publicPage/ui/PublicPage.module.scss';
+import s from './HomePage.module.scss';
 
 type Props = {
-  onOpenModal: (isOpen: boolean, postId?: number) => void;
+  showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
 
 //todo: добавить тернарник этим константам, например, в зависимости от размеров экрана
 const START_POSTS_COUNT = 10;
 const NEXT_POSTS_COUNT = 10;
 
-export const MappedPosts = (props: Props) => {
-  const { onOpenModal } = props;
+export const HomePage = (props: Props) => {
+  const { showPostModalHandler } = props;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   const [getPublicPosts, { data: publicPosts, isFetching }] = useLazyGetPublicPostsQuery();
@@ -42,9 +42,11 @@ export const MappedPosts = (props: Props) => {
 
   //todo: добавить <Loading/> в <div ref={triggerRef}></div>
   return (
-    <div>
+    <div className={s.container}>
       <div className={s.cards}>
-        {publicPosts?.items.map((post) => <UserCard key={post.id} post={post} showPostModalHandler={onOpenModal} />)}
+        {publicPosts?.items.map((post) => (
+          <UserCard key={post.id} post={post} showPostModalHandler={showPostModalHandler} />
+        ))}
       </div>
       <div ref={triggerRef}></div>
     </div>
