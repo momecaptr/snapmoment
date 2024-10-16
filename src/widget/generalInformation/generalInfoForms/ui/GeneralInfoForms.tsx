@@ -93,7 +93,7 @@ export const GeneralInfoForms = memo((props: PersonalInfoProps) => {
                       error={!!errors.dateOfBirth}
                       name={'dateOfBirth'}
                       onChange={(newValue) => onChange(newValue)}
-                      value={value}
+                      value={value ? value : new Date('2000-01-01T00:00:00.000Z').toISOString()}
                     />
                   )}
                   control={control}
