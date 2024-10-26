@@ -26,4 +26,4 @@ export const deviceApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { useDeleteSessionDeviceMutation, useDeleteTerminateDeviceMutation, useGetDeviceQuery } = deviceApi;
+export const { useGetDeviceQuery, useDeleteTerminateDeviceMutation, useDeleteSessionDeviceMutation } = deviceApi;

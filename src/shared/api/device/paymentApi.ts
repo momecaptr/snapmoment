@@ -3,6 +3,13 @@ import { CurrentPaymentSubscriptionsResponse, paymentType, paymentTypeResponse }
 
 export const paymentApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
+    getCurrentPaymentSubscription: builder.query<CurrentPaymentSubscriptionsResponse, void>({
+      providesTags: ['Payment'],
+      query: () => ({
+        method: 'GET',
+        url: '/v1/subscriptions/current-payment-subscriptions'
+      })
+    }),
     sendPayment: builder.mutation<paymentTypeResponse, paymentType>({
       invalidatesTags: ['Payment'],
       query: (data) => ({
@@ -10,15 +17,8 @@ export const paymentApi = snapmomentAPI.injectEndpoints({
         method: 'POST',
         url: '/v1/subscriptions'
       })
-    }),
-    getCurrentPaymentSubscription: builder.query<CurrentPaymentSubscriptionsResponse, void>({
-      providesTags: ['Payment'],
-      query: () => ({
-        method: 'GET',
-        url: '/v1/subscriptions/current-payment-subscriptions'
-      })
     })
   })
 });
 
-export const { useSendPaymentMutation, useGetCurrentPaymentSubscriptionQuery } = paymentApi;
+export const { useGetCurrentPaymentSubscriptionQuery, useSendPaymentMutation } = paymentApi;

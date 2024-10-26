@@ -77,8 +77,8 @@ const RenewalAndSubscriptionMenu = () => {
               month: 'long',
               year: 'numeric'
             };
-            const formattedDate = date.toLocaleString('en-EN', options);
-            const formattedDateEnd = dateEnd.toLocaleString('en-EN', options);
+            const formattedDate = date.toLocaleString('ru-RU', options);
+            const formattedDateEnd = dateEnd.toLocaleString('ru-RU', options);
 
             return (
               <div className={s.subscriptionDatePaymentBox} key={e.userId}>

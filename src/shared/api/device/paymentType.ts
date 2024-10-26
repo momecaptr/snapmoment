@@ -1,8 +1,8 @@
 export type paymentType = {
-  typeSubscription: string;
-  paymentType: string;
   amount: number;
   baseUrl: string;
+  paymentType: string;
+  typeSubscription: string;
 };
 
 export type paymentTypeResponse = {
@@ -15,9 +15,9 @@ export interface CurrentPaymentSubscriptionsResponse {
 }
 
 export interface CurrentPaymentSubscriptionsData {
-  userId: number;
-  subscriptionId: string;
+  autoRenewal: boolean;
   dateOfPayment: string;
   endDateOfSubscription: string;
-  autoRenewal: boolean;
+  subscriptionId: string;
+  userId: number;
 }
