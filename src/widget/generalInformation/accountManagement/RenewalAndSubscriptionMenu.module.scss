@@ -4,7 +4,7 @@
   grid-template-rows: 96px;
   align-items: center;
 
-  margin-top: 30px;
+  margin-top: 18px;
 
   background-color: var(--dark-500);
   border: 1px solid var(--dark-300);
@@ -34,7 +34,7 @@
 .payIconBox {
   position: fixed;
   right: 65px;
-  bottom: 150px;
+  bottom: 100px;
 
   display: flex;
   align-items: center;
@@ -42,11 +42,21 @@
 }
 
 .boxStripe {
-  cursor: pointer;
   margin-left: 54px;
 }
 
 .boxPaypal {
-  cursor: pointer;
   margin-right: 54px;
+}
+
+.checkBoxBox {
+  display: flex;
+  margin: 30px 0 17px;
+}
+
+.subscriptionDatePaymentBox {
+  display: grid;
+  grid-template-columns: 250px 250px;
+  gap: 40px;
+  margin-left: 24px;
 }
