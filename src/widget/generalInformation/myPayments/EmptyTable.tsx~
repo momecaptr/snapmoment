@@ -1,0 +1,23 @@
+import { ReactNode } from 'react';
+
+import { HeaderType } from '@/widget/generalInformation/myPayments/tableComponent/TableComponent';
+
+import { Table } from './table';
+
+type Props = {
+  children: ReactNode;
+  header: HeaderType[];
+};
+export const EmptyTable = (props: Props) => {
+  const { children, header } = props;
+
+  return (
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell colSpan={header.length + 1}>{children}</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  );
+};
+
+export default EmptyTable;

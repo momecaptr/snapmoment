@@ -5,6 +5,7 @@ import { Checkbox, Radio, Typography, Wrapper } from '@/shared/ui';
 import { ChoosePaymentType } from '@/widget/generalInformation/accountManagement/AccountManagement';
 import PayPal from '@/widget/generalInformation/accountManagement/icon/PayPal';
 import Stripe from '@/widget/generalInformation/accountManagement/icon/Stripe';
+import { getNormalDateFormat } from '@/widget/generalInformation/lib/getNormalDateFormat';
 import { useRouter } from 'next/router';
 
 import s from './RenewalAndSubscriptionMenu.module.scss';
@@ -68,17 +69,7 @@ const RenewalAndSubscriptionMenu = () => {
       <div className={s.box}>
         <Wrapper variant={'withoutStyles'}>
           {data?.data.map((e) => {
-            const date = new Date(e.dateOfPayment);
-            const dateEnd = new Date(e.endDateOfSubscription);
-            const options: any = {
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              month: 'long',
-              year: 'numeric'
-            };
-            const formattedDate = date.toLocaleString('en-EN', options);
-            const formattedDateEnd = dateEnd.toLocaleString('en-EN', options);
+            const { formattedDate, formattedDateEnd } = getNormalDateFormat(e);
 
             return (
               <div className={s.subscriptionDatePaymentBox} key={e.userId}>

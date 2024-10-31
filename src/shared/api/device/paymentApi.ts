@@ -1,5 +1,10 @@
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
-import { CurrentPaymentSubscriptionsResponse, paymentType, paymentTypeResponse } from '@/shared/api/device/paymentType';
+import {
+  CurrentPaymentSubscriptionsResponse,
+  MyPaymentsResponse,
+  PaymentArgs,
+  PaymentResponse
+} from '@/shared/api/device/paymentType';
 
 export const paymentApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +15,10 @@ export const paymentApi = snapmomentAPI.injectEndpoints({
         url: '/v1/subscriptions/current-payment-subscriptions'
       })
     }),
-    sendPayment: builder.mutation<paymentTypeResponse, paymentType>({
+    getMyPaymentsData: builder.query<MyPaymentsResponse, void>({
+      query: () => '/v1/subscriptions/my-payments'
+    }),
+    sendPayment: builder.mutation<PaymentResponse, PaymentArgs>({
       invalidatesTags: ['Payment'],
       query: (data) => ({
         body: data,
@@ -21,4 +29,4 @@ export const paymentApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { useGetCurrentPaymentSubscriptionQuery, useSendPaymentMutation } = paymentApi;
+export const { useGetCurrentPaymentSubscriptionQuery, useGetMyPaymentsDataQuery, useSendPaymentMutation } = paymentApi;

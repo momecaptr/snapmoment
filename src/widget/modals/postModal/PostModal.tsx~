@@ -15,7 +15,7 @@ import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/a
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
-import { PublicationSection } from '@/widget/modals/createPostModal/ui/publicationSection/PublicationSection';
+import { PublicationSection } from '@/widget/modals/createPostModal';
 import { CloseEditModal } from '@/widget/modals/postModal/closeEditModal/CloseEditModal';
 import { DeletePostModal } from '@/widget/modals/postModal/deletePostModal/DeletePostModal';
 import { PostModalBurgerDropDown } from '@/widget/modals/postModal/postModalBurgerDropDown/PostModalBurgerDropDown';
@@ -81,7 +81,6 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
 
   // * Общая функция закрытия модалки просмотра поста
   const closeModalHandler = () => {
-    console.log('Удаляем');
     showPostModalHandler(false);
     // router.push('/', undefined, { shallow: true });
     // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
