@@ -1,4 +1,3 @@
-export { Loading } from './Loading/Loading';
 export { BackBtn } from './backBtn/BackBtn';
 export { Button } from './button/Button';
 export { Card } from './card/Card';
@@ -21,7 +20,6 @@ export type { InputProps } from './input/Input';
 export { MobileMenu } from './mobileMenu/MobileMenu';
 export { Modal } from './modal/Modal';
 export type { ModalProps } from './modal/Modal';
-export { usePagination } from './pagination/lib/paginationLogic';
 export { PaginationWithSelect } from './pagination/ui/PaginationWithSelect';
 export type { SelectOptionsType } from './pagination/ui/PaginationWithSelect';
 export { Pagination } from './pagination/ui/paginationInitial/Pagination';
@@ -40,3 +38,5 @@ export { Wrapper } from './wrapper/Wrapper';
 export { CustomDropdownWrapper } from '@/shared/ui/customDropDownWrapper/CustomDropdownWrapper';
 export { CustomDropdownItem } from '@/shared/ui/customDropDownWrapper/CustomDropdownWrapper';
 export { CustomDropdownItemWithIcon } from '@/shared/ui/customDropDownWrapper/CustomDropdownWrapper';
+export { Loading } from '@/shared/ui/loading/Loading';
+export { usePagination } from '@/shared/ui/pagination/hooks/usePaginationLogic';

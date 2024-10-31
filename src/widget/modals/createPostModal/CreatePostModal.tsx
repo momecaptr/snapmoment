@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
-// import { canvasPreview } from '@/widget/sideBar/lib/canvasPreview';
+// import { canvasPreview } from '@/widget/sideBar/hooks/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
 import clsx from 'clsx';
