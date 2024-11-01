@@ -1,18 +1,13 @@
-.boxStyle {
+.box {
+  margin-top: 30px;
   background-color: var(--dark-500);
   border: 1px solid var(--dark-300);
 }
 
-.box {
-  @extend %boxStyle;
-
-  margin-top: 30px;
-}
-
 .boxBusiness {
-  @extend %boxStyle;
-
   margin-bottom: 24px;
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
 }
 
 .radioRoot {
