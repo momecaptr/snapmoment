@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 
 import MoreHorizontalOutline from '@/../public/assets/components/MoreHorizontalOutline';
 import defaultAvatar from '@/../public/question-avatar.png';
-import { MeResponse } from '@/shared/api/common/model/api.types';
 // import { MeResponse } from '@/features/auth/services/auth.types';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { clsx } from 'clsx';
@@ -10,6 +9,7 @@ import { StaticImageData } from 'next/image';
 
 import s from './DropDownWrapper.module.scss';
 
+import { MeResponse } from '../../api/common/model/api.types';
 import { Typography } from '../typography/Typography';
 
 type DropdownMenuDemoProps = {
