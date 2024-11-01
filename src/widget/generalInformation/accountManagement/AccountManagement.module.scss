@@ -1,52 +1,45 @@
-.box {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 96px;
-  align-items: center;
-
-  margin-top: 30px;
-
+.boxStyle {
   background-color: var(--dark-500);
   border: 1px solid var(--dark-300);
+}
+
+.box {
+  @extend %boxStyle;
+
+  margin-top: 30px;
 }
 
 .boxBusiness {
-  background-color: var(--dark-500);
-  border: 1px solid var(--dark-300);
+  @extend %boxStyle;
+
+  margin-bottom: 24px;
 }
 
 .radioRoot {
-  gap: 12px;
-  padding-left: 22px;
-}
-
-.radioRootBusiness {
-  display: flex;
-  gap: 12px;
-  padding: 10px 0 10px 22px;
+  gap: 24px;
+  padding-left: 18px;
+  padding-block: 12px;
 }
 
 .BusinessText {
-  margin-top: 42px;
+  margin-top: 24px;
   margin-bottom: 6px;
 }
 
 .payIconBox {
-  position: fixed;
-  right: 65px;
-  bottom: 150px;
-
   display: flex;
   align-items: center;
   justify-content: end;
 }
 
-.boxStripe {
+.paymentTypeBox {
   cursor: pointer;
+}
+
+.boxStripe {
   margin-left: 54px;
 }
 
 .boxPaypal {
-  cursor: pointer;
   margin-right: 54px;
 }

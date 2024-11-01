@@ -1,22 +1,36 @@
 import React, { useEffect } from 'react';
 
 import { useGetCurrentPaymentSubscriptionQuery, useSendPaymentMutation } from '@/shared/api/device/paymentApi';
-import { Radio, Typography, Wrapper } from '@/shared/ui';
+import { Radio, Typography } from '@/shared/ui';
 import RenewalAndSubscriptionMenu from '@/widget/generalInformation/accountManagement/RenewalAndSubscriptionMenu';
 import PayPal from '@/widget/generalInformation/accountManagement/icon/PayPal';
 import Stripe from '@/widget/generalInformation/accountManagement/icon/Stripe';
+import { clsx } from 'clsx';
 import { useRouter } from 'next/router';
 
 import s from './AccountManagement.module.scss';
 
-export type ChoosePaymentType = 'DAY' | 'MONTHLY' | 'WEEKLY';
+export const paymentVariants = {
+  paypal: 'PAYPAL',
+  stripe: 'STRIPE'
+};
+
+export type PaymentVariantTypes = (typeof paymentVariants)[keyof typeof paymentVariants];
+
+export const subscriptionVariants = {
+  day: 'DAY',
+  monthly: 'MONTHLY',
+  weekly: 'WEEKLY'
+};
+// export type ChoosePaymentType = 'DAY' | 'MONTHLY' | 'WEEKLY';
+export type SubscriptionVariantTypes = (typeof subscriptionVariants)[keyof typeof subscriptionVariants];
 
 export const AccountManagement: React.FC = () => {
   const { data } = useGetCurrentPaymentSubscriptionQuery();
   const [sendPayment] = useSendPaymentMutation();
   const [business, setBusiness] = React.useState<boolean>(false);
   const [savePaymentUrl, setSavePaymentUrl] = React.useState<string | undefined>(undefined);
-  const [choosePayment, setChoosePayment] = React.useState<ChoosePaymentType | undefined>(undefined);
+  const [choosePayment, setChoosePayment] = React.useState<SubscriptionVariantTypes | undefined>(undefined);
   const [isPayment, setIsPayment] = React.useState<boolean>(false);
   const router = useRouter();
 
@@ -37,9 +51,9 @@ export const AccountManagement: React.FC = () => {
     setChoosePayment(undefined);
   };
 
-  const handleSubmitPayment = async (paymentType: 'PAYPAL' | 'STRIPE') => {
+  const handleSubmitPayment = async (paymentType: PaymentVariantTypes) => {
     if (!choosePayment) {
-      console.error('Пожалуйста, выберите способ оплаты перед продолжением.');
+      console.error('Please, choose payment type before proceed.');
 
       return;
     }
@@ -58,27 +72,25 @@ export const AccountManagement: React.FC = () => {
         await router.push(savePaymentUrl);
       }
     } catch (error) {
-      console.error(`Ошибка при отправке платежа ${paymentType}: ${error}`);
+      console.error(`Transaction failed. Please, write to support. \n ${paymentType}: ${error}`);
     }
   };
 
-  const handleSubmitPayPal = () => handleSubmitPayment('PAYPAL');
-  const handleSubmitStripe = () => handleSubmitPayment('STRIPE');
+  const handleSubmitPayPal = () => handleSubmitPayment(paymentVariants.paypal);
+  const handleSubmitStripe = () => handleSubmitPayment(paymentVariants.stripe);
 
   return (
     <div className={s.wrapperPayment}>
       {!isPayment ? (
         <div className={s.box}>
-          <Wrapper variant={'withoutStyles'}>
-            <Radio.Root className={s.radioRoot} name={'grade'}>
-              <Radio.Item onClick={handleSwitchPersonal} value={'1 radio'}>
-                Личный
-              </Radio.Item>
-              <Radio.Item onClick={handleOpenBusinessMenu} value={'2 radio'}>
-                Бизнес
-              </Radio.Item>
-            </Radio.Root>
-          </Wrapper>
+          <Radio.Root className={s.radioRoot} name={'grade'}>
+            <Radio.Item onClick={handleSwitchPersonal} value={'1 radio'}>
+              Personal
+            </Radio.Item>
+            <Radio.Item onClick={handleOpenBusinessMenu} value={'2 radio'}>
+              Business
+            </Radio.Item>
+          </Radio.Root>
         </div>
       ) : (
         <RenewalAndSubscriptionMenu />
@@ -87,35 +99,31 @@ export const AccountManagement: React.FC = () => {
       {business && (
         <>
           <Typography className={s.BusinessText} variant={'regular_text_16'}>
-            Стоимость вашей подписки
+            Your subscription costs:
           </Typography>
           <div className={s.boxBusiness}>
-            <Wrapper variant={'withoutStyles'}>
-              <Radio.Root className={s.radioRootBusiness} name={'grade'}>
-                <Radio.Item onClick={() => setChoosePayment('DAY')} value={'1 radio'}>
-                  $10 за 1 день
-                </Radio.Item>
-                <Radio.Item onClick={() => setChoosePayment('WEEKLY')} value={'2 radio'}>
-                  $50 за 7 дней
-                </Radio.Item>
-                <Radio.Item onClick={() => setChoosePayment('MONTHLY')} value={'3 radio'}>
-                  $100 в месяц
-                </Radio.Item>
-              </Radio.Root>
-            </Wrapper>
+            <Radio.Root className={s.radioRoot} name={'grade'}>
+              <Radio.Item onClick={() => setChoosePayment(subscriptionVariants.day)} value={'1 radio'}>
+                $10 per 1 day
+              </Radio.Item>
+              <Radio.Item onClick={() => setChoosePayment(subscriptionVariants.weekly)} value={'2 radio'}>
+                $50 per 7 days
+              </Radio.Item>
+              <Radio.Item onClick={() => setChoosePayment(subscriptionVariants.monthly)} value={'3 radio'}>
+                $100 per month
+              </Radio.Item>
+            </Radio.Root>
+          </div>
+          <div className={s.payIconBox}>
+            <div className={clsx(s.paymentTypeBox, s.boxPaypal)} onClick={handleSubmitPayPal}>
+              <PayPal />
+            </div>
+            <div>Or</div>
+            <div className={clsx(s.paymentTypeBox, s.boxStripe)} onClick={handleSubmitStripe}>
+              <Stripe />
+            </div>
           </div>
         </>
-      )}
-      {business && (
-        <div className={s.payIconBox}>
-          <div className={s.boxPaypal} onClick={handleSubmitPayPal}>
-            <PayPal />
-          </div>
-          <div>Or</div>
-          <div className={s.boxStripe} onClick={handleSubmitStripe}>
-            <Stripe />
-          </div>
-        </div>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useGetCurrentPaymentSubscriptionQuery, useSendPaymentMutation } from '@/shared/api/device/paymentApi';
 import { Checkbox, Radio, Typography, Wrapper } from '@/shared/ui';
-import { ChoosePaymentType } from '@/widget/generalInformation/accountManagement/AccountManagement';
+import { SubscriptionVariantTypes } from '@/widget/generalInformation/accountManagement/AccountManagement';
 import PayPal from '@/widget/generalInformation/accountManagement/icon/PayPal';
 import Stripe from '@/widget/generalInformation/accountManagement/icon/Stripe';
 import { getNormalDateFormat } from '@/widget/generalInformation/lib/getNormalDateFormat';
@@ -13,7 +13,7 @@ import s from './RenewalAndSubscriptionMenu.module.scss';
 const RenewalAndSubscriptionMenu = () => {
   const [sendPayment] = useSendPaymentMutation();
   const { data } = useGetCurrentPaymentSubscriptionQuery();
-  const [choosePayment, setChoosePayment] = useState<ChoosePaymentType | undefined>();
+  const [choosePayment, setChoosePayment] = useState<SubscriptionVariantTypes | undefined>();
   const [savePaymentUrl, setSavePaymentUrl] = useState<string | undefined>(undefined);
   const [isBusiness, setIsBusiness] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState(false);

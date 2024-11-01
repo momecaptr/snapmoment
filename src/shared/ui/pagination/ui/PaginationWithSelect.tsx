@@ -1,5 +1,5 @@
-import { useQueryParams } from '@/shared/lib';
 import { SelectUI, Typography } from '@/shared/ui';
+import { clsx } from 'clsx';
 
 import s from './PaginationWithSelect.module.scss';
 
@@ -11,6 +11,7 @@ export type SelectOptionsType = {
 };
 
 type Props = {
+  alignment?: 'center' | 'left' | 'right';
   currentPage: number;
   disabled?: boolean;
   itemsPerPage: number;
@@ -20,6 +21,7 @@ type Props = {
   totalItems: number;
 };
 export const PaginationWithSelect = ({
+  alignment = 'center',
   currentPage,
   disabled,
   itemsPerPage,
@@ -29,16 +31,25 @@ export const PaginationWithSelect = ({
   totalItems
 }: Props) => {
   disabled = totalItems <= Number(selectOptions[0].value);
-  const { currentPageSearchParam } = useQueryParams();
+  // const { currentPageSearchParam } = useQueryParams();
 
-  const totalPages =
-    currentPageSearchParam === null && totalItems <= itemsPerPage ? 1 : Math.ceil(totalItems / itemsPerPage);
+  const totalPages = currentPage === null && totalItems <= itemsPerPage ? 1 : Math.ceil(totalItems / itemsPerPage);
   const onValueChange = (count: string) => {
     setItemsPerPage(+count);
   };
 
+  const alignmentClass = () => {
+    if (alignment === 'left') {
+      return s.boxLeft;
+    } else if (alignment === 'right') {
+      return s.boxRight;
+    } else {
+      return '';
+    }
+  };
+
   return (
-    <div className={s.box}>
+    <div className={clsx(s.box, alignmentClass())}>
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
       <div className={s.boxItem}>
         {/*<Typography className={s.firstText}>{t('paginationWithSelect.show')} </Typography>*/}

@@ -1,15 +1,16 @@
 import React, { useMemo } from 'react';
 
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { Typography } from '@/shared/ui';
+import { TableParts } from '@/shared/ui/tableParts';
 import { clsx } from 'clsx';
 
 import s from './UniversalTable.module.scss';
 
 // Интерфейс для props компонента таблицы
-interface UniversalTableProps<TData> {
+interface UniversalTableProps<T> {
   colsStyles?: string; // стили всех колонок
-  data: TData[]; // массив данных любой структуры
-  theadStyles?: string; // стили строки заголовка
+  data: T[]; // массив данных любой структуры
+  tHeadStyles?: string; // стили строки заголовка
 }
 
 // Функция для создания заголовка колонки таблицы на основе типа данных
@@ -21,68 +22,47 @@ const getHeader = (value: string) => {
 };
 
 /**
- * UniversalTable - универсальная таблица на основе Tanstack Table. Принимает любые данные.
- * * Generic TData - Интерфейс для ОДНОГО ОБЪЕКТА из массива объектов таблицы
+ * UniversalTable - универсальная таблица на основе Tanstack TableParts. Принимает любые данные.
+ * * Generic T - Интерфейс для ОДНОГО ОБЪЕКТА из массива объектов таблицы
  * * data - массив данных любой структуры
  * * theadStyles - стили строки заголовка (например высота строки head, ширина колонок (nth-child)
  * @constructor
  */
 // Универсальный компонент таблицы
-export const UniversalTable = <TData extends object>(props: UniversalTableProps<TData>) => {
-  const { colsStyles, data, theadStyles } = props;
+export const UniversalTable = <T extends object>(props: UniversalTableProps<T>) => {
+  const { colsStyles, data, tHeadStyles } = props;
+
+  // Отредактируем данные для таблицы
+
   // Создаем колонки на основе ключей первого элемента данных
-  const columns = useMemo<ColumnDef<TData>[]>(
-    () =>
-      data.length > 0
-        ? Object.keys(data[0]).map((key) => ({
-            accessorKey: key,
-            header: getHeader(key)
-          }))
-        : [],
-    [data]
-  );
-
-  // ЕСЛИ ХОЧЕТСЯ ИЗМЕНИТЬ РАЗМЕР ОТДЕЛЬНОГО СТОЛБЦА, ТО В columns ДЛЯ КОНКРЕТНОГО СТОЛБЦА НУЖНО ДОБАВИТЬ СВОЙСТВО size
-  // Но думаю этот вариант гавно
-  // columns[0].size = columnSizes.first;
-
-  // Создаем таблицу с использованием TanStack Table
-  const table = useReactTable({
-    columns,
-    data,
-    getCoreRowModel: getCoreRowModel()
-  });
+  const columns = useMemo(() => (data.length > 0 ? Object.keys(data[0]) : []), [data]);
 
   // Рендеринг таблицы
   return (
     <div className={s.tableContainer}>
-      <table className={s.table}>
-        <thead className={clsx(theadStyles)} style={{ width: table.getTotalSize() }}>
-          {/*<thead className={clsx(headerRowStyles)}>*/}
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                // <th key={header.id} style={{ width: header.getSize() }}>
-                <th className={colsStyles} key={header.id}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </th>
+      <TableParts.Root className={s.table}>
+        <TableParts.Head className={clsx(tHeadStyles)}>
+          <TableParts.Row>
+            {columns.map((column) => (
+              <TableParts.HeadCell className={colsStyles} key={column}>
+                <Typography variant={'medium_text_14'}>{getHeader(column)}</Typography>
+              </TableParts.HeadCell>
+            ))}
+          </TableParts.Row>
+        </TableParts.Head>
+        <TableParts.Body>
+          {data.map((row, rowIndex) => (
+            <TableParts.Row key={rowIndex}>
+              {columns.map((column) => (
+                <TableParts.Cell className={colsStyles} key={`${rowIndex}-${column}`}>
+                  {/*{formatCellData(String(row[column as keyof T]))}*/}
+                  {String(row[column as keyof T])}
+                </TableParts.Cell>
               ))}
-            </tr>
+            </TableParts.Row>
           ))}
-        </thead>
-        <tbody style={{ width: table.getTotalSize() }}>
-          {/*<tbody>*/}
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} style={{ width: cell.column.getSize() }}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        </TableParts.Body>
+      </TableParts.Root>
     </div>
   );
 };
