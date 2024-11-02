@@ -1,4 +1,4 @@
-import { ArrowIosDownOutline } from '@/../public/assets/components';
+import ArrowIosDownOutline from '@/../public/assets/components/ArrowIosDownOutline';
 import { SelectOptionsType, Typography } from '@/shared/ui';
 import * as Select from '@radix-ui/react-select';
 import clsx from 'clsx';

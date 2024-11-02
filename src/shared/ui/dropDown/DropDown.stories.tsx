@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import editIconOutlineWhite from '@/../public/assets/edit-2-outline-white.svg';
-import groupIconWhite from '@/../public/assets/group-icon-white.svg';
-import logoutIconWhite from '@/../public/assets/log-out-outline-white.svg';
-import personIconOutlineWhite from '@/../public/assets/person-outline-white.svg';
-import trashIconOutlineWhite from '@/../public/assets/trash-outline-white.svg';
 // import defaultAvatar from '@/../public/question-avatar.png';
 import defaultAvatar from '@/../public/question-avatar.png';
 
+import editIconOutlineWhite from '../../../../public/assets/svgs/edit-2-outline-white.svg';
+import groupIconWhite from '../../../../public/assets/svgs/group-icon-white.svg';
+import logoutIconWhite from '../../../../public/assets/svgs/log-out-outline-white.svg';
+import personIconOutlineWhite from '../../../../public/assets/svgs/person-outline-white.svg';
+import trashIconOutlineWhite from '../../../../public/assets/svgs/trash-outline-white.svg';
 import { DropDownItem } from './DropDownItem';
 import { DropDownWrapper } from './DropDownWrapper';
 
