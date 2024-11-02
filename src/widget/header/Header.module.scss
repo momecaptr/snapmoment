@@ -1,4 +1,8 @@
 .header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+
   display: flex;
   justify-content: center;
 
@@ -13,13 +17,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 0 60px;
-}
-
-.logoWrapper {
-  display: flex;
-  align-items: center;
-  margin: 6px 0;
 }
 
 .itemsWrapper {
@@ -29,22 +26,6 @@
   justify-content: flex-end;
 
   width: 100%;
-}
-
-.logo {
-  display: flex;
-  justify-content: flex-start;
-  width: 200px;
-  height: auto;
-}
-
-.logo path {
-  fill: var(--accent-500);
-  transition: fill 0.3s;
-}
-
-.logo:hover path {
-  fill: var(--success-300);
 }
 
 s.bellWrapper {
@@ -57,8 +38,4 @@ s.bellWrapper {
 .bell {
   width: 24px;
   height: 24px;
-}
-
-.item {
-  text-decoration: none;
 }

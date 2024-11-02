@@ -1,5 +1,4 @@
 export { Loading } from './Loading/Loading';
-export { AppLogo } from './appLogo/AppLogo';
 export { AuthButtons } from './authButtons/AuthButtons';
 export { BackBtn } from './backBtn/BackBtn';
 export { Button } from './button/Button';
