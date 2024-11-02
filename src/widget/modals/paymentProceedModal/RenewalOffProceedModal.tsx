@@ -6,20 +6,25 @@ import { Button, Modal, Typography } from '@/shared/ui';
 import s from './RenewalOffProceedModal.module.scss';
 
 type Props = {
+  onProceedStatusChange: (status: boolean) => void;
   openModal: boolean;
   setOpenModal: (openModal: boolean) => void;
-  setProceedStatus: (proceedStatus: boolean) => void;
+  // setProceedStatus: (proceedStatus: boolean) => void;
 };
 export const RenewalOffProceedModal = (props: Props) => {
-  const { openModal, setOpenModal, setProceedStatus } = props;
+  // const { openModal, setOpenModal, setProceedStatus } = props;
+  const { onProceedStatusChange, openModal, setOpenModal } = props;
 
   const handleClose = () => {
     setOpenModal(false);
+    onProceedStatusChange(false);
+    // setProceedStatus(false);
   };
 
   const handleProceed = () => {
-    setProceedStatus(true);
-    handleClose();
+    setOpenModal(false);
+    onProceedStatusChange(true);
+    // setProceedStatus(true);
   };
 
   return (

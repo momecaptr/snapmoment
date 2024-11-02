@@ -70,24 +70,18 @@ export const AccountManagement = () => {
   const [sendPayment] = useSendPaymentMutation();
   const [remoteAccountVariant, setRemoteAccountVariant] = useState<AccountVariantTypes | undefined>(undefined);
   const [localAccountVariant, setLocalAccountVariant] = useState<AccountVariantTypes | undefined>(undefined);
-  const [isAutoRenewal, setIsAutoRenewal] = useState<boolean>();
+  const [isAutoRenewal, setIsAutoRenewal] = useState<boolean>(false);
+  const [savedAutoRenewalValue, setSavedAutoRenewalValue] = useState<boolean>(isAutoRenewal);
+  // const [isProceedStatus, setIsProceedStatus] = useState<boolean>(false);
   const [savedPaymentUrl, setSavedPaymentUrl] = useState<string | undefined>(undefined);
   const [savedPaymentSubscription, setSavedPaymentSubscription] = useState<SubscriptionVariantTypes | undefined>(
     undefined
   );
   const { isOpen: isPaymentModalsOpen, setOpen: setIsPaymentModalsOpen } = useModal(ModalKey.PaymentModals);
-  const { isOpen: isProceedOpen, setOpen: setIsProceedOpen } = useModal(ModalKey.PaymentProceed);
-  const [isProceedPayment, setIsProceedPayment] = useState<boolean>(false);
+  const { isOpen: isProceedModalOpen, setOpen: setIsProceedModalOpen } = useModal(ModalKey.PaymentProceed);
   const [paymentModalsContent, setPaymentModalsContent] = useState<PaymentModalContentType | undefined>(undefined);
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // useEffect(() => {
-  //   if (searchParams.has('success=true')) {
-  //     setPaymentModalsContent(successPayModalContentVariant);
-  //     setIsPaymentModalsOpen(true);
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (data) {
@@ -153,22 +147,17 @@ export const AccountManagement = () => {
     subscriptionType && setSavedPaymentSubscription(subscriptionType);
   };
 
-  const handleAutoRenewal = async (value: boolean) => {
-    // Открываем модалку для подтверждения платежа
-    setIsProceedOpen(true);
-    const proceed = await new Promise<boolean>((resolve) => {
-      setIsProceedPayment((status) => {
-        resolve(status);
+  // Вот это вызываем когда нажимаем на чекбокс AutoRenewal - сохраняем значение на момент нажатия и открываем модалку
+  const handleAutoRenewal = (value: boolean) => {
+    setSavedAutoRenewalValue(value);
+    setIsProceedModalOpen(true);
+  };
 
-        return status;
-      });
-    });
-
-    // Если пользователь не подтвердил платеж, то выходим нахрен и не делаем запрос
-    if (!proceed) {
-      return;
+  const handleModalProceed = (value: boolean) => {
+    if (value) {
+      setIsAutoRenewal(savedAutoRenewalValue);
     }
-    setIsAutoRenewal(value);
+    setIsProceedModalOpen(false);
   };
 
   const { formattedDate, formattedDateEnd } = getNormalDateFormat(
@@ -186,9 +175,10 @@ export const AccountManagement = () => {
         setOpenModal={setIsPaymentModalsOpen}
       />
       <RenewalOffProceedModal
-        openModal={isProceedOpen}
-        setOpenModal={setIsProceedOpen}
-        setProceedStatus={setIsProceedPayment}
+        onProceedStatusChange={handleModalProceed}
+        openModal={isProceedModalOpen}
+        setOpenModal={setIsProceedModalOpen}
+        // setProceedStatus={setIsProceedStatus}
       />
       {isRemoteEqualsBusinessAccount && (
         <div className={s.block}>
@@ -213,7 +203,7 @@ export const AccountManagement = () => {
       )}
       {isLocalEqualsBusinessAccount && isRemoteEqualsBusinessAccount && (
         <div className={s.checkBoxWrapper}>
-          <Checkbox checked={isAutoRenewal} onCheckedChange={handleAutoRenewal} />
+          <Checkbox checked={isAutoRenewal} onCheckedChange={(value) => handleAutoRenewal(value as boolean)} />
           <Typography as={'span'} variant={'regular_text_14'}>
             {'Auto - Renewal'}
           </Typography>
