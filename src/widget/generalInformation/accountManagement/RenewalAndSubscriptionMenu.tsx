@@ -72,7 +72,7 @@ const RenewalAndSubscriptionMenu = () => {
             const { formattedDate, formattedDateEnd } = getNormalDateFormat(e);
 
             return (
-              <div className={s.subscriptionDatePaymentBox} key={e.userId}>
+              <div className={s.subscriptionDatePaymentBox} key={e.subscriptionId}>
                 <div>
                   <Typography>Expire at</Typography>
                   <Typography>{formattedDate}</Typography>
@@ -105,7 +105,7 @@ const RenewalAndSubscriptionMenu = () => {
 
       {isBusiness && (
         <>
-          <div className={s.checkBoxBox}>
+          <div className={s.checkBoxWrapper}>
             <Checkbox checked={isChecked} onChange={(e) => setIsChecked((e.target as HTMLInputElement).checked)} />
             <span>Auto-Renewal</span>
           </div>

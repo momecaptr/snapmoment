@@ -1,15 +1,19 @@
 .sizeModal {
-  width: 376px;
+  width: 550px;
+}
+
+.description {
+  white-space: pre-line;
 }
 
 .boxButton {
   display: flex;
   gap: 12px;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   width: 100%;
-  margin-top: 54px;
+  margin-top: 30px;
 }
 
 .btn {
