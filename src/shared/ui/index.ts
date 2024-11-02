@@ -40,3 +40,4 @@ export { CustomDropdownItem } from '@/shared/ui/customDropDownWrapper/CustomDrop
 export { CustomDropdownItemWithIcon } from '@/shared/ui/customDropDownWrapper/CustomDropdownWrapper';
 export { Loading } from '@/shared/ui/loading/Loading';
 export { usePagination } from '@/shared/ui/pagination/hooks/usePaginationLogic';
+export { TableParts } from '@/shared/ui/tableParts/TableParts';

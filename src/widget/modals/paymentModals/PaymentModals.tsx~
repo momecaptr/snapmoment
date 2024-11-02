@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 
-import { PaymentModalContentType } from '@/shared/lib/consts/accountManagementConstantsTypes';
 import { Button, Modal } from '@/shared/ui';
+import { PaymentModalContentType } from '@/shared/lib/consts/accountManagementConstantsTypes';
 
 import s from './PaymentModals.module.scss';
 

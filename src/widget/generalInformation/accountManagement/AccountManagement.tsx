@@ -1,39 +1,44 @@
 import React, { useEffect, useState } from 'react';
 
+import { AccountTypeSection, CurrentSubscriptionInfoSection } from '@/entities';
+import { PaymentButtons, PickSubscriptionSection } from '@/features';
 import {
   useCancelAutoRenewalMutation,
   useGetCurrentPaymentSubscriptionQuery,
   useSendPaymentMutation
 } from '@/shared/api/device/paymentApi';
-import { ModalKey, useModal } from '@/shared/lib';
-import { Card, Checkbox, Loading, Radio, Typography } from '@/shared/ui';
-import { getNormalDateFormat } from '@/widget/generalInformation/lib/getNormalDateFormat';
+import {
+  type AccountVariantTypes,
+  ModalKey,
+  type PaymentModalContentType,
+  type PaymentVariantTypes,
+  type SubscriptionVariantTypes,
+  accountVariants,
+  errorPayModalContentVariant,
+  notifyPayModalContentVariant,
+  successPayModalContentVariant,
+  useModal
+} from '@/shared/lib';
+import { Checkbox, Loading, Typography } from '@/shared/ui';
 import { PaymentModals } from '@/widget/modals/paymentModals/PaymentModals';
 import { RenewalOffProceedModal } from '@/widget/modals/paymentProceedModal/RenewalOffProceedModal';
 import { isAfter } from '@formkit/tempo';
-import { clsx } from 'clsx';
 import { useRouter } from 'next/router';
 
 import s from './AccountManagement.module.scss';
 
-import PayPal from '../../../../public/assets/components/PayPal';
-import Stripe from '../../../../public/assets/components/Stripe';
-import {
-  accountVariants,
-  errorPayModalContentVariant,
-  notifyPayModalContentVariant,
-  paymentVariants,
-  subscriptionVariantsArray,
-  subscriptionsTextOptions,
-  successPayModalContentVariant
-} from './lib/accountManagementConstants';
-import {
-  type AccountVariantTypes,
-  type PaymentModalContentType,
-  type PaymentVariantTypes,
-  type SubscriptionVariantTypes
-} from './lib/accountManagementConstantsTypes';
+import { usePaymentHandlers } from './hooks/usePaymentHandlers';
 
+/**
+ * Компонент `AccountManagement`
+ *
+ * @description
+ * Компонент для управления учетной записью пользователя. Отображает текущую подписку, позволяет
+ * включать и отключать автообновление подписки, а также выбирать и оформлять подписки.
+ * Взаимодействует с API для получения текущей подписки, отправки платежа и отмены автообновления.
+ *
+ * @returns {JSX.Element} Интерфейс управления аккаунтом пользователя.
+ */
 export const AccountManagement = () => {
   const { data, isLoading } = useGetCurrentPaymentSubscriptionQuery();
   const [sendPayment, { isLoading: isSendPaymentLoading }] = useSendPaymentMutation();
@@ -73,15 +78,6 @@ export const AccountManagement = () => {
     }
   }, [router.query, isPaymentModalsOpen]);
 
-  const handleOpenBusinessMenu = () => {
-    setLocalAccountVariant(accountVariants.business);
-  };
-
-  const handleSwitchPersonal = () => {
-    setLocalAccountVariant(accountVariants.personal);
-    setSavedPaymentSubscription(undefined);
-  };
-
   const submitPayment = async (paymentType: PaymentVariantTypes) => {
     if (!savedPaymentSubscription) {
       setPaymentModalsContent(notifyPayModalContentVariant);
@@ -110,50 +106,21 @@ export const AccountManagement = () => {
     }
   };
 
-  const handleSubmitPaymentType = (e: React.MouseEvent<HTMLDivElement>) => {
-    const paymentType = e.currentTarget.dataset.payment as PaymentVariantTypes;
-
-    if (paymentType) {
-      void submitPayment(paymentType);
-    }
-  };
-
-  const handlePickSubscriptionType = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const subscriptionType = e.currentTarget.dataset.sub as SubscriptionVariantTypes;
-
-    subscriptionType && setSavedPaymentSubscription(subscriptionType);
-  };
-
-  // Вот это вызываем когда нажимаем на чекбокс AutoRenewal - сохраняем значение на момент нажатия и открываем модалку
-  const handleAutoRenewal = (value: boolean) => {
-    // Если автообновление отключено, то ничего не делаем
-    if (!data?.hasAutoRenewal) {
-      return;
-    }
-    setSavedAutoRenewalValue(value);
-    setIsProceedModalOpen(true);
-  };
-
-  // Вот это вызываем когда закрываем модалку
-  const handleModalProceed = (value: boolean) => {
-    // Только если value === true, то меняем isAutoRenewal чекбокс на тот, что сохранили и отправляем запрос
-    if (value) {
-      cancelAutoRenewal()
-        .then(() => {
-          // После успешного завершения запроса обновляем состояние
-          setIsAutoRenewal(false);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      // setIsAutoRenewal(savedAutoRenewalValue);
-    }
-    setIsProceedModalOpen(false);
-  };
-
-  const { formattedDate, formattedDateEnd } = getNormalDateFormat(
-    data?.data[0] ?? { dateOfPayment: '', endDateOfSubscription: '' }
-  );
+  const {
+    handleAutoRenewal,
+    handleModalProceed,
+    handleOpenBusinessMenu,
+    handlePickSubscriptionType,
+    handleSubmitPaymentType,
+    handleSwitchToPersonal
+  } = usePaymentHandlers({
+    setIsAutoRenewal,
+    setIsProceedModalOpen,
+    setLocalAccountVariant,
+    setSavedAutoRenewalValue,
+    setSavedPaymentSubscription,
+    submitPayment
+  });
 
   const isRemoteEqualsBusinessAccount = remoteAccountVariant === accountVariants.business;
   const isLocalEqualsBusinessAccount = localAccountVariant === accountVariants.business;
@@ -176,23 +143,11 @@ export const AccountManagement = () => {
       />
       {isRemoteEqualsBusinessAccount && (
         <div className={s.block}>
-          <Typography className={s.blockTitle} variant={'bold_text_16'}>
-            {'Current Subscription:'}
-          </Typography>
-          <Card className={s.expirationArea}>
-            <div>
-              <Typography className={s.expirationAreaTitle} variant={'regular_text_14'}>
-                {'Expire at'}
-              </Typography>
-              <Typography variant={'medium_text_14'}>{formattedDate}</Typography>
-            </div>
-            <div>
-              <Typography className={s.expirationAreaTitle} variant={'regular_text_14'}>
-                {'Next payment'}
-              </Typography>
-              <Typography variant={'medium_text_14'}>{formattedDateEnd}</Typography>
-            </div>
-          </Card>
+          <CurrentSubscriptionInfoSection
+            classForCard={s.expirationArea}
+            classForText={s.expirationAreaTitle}
+            classForTitle={s.blockTitle}
+          />
         </div>
       )}
       {isLocalEqualsBusinessAccount && isRemoteEqualsBusinessAccount && (
@@ -204,65 +159,28 @@ export const AccountManagement = () => {
         </div>
       )}
       <div className={s.block}>
-        <Typography className={s.blockTitle} variant={'bold_text_16'}>
-          {'Account type:'}
-        </Typography>
-        <Card className={s.cardBox}>
-          <Radio.Root className={s.radioRoot}>
-            <Radio.Item
-              checked={!isRemoteEqualsBusinessAccount}
-              disabled={isRemoteEqualsBusinessAccount}
-              onClick={handleSwitchPersonal}
-              value={accountVariants.personal}
-            >
-              <Typography variant={'regular_text_14'}>{accountVariants.personal}</Typography>
-            </Radio.Item>
-            <Radio.Item
-              checked={isRemoteEqualsBusinessAccount}
-              onClick={handleOpenBusinessMenu}
-              value={accountVariants.business}
-            >
-              <Typography variant={'regular_text_14'}>{accountVariants.business}</Typography>
-            </Radio.Item>
-          </Radio.Root>
-        </Card>
+        <AccountTypeSection
+          classForCard={s.cardBox}
+          classForRadioRoot={s.radioRoot}
+          classForTitle={s.blockTitle}
+          handleOpenBusinessMenu={handleOpenBusinessMenu}
+          handleSwitchPersonal={handleSwitchToPersonal}
+          isRemoteEqualsBusinessAccount={isRemoteEqualsBusinessAccount}
+        />
       </div>
 
       {isLocalEqualsBusinessAccount && (
         <>
           <div className={s.block}>
-            <>
-              <Typography className={s.blockTitle} variant={'bold_text_16'}>
-                {isRemoteEqualsBusinessAccount ? 'Change your subscription' : 'Your subscription costs'}
-              </Typography>
-              <Card className={s.cardBox}>
-                <Radio.Root className={s.radioRoot}>
-                  {subscriptionVariantsArray.map((variant) => (
-                    <Radio.Item data-sub={variant} key={variant} onClick={handlePickSubscriptionType} value={variant}>
-                      <Typography variant={'regular_text_14'}>{subscriptionsTextOptions[variant]}</Typography>
-                    </Radio.Item>
-                  ))}
-                </Radio.Root>
-              </Card>
-            </>
+            <PickSubscriptionSection
+              classForCard={s.cardBox}
+              classForRadioRoot={s.radioRoot}
+              classForTitle={s.blockTitle}
+              handlePickSubscriptionType={handlePickSubscriptionType}
+              isRemoteEqualsBusinessAccount={isRemoteEqualsBusinessAccount}
+            />
           </div>
-          <div className={s.payIconBox}>
-            <div
-              className={clsx(s.paymentTypeBox, s.boxPaypal)}
-              data-payment={paymentVariants.paypal}
-              onClick={handleSubmitPaymentType}
-            >
-              <PayPal />
-            </div>
-            <div>or</div>
-            <div
-              className={clsx(s.paymentTypeBox, s.boxStripe)}
-              data-payment={paymentVariants.stripe}
-              onClick={handleSubmitPaymentType}
-            >
-              <Stripe />
-            </div>
-          </div>
+          <PaymentButtons handleSubmitPaymentType={handleSubmitPaymentType} />
         </>
       )}
     </div>

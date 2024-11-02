@@ -8,6 +8,8 @@ export { LocaleSwitcher } from './localeSwitcher/ui/LocaleSwitcher';
 export type { FullName, LangType } from './localeSwitcher/ui/LocaleSwitcher';
 export { LocaleMenuItem } from './localeSwitcher/ui/localeMenuItem/LocaleMenuItem';
 export { MoreActions } from './moreActions/MoreActions';
+export { PaymentButtons } from './paymentButtons/PaymentButtons';
+export { PickSubscriptionSection } from './pickSubscriptionSection/PickSubscriptionSection';
 export { ReCaptcha } from './reCaptcha/ReCaptcha';
 export { ReSendPost } from './reSendPost/ReSendPost';
 export { SaveGeneralInfo } from './saveGeneralInfo/SaveGeneralInfo';

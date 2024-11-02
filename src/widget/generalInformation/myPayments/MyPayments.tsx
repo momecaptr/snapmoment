@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { useGetMyPaymentsDataQuery } from '@/shared/api/device/paymentApi';
 import { MySinglePayment } from '@/shared/api/device/paymentType';
 import { PaginationWithSelect, SelectOptionsType } from '@/shared/ui';
-import { UniversalTable } from '@/widget/generalInformation/myPayments/tanstackTable/UniversalTable';
+import { UniversalTable } from '@/widget/generalInformation/myPayments/universalTable/UniversalTable';
 
 import s from './MyPayments.module.scss';
 

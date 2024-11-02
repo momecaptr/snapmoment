@@ -1,29 +1,26 @@
 import React, { useMemo } from 'react';
 
-import { Typography } from '@/shared/ui';
-import { TableParts } from '@/shared/ui/tableParts';
+import { TableParts, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 
 import s from './UniversalTable.module.scss';
 
-// Интерфейс для props компонента таблицы
 interface UniversalTableProps<T> {
-  colsStyles?: string; // стили всех колонок
-  data: T[]; // массив данных любой структуры
-  tHeadStyles?: string; // стили строки заголовка
+  colsStyles?: string;
+  data: T[];
+  tHeadStyles?: string;
 }
 
-// Функция для создания заголовка колонки таблицы на основе типа данных
+// Функция для создания заголовка колонки таблицы на основе типа данных. Добавление пробелов перед заглавными буквами,
 const getHeader = (value: string) => {
   return value
-    .replace(/([A-Z])/g, ' $1') // Добавление пробелов перед заглавными буквами
-    .toLowerCase() // Приведение всей строки к нижнему регистру
-    .replace(/^./, (str) => str.toUpperCase()); // Приведение первого символа строки к верхнему регистру;
+    .replace(/([A-Z])/g, ' $1')
+    .toLowerCase()
+    .replace(/^./, (str) => str.toUpperCase());
 };
 
 /**
- * UniversalTable - универсальная таблица на основе Tanstack TableParts. Принимает любые данные.
- * * Generic T - Интерфейс для ОДНОГО ОБЪЕКТА из массива объектов таблицы
+ * UniversalTable - универсальная таблица на основе Tanstack TableParts. Принимает любые данные. Generic T - Интерфейс для ОДНОГО ОБЪЕКТА из массива объектов таблицы
  * * data - массив данных любой структуры
  * * theadStyles - стили строки заголовка (например высота строки head, ширина колонок (nth-child)
  * @constructor
@@ -32,12 +29,9 @@ const getHeader = (value: string) => {
 export const UniversalTable = <T extends object>(props: UniversalTableProps<T>) => {
   const { colsStyles, data, tHeadStyles } = props;
 
-  // Отредактируем данные для таблицы
-
   // Создаем колонки на основе ключей первого элемента данных
   const columns = useMemo(() => (data.length > 0 ? Object.keys(data[0]) : []), [data]);
 
-  // Рендеринг таблицы
   return (
     <div className={s.tableContainer}>
       <TableParts.Root className={s.table}>
