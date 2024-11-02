@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
-import { UserNotifications } from '@/entities';
+import {UserNotifications} from '@/entities';
 import { LocaleSwitcher } from '@/features';
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { Button } from '@/shared/ui';

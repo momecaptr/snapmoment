@@ -3,3 +3,4 @@ export { Author } from './author/Author';
 export { ChartLike } from './chartLike/ChartLike';
 export { Comment } from './comment/Comment';
 export { RegisteredUsersCounter } from './registeredUsersCounter/RegisteredUsersCounter';
+export { UserNotifications } from './userNotifications/UserNotifications';

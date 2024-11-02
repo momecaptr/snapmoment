@@ -1,0 +1,17 @@
+.notificationEl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  &:not(:last-child) {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--dark-300);
+  }
+}
+
+.notificationItem {
+  /* border: 1px solid red; */
+}
