@@ -1,7 +1,11 @@
 import React from 'react';
 
+<<<<<<< HEAD
+=======
+import Outlinebell from '@/../public/assets/components/Outlinebell';
+>>>>>>> cd1aa3f (refactor public assets paths)
 import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
-import {UserNotifications} from '@/entities';
+import { UserNotifications } from '@/entities';
 import { LocaleSwitcher } from '@/features';
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { Button } from '@/shared/ui';

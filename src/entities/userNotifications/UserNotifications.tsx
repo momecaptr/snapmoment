@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Outlinebell } from '@/../public/assets/components';
+import Outlinebell from '@/../public/assets/components/Outlinebell';
 import { CustomDropdownItem, CustomDropdownWrapper, NotificationItem } from '@/shared/ui';
 
 import s from './UserNotifications.module.scss';
