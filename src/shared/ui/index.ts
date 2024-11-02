@@ -41,3 +41,4 @@ export { CustomDropdownItemWithIcon } from '@/shared/ui/customDropDownWrapper/Cu
 export { Loading } from '@/shared/ui/loading/Loading';
 export { usePagination } from '@/shared/ui/pagination/hooks/usePaginationLogic';
 export { TableParts } from '@/shared/ui/tableParts/TableParts';
+export { UniversalTable } from '@/shared/ui/universalTable/UniversalTable';

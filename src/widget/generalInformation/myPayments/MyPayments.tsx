@@ -2,8 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { useGetMyPaymentsDataQuery } from '@/shared/api/device/paymentApi';
 import { MySinglePayment } from '@/shared/api/device/paymentType';
-import { PaginationWithSelect, SelectOptionsType } from '@/shared/ui';
-import { UniversalTable } from '@/widget/generalInformation/myPayments/universalTable/UniversalTable';
+import { PaginationWithSelect, SelectOptionsType, UniversalTable } from '@/shared/ui';
 
 import s from './MyPayments.module.scss';
 
