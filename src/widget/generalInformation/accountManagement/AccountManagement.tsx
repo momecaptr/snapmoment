@@ -1,87 +1,55 @@
 import React, { useEffect, useState } from 'react';
 
-import { useGetCurrentPaymentSubscriptionQuery, useSendPaymentMutation } from '@/shared/api/device/paymentApi';
+import {
+  useCancelAutoRenewalMutation,
+  useGetCurrentPaymentSubscriptionQuery,
+  useSendPaymentMutation
+} from '@/shared/api/device/paymentApi';
 import { ModalKey, useModal } from '@/shared/lib';
-import { Card, Checkbox, Radio, Typography } from '@/shared/ui';
-import PayPal from '@/widget/generalInformation/accountManagement/icon/PayPal';
-import Stripe from '@/widget/generalInformation/accountManagement/icon/Stripe';
+import { Card, Checkbox, Loading, Radio, Typography } from '@/shared/ui';
 import { getNormalDateFormat } from '@/widget/generalInformation/lib/getNormalDateFormat';
 import { PaymentModals } from '@/widget/modals/paymentModals/PaymentModals';
 import { RenewalOffProceedModal } from '@/widget/modals/paymentProceedModal/RenewalOffProceedModal';
 import { isAfter } from '@formkit/tempo';
 import { clsx } from 'clsx';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 import s from './AccountManagement.module.scss';
 
-const accountVariants = {
-  business: 'Business',
-  personal: 'Personal'
-};
-
-// export type ChooseAccountType = 'Business' | 'Personal';
-export type AccountVariantTypes = (typeof accountVariants)[keyof typeof accountVariants];
-
-export const paymentVariants = {
-  paypal: 'PAYPAL',
-  stripe: 'STRIPE'
-};
-
-// export type ChoosePaymentType = 'PAYPAL' | 'STRIPE';
-export type PaymentVariantTypes = (typeof paymentVariants)[keyof typeof paymentVariants];
-
-export const subscriptionVariants = {
-  day: 'DAY',
-  monthly: 'MONTHLY',
-  weekly: 'WEEKLY'
-};
-// export type ChoosePaymentType = 'DAY' | 'MONTHLY' | 'WEEKLY';
-export type SubscriptionVariantTypes = (typeof subscriptionVariants)[keyof typeof subscriptionVariants];
-
-const subscriptionsTextOptions = {
-  [subscriptionVariants.day]: `$10 per ${subscriptionVariants.day.toLowerCase()}`,
-  [subscriptionVariants.monthly]: `$100 per ${subscriptionVariants.monthly.toLowerCase()}`,
-  [subscriptionVariants.weekly]: `$50 per ${subscriptionVariants.weekly.toLowerCase()}`
-};
-
-const errorPayModalContentVariant = {
-  buttonText: 'Back to payment',
-  description: 'Transaction failed. Please, write to support.',
-  title: 'Error'
-};
-
-const successPayModalContentVariant = {
-  buttonText: 'OK',
-  description: 'Payment was successful!',
-  title: 'Success'
-};
-
-const notifyPayModalContentVariant = {
-  buttonText: 'Back to payment',
-  description: 'Please, choose payment type before proceed.',
-  title: 'Choose subscription plan'
-};
-
-export type PaymentModalContentType = typeof errorPayModalContentVariant;
+import PayPal from '../../../../public/assets/components/PayPal';
+import Stripe from '../../../../public/assets/components/Stripe';
+import {
+  accountVariants,
+  errorPayModalContentVariant,
+  notifyPayModalContentVariant,
+  paymentVariants,
+  subscriptionVariantsArray,
+  subscriptionsTextOptions,
+  successPayModalContentVariant
+} from './lib/accountManagementConstants';
+import {
+  type AccountVariantTypes,
+  type PaymentModalContentType,
+  type PaymentVariantTypes,
+  type SubscriptionVariantTypes
+} from './lib/accountManagementConstantsTypes';
 
 export const AccountManagement = () => {
-  const { data } = useGetCurrentPaymentSubscriptionQuery();
-  const [sendPayment] = useSendPaymentMutation();
+  const { data, isLoading } = useGetCurrentPaymentSubscriptionQuery();
+  const [sendPayment, { isLoading: isSendPaymentLoading }] = useSendPaymentMutation();
+  const [cancelAutoRenewal, { isLoading: isCancelAutoRenewalLoading }] = useCancelAutoRenewalMutation();
   const [remoteAccountVariant, setRemoteAccountVariant] = useState<AccountVariantTypes | undefined>(undefined);
   const [localAccountVariant, setLocalAccountVariant] = useState<AccountVariantTypes | undefined>(undefined);
   const [isAutoRenewal, setIsAutoRenewal] = useState<boolean>(false);
   const [savedAutoRenewalValue, setSavedAutoRenewalValue] = useState<boolean>(isAutoRenewal);
-  // const [isProceedStatus, setIsProceedStatus] = useState<boolean>(false);
   const [savedPaymentUrl, setSavedPaymentUrl] = useState<string | undefined>(undefined);
   const [savedPaymentSubscription, setSavedPaymentSubscription] = useState<SubscriptionVariantTypes | undefined>(
     undefined
   );
+  const [paymentModalsContent, setPaymentModalsContent] = useState<PaymentModalContentType | undefined>(undefined);
   const { isOpen: isPaymentModalsOpen, setOpen: setIsPaymentModalsOpen } = useModal(ModalKey.PaymentModals);
   const { isOpen: isProceedModalOpen, setOpen: setIsProceedModalOpen } = useModal(ModalKey.PaymentProceed);
-  const [paymentModalsContent, setPaymentModalsContent] = useState<PaymentModalContentType | undefined>(undefined);
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (data) {
@@ -95,6 +63,15 @@ export const AccountManagement = () => {
       setLocalAccountVariant(accountVariants.business);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (router.query.success && !isPaymentModalsOpen) {
+      // Предположим, что `success` — это параметр запроса, который вы проверяете
+      setPaymentModalsContent(successPayModalContentVariant);
+      setIsPaymentModalsOpen(true);
+      void router.replace(router.pathname, undefined, { shallow: true }); // Используем shallow для предотвращения полного обновления
+    }
+  }, [router.query, isPaymentModalsOpen]);
 
   const handleOpenBusinessMenu = () => {
     setLocalAccountVariant(accountVariants.business);
@@ -149,13 +126,27 @@ export const AccountManagement = () => {
 
   // Вот это вызываем когда нажимаем на чекбокс AutoRenewal - сохраняем значение на момент нажатия и открываем модалку
   const handleAutoRenewal = (value: boolean) => {
+    // Если автообновление отключено, то ничего не делаем
+    if (!data?.hasAutoRenewal) {
+      return;
+    }
     setSavedAutoRenewalValue(value);
     setIsProceedModalOpen(true);
   };
 
+  // Вот это вызываем когда закрываем модалку
   const handleModalProceed = (value: boolean) => {
+    // Только если value === true, то меняем isAutoRenewal чекбокс на тот, что сохранили и отправляем запрос
     if (value) {
-      setIsAutoRenewal(savedAutoRenewalValue);
+      cancelAutoRenewal()
+        .then(() => {
+          // После успешного завершения запроса обновляем состояние
+          setIsAutoRenewal(false);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      // setIsAutoRenewal(savedAutoRenewalValue);
     }
     setIsProceedModalOpen(false);
   };
@@ -166,6 +157,10 @@ export const AccountManagement = () => {
 
   const isRemoteEqualsBusinessAccount = remoteAccountVariant === accountVariants.business;
   const isLocalEqualsBusinessAccount = localAccountVariant === accountVariants.business;
+
+  if (isLoading || isSendPaymentLoading || isCancelAutoRenewalLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className={s.container}>
@@ -178,7 +173,6 @@ export const AccountManagement = () => {
         onProceedStatusChange={handleModalProceed}
         openModal={isProceedModalOpen}
         setOpenModal={setIsProceedModalOpen}
-        // setProceedStatus={setIsProceedStatus}
       />
       {isRemoteEqualsBusinessAccount && (
         <div className={s.block}>
@@ -203,7 +197,7 @@ export const AccountManagement = () => {
       )}
       {isLocalEqualsBusinessAccount && isRemoteEqualsBusinessAccount && (
         <div className={s.checkBoxWrapper}>
-          <Checkbox checked={isAutoRenewal} onCheckedChange={(value) => handleAutoRenewal(value as boolean)} />
+          <Checkbox checked={isAutoRenewal} disabled={!data?.hasAutoRenewal} onCheckedChange={handleAutoRenewal} />
           <Typography as={'span'} variant={'regular_text_14'}>
             {'Auto - Renewal'}
           </Typography>
@@ -237,40 +231,20 @@ export const AccountManagement = () => {
       {isLocalEqualsBusinessAccount && (
         <>
           <div className={s.block}>
-            <Typography className={s.blockTitle} variant={'bold_text_16'}>
-              {isRemoteEqualsBusinessAccount ? 'Change your subscription' : 'Your subscription costs'}
-            </Typography>
-            <Card className={s.cardBox}>
-              <Radio.Root className={s.radioRoot}>
-                <Radio.Item
-                  data-sub={subscriptionVariants.day}
-                  onClick={handlePickSubscriptionType}
-                  value={subscriptionVariants.day}
-                >
-                  <Typography variant={'regular_text_14'}>
-                    {subscriptionsTextOptions[subscriptionVariants.day]}
-                  </Typography>
-                </Radio.Item>
-                <Radio.Item
-                  data-sub={subscriptionVariants.weekly}
-                  onClick={handlePickSubscriptionType}
-                  value={subscriptionVariants.weekly}
-                >
-                  <Typography variant={'regular_text_14'}>
-                    {subscriptionsTextOptions[subscriptionVariants.weekly]}
-                  </Typography>
-                </Radio.Item>
-                <Radio.Item
-                  data-sub={subscriptionVariants.monthly}
-                  onClick={handlePickSubscriptionType}
-                  value={subscriptionVariants.monthly}
-                >
-                  <Typography variant={'regular_text_14'}>
-                    {subscriptionsTextOptions[subscriptionVariants.monthly]}
-                  </Typography>
-                </Radio.Item>
-              </Radio.Root>
-            </Card>
+            <>
+              <Typography className={s.blockTitle} variant={'bold_text_16'}>
+                {isRemoteEqualsBusinessAccount ? 'Change your subscription' : 'Your subscription costs'}
+              </Typography>
+              <Card className={s.cardBox}>
+                <Radio.Root className={s.radioRoot}>
+                  {subscriptionVariantsArray.map((variant) => (
+                    <Radio.Item data-sub={variant} key={variant} onClick={handlePickSubscriptionType} value={variant}>
+                      <Typography variant={'regular_text_14'}>{subscriptionsTextOptions[variant]}</Typography>
+                    </Radio.Item>
+                  ))}
+                </Radio.Root>
+              </Card>
+            </>
           </div>
           <div className={s.payIconBox}>
             <div
@@ -280,7 +254,7 @@ export const AccountManagement = () => {
             >
               <PayPal />
             </div>
-            <div>Or</div>
+            <div>or</div>
             <div
               className={clsx(s.paymentTypeBox, s.boxStripe)}
               data-payment={paymentVariants.stripe}

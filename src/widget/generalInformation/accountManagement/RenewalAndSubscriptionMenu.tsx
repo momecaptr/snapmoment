@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import { useGetCurrentPaymentSubscriptionQuery, useSendPaymentMutation } from '@/shared/api/device/paymentApi';
 import { Checkbox, Radio, Typography, Wrapper } from '@/shared/ui';
-import { SubscriptionVariantTypes } from '@/widget/generalInformation/accountManagement/AccountManagement';
-import PayPal from '@/widget/generalInformation/accountManagement/icon/PayPal';
-import Stripe from '@/widget/generalInformation/accountManagement/icon/Stripe';
+import { SubscriptionVariantTypes } from '@/widget/generalInformation/accountManagement/lib/accountManagementConstantsTypes';
 import { getNormalDateFormat } from '@/widget/generalInformation/lib/getNormalDateFormat';
 import { useRouter } from 'next/router';
 
 import s from './RenewalAndSubscriptionMenu.module.scss';
+
+import PayPal from '../../../../public/assets/components/PayPal';
+import Stripe from '../../../../public/assets/components/Stripe';
 
 const RenewalAndSubscriptionMenu = () => {
   const [sendPayment] = useSendPaymentMutation();

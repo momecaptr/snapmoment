@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import { Button, Modal } from '@/shared/ui';
-import { PaymentModalContentType } from '@/widget/generalInformation/accountManagement/AccountManagement';
+import { PaymentModalContentType } from '@/widget/generalInformation/accountManagement/lib/accountManagementConstantsTypes';
 
 import s from './PaymentModals.module.scss';
 

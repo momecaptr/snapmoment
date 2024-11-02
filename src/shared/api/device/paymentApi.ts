@@ -8,6 +8,13 @@ import {
 
 export const paymentApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
+    cancelAutoRenewal: builder.mutation<void, void>({
+      invalidatesTags: ['Payment'],
+      query: () => ({
+        method: 'POST',
+        url: '/v1/subscriptions/canceled-auto-renewal'
+      })
+    }),
     getCurrentPaymentSubscription: builder.query<CurrentPaymentSubscriptionsResponse, void>({
       providesTags: ['Payment'],
       query: () => ({
@@ -29,4 +36,9 @@ export const paymentApi = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const { useGetCurrentPaymentSubscriptionQuery, useGetMyPaymentsDataQuery, useSendPaymentMutation } = paymentApi;
+export const {
+  useCancelAutoRenewalMutation,
+  useGetCurrentPaymentSubscriptionQuery,
+  useGetMyPaymentsDataQuery,
+  useSendPaymentMutation
+} = paymentApi;
