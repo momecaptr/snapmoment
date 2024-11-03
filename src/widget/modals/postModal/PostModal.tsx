@@ -82,7 +82,9 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
     showPostModalHandler(false);
     // router.push('/', undefined, { shallow: true });
     // ! Это для того, чтобы возвращаться на ту страницу где были, либо на главную страницу
-    pathOnClose ? router.push(pathOnClose) : router.push('/', undefined, { shallow: true });
+    pathOnClose
+      ? router.push(pathOnClose, undefined, { shallow: true })
+      : router.push('/', undefined, { shallow: true });
   };
 
   // * Функия удаления поста
