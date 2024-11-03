@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { useGetMyPaymentsDataQuery } from '@/shared/api/device/paymentApi';
 import { MySinglePayment } from '@/shared/api/device/paymentType';
-import { PaginationWithSelect, SelectOptionsType, UniversalTable } from '@/shared/ui';
+import { PaginationWithSelect, SelectOptionsType, Typography, UniversalTable } from '@/shared/ui';
 
 import s from './MyPayments.module.scss';
 
@@ -26,7 +26,7 @@ export const MyPayments = () => {
   const formatDate = (value: any) => new Date(value).toLocaleDateString('ru-RU');
 
   const formatSubscriptionType = (value: string) => {
-    const types: Record<string, string> = { DAY: '1 day', MONTH: '1 month', WEEK: '7 days' };
+    const types: Record<string, string> = { DAY: '1 day', MONTHLY: '1 month', WEEKLY: '7 days' };
 
     return types[value] || value;
   };
@@ -79,7 +79,7 @@ export const MyPayments = () => {
 
   return (
     <>
-      {myPayments && (
+      {myPayments && myPayments.length > 0 ? (
         <>
           <div className={s.tableWrapper}>
             <UniversalTable<MyPaymentsTableDataSingleObjType>
@@ -98,6 +98,8 @@ export const MyPayments = () => {
             totalItems={myPaymentsTableData.length}
           />
         </>
+      ) : (
+        <Typography>There is no payments yet</Typography>
       )}
     </>
   );
