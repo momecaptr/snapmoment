@@ -40,7 +40,7 @@ export const HomePage = (props: Props) => {
     triggerRef
   } as IUseInfiniteScroll);
 
-  //todo: добавить <Loading/> в <div ref={triggerRef}></div>
+  //todo: добавить <loading/> в <div ref={triggerRef}></div>
   return (
     <div className={s.container}>
       <div className={s.cards}>

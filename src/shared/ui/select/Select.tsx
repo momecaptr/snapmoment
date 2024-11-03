@@ -33,7 +33,8 @@ export const SelectUI = ({ className, disabled, name, onValueChange, selectOptio
         <Select.Trigger aria-label={'select'} className={selectClasses.trigger} asChild>
           <button>
             <Typography className={s.selectVariant} variant={'regular_text_14'}>
-              {selectedOption ? selectedOption.text : 'Select an option'}
+              {/*{selectedOption ? selectedOption.text : 'Select an option'}*/}
+              {selectedOption ? selectedOption.text : selectOptions[0].text}
             </Typography>
             <ArrowIosDownOutline className={selectClasses.icon} />
           </button>

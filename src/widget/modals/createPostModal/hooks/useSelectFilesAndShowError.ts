@@ -1,9 +1,7 @@
 import { ChangeEvent } from 'react';
 
+import { createPostActions, createPostModalSections } from '@/features';
 import { useAppDispatch } from '@/shared/lib';
-
-import { modalSection } from '../lib/createPostConstants';
-import { createPostActions } from '../service/createPostSlice';
 
 export const useSelectFilesAndShowError = (setErrorMessage: (value: string) => void) => {
   const dispatch = useAppDispatch();
@@ -31,7 +29,7 @@ export const useSelectFilesAndShowError = (setErrorMessage: (value: string) => v
     const url = URL.createObjectURL(file);
 
     dispatch(createPostActions.addPostImgs({ url }));
-    dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
+    dispatch(createPostActions.setActiveSection({ section: createPostModalSections.cropping }));
 
     e.target.value = '';
 
