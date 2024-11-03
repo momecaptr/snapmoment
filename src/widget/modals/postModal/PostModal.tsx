@@ -15,7 +15,7 @@ import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/a
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper } from '@/shared/ui';
 import { PostInteractionBar, UsersLikesModal } from '@/widget';
-import { PublicationSection } from '@/widget/modals/createPostModal/ui/publicationSection/PublicationSection';
+import { PublishPost } from '@/widget/modals/createPostModal/ui/publishPost/PublishPost';
 import { CloseEditModal } from '@/widget/modals/postModal/closeEditModal/CloseEditModal';
 import { DeletePostModal } from '@/widget/modals/postModal/deletePostModal/DeletePostModal';
 import { PostModalBurgerDropDown } from '@/widget/modals/postModal/postModalBurgerDropDown/PostModalBurgerDropDown';
@@ -184,7 +184,7 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
                 </>
               ) : (
                 <>
-                  <PublicationSection
+                  <PublishPost
                     changeEditMode={() => setIsEditMode(false)}
                     description={postData.description}
                     isLocationBar={false}

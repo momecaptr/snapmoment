@@ -1,12 +1,4 @@
-import type { AspectRatioVals } from '../../../service/createPostSliceTypes';
-
 import React from 'react';
-
-import { useAppSelector } from '@/shared/lib';
-import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
-import { clsx } from 'clsx';
-
-import s from './CropAndScalePanel.module.scss';
 
 import Expand from '@/../public/assets/components/Expand';
 import IconHorizontalRectangle from '@/../public/assets/components/IconHorizontalRectangle';
@@ -15,12 +7,18 @@ import IconVerticalRectangle from '@/../public/assets/components/IconVerticalRec
 import Maximize from '@/../public/assets/components/Maximize';
 import MaximizeOutline from '@/../public/assets/components/MaximizeOutline';
 import Picture from '@/../public/assets/components/PictureOutline';
-import { aspectRatios } from '../../../lib/createPostConstants';
+import { PhotoAspectRatioType, photoAspectRatios } from '@/entities';
+import { useAppSelector } from '@/shared/lib';
+import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
+import { clsx } from 'clsx';
+
+import s from './CropAndScalePanel.module.scss';
+
 import { createPostSelectors } from '../../../service/createPostSlice';
 
 type PropsCropAndScale = {
   id: string;
-  onAspectChange: ({ aspect }: { aspect: AspectRatioVals }) => void;
+  onAspectChange: ({ aspect }: { aspect: PhotoAspectRatioType }) => void;
   onZoomChange: ({ zoom }: { zoom: number }) => void;
 };
 
@@ -38,8 +36,8 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
   const currentImage = useAppSelector((state) => createPostSelectors.soloImg(state, id));
   const zoomVal = currentImage?.zoom;
 
-  const isActiveRatio = (ratio: AspectRatioVals) =>
-    ratio.value === aspectRatios.find((r) => r.value === ratio.value)?.value;
+  const isActiveRatio = (ratio: PhotoAspectRatioType) =>
+    ratio.value === photoAspectRatios.find((r) => r.value === ratio.value)?.value;
 
   return (
     <div className={s.croppingPanel}>
@@ -56,7 +54,7 @@ export const CropAndScalePanel = (props: PropsCropAndScale) => {
         side={'top'}
         sideOffset={2}
       >
-        {aspectRatios.map((ratio) => (
+        {photoAspectRatios.map((ratio) => (
           <CustomDropdownItem
             className={clsx(s.contentAspects, isActiveRatio(ratio) && s.active)}
             key={ratio.text}

@@ -30,7 +30,7 @@ export const UniversalTable = <T extends object>(props: UniversalTableProps<T>) 
   const { colsStyles, data, tHeadStyles } = props;
 
   // Создаем колонки на основе ключей первого элемента данных
-  const columns = useMemo(() => (data.length > 0 ? Object.keys(data[0]) : []), [data]);
+  const columns = useMemo(() => (data.length > 0 ? Object.keys(data[0]) : []), [JSON.stringify(data)]);
 
   return (
     <div className={s.tableContainer}>

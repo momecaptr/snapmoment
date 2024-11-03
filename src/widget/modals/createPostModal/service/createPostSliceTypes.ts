@@ -1,12 +1,9 @@
-import { direction, modalSection } from '../lib/createPostConstants';
+import { PhotoAspectRatioType } from '@/entities';
 
-export type AspectRatioVals = {
-  text: string;
-  value: number;
-};
+import { createPostModalDirections, createPostModalSections } from '../lib/createPostConstants';
 
 export type CreatePostImgProps = {
-  aspect: AspectRatioVals;
+  aspect: PhotoAspectRatioType;
   buferUrl: string;
   crop: CropInit;
   croppedAreaPx: CroppedAreaPx;
@@ -39,10 +36,10 @@ export type UpdateImgZoom = {
 };
 
 export type UpdateImgAspect = {
-  aspect: AspectRatioVals;
+  aspect: PhotoAspectRatioType;
   id: string;
 };
 
 // export type Sections = 'Cropping' | 'Filters' | 'Publication';
-export type CreatePostModalSections = (typeof modalSection)[keyof typeof modalSection];
-export type NextBackDirection = (typeof direction)[keyof typeof direction];
+export type CreatePostModalSections = (typeof createPostModalSections)[keyof typeof createPostModalSections];
+export type NextBackDirection = (typeof createPostModalDirections)[keyof typeof createPostModalDirections];

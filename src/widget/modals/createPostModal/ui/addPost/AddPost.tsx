@@ -4,14 +4,14 @@ import PhotoStub from '@/../public/assets/components/PhotoStub';
 import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 
-import s from './AddPostSection.module.scss';
+import s from './AddPost.module.scss';
 
 import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
 
 type AddImgSectionType = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;
 };
-export const AddPostSection = (props: AddImgSectionType) => {
+export const AddPost = (props: AddImgSectionType) => {
   const { onSelectFile } = props;
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();

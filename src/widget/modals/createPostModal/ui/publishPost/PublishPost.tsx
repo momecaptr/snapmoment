@@ -16,7 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { z } from 'zod';
 
-import s from './PublicationSection.module.scss';
+import s from './PublishPost.module.scss';
 
 import { useRefreshPostCreationData } from '../../hooks/useRefreshPostCreationData';
 import { createPostSelectors } from '../../service/createPostSlice';
@@ -53,7 +53,7 @@ export type AddPostType = z.infer<typeof addPostSchema>;
  * * postId {number} - Id поста, если передано
  * * changeEditMode {() => void} - Если передано - для изменения вида модалки
  */
-export const PublicationSection = (props: Props) => {
+export const PublishPost = (props: Props) => {
   const {
     changeEditMode,
     className,

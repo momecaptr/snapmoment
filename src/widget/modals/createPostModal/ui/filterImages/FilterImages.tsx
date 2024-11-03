@@ -2,13 +2,13 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
+import { photoFilters } from '@/entities/photo/photoConstants';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 
-import s from './FiltersSection.module.scss';
+import s from './FilterImages.module.scss';
 
-import { createPostModalFilters } from '../../lib/createPostConstants';
 import { createImage } from '../../lib/cropImage';
 import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
 import { CreatePostImgProps } from '../../service/createPostSliceTypes';
@@ -24,15 +24,11 @@ type Props = {
  * @description Для обновления фильров картинки ИСПОЛЬЗУЕМ useEffect потому что функция сохранения картинки с фильтром асинхронная и чтобы обеспечить моментальное ее срабатывание, делаем useEffect. Когда не использовал, картинка обновляляась только на второй клик.
  * @param {number} props.imgIndex - индекс выбранного изображения (от карусели)
  */
-export const FiltersSection = (props: Props) => {
+export const FilterImages = (props: Props) => {
   const { className, imgIndex } = props;
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   const [selectedFilter, setSelectedFilter] = useState<string>(allPostImages[imgIndex]?.filter || 'none'); // Инициализируем на основе фильтра изображения
-  const [buferIndex, setBuferIndex] = useState(imgIndex);
-  const activeSection = useAppSelector(createPostSelectors.activeSection);
-
-  console.log({ imgIndex });
 
   async function transformImage(img: CreatePostImgProps) {
     const canvas = document.createElement('canvas');
@@ -69,7 +65,6 @@ export const FiltersSection = (props: Props) => {
     const img = allPostImages[imgIndex];
 
     transformImage(img).then((transformedImage) => {
-      console.log({ transformedImage });
       dispatch(createPostActions.setFinalBuferImg({ imgIndex, transformedImage }));
     });
     // }
@@ -88,7 +83,7 @@ export const FiltersSection = (props: Props) => {
 
   return (
     <div className={s.container}>
-      {createPostModalFilters.map((filter) => {
+      {photoFilters.map((filter) => {
         const isSelected = selectedFilter === filter.style;
 
         return (

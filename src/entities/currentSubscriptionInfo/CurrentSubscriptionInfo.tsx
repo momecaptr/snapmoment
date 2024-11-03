@@ -10,7 +10,7 @@ type Props = {
   classForTitle: string;
 };
 
-export const CurrentSubscriptionInfoSection = (props: Props) => {
+export const CurrentSubscriptionInfo = (props: Props) => {
   const { classForCard, classForText, classForTitle } = props;
   const { data, isLoading } = useGetCurrentPaymentSubscriptionQuery();
 

@@ -4,20 +4,20 @@ import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutli
 // import { canvasPreview } from '@/widget/sideBar/hooks/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
+import { AddPost } from '@/widget/modals/createPostModal/ui/addPost/AddPost';
+import { CropAndScale } from '@/widget/modals/createPostModal/ui/cropAndScale/CropAndScale';
+import { FilterImages } from '@/widget/modals/createPostModal/ui/filterImages/FilterImages';
+import { PublishPost } from '@/widget/modals/createPostModal/ui/publishPost/PublishPost';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
 
 import { useNavigateBtnLogic } from './hooks/useNavigateBtnLogic';
 import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
-import { direction, modalSection } from './lib/createPostConstants';
+import { createPostModalDirections, createPostModalSections } from './lib/createPostConstants';
 import { createPostSelectors } from './service/createPostSlice';
 import { NextBackDirection } from './service/createPostSliceTypes';
-import { AddPostSection } from './ui/addPostSection/AddPostSection';
 import { CloseCreatePostModal } from './ui/closeCreatePostModal/CloseCreatePostModal';
-import { CropAndScaleSection } from './ui/cropAndScaleSection/CropAndScaleSection';
-import { FiltersSection } from './ui/filtersSection/FiltersSection';
-import { PublicationSection } from './ui/publicationSection/PublicationSection';
 
 type PropsCrPostModal = {
   isOpen: boolean;
@@ -32,7 +32,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
 
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
   const [activeSwiperImgId, setActiveSwiperImgId] = useState(0);
-  const submitRef = useRef<HTMLButtonElement>(null); // ref для button в PublicationSection
+  const submitRef = useRef<HTMLButtonElement>(null); // ref для button в PublishPost
 
   const { isOpen: isCloseModalOpen, setOpen: setIsCloseModalOpen } = useModal(ModalKey.CreatePostOnBlur);
   const { navigateBtnLogic } = useNavigateBtnLogic();
@@ -48,7 +48,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   };
 
   const closeGeneralModal = () => {
-    if (activeSection !== modalSection.addPost) {
+    if (activeSection !== createPostModalSections.addPost) {
       setIsCloseModalOpen(true);
     } else {
       setOpen(false);
@@ -58,31 +58,36 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
   const nextButton = allPostImages.length ? (
     <Button
       onClick={() => {
-        if (activeSection === modalSection.publication) {
+        if (activeSection === createPostModalSections.publication) {
           submitRef.current?.click();
         } else {
-          navigateBtnHandler(direction.next);
+          navigateBtnHandler(createPostModalDirections.next);
         }
       }}
-      type={activeSection === modalSection.publication ? 'submit' : 'button'}
+      type={activeSection === createPostModalSections.publication ? 'submit' : 'button'}
       variant={'text'}
     >
       <Typography className={s.nextBtnTxt} variant={'h3'}>
-        {activeSection === modalSection.publication ? 'Publish' : direction.next}
+        {activeSection === createPostModalSections.publication ? 'Publish' : createPostModalDirections.next}
       </Typography>
     </Button>
   ) : null;
 
   const prevButton = allPostImages.length ? (
-    <Button className={s.prevBtn} onClick={() => navigateBtnHandler(direction.back)} type={'button'} variant={'text'}>
+    <Button
+      className={s.prevBtn}
+      onClick={() => navigateBtnHandler(createPostModalDirections.back)}
+      type={'button'}
+      variant={'text'}
+    >
       <ArrowIosBackOutline />
     </Button>
   ) : null;
 
   errorMessage && showToast({ message: `${errorMessage}`, type: 'error' });
 
-  const isAddPostSection = activeSection === modalSection.addPost;
-  const isCroppingSection = activeSection === modalSection.cropping;
+  const isAddPostSection = activeSection === createPostModalSections.addPost;
+  const isCroppingSection = activeSection === createPostModalSections.cropping;
 
   return (
     <>
@@ -101,7 +106,7 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
           {/*<button onClick={handleClick}>ALALALALA</button>*/}
           {allPostImages.length !== 0 ? (
             <>
-              {isCroppingSection && <CropAndScaleSection onSelectFile={onSelectFile} />}
+              {isCroppingSection && <CropAndScale onSelectFile={onSelectFile} />}
               {!isAddPostSection && !isCroppingSection && (
                 <>
                   <div className={s.leftContent}>
@@ -119,17 +124,17 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
                   <div
                     className={clsx(
                       s.rightContent,
-                      activeSection === modalSection.filters ? s.filtersPanel : s.publicationPanel
+                      activeSection === createPostModalSections.filters ? s.filtersPanel : s.publicationPanel
                     )}
                   >
-                    {activeSection === modalSection.filters && <FiltersSection imgIndex={activeSwiperImgId} />}
-                    {activeSection === modalSection.publication && <PublicationSection submitRef={submitRef} />}
+                    {activeSection === createPostModalSections.filters && <FilterImages imgIndex={activeSwiperImgId} />}
+                    {activeSection === createPostModalSections.publication && <PublishPost submitRef={submitRef} />}
                   </div>
                 </>
               )}
             </>
           ) : (
-            <AddPostSection onSelectFile={onSelectFile} />
+            <AddPost onSelectFile={onSelectFile} />
           )}
         </div>
       </Modal>

@@ -3,17 +3,16 @@ import Cropper, { Area, Point } from 'react-easy-crop';
 
 import ArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import ArrowIosForward from '@/../public/assets/components/ArrowIosForward';
+import { PhotoAspectRatioType, photoAspectRatios } from '@/entities';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { clsx } from 'clsx';
 import { Swiper as SwiperProps } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import s from './CropAndScaleSection.module.scss';
+import s from './CropAndScale.module.scss';
 
-import { aspectRatios } from '../../lib/createPostConstants';
 import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
-import { AspectRatioVals } from '../../service/createPostSliceTypes';
 import { AddNewImgPanel } from './addNewImgPanel/AddNewImgPanel';
 import { CropAndScalePanel } from './cropAndScalePanel/CropAndScalePanel';
 
@@ -30,7 +29,7 @@ type CropAndScaleSectionType = {
  * * AddNewImgPanel - компонент для добавления новых изображений
  * * CropAndScalePanel - компонент для масштабирования и обрезания
  */
-export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
+export const CropAndScale = (props: CropAndScaleSectionType) => {
   const { errorMessage, onSelectFile } = props;
   const dispatch = useAppDispatch();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
@@ -50,10 +49,10 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
     dispatch(createPostActions.setZoom({ id, zoom }));
   };
 
-  const onAspectChange = ({ aspect, id }: { aspect: AspectRatioVals; id: string }) => {
+  const onAspectChange = ({ aspect, id }: { aspect: PhotoAspectRatioType; id: string }) => {
     if (aspect) {
       dispatch(createPostActions.setAspect({ aspect, id }));
-      if (aspect.text === aspectRatios[0].text) {
+      if (aspect.text === photoAspectRatios[0].text) {
         dispatch(createPostActions.setZoom({ id, zoom: 1 }));
         dispatch(createPostActions.setCrop({ crop: { x: 0, y: 0 }, id }));
       }
@@ -69,13 +68,6 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
     );
   };
 
-  const [mediaSize, setMediaSize] = useState({
-    height: 0,
-    naturalHeight: 0,
-    naturalWidth: 0,
-    width: 0
-  });
-
   const cropperExtraStyles = {
     style: {
       containerStyle: {
@@ -85,10 +77,6 @@ export const CropAndScaleSection = (props: CropAndScaleSectionType) => {
       cropAreaStyle: {
         border: 'none'
       }
-      // mediaStyle: {
-      //   // height: '100%',
-      //   // objectFit: 'contain'
-      // }
     }
   };
 

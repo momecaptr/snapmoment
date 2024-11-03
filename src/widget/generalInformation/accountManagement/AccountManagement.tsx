@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { AccountTypeSection, CurrentSubscriptionInfoSection } from '@/entities';
+import { AccountType, CurrentSubscriptionInfo } from '@/entities';
 import { PaymentButtons, PickSubscriptionSection } from '@/features';
 import {
   useCancelAutoRenewalMutation,
@@ -143,7 +143,7 @@ export const AccountManagement = () => {
       />
       {isRemoteEqualsBusinessAccount && (
         <div className={s.block}>
-          <CurrentSubscriptionInfoSection
+          <CurrentSubscriptionInfo
             classForCard={s.expirationArea}
             classForText={s.expirationAreaTitle}
             classForTitle={s.blockTitle}
@@ -159,7 +159,7 @@ export const AccountManagement = () => {
         </div>
       )}
       <div className={s.block}>
-        <AccountTypeSection
+        <AccountType
           classForCard={s.cardBox}
           classForRadioRoot={s.radioRoot}
           classForTitle={s.blockTitle}
