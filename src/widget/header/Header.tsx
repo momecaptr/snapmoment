@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Outlinebell } from '@/../public/assets/components';
+import Outlinebell from '@/../public/assets/components/Outlinebell';
 import SnapMomentLogo from '@/../public/assets/components/SnapMomentLogo';
 import { LocaleSwitcher } from '@/features';
 import { useMeQuery } from '@/shared/api/auth/authApi';

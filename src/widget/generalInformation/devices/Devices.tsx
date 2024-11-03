@@ -3,15 +3,16 @@ import React from 'react';
 import { useDeleteTerminateDeviceMutation, useGetDeviceQuery } from '@/shared/api/payment/deviceApi';
 import { Button, Typography } from '@/shared/ui';
 import OtherDevices from '@/widget/generalInformation/devices/OtherDevices';
-import Brave from '@/widget/generalInformation/devices/icon/browserIcon/Brave';
-import Chrome from '@/widget/generalInformation/devices/icon/browserIcon/Chrome';
-import Edge from '@/widget/generalInformation/devices/icon/browserIcon/Exploer';
-import Firefox from '@/widget/generalInformation/devices/icon/browserIcon/FireFox';
-import Opera from '@/widget/generalInformation/devices/icon/browserIcon/Opera';
-import Safari from '@/widget/generalInformation/devices/icon/browserIcon/Safari';
-import Yandex from '@/widget/generalInformation/devices/icon/browserIcon/Yandex';
 
 import s from './Devices.module.scss';
+
+import Brave from '../../../../public/assets/components/BraveBrowserIcon';
+import Chrome from '../../../../public/assets/components/ChromeBrowserIcon';
+import Edge from '../../../../public/assets/components/ExploerBrowserIcon';
+import Firefox from '../../../../public/assets/components/FireFoxBrowserIcon';
+import Opera from '../../../../public/assets/components/OperaBrowserIcon';
+import Safari from '../../../../public/assets/components/SafariBrowserIcon';
+import Yandex from '../../../../public/assets/components/YandexBrowserIcon';
 
 export const Devices = () => {
   const { data } = useGetDeviceQuery();

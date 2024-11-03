@@ -16,7 +16,7 @@ export default function Page() {
   );
 
   // if (isLoading) {
-  //   return <div>Loading...</div>;
+  //   return <div>loading...</div>;
   // }
   //
   // if (isSuccess) {

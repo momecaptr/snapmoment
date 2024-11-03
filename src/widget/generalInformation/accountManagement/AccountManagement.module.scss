@@ -1,52 +1,39 @@
-.box {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 96px;
-  align-items: center;
+.container {
+  .blockTitle {
+    margin-bottom: 20px;
+  }
 
-  margin-top: 30px;
+  .block {
+    margin-bottom: 20px;
+  }
 
-  background-color: var(--dark-500);
-  border: 1px solid var(--dark-300);
-}
+  .expirationArea {
+    display: grid;
+    grid-template-columns: 250px 250px;
+    gap: 40px;
 
-.boxBusiness {
-  background-color: var(--dark-500);
-  border: 1px solid var(--dark-300);
-}
+    padding-left: 24px;
+    padding-block: 12px;
 
-.radioRoot {
-  gap: 12px;
-  padding-left: 22px;
-}
+    .expirationAreaTitle {
+      margin-bottom: 12px;
+      color: var(--light-900);
+    }
+  }
 
-.radioRootBusiness {
-  display: flex;
-  gap: 12px;
-  padding: 10px 0 10px 22px;
-}
+  .cardBox {
+    background-color: var(--dark-500);
+    border: 1px solid var(--dark-300);
+  }
 
-.BusinessText {
-  margin-top: 42px;
-  margin-bottom: 6px;
-}
+  .radioRoot {
+    gap: 24px;
+    padding-left: 24px;
+    padding-block: 12px;
+  }
 
-.payIconBox {
-  position: fixed;
-  right: 65px;
-  bottom: 150px;
-
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-
-.boxStripe {
-  cursor: pointer;
-  margin-left: 54px;
-}
-
-.boxPaypal {
-  cursor: pointer;
-  margin-right: 54px;
+  .checkBoxWrapper {
+    display: flex;
+    margin-bottom: 20px;
+  }
 }

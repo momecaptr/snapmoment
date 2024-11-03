@@ -12,6 +12,14 @@
   gap: 10px 24px;
   align-items: center;
   justify-content: center;
+
+  &.boxLeft {
+    justify-content: flex-start;
+  }
+
+  &.boxRight {
+    justify-content: flex-end;
+  }
 }
 
 .boxItem {

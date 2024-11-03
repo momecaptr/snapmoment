@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react';
 
+import { createPostSelectors } from '@/features';
 import { useAppSelector } from '@/shared/lib';
 import { Button, Modal, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 
 import s from './CloseCreatePostModal.module.scss';
 
-import { useRefreshPostCreationData } from '../../hooks/useRefreshPostCreationData';
-import { createPostSelectors } from '../../service/createPostSlice';
+import { useRefreshPostCreationData } from '../../../../../features/createPost/hooks/useRefreshPostCreationData';
 
 type Props = {
   className?: string;

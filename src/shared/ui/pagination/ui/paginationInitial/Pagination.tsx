@@ -1,9 +1,9 @@
 import SvgArrowIosBack from '@/../public/assets/components/ArrowIosBack';
 import SvgArrowIosForward from '@/../public/assets/components/ArrowIosForward';
+import { usePagination } from '@/shared/ui/pagination/hooks/usePaginationLogic';
 
 import s from './Pagination.module.scss';
 
-import { usePagination } from '../../lib/paginationLogic';
 import { PageLink } from './pageLink/PageLink';
 
 type Props = {

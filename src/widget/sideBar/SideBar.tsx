@@ -86,7 +86,7 @@ export const SideBar = (props: Props) => {
   //
   //   showPromiseToast(promise, {
   //     error: 'Error occurred',
-  //     loading: 'Loading...',
+  //     loading: 'loading...',
   //     success: 'Success'
   //   });
   // };

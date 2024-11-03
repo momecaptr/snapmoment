@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 
 import CloseOutline from '@/../public/assets/components/CloseOutline';
 import { Author, Comment } from '@/entities';
-import { AddComment, ShowLikers, TimeAgo } from '@/features';
+import { AddComment, CloseEditModal, DeletePostModal, PublishPost, ShowLikers, TimeAgo } from '@/features';
 import { MeResponse } from '@/shared/api/common/model/api.types';
 import {
   useDeleteUsersImagePostMutation,
@@ -13,15 +13,13 @@ import {
 } from '@/shared/api/posts/postsApi';
 import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
-import { Button, Modal, PhotosSwiper } from '@/shared/ui';
-import { PostInteractionBar, UsersLikesModal } from '@/widget';
-import { PublicationSection } from '@/widget/modals/createPostModal/ui/publicationSection/PublicationSection';
-import { CloseEditModal } from '@/widget/modals/postModal/closeEditModal/CloseEditModal';
-import { DeletePostModal } from '@/widget/modals/postModal/deletePostModal/DeletePostModal';
-import { PostModalBurgerDropDown } from '@/widget/modals/postModal/postModalBurgerDropDown/PostModalBurgerDropDown';
+import { Button, Modal, PhotosSwiper, PostModalBurgerDropDown } from '@/shared/ui';
 import { useRouter } from 'next/router';
 
 import s from './PostModal.module.scss';
+
+import { PostInteractionBar } from '../../postInteractionBar/PostInteractionBar';
+import { UsersLikesModal } from '../usersLikesModal/UsersLikesModal';
 
 type Props = {
   me: MeResponse | undefined;
@@ -51,7 +49,7 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
   const router = useRouter();
 
   //const { data: me } = useMeQuery();
-  const { data: postData } = useGetPostByIdQuery({ postId: postId || null });
+  const { data: postData, refetch } = useGetPostByIdQuery({ postId: postId || null });
   const { data: postComments } = useGetPostCommentsByPostIdQuery({ postId: postId || null });
   const { data: postLikes } = useGetPostLikesQuery({ postId: postId || null });
   const [updatePost, { isLoading: isLoadingUpdatePost }] = useUpdateUsersPostMutation();
@@ -184,7 +182,7 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
                 </>
               ) : (
                 <>
-                  <PublicationSection
+                  <PublishPost
                     changeEditMode={() => setIsEditMode(false)}
                     description={postData.description}
                     isLocationBar={false}

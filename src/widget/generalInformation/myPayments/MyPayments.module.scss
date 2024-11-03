@@ -1,0 +1,24 @@
+.tableWrapper {
+  margin-bottom: 36px;
+}
+
+.tHeadStyles {
+  // nothing yet
+}
+
+.colsStyles {
+  &:nth-child(1) {
+    position: relative;
+    width: 18%;
+  }
+
+  &:nth-child(2) {
+    position: relative;
+    width: 22%;
+  }
+
+  &:nth-child(3) {
+    position: relative;
+    width: 5%;
+  }
+}

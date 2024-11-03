@@ -3,11 +3,12 @@ import React from 'react';
 import { useDeleteSessionDeviceMutation, useGetDeviceQuery } from '@/shared/api/payment/deviceApi';
 import { DeviceTypeArgs } from '@/shared/api/payment/deviceType';
 import { Typography } from '@/shared/ui';
-import Desktop from '@/widget/generalInformation/devices/icon/Desctop';
-import LogOut from '@/widget/generalInformation/devices/icon/LogOut';
-import Phone from '@/widget/generalInformation/devices/icon/Phone';
 
 import s from '@/widget/generalInformation/devices/Devices.module.scss';
+
+import Desktop from '../../../../public/assets/components/DescktopIcon';
+import LogOut from '../../../../public/assets/components/LogOutIcon';
+import Phone from '../../../../public/assets/components/PhoneIcon';
 
 const OtherDevices = () => {
   const { data } = useGetDeviceQuery();

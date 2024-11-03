@@ -1,9 +1,12 @@
+import { createPostActions, createPostSelectors } from '@/features';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-import getCroppedImg from '../lib/cropImage';
-import { createPostActions, createPostSelectors } from '../service/createPostSlice';
-import { NextBackDirection } from '../service/createPostSliceTypes';
 
-import { direction, modalSection } from '../lib/createPostConstants';
+import {
+  NextBackDirection,
+  createPostModalDirections,
+  createPostModalSections
+} from '@/features';
+import { getCroppedImg } from '@/features';
 
 // interface NavigateBtnLogic {
 //   activeSection: CreatePostModalSections;
@@ -42,39 +45,39 @@ export const useNavigateBtnLogic = () => {
 
   const navigateBtnLogic = (directionValue: NextBackDirection) => {
     switch (activeSection) {
-      case modalSection.addPost:
-        if (directionValue === direction.next) {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
+      case createPostModalSections.addPost:
+        if (directionValue === createPostModalDirections.next) {
+          dispatch(createPostActions.setActiveSection({ section: createPostModalSections.cropping }));
         } else {
           console.log('Начало');
         }
         break;
-      case modalSection.cropping:
-        if (directionValue === direction.next) {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
+      case createPostModalSections.cropping:
+        if (directionValue === createPostModalDirections.next) {
+          dispatch(createPostActions.setActiveSection({ section: createPostModalSections.filters }));
           // Сохраняем обрезанные изображения
           void saveCropImgToUrl();
         } else {
           dispatch(createPostActions.setAllPostImgs({ images: [] }));
-          dispatch(createPostActions.setActiveSection({ section: modalSection.addPost }));
+          dispatch(createPostActions.setActiveSection({ section: createPostModalSections.addPost }));
         }
         break;
-      case modalSection.filters:
-        if (directionValue === direction.next) {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.publication }));
+      case createPostModalSections.filters:
+        if (directionValue === createPostModalDirections.next) {
+          dispatch(createPostActions.setActiveSection({ section: createPostModalSections.publication }));
         } else {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.cropping }));
+          dispatch(createPostActions.setActiveSection({ section: createPostModalSections.cropping }));
         }
         break;
-      case modalSection.publication:
-        if (directionValue === direction.next) {
+      case createPostModalSections.publication:
+        if (directionValue === createPostModalDirections.next) {
           console.log('отправить данные надобно');
 
           // pushToSend().then(() => {
           //   console.log({ final: allPostImages[0].buferUrl });
           // });
         } else {
-          dispatch(createPostActions.setActiveSection({ section: modalSection.filters }));
+          dispatch(createPostActions.setActiveSection({ section: createPostModalSections.filters }));
         }
         break;
     }

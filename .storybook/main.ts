@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
-import path from 'path';
+import * as path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -22,9 +22,23 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
 
     config.resolve.alias = {
-      ...config.resolve.alias,
+      ...(config.resolve.alias || {}),
       '@': path.resolve(__dirname, '../src')
     };
+    // Добавьте обработчик для next/image
+    // config.module.rules.push({
+    //   test: /\.(png|jpe?g|gif|svg)$/i,
+    //   use: [
+    //     {
+    //       loader: 'file-loader',
+    //       options: {
+    //         name: '[name].[ext]',
+    //         outputPath: 'static/media',
+    //         publicPath: '/static/media'
+    //       }
+    //     }
+    //   ]
+    // });
 
     return config;
   }
