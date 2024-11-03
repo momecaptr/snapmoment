@@ -27,7 +27,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
 
   const showPostModalHandler = (isOpen: boolean, postId?: number) => {
     setOpen(isOpen);
-    postId && router.push(`/?id=${postId}`);
+    postId && router.push(`/?id=${postId}`, undefined, { shallow: true });
   };
 
   return getConditionLayout(
