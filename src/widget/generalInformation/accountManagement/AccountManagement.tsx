@@ -76,6 +76,11 @@ export const AccountManagement = () => {
       setIsPaymentModalsOpen(true);
       void router.replace(router.pathname, undefined, { shallow: true }); // Используем shallow для предотвращения полного обновления
     }
+    // ???
+    if (router.query.success === 'false' && !isPaymentModalsOpen) {
+      setPaymentModalsContent(errorPayModalContentVariant);
+      setIsPaymentModalsOpen(true);
+    }
   }, [router.query, isPaymentModalsOpen]);
 
   const submitPayment = async (paymentType: PaymentVariantTypes) => {
@@ -93,12 +98,11 @@ export const AccountManagement = () => {
         paymentType,
         typeSubscription: savedPaymentSubscription
       });
-      const url = response.data?.url || '';
+      const url = response.data?.url;
 
-      setSavedPaymentUrl(url);
-      if (savedPaymentUrl) {
+      if (url) {
+        await router.push(url, undefined, { shallow: true });
         setSavedPaymentSubscription(undefined);
-        await router.push(savedPaymentUrl);
       }
     } catch (error) {
       setPaymentModalsContent(errorPayModalContentVariant);

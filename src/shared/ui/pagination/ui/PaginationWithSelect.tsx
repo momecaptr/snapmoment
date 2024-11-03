@@ -52,7 +52,6 @@ export const PaginationWithSelect = ({
     <div className={clsx(s.box, alignmentClass())}>
       <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
       <div className={s.boxItem}>
-        {/*<Typography className={s.firstText}>{t('paginationWithSelect.show')} </Typography>*/}
         <Typography className={s.firstText}>Show </Typography>
         <SelectUI
           className={'select'}
@@ -61,7 +60,6 @@ export const PaginationWithSelect = ({
           selectOptions={selectOptions}
           value={itemsPerPage.toString()}
         />
-        {/*<Typography className={s.lastText}>{t('paginationWithSelect.onPage')}</Typography>*/}
         <Typography className={s.lastText}>on page</Typography>
       </div>
     </div>
