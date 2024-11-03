@@ -31,14 +31,6 @@ export const MyPayments = () => {
     return types[value] || value;
   };
 
-  const selectOptions = [
-    { text: '10', value: '10' },
-    { text: '20', value: '20' },
-    { text: '30', value: '30' },
-    { text: '50', value: '50' },
-    { text: '100', value: '100' }
-  ] as SelectOptionsType[];
-
   const myPaymentsTableData = useMemo(() => {
     return (myPayments || []).map((item) => {
       return Object.fromEntries(
@@ -61,10 +53,23 @@ export const MyPayments = () => {
     });
   }, [myPayments]);
 
+  const selectOptions = [
+    { text: '10', value: '10' },
+    { text: '20', value: '20' },
+    { text: '30', value: '30' },
+    { text: '50', value: '50' },
+    { text: '100', value: '100' }
+  ] as SelectOptionsType[];
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(+selectOptions[0].value);
 
-  // Рассчитываем данные для текущей страницы
+  /*
+  paginatedData вычисляется для отображения отформатированных данных на текущей странице таблицы с учётом разделения на страницы.
+  То есть допустим к нам приходит массив 50 объектов, а 1 стр пагинации - 10. Вот благодаря этой pagindatedData только 10 и увидим.
+  Остальные 40 пока будут скрыты. Если нажмем на следующую страницу - увидим следующие 10 и т.д.
+  Так мы видим только часть данных (определённое количество элементов) на каждой странице, а не весь массив данных сразу.
+*/
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
