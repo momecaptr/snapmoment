@@ -87,7 +87,10 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
     </Button>
   ) : null;
 
-  errorMessage && showToast({ message: `${errorMessage}`, type: 'error' });
+  if (errorMessage) {
+    showToast({ message: `${errorMessage}`, type: 'error' });
+    setErrorMessage(null);
+  }
 
   const isAddPostSection = activeSection === createPostModalSections.addPost;
   const isCroppingSection = activeSection === createPostModalSections.cropping;
@@ -106,7 +109,6 @@ export const CreatePostModal = (props: PropsCrPostModal) => {
         title={activeSection}
       >
         <div className={clsx(s.boxContent, isAddPostSection || isCroppingSection ? s.fullWidth : s.splitContent)}>
-          {/*<button onClick={handleClick}>ALALALALA</button>*/}
           {allPostImages.length !== 0 ? (
             <>
               {isCroppingSection && <CropAndScale onSelectFile={onSelectFile} />}
