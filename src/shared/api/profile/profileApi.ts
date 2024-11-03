@@ -14,6 +14,7 @@ export const profileApi = snapmomentAPI.injectEndpoints({
       query: () => 'v1/users/profile'
     }),
     publishPosts: builder.mutation<Item, PublishPostsArgs>({
+      invalidatesTags: ['PostsByUserName', 'UserProfile', 'publicPost', 'PostsByUserName'],
       query: (data) => ({
         body: data,
         method: 'POST',

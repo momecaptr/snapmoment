@@ -1,22 +1,25 @@
 import React, { useRef, useState } from 'react';
 
 import ArrowIosBackOutline from '@/../public/assets/components/ArrowIosBackOutline';
+import {
+  AddPost,
+  CropAndScale,
+  FilterImages,
+  NextBackDirection,
+  PublishPost,
+  createPostModalDirections,
+  createPostModalSections,
+  createPostSelectors
+} from '@/features';
 // import { canvasPreview } from '@/widget/sideBar/hooks/canvasPreview';
 import { ModalKey, useAppSelector, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, Typography } from '@/shared/ui';
-import { AddPost } from '@/widget/modals/createPostModal/ui/addPost/AddPost';
-import { CropAndScale } from '@/widget/modals/createPostModal/ui/cropAndScale/CropAndScale';
-import { FilterImages } from '@/widget/modals/createPostModal/ui/filterImages/FilterImages';
-import { PublishPost } from '@/widget/modals/createPostModal/ui/publishPost/PublishPost';
 import clsx from 'clsx';
 
 import s from './CreatePostModal.module.scss';
 
 import { useNavigateBtnLogic } from './hooks/useNavigateBtnLogic';
 import { useSelectFilesAndShowError } from './hooks/useSelectFilesAndShowError';
-import { createPostModalDirections, createPostModalSections } from './lib/createPostConstants';
-import { createPostSelectors } from './service/createPostSlice';
-import { NextBackDirection } from './service/createPostSliceTypes';
 import { CloseCreatePostModal } from './ui/closeCreatePostModal/CloseCreatePostModal';
 
 type PropsCrPostModal = {

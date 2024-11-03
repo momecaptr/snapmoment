@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react';
 
-import Edit2Outline from '@/../public/assets/components/Edit2Outline';
-import MoreActions from '@/../public/assets/components/MoreHorizontal';
-import TrashOutline from '@/../public/assets/components/TrashOutline';
 import { Button, CustomDropdownItem, CustomDropdownWrapper, Typography } from '@/shared/ui';
 
 import s from './PostModalBurgerDropDown.module.scss';
+
+import Edit2Outline from '../../../../public/assets/components/Edit2Outline';
+import MoreActions from '../../../../public/assets/components/MoreHorizontal';
+import TrashOutline from '../../../../public/assets/components/TrashOutline';
 
 type Props = {
   changeEditMode: () => void;

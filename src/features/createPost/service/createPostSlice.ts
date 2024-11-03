@@ -1,6 +1,5 @@
 import type {
   CreatePostImgProps,
-  CreatePostModalSections,
   CroppedAreaPx,
   UpdateImgAspect,
   UpdateImgCrop,
@@ -9,6 +8,8 @@ import type {
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v1 } from 'uuid';
+
+import { CreatePostModalSections } from '../lib/createPostModalConstants';
 
 const slice = createSlice({
   initialState: {

@@ -24,16 +24,17 @@ function getRadianAngle(degreeValue: number): number {
 /**
  * Взято вот отсюда -https://github.com/CodingWith-Adam/react-easy-crop-tutorial/blob/main/src/cropImage.js и добавил типизацию
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
- * @description Эта функция getCroppedImg предназначена для обрезки и поворота изображения на основе заданных параметров. Она принимает URL изображения, параметры обрезки и угол поворота, а затем возвращает обрезанное и повернутое изображение в виде URL объекта Blob или FileReader
+ * @description Эта функция getCroppedImg предназначена для обрезки и поворота изображения на основе заданных параметров. Она принимает URL изображения, параметры обрезки и угол поворота, а затем возвращает обрезанное и повернутое изображение в виде URL объекта Blob или Base64String
  * @param {File} image - Image File url
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
  */
-export default async function getCroppedImg(
+// export default async function getCroppedImg(
+export const getCroppedImg = async (
   imageSrc: null | string | undefined,
   pixelCrop: { height: number; width: number; x: number; y: number } | null,
   rotation = 0
-): Promise<null | string> {
+): Promise<null | string> => {
   if (!imageSrc || !pixelCrop) {
     return null;
   }
@@ -86,4 +87,4 @@ export default async function getCroppedImg(
       }
     }, 'image/jpeg');
   });
-}
+};

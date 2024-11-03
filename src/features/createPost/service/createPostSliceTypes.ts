@@ -1,7 +1,5 @@
 import { PhotoAspectRatioType } from '@/entities';
 
-import { createPostModalDirections, createPostModalSections } from '../lib/createPostConstants';
-
 export type CreatePostImgProps = {
   aspect: PhotoAspectRatioType;
   buferUrl: string;
@@ -39,7 +37,3 @@ export type UpdateImgAspect = {
   aspect: PhotoAspectRatioType;
   id: string;
 };
-
-// export type Sections = 'Cropping' | 'Filters' | 'Publication';
-export type CreatePostModalSections = (typeof createPostModalSections)[keyof typeof createPostModalSections];
-export type NextBackDirection = (typeof createPostModalDirections)[keyof typeof createPostModalDirections];

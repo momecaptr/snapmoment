@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
-import { photoFilters } from '@/entities/photo/photoConstants';
+import { photoFilters } from '@/entities';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { Typography } from '@/shared/ui';
 import { clsx } from 'clsx';

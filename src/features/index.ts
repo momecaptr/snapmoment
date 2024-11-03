@@ -1,5 +1,15 @@
 export { AddComment } from './addComment/AddComment';
 export { ChangePhoto } from './changePhotoProfile/ChangePhoto';
+export { CloseEditModal } from './closeEditModal/CloseEditModal';
+export { createPostModalDirections, createPostModalSections } from './createPost/lib/createPostModalConstants';
+export type { CreatePostModalSections, NextBackDirection } from './createPost/lib/createPostModalConstants';
+export { createImage, getCroppedImg } from './createPost/lib/cropImage';
+export { createPostActions, createPostSelectors } from './createPost/service/createPostSlice';
+export { AddPost } from './createPost/ui/addPost/AddPost';
+export { CropAndScale } from './createPost/ui/cropAndScale/CropAndScale';
+export { FilterImages } from './createPost/ui/filterImages/FilterImages';
+export { PublishPost } from './createPost/ui/publishPost/PublishPost';
+export { DeletePostModal } from './deletePostModal/DeletePostModal';
 export { GeneralInfoNavigation } from './generalInfoNavigation/GeneralInfoNavigation';
 export { GithubAuthButton } from './githubButton/GithubAuthButton';
 export { useAuthGoogle } from './googleButton/lib/useAuthGoogle';

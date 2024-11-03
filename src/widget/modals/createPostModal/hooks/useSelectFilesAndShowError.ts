@@ -1,9 +1,7 @@
 import { ChangeEvent } from 'react';
 
+import { createPostActions, createPostModalSections } from '@/features';
 import { useAppDispatch } from '@/shared/lib';
-
-import { createPostModalSections } from '../lib/createPostConstants';
-import { createPostActions } from '../service/createPostSlice';
 
 export const useSelectFilesAndShowError = (setErrorMessage: (value: string) => void) => {
   const dispatch = useAppDispatch();

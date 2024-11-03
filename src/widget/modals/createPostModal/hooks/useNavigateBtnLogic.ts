@@ -1,9 +1,12 @@
+import {
+  NextBackDirection,
+  createPostActions,
+  createPostModalDirections,
+  createPostModalSections,
+  createPostSelectors,
+  getCroppedImg
+} from '@/features';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
-
-import { createPostModalDirections, createPostModalSections } from '../lib/createPostConstants';
-import getCroppedImg from '../lib/cropImage';
-import { createPostActions, createPostSelectors } from '../service/createPostSlice';
-import { NextBackDirection } from '../service/createPostSliceTypes';
 
 // interface NavigateBtnLogic {
 //   activeSection: CreatePostModalSections;
