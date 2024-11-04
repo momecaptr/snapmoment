@@ -173,7 +173,7 @@ export const PostModal = ({ me, pathOnClose, postId, showPostModalHandler }: Pro
 
                   <div className={s.actions}>
                     <div className={s.actionsWrapper}>
-                      {isAuth && <PostInteractionBar postData={postData} postLikes={postLikes} />}
+                      {isAuth && <PostInteractionBar postData={postData} postId={postId} postLikes={postLikes} />}
 
                       <ShowLikers postLikes={postLikes} showViewLikesHandler={showViewLikesHandler} />
                       <TimeAgo time={postData.createdAt} />

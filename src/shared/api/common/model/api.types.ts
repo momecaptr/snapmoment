@@ -1,3 +1,11 @@
+export interface GithubOAuthResponse {
+  url: string;
+}
+
+export interface GithubOAuthArgs {
+  redirectUrl: string;
+}
+
 export interface GoogleOAuthResponse {
   accessToken: string;
   email: string;
