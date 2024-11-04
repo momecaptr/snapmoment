@@ -34,8 +34,12 @@ export const ChangePhoto = memo((props: Props) => {
     setOpen(!isOpen);
   }, [setOpen, isOpen]);
 
-  const deletePhotoHandler = () => {
-    deletePhotoProfile();
+  const deletePhotoHandler = async () => {
+    try {
+      await deletePhotoProfile();
+    } catch (e) {
+      console.log(e);
+    }
     refetch();
   };
 
