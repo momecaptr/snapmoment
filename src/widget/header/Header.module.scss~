@@ -1,7 +1,7 @@
 .header {
   position: sticky;
-  top: 0;
   z-index: 100;
+  top: 0;
 
   display: flex;
   justify-content: center;
@@ -9,8 +9,7 @@
   width: 100%;
   height: auto;
 
-  background-color: var(--dark-700);
-  border-bottom: 1px solid var(--dark-300);
+  
 }
 
 .wrapper {

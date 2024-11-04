@@ -1,9 +1,9 @@
 import s from './NotificationItem.module.scss';
 
 export const NotificationItem = ({ text }: { text: string }) => (
-  <div className={s.notification}>
+  <div className={s.notificationEl}>
     <p>
-      <strong>Новое уведомление!</strong> <span className={s.new}>New</span>
+      <strong>Новое уведомление!</strong> <span className={'new'}>New</span>
     </p>
     <p>Следующий платеж у вас спишется через 1 день</p>
     <small>1 час назад</small>

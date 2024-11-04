@@ -45,7 +45,7 @@ export const LocaleSwitcher = () => {
       align={'center'}
       isArrow
     >
-      <CustomDropdownItem className={s.DropdownMenuContent} tabIndex={3}>
+      <CustomDropdownItem className={s.DropdownMenuContent}>
         {Object.entries(LANG_DATA).map(([key, value]) => (
           <LocaleMenuItem
             fullName={value.fullName}

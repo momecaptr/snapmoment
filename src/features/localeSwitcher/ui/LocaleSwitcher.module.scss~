@@ -31,13 +31,19 @@ $accent-color: var(--accent-500);
 
   transition: background 0.8s; // Добавляем плавный переход фона
 
-  &:hover,
-  &[data-state='open'] {
+  &:hover {
     background: var(--dark-500) radial-gradient(circle, transparent 1%, var(--dark-500) 1%) center/15000%;
   }
 
   &[data-state='open'] .iconArrowDown {
     transform: rotate(180deg);
+  }
+
+  &[data-state='open'] .DropdownMenuContent {
+    border-top-width: 0;
+    transition:
+            0.2s border-top-width ease-in,
+            0.3s border-top-color;
   }
 }
 
@@ -91,8 +97,10 @@ $accent-color: var(--accent-500);
   border: $border-dark;
   border-radius: 6px;
 
+  transition: 0.3s background-color;
+
   &:focus-visible,
-  &:hover {
+  &:hover{
     background-color: $bg-dark;
   }
 }

@@ -11,14 +11,14 @@ const notifications: Record<string, string> = {
   'New followers': 'New followers',
   'New messages': 'New messages',
   'New messages2': 'New messages',
-  'New messages3': 'New messages',
-  'New messages4': 'New messages',
-  'New messages5': 'New messages',
-  'New messages6': 'New messages',
-  'New messages7': 'New messages',
-  'New messages8': 'New messages',
-  'New messages9': 'New messages',
-  'New messages10': 'New messages'
+  'New messages2': 'New messages',
+  'New messages2': 'New messages',
+  'New messages2': 'New messages',
+  'New messages2': 'New messages',
+  'New messages2': 'New messages',
+  'New messages2': 'New messages',
+  'New messages2': 'New messages',
+  'New messages3': 'New messages'
 };
 
 export const UserNotifications = () => {
