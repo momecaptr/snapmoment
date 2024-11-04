@@ -37,10 +37,10 @@ export const ChangePhoto = memo((props: Props) => {
   const deletePhotoHandler = async () => {
     try {
       await deletePhotoProfile();
+      refetch();
     } catch (e) {
       console.log(e);
     }
-    refetch();
   };
 
   return (
