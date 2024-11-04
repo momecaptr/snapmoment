@@ -3,9 +3,11 @@ import {
   GetPersonalInformationUserResponse,
   PersonalInformationArgs
 } from '@/shared/api/personalInformationUser/personalInformationUserTypes';
+
 export const personalInformationUserAPI = snapmomentAPI.injectEndpoints({
   endpoints: (build) => ({
     getPersonalInformationUser: build.query<GetPersonalInformationUserResponse, void>({
+      keepUnusedDataFor: 10,
       query: () => ({
         method: 'GET',
         url: 'v1/users/profile'

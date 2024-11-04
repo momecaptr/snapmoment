@@ -6,8 +6,8 @@ import { Wrapper } from '@/shared/ui';
 import { AccountManagement, AddProfilePhotoModal, Devices, GeneralInfoForms, MyPayments } from '@/widget';
 // import { AccountManagement, Devices, GeneralInfoForms, MyPayments } from '@/widget';
 // import { AddProfilePhotoModal } from '@/widgetaddProfilePhotoModal/AddProfilePhotoModal';
-
 import { useMeQuery } from '@/shared/api/auth/authApi';
+import { useRouter } from 'next/router';
 
 import s from './GeneralInfo.module.scss';
 
@@ -15,6 +15,7 @@ export const GeneralInfo = () => {
   const me = useMeQuery();
   const { isOpen, setOpen } = useModal(ModalKey.ChangePhoto);
   const [activeSection, setActiveSection] = useState('General information');
+  const router = useRouter();
 
   const renderActiveSection = () => {
     switch (activeSection) {

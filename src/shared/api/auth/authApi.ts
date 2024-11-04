@@ -3,6 +3,8 @@ import {
   CheckRecoveryCodeArgs,
   CheckRecoveryCodeResponse,
   CreateNewPasswordArgs,
+  GithubOAuthArgs,
+  GithubOAuthResponse,
   GoogleOAuthArgs,
   GoogleOAuthResponse,
   LoginArgs,
@@ -38,6 +40,13 @@ export const authApi = snapmomentAPI.injectEndpoints({
         body: data,
         method: 'POST',
         url: 'v1/auth/new-password'
+      })
+    }),
+    githubOAuth: builder.query<GithubOAuthResponse, GithubOAuthArgs>({
+      query: ({ redirectUrl }) => ({
+        method: 'GET',
+        params: { redirectUrl },
+        url: 'v1/auth/github/login'
       })
     }),
     googleOAuth: builder.mutation<GoogleOAuthResponse, GoogleOAuthArgs>({
@@ -115,7 +124,9 @@ export const {
   useCheckRecoveryCodeMutation,
   useConfirmRegistrationMutation,
   useCreateNewPasswordMutation,
+  useGithubOAuthQuery,
   useGoogleOAuthMutation,
+  useLazyGithubOAuthQuery,
   useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
