@@ -11,6 +11,7 @@ type CustomDropdownWrapperProps = {
   align?: 'center' | 'end' | 'start';
   children?: ReactNode;
   className?: string;
+  classNameArrow?: string;
   classNameTriggerActive?: string;
   isArrow?: boolean;
   side?: 'bottom' | 'left' | 'right' | 'top';
@@ -29,6 +30,7 @@ type CustomDropdownWrapperProps = {
  * @param {ReactNode} children - Дочерние элементы, которые будут отображаться в выпадающем меню.
  * @param {string} className - Дополнительные классы для стилизации контейнера выпадающего меню.
  * @param {string} classNameTriggerActive - Классы для стилизации триггера, когда меню открыто.
+ * @param {string} classNameArrow - Классы для стилизации стрелки, когда меню открыто. Фон задавать через fill, обводку - stroke
  * @param {boolean} isArrow - Определяет, будет ли стрелка отображаться на выпадающем меню (по умолчанию `true`).
  * @param {'bottom' | 'left' | 'right' | 'top'} side - Сторона, с которой открывается выпадающее меню.
  * @param {number} sideOffset - Отступ между триггером и выпадающим меню (по умолчанию `8`).
@@ -43,6 +45,7 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
       align = 'center',
       children,
       className,
+      classNameArrow,
       classNameTriggerActive,
       isArrow = false,
       side = 'bottom',
@@ -66,7 +69,7 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
 
     const classNames = {
       arrow: clsx(s.arrow),
-      arrowWrap: clsx(s.arrowWrap),
+      arrowWrap: clsx(s.arrowWrap, classNameArrow),
       content: clsx(s.dropdownMenuContent, className),
       itemsWrap: clsx(s.itemsWrap)
     };
@@ -88,7 +91,7 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
             sideOffset={sideOffset}
             style={style}
           >
-            {isArrow && <DropdownMenu.Arrow className={classNames.arrowWrap} />}
+            {isArrow && <DropdownMenu.Arrow className={classNames.arrowWrap} height={10} width={20} />}
             <div className={classNames.itemsWrap}>
               {children} {/* Рендерим children напрямую */}
             </div>

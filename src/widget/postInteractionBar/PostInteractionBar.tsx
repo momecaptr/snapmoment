@@ -20,11 +20,15 @@ export const PostInteractionBar = ({ postData, postId, postLikes }: Props) => {
 
   const isMyLike = !!postLikes?.items?.find((item) => item.userId === me?.userId);
   const updateLikeStatusHandler = async () => {
-    await updateLikePost({
-      likeStatus: isMyLike ? LikeStatus.NONE : LikeStatus.LIKE,
-      postId: postData?.id
-    });
-    refetch();
+    try {
+      await updateLikePost({
+        likeStatus: isMyLike ? LikeStatus.NONE : LikeStatus.LIKE,
+        postId: postData?.id
+      });
+      refetch();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
