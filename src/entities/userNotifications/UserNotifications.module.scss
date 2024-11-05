@@ -20,10 +20,7 @@
 .notificationItemWrap {
   display: flex;
   flex-direction: column;
-
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
+  padding: 0;
 }
 
 .title {
@@ -39,4 +36,8 @@
 .msgs {
   overflow-y: auto; /* Прокрутка по вертикали */
   max-height: 350px;
+}
+
+.showMoreBtn {
+  padding-top: 20px;
 }

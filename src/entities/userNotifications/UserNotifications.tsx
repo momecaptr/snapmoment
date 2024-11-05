@@ -1,28 +1,55 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Outlinebell from '@/../public/assets/components/Outlinebell';
+import { useGetNotificationsQuery } from '@/shared/api/notifications/notificationsAPI';
+import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
 import { useSocket } from '@/shared/lib/hooks/useSocket';
-import { CustomDropdownItem, CustomDropdownWrapper, NotificationItem, Typography } from '@/shared/ui';
+import { Button, CustomDropdownItem, CustomDropdownWrapper, NotificationItem, Typography } from '@/shared/ui';
 
 import s from './UserNotifications.module.scss';
 
-const notifications: Record<string, string> = {
-  'New comments': 'New comments',
-  'New followers': 'New followers',
-  'New messages': 'New messages',
-  'New messages2': 'New messages',
-  'New messages3': 'New messages',
-  'New messages4': 'New messages',
-  'New messages5': 'New messages',
-  'New messages6': 'New messages',
-  'New messages7': 'New messages',
-  'New messages8': 'New messages',
-  'New messages9': 'New messages',
-  'New messages10': 'New messages'
-};
-
 export const UserNotifications = () => {
+  const [notifications, setNotifications] = useState<INotificationItem[]>([]);
   const ACCESS_TOKEN = localStorage.getItem('accessToken');
+  const { data: notificationsData, refetch } = useGetNotificationsQuery({ cursor: 0 }); // useGetNotificationsQuery
+
+  /*___________DROPDOWN____________*/
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleDropdownToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    // Дополнительная логика при клике на элемент
+  };
+  /*___________DROPDOWN____________*/
+
+  console.log(notificationsData);
+  console.log(notifications);
+
+  useEffect(() => {
+    if (notificationsData && notificationsData.items) {
+      setNotifications((prevState) => [...prevState, ...notificationsData.items]);
+    }
+  }, [notificationsData]);
 
   useSocket({
     events: {
@@ -40,93 +67,37 @@ export const UserNotifications = () => {
   return (
     <CustomDropdownWrapper
       trigger={
-        <div className={s.notificationItem} tabIndex={0}>
+        <div className={s.notificationItem} onClick={handleDropdownToggle} tabIndex={0}>
           <Outlinebell className={s.bell} />
         </div>
       }
       align={'end'}
       className={s.dropdownNotifications}
+      stayOpen={isOpen}
       isArrow
     >
-      <CustomDropdownItem className={s.notificationItemWrap}>
-        {/*<NotificationItem text={'Notifications'} />*/}
+      <CustomDropdownItem className={s.notificationItemWrap} onClick={handleItemClick}>
+        <div>
+          <div className={s.title}>
+            <Typography variant={'bold_text_16'}>Уведомления</Typography>
+          </div>
 
-        <div className={s.title}>
-          <Typography variant={'bold_text_16'}>Уведомления</Typography>
-        </div>
+          <div className={s.msgs}>
+            {/*<Typography variant={'regular_text_14'}>У вас нет новых уведомлений</Typography>*/}
 
-        <div className={s.msgs}>
-          {Object.values(notifications).map((notification) => (
-            <NotificationItem key={notification} text={notification} /> //! key={notification.id}
-          ))}
+            {Object.values(notifications).map((notification) => (
+              <div key={notification.id}>
+                <NotificationItem message={notification.message} />
+              </div>
+            ))}
+          </div>
+          <div className={s.showMoreBtn} onClick={handleDropdownToggle}>
+            <Button variant={'secondary'} fullWidth>
+              <Typography variant={'small_text'}>Show more</Typography>
+            </Button>
+          </div>
         </div>
       </CustomDropdownItem>
     </CustomDropdownWrapper>
   );
 };
-
-/*<CustomDropdownWrapper
-  trigger={
-    <div className={s.notificationItem} tabIndex={0}>
-      <Outlinebell className={s.bell} />
-    </div>
-  }
-  align={'end'}
-  className={s.dropdownNotifications}
-  isArrow
->
-  <CustomDropdownItem className={s.notificationItemWrap}>
-    <NotificationItem text={'Notifications'} />
-    <div className={s.notificationMmgs}>
-      {Object.values(notifications).map((notification) => (
-        <NotificationItem key={notification} text={notification} /> //! key={notification.id}
-      ))}
-    </div>
-  </CustomDropdownItem>
-</CustomDropdownWrapper>*/
-
-/*const [getSocketUrl, { data: socketData }] = useLazyGetNotificationsQuery();
-const { data: notificationsData, refetch } = useGetNotificationsQuery({ cursor: 0 });*/
-
-/*const SOCKET_PARAMS = {
-    query: {
-      accessToken: ACCESS_TOKEN
-      /!*cursor: 0,
-      pageSize: 12,
-      sortDirection: 'desc'*!/
-    }
-  };*/
-
-/*useSocket({
-  onConnect: () => console.log('Connected to socket.io server'),
-  onDisconnect: () => console.log('Disconnected from socket.io server'),
-  onError: (error) => console.error('Socket error:', error),
-  onMessage: (newMessage) => {
-    console.log('New message received:', newMessage);
-    //refetch();
-  },
-  params: SOCKET_PARAMS,
-  url: 'https://inctagram.work'
-});*/
-
-/*useEffect(() => {
-  const socket = io('https://inctagram.work', SOCKET_PARAMS);
-
-  socket.on('connect', () => {
-    console.log('Connected to socket.io server');
-  });
-
-  socket.on('disconnect', () => {
-    console.log('Disconnected from socket.io server');
-  });
-
-  socket.on('NOTIFICATION', (data) => {
-    const { message, type } = data;
-
-    console.log('NOTIFICATION:', data);
-  });
-
-  return () => {
-    socket.disconnect();
-  };
-}, []);*/

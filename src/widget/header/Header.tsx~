@@ -11,15 +11,12 @@ export const Header = () => {
   const { data: me } = useMeQuery();
   const { pathname } = useRouter();
 
+  
+
   return (
     <header className={s.header}>
       <Wrapper className={s.wrapper} variant={'box'}>
         <AppLogo />
-
-        <Button variant={'primary'}>Search</Button>
-        <Button variant={'secondary'}>Search</Button>
-        <Button variant={'outlined'}>Search</Button>
-
         <div className={s.itemsWrapper}>
           {me && <UserNotifications />}
           <LocaleSwitcher />

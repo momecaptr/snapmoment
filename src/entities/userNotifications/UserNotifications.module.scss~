@@ -1,47 +1,5 @@
 @import '../../myApp/styles/mixins';
 
-/*
-
-
-.notificationItemWrap {
-  display: flex;
-  flex-direction: column;
-
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-
-  border: 1px solid red;
-}
-
-.dropdownNotifications {
-  @include focus-visible-default;
-
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 15px;
-  align-items: flex-start;
-  justify-content: center;
-
-  padding: 10px;
-
-  background-color: var(--dark-700);
-  border: 1px solid var(--dark-300);
-  border-radius: 6px;
-}
-
-.notificationMmgs{
-  border: 1px solid yellow;
-}
-
-.notificationMmgs::-webkit-scrollbar {
-
-}
-
-*/
-
-
-
 .dropdownNotifications {
   @include focus-visible-default;
 
@@ -66,8 +24,6 @@
   padding-right: 0;
   padding-bottom: 0;
   padding-left: 0;
-
-  //border: 1px solid red;
 }
 
 .title {
@@ -80,7 +36,11 @@
   border-bottom: 1px solid #444;
 }
 
-.msgs{
+.msgs {
   overflow-y: auto; /* Прокрутка по вертикали */
   max-height: 350px;
+}
+
+.showMoreBtn{
+  padding-top: 20px;
 }
