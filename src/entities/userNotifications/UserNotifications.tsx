@@ -42,12 +42,9 @@ export const UserNotifications = () => {
   };
   /*___________DROPDOWN____________*/
 
-  console.log(notificationsData);
-  console.log(notifications);
-
   useEffect(() => {
     if (notificationsData && notificationsData.items) {
-      setNotifications((prevState) => [...prevState, ...notificationsData.items]);
+      setNotifications([...notificationsData.items]);
     }
   }, [notificationsData]);
 
@@ -73,23 +70,28 @@ export const UserNotifications = () => {
       }
       align={'end'}
       className={s.dropdownNotifications}
+      classNameArrow={s.arrow}
       stayOpen={isOpen}
       isArrow
     >
       <CustomDropdownItem className={s.notificationItemWrap} onClick={handleItemClick}>
         <div>
           <div className={s.title}>
-            <Typography variant={'bold_text_16'}>Уведомления</Typography>
+            <Typography variant={'bold_text_16'}>Notifications</Typography>
           </div>
 
-          <div className={s.msgs}>
-            {/*<Typography variant={'regular_text_14'}>У вас нет новых уведомлений</Typography>*/}
+          <div className={s.msgsWrapper}>
+            <div className={s.msgs}>
+              {/*<div className={s.noNotifications}>
+              <Typography variant={'regular_text_14'}>You have no new notices</Typography>
+            </div>*/}
 
-            {Object.values(notifications).map((notification) => (
-              <div key={notification.id}>
-                <NotificationItem message={notification.message} />
-              </div>
-            ))}
+              {Object.values(notifications).map((notification) => (
+                <div key={notification.id}>
+                  <NotificationItem message={notification.message} />
+                </div>
+              ))}
+            </div>
           </div>
           <div className={s.showMoreBtn} onClick={handleDropdownToggle}>
             <Button variant={'secondary'} fullWidth>

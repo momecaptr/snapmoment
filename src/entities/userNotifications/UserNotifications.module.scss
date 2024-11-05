@@ -1,7 +1,16 @@
 @import '../../myApp/styles/mixins';
 
+.arrow {
+  top: 0;
+  left: 1px;
+  fill: var(--dark-100);
+}
+
 .dropdownNotifications {
   @include focus-visible-default;
+
+  position: relative;
+  right: -10px;
 
   display: flex;
   flex-flow: column nowrap;
@@ -12,8 +21,8 @@
   max-height: 424px;
   padding: 10px;
 
-  background-color: var(--dark-700);
-  border: 1px solid var(--dark-300);
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-100);
   border-radius: 6px;
 }
 
@@ -26,18 +35,28 @@
 .title {
   display: flex;
   justify-content: left;
-
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 8px;
+}
 
-  border-bottom: 1px solid #444;
+.msgsWrapper {
+  overflow-y: auto; /* Прокрутка по вертикали */
+  max-height: 300px;
 }
 
 .msgs {
-  overflow-y: auto; /* Прокрутка по вертикали */
-  max-height: 350px;
+  padding: 0 8px;
+}
+
+.noNotifications {
+  padding-top: 10px;
+  border-top: 1px solid var(--dark-100);
 }
 
 .showMoreBtn {
   padding-top: 20px;
+}
+
+.showMoreBtn button {
+  background-color: var(--dark-300);
 }

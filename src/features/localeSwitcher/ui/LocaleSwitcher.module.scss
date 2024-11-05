@@ -8,6 +8,12 @@ $border-dark: 1px solid var(--dark-300);
 $bg-dark: var(--dark-700);
 $accent-color: var(--accent-500);
 
+.arrow {
+  top: 0;
+  left: -10px;
+  fill: var(--dark-300);
+}
+
 .IconButton,
 .boxContent {
   @include focus-visible-default;
@@ -55,7 +61,6 @@ $accent-color: var(--accent-500);
   width: $flag-width;
   height: $flag-height;
   object-fit: cover;
-  border: solid rgb(0 0 0 / 100%) 0.7px;
 }
 
 .DropdownMenuArrow {
@@ -71,6 +76,11 @@ $accent-color: var(--accent-500);
     border-bottom: 1px solid var(--dark-300);
   }
 
+  &:hover,
+  &:focus-visible {
+    background: var(--dark-300);
+  }
+
   &:focus-visible,
   &:hover .dropdownText,
   &:focus .dropdownText,
@@ -80,16 +90,19 @@ $accent-color: var(--accent-500);
 }
 
 .DropdownMenuContent {
+  position: relative;
+  top: -9px;
+
   display: flex;
   flex-direction: column;
   gap: 0;
   align-items: flex-start;
 
-  padding: 5px;
+  padding: 0;
 
   background-color: $bg-dark;
   border: $border-dark;
-  border-radius: 6px;
+  border-radius: 0;
 
   &:focus-visible,
   &:hover {
