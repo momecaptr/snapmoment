@@ -1,3 +1,5 @@
+import { Typography } from '@/shared/ui';
+
 import s from './NotificationItem.module.scss';
 
 type Props = {
@@ -9,18 +11,18 @@ export const NotificationItem = (props: Props) => {
 
   return (
     <div className={s.notification}>
-      <p>
-        <strong>Новое уведомление!</strong> <span className={s.new}>New</span>
-      </p>
-      <p>{message}</p>
-      <small>1 час назад</small>
+      <div className={s.newBox}>
+        <Typography variant={'bold_text_16'}>New notice!</Typography>
+        <Typography className={s.new} variant={'small_text'}>
+          New
+        </Typography>
+      </div>
+      <Typography className={s.message} variant={'regular_text_14'}>
+        {message}
+      </Typography>
+      <Typography className={s.time} variant={'small_text'}>
+        1 час назад
+      </Typography>
     </div>
   );
 };
-
-/*
-<div className={s.notificationEl}>
-  <Typography className={s.notificationItem} variant={'h2'}>
-    {text}
-  </Typography>
-</div>*/

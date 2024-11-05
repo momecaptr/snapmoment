@@ -41,7 +41,10 @@
 
 .msgsWrapper {
   overflow-y: auto; /* Прокрутка по вертикали */
+  max-width: 335px;
   max-height: 300px;
+
+  // word-wrap: break-word;
 }
 
 .msgs {

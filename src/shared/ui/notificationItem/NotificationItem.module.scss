@@ -1,18 +1,30 @@
 .notification {
-  padding: 10px 0;
+  padding: 5px 0 0;
+  line-height: 1.5; /* Устанавливаем высоту строки в 1.5 раза больше размера шрифта */
+  overflow-wrap: break-word; /* или word-wrap: break-word; */
   border-top: 1px solid #444;
 }
 
-.notification p {
+.newBox {
+  display: flex;
+  flex-direction: row;
   margin: 0;
+  padding: 5px 0 0;
 }
 
 .new {
+  padding: 5px 0 0 5px;
   font-size: 12px;
   color: #00b7ff;
 }
 
-.notification small {
+.time {
   font-size: 12px;
   color: #aaa;
+}
+
+.message {
+  padding: 3px 0 0;
+  line-height: inherit; /* Наследуем line-height от родительского элемента */
+  overflow-wrap: inherit; /* Наследуем overflow-wrap от родительского элемента */
 }
