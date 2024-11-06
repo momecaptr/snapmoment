@@ -1,33 +1,19 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 
 import { RegisteredUsersCounter } from '@/entities';
 import { wrapper } from '@/myApp/store';
 import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
 import { getPublicPosts } from '@/shared/api/public/publicApi';
 import { Item } from '@/shared/api/public/publicTypes';
-import { ModalKey, useModal } from '@/shared/lib';
+import { useShowPostModal } from '@/shared/lib/hooks/useShowPostModal';
 import { getConditionLayout } from '@/shared/providers';
 import { PostModal, UserCard } from '@/widget';
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
-import { useRouter } from 'next/router';
 
 import s from '@/pagesComponents/publicPage/ui/PublicPage.module.scss';
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter();
-  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-  const postId = Number(router.query.id);
-
-  useEffect(() => {
-    if (postId && !isOpen) {
-      setOpen(true);
-    }
-  }, [postId]);
-
-  const showPostModalHandler = (isOpen: boolean, postId?: number) => {
-    setOpen(isOpen);
-    postId && router.push(`/?id=${postId}`, undefined, { shallow: true });
-  };
+  const { isOpen, postId, showPostModalHandler } = useShowPostModal();
 
   return getConditionLayout(
     <>
