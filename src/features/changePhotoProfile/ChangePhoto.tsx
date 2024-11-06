@@ -2,7 +2,10 @@ import React, { memo, useCallback, useState } from 'react';
 
 import DeletePhoto from '@/../public/Delet photo.svg';
 import { selectIsPhotoInState } from '@/myApp/model/appSelectors';
-import { useDeleteMainPhotoProfileMutation } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
+import {
+  useDeleteMainPhotoProfileMutation,
+  useGetUserProfilePhotoQuery
+} from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import { useAppSelector } from '@/shared/lib';
 import { Button, PhotoProfile } from '@/shared/ui';
 import { DeletePhotoModal } from '@/widget';
@@ -21,6 +24,7 @@ export const ChangePhoto = memo((props: Props) => {
   const [isOpenDeletePhoto, setIsOpenDeletePhoto] = useState(false);
   const isPhotoInState = useAppSelector(selectIsPhotoInState);
   const [deletePhotoProfile] = useDeleteMainPhotoProfileMutation();
+  const { refetch } = useGetUserProfilePhotoQuery();
 
   const onChangeDeletePhoto = useCallback(() => {
     setIsOpenDeletePhoto((prev) => !prev);
@@ -30,10 +34,19 @@ export const ChangePhoto = memo((props: Props) => {
     setOpen(!isOpen);
   }, [setOpen, isOpen]);
 
+  const deletePhotoHandler = async () => {
+    try {
+      await deletePhotoProfile();
+    } catch (e) {
+      console.log(e);
+    }
+    refetch();
+  };
+
   return (
     <>
       <DeletePhotoModal
-        deletePhotoProfile={deletePhotoProfile}
+        deletePhotoProfile={deletePhotoHandler}
         isOpen={isOpenDeletePhoto}
         setOpen={setIsOpenDeletePhoto}
       />

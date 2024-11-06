@@ -1,10 +1,14 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useSetMainPhotoProfileMutation } from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
+import {
+  useGetUserProfilePhotoQuery,
+  useSetMainPhotoProfileMutation
+} from '@/shared/api/mainPhotoProfile/mainPhotoProfileAPI';
 import { Button, Modal, PhotoProfile, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import s from './AddProfilePhotoModal.module.scss';
 
@@ -15,6 +19,8 @@ type Props = {
 
 export const AddProfilePhotoModal = (props: Props) => {
   const { openViewPhoto, setOpenViewPhoto } = props;
+  const router = useRouter();
+  const { refetch } = useGetUserProfilePhotoQuery();
 
   const [preview, setPreview] = useState<null | string>(null);
   const [cover, setCover] = useState<File | null>(null);
@@ -77,6 +83,10 @@ export const AddProfilePhotoModal = (props: Props) => {
 
     setPreview(null);
     setCover(null);
+    // ! ТАК ДЕЛАТЬ НЕЛЬЗЯ! НО НЕ РАБОТАЕТ ИНВАЛИДАЦИЯ ТЕГОВ!
+    // router.reload(); // А с этим работает
+    //* Вот так лучше, но С ИНВАЛИДАЦИЕЙ ТАКОГО БЫ НЕ ПОТРЕБОВАЛОСЬ. ХОТЯ ОНА ВРОДЕ КАК НЕ БУДЕТ РАБОТАТЬ С SSR от другой страницы. Может это лучший вариант
+    refetch();
   };
 
   return (
