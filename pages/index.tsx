@@ -5,7 +5,7 @@ import { wrapper } from '@/myApp/store';
 import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
 import { getPublicPosts } from '@/shared/api/public/publicApi';
 import { Item } from '@/shared/api/public/publicTypes';
-import { useShowPostModal } from '@/shared/lib/hooks/useShowPostModal';
+import { useShowPostModal } from '@/shared/lib';
 import { getConditionLayout } from '@/shared/providers';
 import { PostModal, UserCard } from '@/widget';
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';

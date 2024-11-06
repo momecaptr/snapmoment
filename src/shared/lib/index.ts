@@ -10,4 +10,5 @@ export { useCustomToast } from './hooks/useCustomToast';
 export { useDebounce } from './hooks/useDebounce';
 export { ModalKey, useModal } from './hooks/useModal';
 export { useQueryParams } from './hooks/useQueryParams';
+export { useShowPostModal } from './hooks/useShowPostModal';
 export { useThrottle } from './hooks/useThrottle';
