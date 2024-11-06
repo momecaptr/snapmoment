@@ -12,13 +12,6 @@ import s from '@/shared/providers/authorizedLayout/AuthorizedLayout.module.scss'
  */
 export const ConditionLayout: NextPage<PropsWithChildren> = (props) => {
   const { data: me } = useMeQuery();
-  // {me ? (
-  //   <AuthorizedLayout>{props.children}</AuthorizedLayout>
-  // ) : (
-  //   <NonAuthorizedLayout>{props.children}</NonAuthorizedLayout>
-  // )}
-
-  console.log('ZNEN', me);
 
   return (
     <>
