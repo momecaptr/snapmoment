@@ -1,5 +1,5 @@
 import { HomePage } from '@/pagesComponents';
-import { useShowPostModal } from '@/shared/lib/hooks/useShowPostModal';
+import { useShowPostModal } from '@/shared/lib';
 import { getConditionLayout } from '@/shared/providers';
 import { PostModal } from '@/widget';
 
