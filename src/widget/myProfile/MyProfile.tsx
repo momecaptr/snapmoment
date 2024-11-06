@@ -67,12 +67,7 @@ export const MyProfile = ({ postsUser, user }: Props) => {
   return (
     <>
       {isOpen && (
-        <PostModal
-          me={me}
-          pathOnClose={`/profile/${user.id}`}
-          postId={pickedId!}
-          showPostModalHandler={showPostModalHandler}
-        />
+        <PostModal pathOnClose={`/profile/${user.id}`} postId={pickedId!} showPostModalHandler={showPostModalHandler} />
       )}
       <Wrapper className={s.wrapper}>
         <div className={s.box}>
@@ -84,7 +79,11 @@ export const MyProfile = ({ postsUser, user }: Props) => {
               <div className={s.nameAndButton}>
                 {/*<Typography variant={'regular_text_16'}>{user?.userName || data?.userName}</Typography>*/}
                 <Typography variant={'regular_text_16'}>{user?.userName}</Typography>
-                <GoProfileSetting />
+                {me?.userId === user?.id && (
+                  <Link className={s.button} href={'/profile/generalinfo'}>
+                    <Typography variant={'regular_text_16'}>Profile Settings</Typography>
+                  </Link>
+                )}
               </div>
               <div className={s.subscribleAndFollowers}>
                 <div>
@@ -128,20 +127,6 @@ export const MyProfile = ({ postsUser, user }: Props) => {
           </div>
         </div>
       </Wrapper>
-    </>
-  );
-};
-
-export const GoProfileSetting = () => {
-  const { data } = useMeQuery();
-
-  return (
-    <>
-      {data && (
-        <Link className={s.button} href={'/profile/generalinfo'}>
-          <Typography variant={'regular_text_16'}>Profile Settings</Typography>
-        </Link>
-      )}
     </>
   );
 };

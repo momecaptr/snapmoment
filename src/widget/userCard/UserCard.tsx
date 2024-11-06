@@ -22,10 +22,18 @@ export const UserCard = ({ post, showPostModalHandler }: Props) => {
 
   const toggleShowText = () => setIsShowText(!isShowText);
 
+  const lastIndex = post.images.length - 1;
+
   return (
     <div className={s.card}>
       <div className={s.photo} onClick={() => showPostModalHandler(true, post.id)}>
-        <Image alt={'post photos'} height={100} src={post.images[0]?.url || avatarMock} width={100} unoptimized />
+        <Image
+          alt={'post photos'}
+          height={100}
+          src={post.images[lastIndex]?.url || avatarMock}
+          width={100}
+          unoptimized
+        />
       </div>
 
       <div className={clsx(s.content, isShowText && s.expanded)}>

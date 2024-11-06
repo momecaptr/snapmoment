@@ -53,7 +53,8 @@ export const DevSideBar = () => {
   const mainLinks: MainLinksProps[] = [
     { IconComponent: ArrowIosForward, name: 'Home', path: '/', value: 'home' },
     { IconComponent: ArrowIosForward, name: 'Create', path: '/auth/plus', value: 'plus' },
-    { IconComponent: ArrowIosForward, name: 'My Profile', path: '/profile', value: 'profile' },
+    // Такого роута уже нет
+    // { IconComponent: ArrowIosForward, name: 'My Profile', path: '/profile', value: 'profile' },
     { IconComponent: ArrowIosForward, name: 'Messenger', path: '/message', value: 'message' },
     { IconComponent: ArrowIosForward, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: ArrowIosForward, name: 'Statistics', path: '/statistics', value: 'statistics' },

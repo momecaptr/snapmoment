@@ -3,7 +3,7 @@ import { useMeQuery } from '@/shared/api/auth/authApi';
 import { useGetPostLikesQuery, useUpdateLikePostMutation } from '@/shared/api/posts/postsApi';
 import { GetPostLikesResponse } from '@/shared/api/posts/postsTypes';
 import { GetPostByIdResponse } from '@/shared/api/public/publicTypes';
-import { LikeStatus } from '@/shared/lib';
+import { LikeStatus, useAppDispatch } from '@/shared/lib';
 
 import s from './PostInteractionBar.module.scss';
 
@@ -17,6 +17,7 @@ export const PostInteractionBar = ({ postData, postId, postLikes }: Props) => {
   const { data: me } = useMeQuery();
   const [updateLikePost] = useUpdateLikePostMutation();
   const { refetch } = useGetPostLikesQuery({ postId: postId || null });
+  const dispatch = useAppDispatch();
 
   const isMyLike = !!postLikes?.items?.find((item) => item.userId === me?.userId);
   const updateLikeStatusHandler = async () => {
@@ -26,6 +27,7 @@ export const PostInteractionBar = ({ postData, postId, postLikes }: Props) => {
         postId: postData?.id
       });
       refetch();
+      // dispatch(snapmomentAPI.util.invalidateTags(['publicPostLikes']));
     } catch (e) {
       console.log(e);
     }
