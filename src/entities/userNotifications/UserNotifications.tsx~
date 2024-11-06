@@ -16,6 +16,11 @@ export const UserNotifications = () => {
   //const changedNotificationsRef = useRef<INotificationItem[]>([]);
   const filteredNotifications = notifications.filter((notification) => !notification.isRead);
 
+  useEffect(() => {
+    if (notificationsData && notificationsData.items) {
+    }
+  }, [notificationsData]);
+
   /*___________DROPDOWN____________*/
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);

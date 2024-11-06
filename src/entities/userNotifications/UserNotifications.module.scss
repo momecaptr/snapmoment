@@ -6,6 +6,11 @@
   fill: var(--dark-100);
 }
 
+.bellActive {
+  fill: var(--accent-500);
+  stroke: var(--accent-500);
+}
+
 .dropdownNotifications {
   @include focus-visible-default;
 
@@ -29,12 +34,13 @@
 .notificationItemWrap {
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding: 0;
 }
 
 .title {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   width: 100%;
   padding: 10px 8px;
 }
@@ -48,11 +54,17 @@
 }
 
 .msgs {
+  min-width: 300px;
   padding: 0 8px;
 }
 
 .noNotifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   padding-top: 10px;
+
   border-top: 1px solid var(--dark-100);
 }
 
@@ -60,6 +72,11 @@
   padding-top: 20px;
 }
 
-.showMoreBtn button {
+.showMoreBtn button,
+.clearButton {
   background-color: var(--dark-300);
+}
+
+.clearButton {
+  padding: 0.3rem 0.7rem;
 }
