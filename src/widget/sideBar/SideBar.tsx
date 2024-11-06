@@ -58,7 +58,7 @@ export const SideBar = (props: Props) => {
   };
 
   const mainLinks: MainLinksProps[] = [
-    { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
+    { IconComponent: Home, name: 'Home', path: '/home', value: 'home' },
     // { IconComponent: PlusSquare, name: 'Create', path: '/auth/create', value: 'create' },
     { IconComponent: Person, name: 'My Profile', path: `/profile/${me?.userId}`, value: 'profile' },
     { IconComponent: MessageCircle, name: 'Messenger', path: '/message', value: 'message' },

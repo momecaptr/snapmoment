@@ -1,23 +1,38 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 
 import StoreProvider from '@/myApp/StoreProvider';
 import { useMeQuery } from '@/shared/api/auth/authApi';
-import { AuthorizedLayout, NonAuthorizedLayout } from '@/shared/providers';
+import { Header, SideBar } from '@/widget';
 import { NextPage } from 'next';
+
+import s from '@/shared/providers/authorizedLayout/AuthorizedLayout.module.scss';
 
 /**
  * Conditional render Layout. With Me Query
  */
 export const ConditionLayout: NextPage<PropsWithChildren> = (props) => {
-  const { data } = useMeQuery();
+  const { data: me } = useMeQuery();
+  // {me ? (
+  //   <AuthorizedLayout>{props.children}</AuthorizedLayout>
+  // ) : (
+  //   <NonAuthorizedLayout>{props.children}</NonAuthorizedLayout>
+  // )}
+
+  console.log('ZNEN', me);
 
   return (
     <>
-      {data ? (
-        <AuthorizedLayout>{props.children}</AuthorizedLayout>
-      ) : (
-        <NonAuthorizedLayout>{props.children}</NonAuthorizedLayout>
-      )}
+      <main className={s.layout}>
+        <div className={s.header}>
+          <Header />
+        </div>
+        {me && (
+          <div className={s.sidebar}>
+            <SideBar />
+          </div>
+        )}
+        <div className={s.content}>{props.children}</div>
+      </main>
     </>
   );
 };
