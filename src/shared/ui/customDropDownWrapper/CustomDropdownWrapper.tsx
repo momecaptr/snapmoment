@@ -13,7 +13,9 @@ type CustomDropdownWrapperProps = {
   className?: string;
   classNameArrow?: string;
   classNameTriggerActive?: string;
+  closeTriggerCallback?: () => void;
   isArrow?: boolean;
+  openTriggerCallback?: () => void;
   side?: 'bottom' | 'left' | 'right' | 'top';
   sideOffset?: number;
   stayOpen?: boolean;
@@ -38,6 +40,8 @@ type CustomDropdownWrapperProps = {
  * @param {CSSProperties} style - Дополнительные стили для выпадающего меню.
  * @param {ReactNode} trigger - Элемент триггера, по которому открывается выпадающее меню.
  * @param {ReactNode} triggerActive - Элемент триггера, отображаемый, когда меню открыто. ДЛЯ ТЕХ СЛУЧАЕВ, КОГДА ИКОНКА ДОЛЖНА ОТЛИЧАТЬСЯ ОТ ТРИГГЕРА В ЗАКРЫТОМ СОСТОЯНИИ.
+ * @param {() => void} openTriggerCallback - кастомная функция, которая отвечает за ДОПОЛНИТЕЛЬНОЕ действие, нужное при открытии dropDown
+ * @param {() => void} closeTriggerCallback - кастомная функция, которая отвечает за ДОПОЛНИТЕЛЬНОЕ действие, нужное при закрытии dropDown
  */
 export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdownWrapperProps>(
   (
@@ -47,7 +51,9 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
       className,
       classNameArrow,
       classNameTriggerActive,
+      closeTriggerCallback,
       isArrow = false,
+      openTriggerCallback,
       side = 'bottom',
       sideOffset = 8,
       stayOpen = false,
@@ -67,6 +73,16 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
       }
     };
 
+    const handleOpenChange = () => {
+      if (open) {
+        closeTriggerCallback?.();
+      }
+      if (!open) {
+        openTriggerCallback?.();
+      }
+      setOpen((prev) => !prev);
+    };
+
     const classNames = {
       arrow: clsx(s.arrow),
       arrowWrap: clsx(s.arrowWrap, classNameArrow),
@@ -75,7 +91,7 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
     };
 
     return (
-      <DropdownMenu.Root onOpenChange={setOpen} open={open}>
+      <DropdownMenu.Root onOpenChange={handleOpenChange} open={open}>
         <DropdownMenu.Trigger className={clsx(s.trigger, open && classNameTriggerActive)} ref={ref} asChild>
           {triggerCondition()}
         </DropdownMenu.Trigger>
