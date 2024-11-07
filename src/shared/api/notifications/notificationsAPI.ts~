@@ -42,9 +42,5 @@ export const notificationsAPI = snapmomentAPI.injectEndpoints({
   })
 });
 
-export const {
-  useDeleteNotificationsMutation,
-  useGetNotificationsQuery,
-  useLazyGetNotificationsQuery,
-  useSetAsReadNotificationsMutation
-} = notificationsAPI;
+export const { useGetNotificationsQuery, useLazyGetNotificationsQuery, useSetAsReadNotificationsMutation, useDeleteNotificationsMutation } =
+  notificationsAPI;
