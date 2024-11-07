@@ -13,9 +13,9 @@ type CustomDropdownWrapperProps = {
   className?: string;
   classNameArrow?: string;
   classNameTriggerActive?: string;
-  closeTriggerCallback?: () => void;
   isArrow?: boolean;
-  openTriggerCallback?: () => void;
+  onCloseCallback?: () => void;
+  onOpenCallback?: () => void;
   side?: 'bottom' | 'left' | 'right' | 'top';
   sideOffset?: number;
   stayOpen?: boolean;
@@ -28,20 +28,20 @@ type CustomDropdownWrapperProps = {
  * Компонент `CustomDropdownWrapper` — настраиваемый выпадающий список, который может содержать
  * различные элементы, такие как кнопки или другие интерактивные элементы.
  *
- * @param {'center' | 'end' | 'start'} align - Выравнивание выпадающего меню по горизонтали.
- * @param {ReactNode} children - Дочерние элементы, которые будут отображаться в выпадающем меню.
- * @param {string} className - Дополнительные классы для стилизации контейнера выпадающего меню.
- * @param {string} classNameTriggerActive - Классы для стилизации триггера, когда меню открыто.
- * @param {string} classNameArrow - Классы для стилизации стрелки, когда меню открыто. Фон задавать через fill, обводку - stroke
- * @param {boolean} isArrow - Определяет, будет ли стрелка отображаться на выпадающем меню (по умолчанию `true`).
- * @param {'bottom' | 'left' | 'right' | 'top'} side - Сторона, с которой открывается выпадающее меню.
- * @param {number} sideOffset - Отступ между триггером и выпадающим меню (по умолчанию `8`).
- * @param {boolean} stayOpen - Если `true`, меню остается открытым после клика по элементам (по умолчанию `false`).
- * @param {CSSProperties} style - Дополнительные стили для выпадающего меню.
- * @param {ReactNode} trigger - Элемент триггера, по которому открывается выпадающее меню.
- * @param {ReactNode} triggerActive - Элемент триггера, отображаемый, когда меню открыто. ДЛЯ ТЕХ СЛУЧАЕВ, КОГДА ИКОНКА ДОЛЖНА ОТЛИЧАТЬСЯ ОТ ТРИГГЕРА В ЗАКРЫТОМ СОСТОЯНИИ.
- * @param {() => void} openTriggerCallback - кастомная функция, которая отвечает за ДОПОЛНИТЕЛЬНОЕ действие, нужное при открытии dropDown
- * @param {() => void} closeTriggerCallback - кастомная функция, которая отвечает за ДОПОЛНИТЕЛЬНОЕ действие, нужное при закрытии dropDown
+ * * align - Выравнивание выпадающего меню по горизонтали.
+ * * children - Дочерние элементы, которые будут отображаться в выпадающем меню.
+ * * className - Дополнительные классы для стилизации контейнера выпадающего меню.
+ * * classNameTriggerActive - Классы для стилизации триггера, когда меню открыто.
+ * * classNameArrow - Классы для стилизации стрелки, когда меню открыто. Фон задавать через fill, обводку - stroke
+ * * isArrow - Определяет, будет ли стрелка отображаться на выпадающем меню (по умолчанию `true`).
+ * * side - Сторона, с которой открывается выпадающее меню.
+ * * sideOffset - Отступ между триггером и выпадающим меню (по умолчанию `8`).
+ * * stayOpen - Если `true`, меню остается открытым после клика по элементам (по умолчанию `false`).
+ * * style - Дополнительные стили для выпадающего меню.
+ * * trigger - Элемент триггера, по которому открывается выпадающее меню.
+ * * triggerActive - Элемент триггера, отображаемый, когда меню открыто. ДЛЯ ТЕХ СЛУЧАЕВ, КОГДА ИКОНКА ДОЛЖНА ОТЛИЧАТЬСЯ ОТ ТРИГГЕРА В ЗАКРЫТОМ СОСТОЯНИИ.
+ * * onOpenCallback - Дополнительное действие при открытии dropDown
+ * * onCloseCallback - Дополнительное действие при закрытии dropDown
  */
 export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdownWrapperProps>(
   (
@@ -51,9 +51,9 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
       className,
       classNameArrow,
       classNameTriggerActive,
-      closeTriggerCallback,
       isArrow = false,
-      openTriggerCallback,
+      onCloseCallback,
+      onOpenCallback,
       side = 'bottom',
       sideOffset = 8,
       stayOpen = false,
@@ -75,10 +75,10 @@ export const CustomDropdownWrapper = forwardRef<HTMLButtonElement, CustomDropdow
 
     const handleOpenChange = () => {
       if (open) {
-        closeTriggerCallback?.();
+        onCloseCallback?.();
       }
       if (!open) {
-        openTriggerCallback?.();
+        onOpenCallback?.();
       }
       setOpen((prev) => !prev);
     };
