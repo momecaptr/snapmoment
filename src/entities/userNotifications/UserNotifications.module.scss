@@ -8,38 +8,43 @@
 
 .notifierWrap {
   position: relative;
-}
 
-.notificationCount {
-  position: absolute;
+  & .notificationCount {
+    position: absolute;
+    right: 0;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  width: 13px;
-  height: 13px;
+    width: 13px;
+    height: 13px;
 
-  background-color: red;
-  border-radius: 50%;
-}
+    background-color: red;
+    border-radius: 50%;
 
-.notificationCount p {
-  font-size: 11px;
-}
-
-.bell {
-  width: 24px;
-  height: 24px;
-
-  &:hover {
-    cursor: pointer;
+    & p {
+      font-size: 10px;
+      font-weight: 500;
+    }
   }
 
-  & .bellActive {
-    fill: var(--accent-500);
-    stroke: var(--accent-500);
+  & .bell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.bellActive {
+      color: var(--accent-500);
+    }
   }
 }
 
