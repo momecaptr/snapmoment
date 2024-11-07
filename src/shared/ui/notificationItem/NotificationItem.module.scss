@@ -1,7 +1,11 @@
 .notification {
+  position: relative;
+
   padding: 5px 0 0;
+
   line-height: 1.5; /* Устанавливаем высоту строки в 1.5 раза больше размера шрифта */
   overflow-wrap: break-word; /* или word-wrap: break-word; */
+
   border-top: 1px solid #444;
 }
 
@@ -18,10 +22,25 @@
   padding: 5px 0 0;
 }
 
+.readedNotice {
+  padding: 5px 0 0;
+}
+
 .new {
   padding: 5px 0 0 5px;
   font-size: 12px;
   color: #00b7ff;
+}
+
+.closeButtonWrap {
+  position: absolute;
+  top: 1px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  width: 100%;
 }
 
 .closeButton {
@@ -52,4 +71,8 @@
   padding: 3px 0 0;
   line-height: inherit; /* Наследуем line-height от родительского элемента */
   overflow-wrap: inherit; /* Наследуем overflow-wrap от родительского элемента */
+}
+
+.isRead {
+  color: var(--light-900);
 }

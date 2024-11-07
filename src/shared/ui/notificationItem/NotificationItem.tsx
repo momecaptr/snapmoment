@@ -1,37 +1,43 @@
-import { useState } from 'react';
+import React from 'react';
 
 import Close from '@/../public/assets/components/Close';
+import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
 import { Button, Typography } from '@/shared/ui';
+import clsx from 'clsx';
 
 import s from './NotificationItem.module.scss';
 
 type Props = {
-  id: number;
-  isRead: boolean;
-  message: string;
+  isReadedNotice: boolean;
+  notice: INotificationItem;
 };
 
 export const NotificationItem = (props: Props) => {
-  const { message } = props;
-  const [isRead, setIsRead] = useState();
-
-  const handleClick = () => {};
+  const {
+    isReadedNotice,
+    notice: { id, message }
+  } = props;
 
   return (
     <div className={s.notification}>
-      <div className={s.title}>
-        <div className={s.newBox}>
-          <Typography variant={'bold_text_16'}>New notice!</Typography>
-          <Typography className={s.new} variant={'small_text'}>
-            New
-          </Typography>
-        </div>
-        <Button className={s.closeButton} onClick={handleClick} title={'Clear'} variant={'text'}>
+      <div className={s.closeButtonWrap}>
+        <Button className={s.closeButton} title={'Clear'} variant={'text'}>
           <Close />
         </Button>
       </div>
+      <div className={s.title}>
+        {!isReadedNotice && (
+          <div className={s.newBox}>
+            <Typography variant={'bold_text_16'}>New notice!</Typography>
+            <Typography className={s.new} variant={'small_text'}>
+              New
+            </Typography>
+          </div>
+        )}
+        {isReadedNotice && <div className={s.readedNotice}></div>}
+      </div>
 
-      <Typography className={s.message} variant={'regular_text_14'}>
+      <Typography className={clsx(s.message, isReadedNotice && s.isRead)} variant={'regular_text_14'}>
         {message}
       </Typography>
       <Typography className={s.time} variant={'small_text'}>

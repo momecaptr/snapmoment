@@ -1,118 +1,79 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
+import Fillbell from '@/../public/assets/components/Fillbell';
 import Outlinebell from '@/../public/assets/components/Outlinebell';
-import { useGetNotificationsQuery } from '@/shared/api/notifications/notificationsAPI';
-import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
+import { DropDownContent } from '@/entities/userNotifications/DropDownContent';
+import {
+  useGetNotificationsQuery,
+  useSetAsReadNotificationsMutation
+} from '@/shared/api/notifications/notificationsAPI';
 import { useSocket } from '@/shared/lib/hooks/useSocket';
-import { Button, CustomDropdownItem, CustomDropdownWrapper, NotificationItem, Typography } from '@/shared/ui';
+import { CustomDropdownItem, CustomDropdownWrapper, Typography } from '@/shared/ui';
+import { clsx } from 'clsx';
 
 import s from './UserNotifications.module.scss';
 
 export const UserNotifications = () => {
-  const [notifications, setNotifications] = useState<INotificationItem[]>([]);
   const ACCESS_TOKEN = localStorage.getItem('accessToken');
-  const { data: notificationsData, refetch } = useGetNotificationsQuery({ cursor: 0 }); // useGetNotificationsQuery
+  const { data: notificationsData, refetch } = useGetNotificationsQuery({});
+  const [markAsRead] = useSetAsReadNotificationsMutation();
 
-  //const changedNotificationsRef = useRef<INotificationItem[]>([]);
-  const filteredNotifications = notifications.filter((notification) => !notification.isRead);
-
-  /*___________DROPDOWN____________*/
+  const [readedNotifications, setReadedNotifications] = useState<number[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const handleDropdownToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const newNotificationsCount = useMemo(
+    () => notificationsData?.items.filter((notification) => !notification.isRead).length || 0,
+    [notificationsData]
+  );
 
   const handleItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     event.preventDefault();
   };
-  /*___________DROPDOWN____________*/
 
-  useEffect(() => {
-    if (notificationsData && notificationsData.items) {
-      setNotifications([...notificationsData.items]);
-    }
-  }, [notificationsData]);
+  const handleDropdownToggle = useCallback(
+    (openState: boolean) => {
+      if (!openState && readedNotifications.length > 0) {
+        markAsRead({ ids: readedNotifications });
+        setReadedNotifications([]);
+      }
+      setIsOpen(openState);
+    },
+    [markAsRead, readedNotifications]
+  );
 
   useSocket({
-    events: {
-      NOTIFICATION: () => {
-        //refetch();
-      }
-    },
+    events: { NOTIFICATION: refetch },
     onConnect: () => console.log('Connected to WebSocket server'),
     onDisconnect: () => console.log('Disconnected from WebSocket server'),
-    onError: (error) => console.error('General connection error:', error),
-    params: { query: { accessToken: ACCESS_TOKEN } }, // Параметры для подключения
-    url: 'https://inctagram.work' // WebSocket URL
+    onError: (error) => console.error('WebSocket error:', error),
+    params: { query: { accessToken: ACCESS_TOKEN } },
+    url: 'https://inctagram.work'
   });
 
   return (
     <CustomDropdownWrapper
       trigger={
-        <div className={s.notificationItem} onClick={handleDropdownToggle} tabIndex={0}>
-          <Outlinebell className={s.bell} />
+        <div className={s.notifierWrap} tabIndex={0}>
+          {newNotificationsCount > 0 && (
+            <div className={s.notificationCount}>
+              <Typography variant={'small_text'}>{newNotificationsCount}</Typography>
+            </div>
+          )}
+          {!isOpen ? <Outlinebell className={s.bell} /> : <Fillbell className={clsx(s.bell, isOpen && s.bellActive)} />}
         </div>
       }
       align={'end'}
       className={s.dropdownNotifications}
       classNameArrow={s.arrow}
       classNameTriggerActive={s.bellActive}
+      onCloseCallback={() => handleDropdownToggle(false)}
+      onOpenCallback={() => handleDropdownToggle(true)}
       stayOpen={isOpen}
       isArrow
     >
       <CustomDropdownItem className={s.notificationItemWrap} onClick={handleItemClick}>
-        <div>
-          <div className={s.title}>
-            <Typography variant={'bold_text_16'}>Notifications</Typography>
-            {filteredNotifications && filteredNotifications.length > 0 && (
-              <Button className={s.clearButton} title={'Clear all'} variant={'secondary'}>
-                <Typography className={s.time} variant={'small_text'}>
-                  Clear all
-                </Typography>
-              </Button>
-            )}
-          </div>
-
-          <div className={s.msgsWrapper}>
-            <div className={s.msgs}>
-              {filteredNotifications && filteredNotifications.length === 0 && (
-                <div className={s.noNotifications}>
-                  <Typography variant={'regular_text_14'}>You have no new notices</Typography>
-                </div>
-              )}
-
-              {filteredNotifications &&
-                filteredNotifications.length > 0 &&
-                Object.values(notifications).map((notice) => (
-                  <div key={notice.id}>
-                    <NotificationItem id={notice.id} isRead={notice.isRead} message={notice.message} />
-                  </div>
-                ))}
-            </div>
-          </div>
-          <div className={s.showMoreBtn} onClick={handleDropdownToggle}>
-            <Button variant={'secondary'} fullWidth>
-              <Typography variant={'small_text'}>Show more</Typography>
-            </Button>
-          </div>
-        </div>
+        <DropDownContent readedNotifications={readedNotifications} setReadedNotifications={setReadedNotifications} />
       </CustomDropdownItem>
     </CustomDropdownWrapper>
   );

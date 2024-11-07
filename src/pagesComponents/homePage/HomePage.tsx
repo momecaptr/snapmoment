@@ -17,6 +17,7 @@ const NEXT_POSTS_COUNT = 10;
 export const HomePage = (props: Props) => {
   const { showPostModalHandler } = props;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
+  const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   const [getPublicPosts, { data: publicPosts, isFetching }] = useLazyGetPublicPostsQuery();
 
@@ -26,17 +27,18 @@ export const HomePage = (props: Props) => {
   }, []);
 
   //Проверяем есть ли еще посты на сервере
-  const hasMorePosts = publicPosts?.totalCount === publicPosts?.items.length;
+  const hasNoMorePosts = publicPosts?.totalCount === publicPosts?.items.length;
 
   const onLoadNextPosts = useCallback(() => {
-    if (!isFetching && !hasMorePosts && publicPosts) {
+    if (!isFetching && !hasNoMorePosts && publicPosts) {
       getPublicPosts({ pageSize: publicPosts.items.length + NEXT_POSTS_COUNT });
     }
   }, [isFetching]);
 
   useInfiniteScroll({
     callBack: onLoadNextPosts,
-    rootMargin: '100px 0px',
+    rootMargin: '0px',
+    threshold: 0.1,
     triggerRef
   } as IUseInfiniteScroll);
 
@@ -48,7 +50,9 @@ export const HomePage = (props: Props) => {
           <UserCard key={post.id} post={post} showPostModalHandler={showPostModalHandler} />
         ))}
       </div>
-      <div ref={triggerRef}></div>
+      <div ref={triggerRef} style={{ opacity: 0 }}>
+        .
+      </div>
     </div>
   );
 };

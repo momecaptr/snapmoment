@@ -12,7 +12,11 @@ export interface NotificationsResponse {
 }
 
 export interface NotificationsArgs {
-  cursor: number;
+  cursor?: number;
   pageSize?: number;
   sortDirection?: string;
+}
+
+export interface SetAsReadNotificationsArgs {
+  ids: number[];
 }
