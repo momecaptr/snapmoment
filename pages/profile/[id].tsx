@@ -4,7 +4,7 @@ import { wrapper } from '@/myApp/store';
 import { Profile } from '@/pagesComponents/profile/Profile';
 import { getPublicPostsUser, getPublicUserProfile } from '@/shared/api/public/publicApi';
 import { GetPostsResponse, GetPublicUserProfileResponse } from '@/shared/api/public/publicTypes';
-import { getAuthorizedLayout } from '@/shared/providers';
+import { getConditionLayout } from '@/shared/providers';
 import { GetServerSideProps } from 'next';
 
 interface Props {
@@ -47,4 +47,4 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
   };
 });
 
-Page.getLayout = getAuthorizedLayout;
+Page.getLayout = getConditionLayout;
