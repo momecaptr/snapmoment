@@ -26,7 +26,7 @@ export const publicApi = snapmomentAPI.injectEndpoints({
     }),
 
     getPublicPosts: builder.query<GetPostsResponse, GetPostsArgs>({
-      query: ({ endCursorPostId = null, pageSize }) => ({
+      query: ({ pageSize, endCursorPostId = null }) => ({
         params: {
           pageSize,
           sortBy: 'createdAt',
