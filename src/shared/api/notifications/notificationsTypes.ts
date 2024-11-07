@@ -14,9 +14,14 @@ export interface NotificationsResponse {
 export interface NotificationsArgs {
   cursor?: number;
   pageSize?: number;
+  sortBy?: string;
   sortDirection?: string;
 }
 
 export interface SetAsReadNotificationsArgs {
   ids: number[];
+}
+
+export interface DeleteAsReadNotificationsArgs {
+  id: number;
 }

@@ -21,7 +21,6 @@ export const NotificationItem = (props: Props) => {
   const [deleteNotification] = useDeleteNotificationsMutation();
 
   const handleRemoveNotice = () => {
-    console.log(id);
     deleteNotification({ id });
   };
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Fillbell from '@/../public/assets/components/Fillbell';
 import Outlinebell from '@/../public/assets/components/Outlinebell';
@@ -7,19 +7,35 @@ import {
   useGetNotificationsQuery,
   useSetAsReadNotificationsMutation
 } from '@/shared/api/notifications/notificationsAPI';
-import { useSocket } from '@/shared/lib/hooks/useSocket';
 import { CustomDropdownItem, CustomDropdownWrapper, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
+import { Socket, io } from 'socket.io-client';
 
 import s from './UserNotifications.module.scss';
 
+const SOCKET_URL = 'https://inctagram.work';
+
 export const UserNotifications = () => {
   const ACCESS_TOKEN = localStorage.getItem('accessToken');
+  const socketRef = useRef<Socket | null>(null);
+
   const { data: notificationsData, refetch } = useGetNotificationsQuery({});
   const [markAsRead] = useSetAsReadNotificationsMutation();
 
   const [readedNotifications, setReadedNotifications] = useState<number[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const socket = io(SOCKET_URL, { query: { accessToken: ACCESS_TOKEN } });
+
+    socket.on('NOTIFICATION', () => {
+      refetch();
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [ACCESS_TOKEN, refetch, socketRef]);
 
   const newNotificationsCount = useMemo(
     () => notificationsData?.items.filter((notification) => !notification.isRead).length || 0,
@@ -41,15 +57,6 @@ export const UserNotifications = () => {
     },
     [markAsRead, readedNotifications]
   );
-
-  useSocket({
-    events: { NOTIFICATION: refetch },
-    onConnect: () => console.log('Connected to WebSocket server'),
-    onDisconnect: () => console.log('Disconnected from WebSocket server'),
-    onError: (error) => console.error('WebSocket error:', error),
-    params: { query: { accessToken: ACCESS_TOKEN } },
-    url: 'https://inctagram.work'
-  });
 
   return (
     <CustomDropdownWrapper
