@@ -16,7 +16,7 @@ export const NotificationItem = (props: Props) => {
     readedNotices
   } = props;
 
-  const isReadedNotice = readedNotices.includes(id);
+  const isReadedNotice =  readedNotices.includes(id);
 
   return (
     <div className={s.notification}>

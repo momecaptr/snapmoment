@@ -6,6 +6,18 @@
   fill: var(--dark-100);
 }
 
+.notificationCount {
+  position: relative;
+  top: 0;
+  right: 0;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: red;
+  border-radius: 50%;
+}
+
 .bellActive {
   fill: var(--accent-500);
   stroke: var(--accent-500);

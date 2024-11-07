@@ -53,3 +53,7 @@
   line-height: inherit; /* Наследуем line-height от родительского элемента */
   overflow-wrap: inherit; /* Наследуем overflow-wrap от родительского элемента */
 }
+
+.isRead {
+  color: var(--light-900);
+}
