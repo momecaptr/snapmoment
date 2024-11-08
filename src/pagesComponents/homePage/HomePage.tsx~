@@ -1,11 +1,11 @@
 import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useLazyGetPublicPostsQuery } from '@/shared/api/public/publicApi';
-import { Item as ResponseItem } from '@/shared/api/public/publicTypes';
 import { IUseInfiniteScroll, useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll';
 import { UserCard } from '@/widget';
 
 import s from './HomePage.module.scss';
+import {Item as ResponseItem}  from '@/shared/api/public/publicTypes';
 
 type Props = {
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
