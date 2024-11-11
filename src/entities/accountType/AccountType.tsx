@@ -10,6 +10,7 @@ type AccountTypeSectionProps = {
   handleOpenBusinessMenu: () => void;
   handleSwitchPersonal: () => void;
   isRemoteEqualsBusinessAccount: boolean;
+  localAccountVariant: string | undefined;
 };
 export const AccountType = (props: AccountTypeSectionProps) => {
   const {
@@ -18,7 +19,8 @@ export const AccountType = (props: AccountTypeSectionProps) => {
     classForTitle,
     handleOpenBusinessMenu,
     handleSwitchPersonal,
-    isRemoteEqualsBusinessAccount
+    isRemoteEqualsBusinessAccount,
+    localAccountVariant
   } = props;
 
   return (
@@ -29,7 +31,7 @@ export const AccountType = (props: AccountTypeSectionProps) => {
       <Card className={classForCard}>
         <Radio.Root className={classForRadioRoot}>
           <Radio.Item
-            checked={!isRemoteEqualsBusinessAccount}
+            checked={localAccountVariant === accountVariants.personal}
             disabled={isRemoteEqualsBusinessAccount}
             onClick={handleSwitchPersonal}
             value={accountVariants.personal}
@@ -37,7 +39,7 @@ export const AccountType = (props: AccountTypeSectionProps) => {
             <Typography variant={'regular_text_14'}>{accountVariants.personal}</Typography>
           </Radio.Item>
           <Radio.Item
-            checked={isRemoteEqualsBusinessAccount}
+            checked={localAccountVariant === accountVariants.business}
             onClick={handleOpenBusinessMenu}
             value={accountVariants.business}
           >

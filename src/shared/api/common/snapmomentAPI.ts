@@ -26,7 +26,8 @@ export const snapmomentAPI = createApi({
     'publicPostLikes',
     'PostsByUserName',
     'Payment',
-    'Device'
+    'Device',
+    'Notifications'
   ]
 });
 

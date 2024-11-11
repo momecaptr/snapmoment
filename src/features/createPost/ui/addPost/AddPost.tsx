@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useRef } from 'react';
 
 import PhotoStub from '@/../public/assets/components/PhotoStub';
+import { createPostActions, createPostSelectors } from '@/features';
 import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 
 import s from './AddPost.module.scss';
-
-import { createPostActions, createPostSelectors } from '../../service/createPostSlice';
 
 type AddImgSectionType = {
   onSelectFile: (e: ChangeEvent<HTMLInputElement>) => void;

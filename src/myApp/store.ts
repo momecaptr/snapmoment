@@ -1,3 +1,4 @@
+import { notificationSlice } from '@/entities/userNotifications/api/notificationSlice';
 import { createPostSlice } from '@/features/createPost/service/createPostSlice';
 import { appSlice } from '@/myApp/model/appSlice';
 import { snapmomentAPI } from '@/shared/api/common/snapmomentAPI';
@@ -10,6 +11,7 @@ const makeStore = () =>
     reducer: {
       app: appSlice.reducer,
       createPost: createPostSlice,
+      notifications: notificationSlice,
       [snapmomentAPI.reducerPath]: snapmomentAPI.reducer
     }
   });

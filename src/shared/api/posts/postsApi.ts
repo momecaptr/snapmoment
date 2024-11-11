@@ -35,6 +35,13 @@ export const postsApi = snapmomentAPI.injectEndpoints({
       })
     }),
     getPostLikes: builder.query<GetPostLikesResponse, GetPostLikesArgs>({
+      // providesTags: (result) =>
+      //   result && result.items
+      //     ? [
+      //         ...result.items.map((item) => ({ id: item.id, type: 'publicPostLikes' as const })),
+      //         { id: 'LIST', type: 'publicPostLikes' }
+      //       ]
+      //     : [{ id: 'LIST', type: 'publicPostLikes' }],
       providesTags: ['publicPostLikes'],
       query: ({ postId }) => ({
         url: `v1/posts/${postId}/likes`
@@ -59,6 +66,7 @@ export const postsApi = snapmomentAPI.injectEndpoints({
       }
     }),
     updateLikePost: builder.mutation<void, UpdateLikePostArgs>({
+      // invalidatesTags: ['publicPost', { id: 'LIST', type: 'publicPostLikes' }],
       invalidatesTags: ['publicPost', 'publicPostLikes'],
 
       query: ({ likeStatus, postId }) => ({

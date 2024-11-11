@@ -1,27 +1,49 @@
 @import '@/myApp/styles/mixins';
 
-/* @import '../../../../node_modules/@radix-ui/colors/mauve.css'; */
+$icon-button-width: 163px;
+$icon-button-height: 36px;
+$flag-width: 30px;
+$flag-height: 20px;
+$border-dark: 1px solid var(--dark-300);
+$bg-dark: var(--dark-700);
+$accent-color: var(--accent-500);
 
-.IconButton {
+.arrow {
+  top: 0;
+  left: -10px;
+  fill: var(--dark-300);
+}
+
+.IconButton,
+.boxContent {
   @include focus-visible-default;
 
   cursor: pointer;
 
   display: flex;
   align-items: center;
+
+  width: $icon-button-width;
+  height: $icon-button-height;
+  padding: 6px 12px;
+}
+
+.IconButton {
   justify-content: space-between;
 
-  width: 163px;
-  height: 36px;
-  padding: 6px 12px;
+  background-color: $bg-dark;
+  background-position: center;
+  border: $border-dark;
 
-  background-color: var(--dark-700);
-  border: 1px solid var(--dark-300);
+  transition: background 0.8s; // Добавляем плавный переход фона
 
+  &:hover,
   &[data-state='open'] {
-    .iconArrowDown {
-      transform: rotate(180deg);
-    }
+    background: var(--dark-500) radial-gradient(circle, transparent 1%, var(--dark-500) 1%) center/15000%;
+  }
+
+  &[data-state='open'] .iconArrowDown {
+    transform: rotate(180deg);
   }
 }
 
@@ -34,71 +56,56 @@
   }
 }
 
-.DropdownMenuArrow {
-  fill: var(--dark-300);
-}
-
-.flag {
-  width: 30px;
-  height: 20px;
+.flag,
+.dropItemFlag {
+  width: $flag-width;
+  height: $flag-height;
   object-fit: cover;
-  border: solid rgb(0 0 0 / 100%) 0.7px;
 }
 
-.IconButton[data-state='open'] img,
-.IconButton:focus-visible img {
-  box-shadow: 0 0 10px 8px rgb(137 74 255 / 50%);
+.DropdownMenuArrow {
+  fill: $border-dark;
 }
 
 .boxContent {
-  cursor: pointer;
-
-  display: flex;
   flex-direction: row;
   gap: 10px;
-  align-items: center;
-
-  width: 163px;
-  height: 36px;
-
   border-radius: 1px;
 
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--dark-300);
+  }
+
+  &:hover,
   &:focus-visible {
-    outline: none;
+    background: var(--dark-300);
   }
 
-  &:hover .dropdownText {
-    color: var(--accent-500);
-  }
-
+  &:focus-visible,
+  &:hover .dropdownText,
+  &:focus .dropdownText,
   &:focus-visible .dropdownText {
-    color: var(--accent-500);
+    color: $accent-color;
   }
-
-  &:focus .dropdownText {
-    color: var(--accent-500);
-  }
-}
-
-.dropItemFlag {
-  width: 30px;
-  height: 20px;
-  object-fit: cover;
-  border: solid rgb(0 0 0 / 100%) 0.7px;
 }
 
 .DropdownMenuContent {
-  @include animation-appearance;
+  position: relative;
+  top: -9px;
 
   display: flex;
-  flex-flow: column nowrap;
-  gap: 15px;
+  flex-direction: column;
+  gap: 0;
   align-items: flex-start;
-  justify-content: center;
 
-  padding: 10px;
+  padding: 0;
 
-  background-color: var(--dark-700);
-  border: 1px solid var(--dark-300);
-  border-radius: 6px;
+  background-color: $bg-dark;
+  border: $border-dark;
+  border-radius: 0;
+
+  &:focus-visible,
+  &:hover {
+    background-color: $bg-dark;
+  }
 }

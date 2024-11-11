@@ -1,6 +1,7 @@
-import React, { MutableRefObject, useCallback, useEffect, useRef } from 'react';
+import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useLazyGetPublicPostsQuery } from '@/shared/api/public/publicApi';
+import { Item as ResponseItem } from '@/shared/api/public/publicTypes';
 import { IUseInfiniteScroll, useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll';
 import { UserCard } from '@/widget';
 
@@ -10,7 +11,6 @@ type Props = {
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
 
-//todo: добавить тернарник этим константам, например, в зависимости от размеров экрана
 const START_POSTS_COUNT = 10;
 const NEXT_POSTS_COUNT = 10;
 
@@ -18,37 +18,49 @@ export const HomePage = (props: Props) => {
   const { showPostModalHandler } = props;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
-  const [getPublicPosts, { data: publicPosts, isFetching }] = useLazyGetPublicPostsQuery();
+  const [getPublicPosts, { data: fetchedData, isFetching }] = useLazyGetPublicPostsQuery();
+  const [posts, setPosts] = useState<ResponseItem[]>([]); // Локальное состояние для списка постов
 
-  // Запрашиваем первые посты при загрузке компонента
+  // Первоначальная загрузка постов
   useEffect(() => {
     getPublicPosts({ pageSize: START_POSTS_COUNT });
   }, []);
 
-  //Проверяем есть ли еще посты на сервере
-  const hasMorePosts = publicPosts?.totalCount === publicPosts?.items.length;
+  // Проверка на отсутствие дополнительных постов
+  const hasNoMorePosts = fetchedData?.totalCount === posts.length;
 
   const onLoadNextPosts = useCallback(() => {
-    if (!isFetching && !hasMorePosts && publicPosts) {
-      getPublicPosts({ pageSize: publicPosts.items.length + NEXT_POSTS_COUNT });
+    if (!isFetching && !hasNoMorePosts && posts.length) {
+      const cursorID = posts[posts.length - 1]?.id;
+
+      getPublicPosts({ endCursorPostId: cursorID, pageSize: NEXT_POSTS_COUNT });
     }
-  }, [isFetching]);
+  }, [getPublicPosts, hasNoMorePosts, isFetching, posts]);
 
   useInfiniteScroll({
     callBack: onLoadNextPosts,
-    rootMargin: '100px 0px',
+    rootMargin: '0px',
+    threshold: 0.1,
     triggerRef
   } as IUseInfiniteScroll);
 
-  //todo: добавить <loading/> в <div ref={triggerRef}></div>
+  // Обновление состояния постов при приходе новых данных
+  useEffect(() => {
+    if (fetchedData?.items) {
+      setPosts((prev) => [...prev, ...fetchedData.items]); // Добавление новых постов к текущему состоянию
+    }
+  }, [fetchedData]);
+
   return (
     <div className={s.container}>
       <div className={s.cards}>
-        {publicPosts?.items.map((post) => (
+        {posts.map((post) => (
           <UserCard key={post.id} post={post} showPostModalHandler={showPostModalHandler} />
         ))}
       </div>
-      <div ref={triggerRef}></div>
+      <div ref={triggerRef} style={{ opacity: 0 }}>
+        .
+      </div>
     </div>
   );
 };

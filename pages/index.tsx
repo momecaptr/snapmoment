@@ -1,40 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { Fragment } from 'react';
 
+import { RegisteredUsersCounter } from '@/entities';
 import { wrapper } from '@/myApp/store';
-import { PublicPage } from '@/pagesComponents';
-import { HomePage } from '@/pagesComponents/homePage/HomePage';
-import { useMeQuery } from '@/shared/api/auth/authApi';
 import { getRunningQueriesThunk } from '@/shared/api/common/snapmomentAPI';
 import { getPublicPosts } from '@/shared/api/public/publicApi';
 import { Item } from '@/shared/api/public/publicTypes';
-import { ModalKey, useModal } from '@/shared/lib';
+import { useShowPostModal } from '@/shared/lib';
 import { getConditionLayout } from '@/shared/providers';
-import { PostModal } from '@/widget';
+import { PostModal, UserCard } from '@/widget';
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next';
-import { useRouter } from 'next/router';
+
+import s from '@/pagesComponents/publicPage/ui/PublicPage.module.scss';
 
 export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { data: me } = useMeQuery();
-  const router = useRouter();
-  const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-  const postId = Number(router.query.id);
-
-  useEffect(() => {
-    if (postId && !isOpen) {
-      setOpen(true);
-    }
-  }, [postId]);
-
-  const showPostModalHandler = (isOpen: boolean, postId?: number) => {
-    setOpen(isOpen);
-    postId && router.push(`/?id=${postId}`, undefined, { shallow: true });
-  };
+  const { isOpen, postId, showPostModalHandler } = useShowPostModal();
 
   return getConditionLayout(
     <>
-      {isOpen && <PostModal me={me} postId={postId} showPostModalHandler={showPostModalHandler} />}
-      {!me && <PublicPage posts={posts} showPostModalHandler={showPostModalHandler} />}
-      {me && <HomePage showPostModalHandler={showPostModalHandler} />}
+      {isOpen && <PostModal postId={postId} showPostModalHandler={showPostModalHandler} />}
+      <section className={s.container}>
+        <RegisteredUsersCounter />
+
+        <div className={s.cards}>
+          {posts?.map((post) => (
+            <Fragment key={post.id}>
+              <UserCard post={post} showPostModalHandler={showPostModalHandler} />
+            </Fragment>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

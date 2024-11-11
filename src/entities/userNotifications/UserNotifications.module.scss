@@ -1,0 +1,121 @@
+@import '../../myApp/styles/mixins';
+
+.arrow {
+  top: 0;
+  left: 1px;
+  fill: var(--dark-100);
+}
+
+.notifierWrap {
+  position: relative;
+
+  & .notificationCount {
+    position: absolute;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 13px;
+    height: 13px;
+
+    background-color: red;
+    border-radius: 50%;
+
+    & p {
+      font-size: 10px;
+      font-weight: 500;
+    }
+  }
+
+  & .bell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.bellActive {
+      color: var(--accent-500);
+    }
+  }
+}
+
+.dropdownNotifications {
+  @include focus-visible-default;
+
+  position: relative;
+  right: -10px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 15px;
+  align-items: flex-start;
+  justify-content: center;
+
+  max-height: 424px;
+  padding: 10px;
+
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-100);
+  border-radius: 6px;
+}
+
+.notificationItemWrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 8px;
+}
+
+.msgsWrapper {
+  overflow-y: auto; /* Прокрутка по вертикали */
+  max-width: 335px;
+  max-height: 300px;
+}
+
+.msgs {
+  min-width: 330px;
+  padding: 0 8px;
+}
+
+.noNotifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 10px;
+
+  border-top: 1px solid var(--dark-100);
+}
+
+.showMoreBtn {
+  padding-top: 20px;
+}
+
+.showMoreBtn button,
+.clearButton {
+  background-color: var(--dark-300);
+}
+
+.clearButton {
+  padding: 0.3rem 0.7rem;
+}
+
+.invisibleTrigger {
+  opacity: 0;
+}

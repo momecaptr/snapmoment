@@ -7,3 +7,4 @@ export { CurrentSubscriptionInfo } from './currentSubscriptionInfo/CurrentSubscr
 export { photoAspectRatios, photoFilters } from './photo/photoConstants';
 export type { PhotoAspectRatioType } from './photo/photoConstants';
 export { RegisteredUsersCounter } from './registeredUsersCounter/RegisteredUsersCounter';
+export { UserNotifications } from './userNotifications/UserNotifications';

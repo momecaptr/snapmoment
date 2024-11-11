@@ -58,7 +58,7 @@ export const SideBar = (props: Props) => {
   };
 
   const mainLinks: MainLinksProps[] = [
-    { IconComponent: Home, name: 'Home', path: '/', value: 'home' },
+    { IconComponent: Home, name: 'Home', path: '/home', value: 'home' },
     // { IconComponent: PlusSquare, name: 'Create', path: '/auth/create', value: 'create' },
     { IconComponent: Person, name: 'My Profile', path: `/profile/${me?.userId}`, value: 'profile' },
     { IconComponent: MessageCircle, name: 'Messenger', path: '/message', value: 'message' },
@@ -96,7 +96,7 @@ export const SideBar = (props: Props) => {
       <CreatePostModal isOpen={isOpen} setOpen={setOpen} />
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)}>
+          <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)} shallow>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />
