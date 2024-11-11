@@ -30,7 +30,7 @@ const UserNotifications = () => {
   const isOpen = useAppSelector(notificationSelectors.getIsOpen);
   const notices = useAppSelector(notificationSelectors.getNotifications);
   const unReadCount = useAppSelector(notificationSelectors.getUnReadCount);
-  //const totalCount = useAppSelector(notificationSelectors.getTotalCount);
+  const totalCount = useAppSelector(notificationSelectors.getTotalCount);
 
   const isNoticesExists = notices.length > 0;
 
@@ -40,6 +40,7 @@ const UserNotifications = () => {
     dispatch(fetchNotificationsForCounter({}));
 
     return () => {
+      console.log('unMount');
       //dispatch(notificationActions.unMount());
     };
   }, []);

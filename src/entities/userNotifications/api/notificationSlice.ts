@@ -127,6 +127,8 @@ const slice = createSlice({
         const newNotifications = action.payload.items.filter((item) => !existingIds.has(item.id));
 
         state.notifications = [...state.notifications, ...newNotifications];
+
+        /*state.notifications = [...state.notifications, ...action.payload.items];*/
         state.totalCount = action.payload.totalCount;
         state.isFetching = false;
         state.cursorId = action.payload.items[action.payload.items.length - 1]?.id;
@@ -139,6 +141,7 @@ const slice = createSlice({
         state.isFetching = true;
       })
       .addCase(fetchNotificationsForCounter.fulfilled, (state, action) => {
+        state.isFetching = false;
         if (action.payload?.items.length > 0) {
           state.unReadCount = action.payload.items.filter((notification) => !notification.isRead).length;
         } else {
@@ -146,18 +149,39 @@ const slice = createSlice({
         }
       })
       .addCase(fetchNotificationsForCounter.rejected, (state, action) => {
-        state.isFetching = false;
         state.error = action.payload as string;
+        state.isFetching = false;
       })
       .addCase(deleteNotification.pending, (state) => {
         state.isFetching = true;
       })
       .addCase(deleteNotification.fulfilled, (state, action) => {
+        state.isFetching = false;
         state.notifications = state.notifications.filter((notification) => notification.id !== action.meta.arg);
         state.totalCount -= 1;
       })
       .addCase(deleteNotification.rejected, (state, action) => {
         state.error = action.payload as string;
+        state.isFetching = false;
+      })
+      .addCase(markNotificationsAsRead.pending, (state) => {
+        state.isFetching = true;
+      })
+      .addCase(markNotificationsAsRead.fulfilled, (state, action) => {
+        state.isFetching = false;
+        const readIds = new Set(action.meta.arg);
+
+        state.notifications.forEach((notification) => {
+          if (readIds.has(notification.id)) {
+            notification.isRead = true;
+          }
+        });
+
+        state.unReadCount -= readIds.size;
+      })
+      .addCase(markNotificationsAsRead.rejected, (state, action) => {
+        state.error = action.payload as string;
+        state.isFetching = false;
       });
   },
   initialState: initialState,
@@ -168,6 +192,12 @@ const slice = createSlice({
     },
     changeDropDownState: (state, action: PayloadAction<{ isOpen: boolean }>) => {
       state.isOpen = action.payload.isOpen;
+    },
+    unMount: (state) => {
+      state.notifications = [];
+      state.totalCount = 0;
+      state.unReadCount = 0;
+      state.cursorId = null;
     }
   },
   selectors: {

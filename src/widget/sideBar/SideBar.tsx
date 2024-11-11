@@ -96,7 +96,7 @@ export const SideBar = (props: Props) => {
       <CreatePostModal isOpen={isOpen} setOpen={setOpen} />
       <div className={s.btns}>
         {mainLinks.map(({ IconComponent, name, path, value }) => (
-          <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)}>
+          <Link className={s.btn} href={path} key={value} onClick={() => setActiveIcon(value)} shallow>
             <IconComponent
               className={clsx(s.icon, { [s.active]: activeIcon === value }, value === 'search' && s.searchIcon)}
             />

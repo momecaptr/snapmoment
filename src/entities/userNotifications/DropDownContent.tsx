@@ -1,8 +1,9 @@
 import React, { memo, useCallback, useRef } from 'react';
 
-import { fetchNotifications } from '@/entities/userNotifications/api/notificationSlice';
+import { fetchNotifications, markNotificationsAsRead } from '@/entities/userNotifications/api/notificationSlice';
 import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
 import { useAppDispatch } from '@/shared/lib';
+import { useDebounceFn } from '@/shared/lib/hooks/useDebounceFn';
 import { IUseInfiniteScroll, useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll';
 import { NotificationItem, Typography } from '@/shared/ui';
 
@@ -17,18 +18,33 @@ type Props = {
 };
 
 const NEXT_NOTICES_COUNT = 1;
+const MARK_AR_READ_DELAY = 1500;
 
 const DropDownContent = (props: Props) => {
   const { cursorId, hasNoMoreNotices, isNoticesExists, isNoticesFetching, notices } = props;
   const dispatch = useAppDispatch();
   const triggerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const hoveredItemIdsRef = useRef<number[]>([]);
 
-  /*const [isReadMark, setIsReadMark] = useState<number[]>([]);
-  const readNotifications = useMemo(() => notices.filter((item) => item.isRead).map((item) => item.id), [notices]);*/
+  // Отложенная отправка массива id's
+  const debouncedSendHoveredIds = useDebounceFn(() => {
+    if (hoveredItemIdsRef.current.length) {
+      dispatch(markNotificationsAsRead(hoveredItemIdsRef.current));
+    }
+    hoveredItemIdsRef.current = [];
+  }, MARK_AR_READ_DELAY);
 
-  // Запрос уведомлений (последующие)
+  const handleItemHover = useCallback(
+    (itemID: number, isRead: boolean) => () => {
+      if (!isRead && !hoveredItemIdsRef.current.includes(itemID)) {
+        hoveredItemIdsRef.current.push(itemID);
+        debouncedSendHoveredIds();
+      }
+    },
+    [debouncedSendHoveredIds]
+  );
+
   const onLoadNextNotices = useCallback(() => {
-    // Проверяем, что мы не загружаем данные и что либо уведомлений нет, либо есть курсор для продолжения загрузки
     if (isNoticesExists && !isNoticesFetching && !hasNoMoreNotices && !!cursorId) {
       dispatch(fetchNotifications({ cursor: cursorId, pageSize: NEXT_NOTICES_COUNT }));
     }
@@ -42,16 +58,6 @@ const DropDownContent = (props: Props) => {
     triggerRef
   } as IUseInfiniteScroll);
 
-  // Обновление значения прочитанных уведомлений при наведении
-  const handleItemHover = useCallback(
-    (itemID: number) => () => {
-      /*      if (!readNotifications.includes(itemID) && !isReadMark.includes(itemID)) {
-        setIsReadMark([...isReadMark, itemID]);
-      }*/
-    },
-    []
-  );
-
   return (
     <div>
       <div className={s.title}>
@@ -63,7 +69,7 @@ const DropDownContent = (props: Props) => {
           <div className={s.msgs}>
             {isNoticesExists &&
               notices.map((notice) => (
-                <div key={notice.id} onMouseLeave={handleItemHover(notice.id)}>
+                <div key={notice.id} onMouseEnter={handleItemHover(notice.id, notice.isRead)}>
                   <NotificationItem isReadNotice={notice.isRead} notice={notice} />
                 </div>
               ))}
