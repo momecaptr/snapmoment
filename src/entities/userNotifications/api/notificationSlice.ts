@@ -171,12 +171,17 @@ const slice = createSlice({
         state.isFetching = false;
         const readIds = new Set(action.meta.arg);
 
-        state.notifications.forEach((notification) => {
+        // Создаем новый массив с обновленными уведомлениями
+        const updatedNotifications = state.notifications.map((notification) => {
           if (readIds.has(notification.id)) {
-            notification.isRead = true;
+            return { ...notification, isRead: true };
           }
+
+          return notification;
         });
 
+        // Обновляем состояние с новым массивом уведомлений
+        state.notifications = updatedNotifications;
         state.unReadCount -= readIds.size;
       })
       .addCase(markNotificationsAsRead.rejected, (state, action) => {
