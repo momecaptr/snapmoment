@@ -12,10 +12,10 @@ export interface NotificationsResponse {
 }
 
 export interface NotificationsArgs {
-  cursor?: number;
-  pageSize?: number;
-  sortBy?: string;
-  sortDirection?: string;
+  cursor?: null | number;
+  pageSize?: null | number;
+  sortBy?: null | string;
+  sortDirection?: null | string;
 }
 
 export interface SetAsReadNotificationsArgs {

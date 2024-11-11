@@ -1,12 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef } from 'react';
 
 import Fillbell from '@/../public/assets/components/Fillbell';
 import Outlinebell from '@/../public/assets/components/Outlinebell';
 import { DropDownContent } from '@/entities/userNotifications/DropDownContent';
 import {
-  useGetNotificationsQuery,
-  useSetAsReadNotificationsMutation
-} from '@/shared/api/notifications/notificationsAPI';
+  fetchNotifications,
+  fetchNotificationsForCounter,
+  notificationActions,
+  notificationSelectors
+} from '@/entities/userNotifications/api/notificationSlice';
+import { useAppDispatch, useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 import { Socket, io } from 'socket.io-client';
@@ -14,34 +17,42 @@ import { Socket, io } from 'socket.io-client';
 import s from './UserNotifications.module.scss';
 
 const SOCKET_URL = 'https://inctagram.work';
+const START_NOTICES_COUNT = 5;
 
-export const UserNotifications = () => {
+const UserNotifications = () => {
   const ACCESS_TOKEN = localStorage.getItem('accessToken');
   const socketRef = useRef<Socket | null>(null);
+  const dispatch = useAppDispatch();
 
-  const { data: notificationsData, refetch } = useGetNotificationsQuery({});
-  const [markAsRead] = useSetAsReadNotificationsMutation();
+  const cursorId = useAppSelector(notificationSelectors.getCursorId);
+  const hasNoMoreNotices = !useAppSelector(notificationSelectors.getHasMore);
+  const isNoticesFetching = useAppSelector(notificationSelectors.getIsFetching);
+  const isOpen = useAppSelector(notificationSelectors.getIsOpen);
+  const notices = useAppSelector(notificationSelectors.getNotifications);
+  const unReadCount = useAppSelector(notificationSelectors.getUnReadCount);
 
-  const [readedNotifications, setReadedNotifications] = useState<number[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const isNoticesExists = notices.length > 0;
 
+  // Первоначальная загрузка уведомлений и количества непрочитанных
+  useEffect(() => {
+    dispatch(fetchNotifications({ cursor: cursorId, pageSize: START_NOTICES_COUNT }));
+    dispatch(fetchNotificationsForCounter({}));
+  }, []);
+
+  //Подключение к сокету и просолучение события NOTIFICATION
   useEffect(() => {
     const socket = io(SOCKET_URL, { query: { accessToken: ACCESS_TOKEN } });
 
-    socket.on('NOTIFICATION', () => {
-      refetch();
+    socket.on('NOTIFICATION', (data) => {
+      dispatch(notificationActions.addNewNotification(data));
     });
 
     return () => {
       socket.disconnect();
     };
-  }, [ACCESS_TOKEN, refetch, socketRef]);
+  }, [ACCESS_TOKEN, socketRef]);
 
-  const newNotificationsCount = useMemo(
-    () => notificationsData?.items.filter((notification) => !notification.isRead).length || 0,
-    [notificationsData]
-  );
-
+  //Отмена закрытия дроплауна при клике на эллементы
   const handleItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     event.preventDefault();
@@ -49,22 +60,18 @@ export const UserNotifications = () => {
 
   const handleDropdownToggle = useCallback(
     (openState: boolean) => {
-      if (!openState && readedNotifications.length > 0) {
-        markAsRead({ ids: readedNotifications });
-        setReadedNotifications([]);
-      }
-      setIsOpen(openState);
+      dispatch(notificationActions.changeDropDownState({ isOpen: openState }));
     },
-    [markAsRead, readedNotifications]
+    [dispatch]
   );
 
   return (
     <CustomDropdownWrapper
       trigger={
         <div className={s.notifierWrap} tabIndex={0}>
-          {newNotificationsCount > 0 && (
+          {unReadCount > 0 && (
             <div className={s.notificationCount}>
-              <Typography variant={'small_text'}>{newNotificationsCount}</Typography>
+              <Typography variant={'small_text'}>{unReadCount}</Typography>
             </div>
           )}
           {!isOpen ? <Outlinebell className={s.bell} /> : <Fillbell className={clsx(s.bell, isOpen && s.bellActive)} />}
@@ -80,8 +87,18 @@ export const UserNotifications = () => {
       isArrow
     >
       <CustomDropdownItem className={s.notificationItemWrap} onClick={handleItemClick}>
-        <DropDownContent readedNotifications={readedNotifications} setReadedNotifications={setReadedNotifications} />
+        <DropDownContent
+          cursorId={cursorId}
+          hasNoMoreNotices={hasNoMoreNotices}
+          isNoticesExists={isNoticesExists}
+          isNoticesFetching={isNoticesFetching}
+          notices={notices}
+        />
       </CustomDropdownItem>
     </CustomDropdownWrapper>
   );
 };
+
+const MemoizedUserNotifications = memo(UserNotifications);
+
+export { MemoizedUserNotifications as UserNotifications };

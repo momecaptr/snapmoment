@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { memo } from 'react';
+import ReactTimeAgo from 'react-time-ago';
 
 import Close from '@/../public/assets/components/Close';
-import { useDeleteNotificationsMutation } from '@/shared/api/notifications/notificationsAPI';
+import { deleteNotification } from '@/entities/userNotifications/api/notificationSlice';
 import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
+import { useAppDispatch } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 
 import s from './NotificationItem.module.scss';
 
 type Props = {
-  isReadedNotice: boolean;
+  isReadNotice: boolean;
   notice: INotificationItem;
 };
 
-export const NotificationItem = (props: Props) => {
+const NotificationItem = (props: Props) => {
   const {
-    isReadedNotice,
-    notice: { id, message }
+    isReadNotice,
+    notice: { id, message, notifyAt }
   } = props;
-  const [deleteNotification] = useDeleteNotificationsMutation();
-
+  const notifyDate = new Date(notifyAt);
+  const dispatch = useAppDispatch();
   const handleRemoveNotice = () => {
-    console.log(id);
-    deleteNotification({ id });
+    dispatch(deleteNotification(id));
   };
 
   return (
@@ -33,7 +34,7 @@ export const NotificationItem = (props: Props) => {
         </Button>
       </div>
       <div className={s.title}>
-        {!isReadedNotice && (
+        {!isReadNotice && (
           <div className={s.newBox}>
             <Typography variant={'bold_text_16'}>New notice!</Typography>
             <Typography className={s.new} variant={'small_text'}>
@@ -41,16 +42,19 @@ export const NotificationItem = (props: Props) => {
             </Typography>
           </div>
         )}
-        {isReadedNotice && <div className={s.readedNotice}></div>}
+        {isReadNotice && <div className={s.readedNotice}></div>}
       </div>
 
-      <Typography className={clsx(s.message, isReadedNotice && s.isRead)} variant={'regular_text_14'}>
+      <Typography className={clsx(s.message, isReadNotice && s.isRead)} variant={'regular_text_14'}>
         {message}
-        {id}
       </Typography>
       <Typography className={s.time} variant={'small_text'}>
-        1 час назад
+        <ReactTimeAgo date={notifyDate} locale={'en-US'} />
       </Typography>
     </div>
   );
 };
+
+const MemoizedNotificationItem = memo(NotificationItem);
+
+export { MemoizedNotificationItem as NotificationItem };

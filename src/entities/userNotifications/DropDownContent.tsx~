@@ -1,52 +1,40 @@
-import React, { MutableRefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
 
-import { useLazyGetNotificationsQuery } from '@/shared/api/notifications/notificationsAPI';
+import { fetchNotifications } from '@/entities/userNotifications/api/notificationSlice';
 import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
+import { useAppDispatch } from '@/shared/lib';
 import { IUseInfiniteScroll, useInfiniteScroll } from '@/shared/lib/hooks/useInfiniteScroll';
 import { NotificationItem, Typography } from '@/shared/ui';
 
 import s from '@/entities/userNotifications/UserNotifications.module.scss';
 
 type Props = {
-  readedNotifications: number[];
-  setReadedNotifications: (readedNotices: number[]) => void;
+  cursorId: null | number;
+  hasNoMoreNotices: boolean;
+  isNoticesExists: boolean;
+  isNoticesFetching: boolean;
+  notices: INotificationItem[];
 };
 
-const NEXT_NOTICES_COUNT = 3;
+const NEXT_NOTICES_COUNT = 1;
 
-export const DropDownContent = (props: Props) => {
-  const { readedNotifications, setReadedNotifications } = props;
-  const [notifications, setNotifications] = useState<INotificationItem[]>([]);
-  const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
-  const [fetchNotices, { data: noticesData, isFetching: isNoticesFetching }] = useLazyGetNotificationsQuery();
+const DropDownContent = (props: Props) => {
+  const { cursorId, hasNoMoreNotices, isNoticesExists, isNoticesFetching, notices } = props;
+  const dispatch = useAppDispatch();
+  const triggerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  // Обновление уведомлений при наведении
-  const handleItemHover = useCallback(
-    (itemID: number) => () => {
-      if (!readedNotifications.includes(itemID)) {
-        setReadedNotifications([...readedNotifications, itemID]);
-      }
-    },
-    [readedNotifications, setReadedNotifications]
-  );
+  /*const [isReadMark, setIsReadMark] = useState<number[]>([]);
+  const readNotifications = useMemo(() => notices.filter((item) => item.isRead).map((item) => item.id), [notices]);*/
 
-  // Первоначальная загрузка уведомлений
-  useEffect(() => {
-    fetchNotices({ pageSize: NEXT_NOTICES_COUNT });
-  }, []);
-
-  //Проверяем есть ли еще notices на сервере
-  const hasNoMoreNotices = noticesData?.totalCount === notifications.length;
-
+  // Запрос уведомлений (последующие)
   const onLoadNextNotices = useCallback(() => {
-    if (!isNoticesFetching && !hasNoMoreNotices && notifications.length) {
-      const cursorID = notifications[notifications.length - 1]?.id;
-
-      fetchNotices({ cursor: cursorID, pageSize: NEXT_NOTICES_COUNT });
+    // Проверяем, что мы не загружаем данные и что либо уведомлений нет, либо есть курсор для продолжения загрузки
+    if (isNoticesExists && !isNoticesFetching && !hasNoMoreNotices && !!cursorId) {
+      dispatch(fetchNotifications({ cursor: cursorId, pageSize: NEXT_NOTICES_COUNT }));
     }
-  }, [isNoticesFetching, hasNoMoreNotices, notifications, fetchNotices]);
+  }, [isNoticesExists, isNoticesFetching, hasNoMoreNotices, cursorId, dispatch]);
 
-  // Используем хук бесконечного скролла
+  // Используем хук для бесконечной пагинации
   useInfiniteScroll({
     callBack: onLoadNextNotices,
     rootMargin: '0px',
@@ -54,12 +42,16 @@ export const DropDownContent = (props: Props) => {
     triggerRef
   } as IUseInfiniteScroll);
 
-  // Обновление состояния уведомлений при приходе новых данных
-  useEffect(() => {
-    if (noticesData?.items) {
-      setNotifications((prev) => [...prev, ...noticesData.items]);
-    }
-  }, [noticesData]);
+  // Обновление значения прочитанных уведомлений при наведении
+  const handleItemHover = useCallback(
+    (itemID: number) => () => {
+      /*      if (!readNotifications.includes(itemID) && !isReadMark.includes(itemID)) {
+        setIsReadMark([...isReadMark, itemID]);
+      }*/
+    },
+    []
+  );
+
 
   return (
     <div>
@@ -70,26 +62,27 @@ export const DropDownContent = (props: Props) => {
       <div className={s.msgsWrapper}>
         <div>
           <div className={s.msgs}>
-            {noticesData && noticesData.items.length === 0 && (
-              <div className={s.noNotifications}>
-                <Typography variant={'regular_text_14'}>You have no new notices</Typography>
-              </div>
-            )}
-
-            {notifications.map((notice) => (
-              <div key={notice.id} onMouseEnter={handleItemHover(notice.id)}>
-                <NotificationItem
-                  isReadedNotice={readedNotifications.includes(notice.id) || notice.isRead}
-                  notice={notice}
-                />
-              </div>
-            ))}
+            {isNoticesExists &&
+              notices.map((notice) => (
+                <div key={notice.id} onMouseLeave={handleItemHover(notice.id)}>
+                  <NotificationItem isReadNotice={notice.isRead} notice={notice} />
+                </div>
+              ))}
+            <div className={s.invisibleTrigger} ref={triggerRef}>
+              invisibleTrigger
+            </div>
           </div>
-          <div ref={triggerRef} style={{ opacity: 0 }}>
-            .
-          </div>
+          {!isNoticesExists && (
+            <div className={s.noNotifications}>
+              <Typography variant={'regular_text_14'}>You have no new notices</Typography>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
+const MemoizedDropDownContent = memo(DropDownContent);
+
+export { MemoizedDropDownContent as DropDownContent };

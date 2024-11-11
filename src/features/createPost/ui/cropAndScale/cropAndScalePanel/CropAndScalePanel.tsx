@@ -8,13 +8,12 @@ import Maximize from '@/../public/assets/components/Maximize';
 import MaximizeOutline from '@/../public/assets/components/MaximizeOutline';
 import Picture from '@/../public/assets/components/PictureOutline';
 import { PhotoAspectRatioType, photoAspectRatios } from '@/entities';
+import { createPostSelectors } from '@/features';
 import { useAppSelector } from '@/shared/lib';
 import { CustomDropdownItem, CustomDropdownWrapper, Slider, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 
 import s from './CropAndScalePanel.module.scss';
-
-import { createPostSelectors } from '../../../service/createPostSlice';
 
 type PropsCropAndScale = {
   id: string;

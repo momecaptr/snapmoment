@@ -115,7 +115,3 @@
 .clearButton {
   padding: 0.3rem 0.7rem;
 }
-
-.invisibleTrigger {
-  opacity: 0;
-}

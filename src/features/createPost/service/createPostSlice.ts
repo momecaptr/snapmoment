@@ -19,9 +19,6 @@ const slice = createSlice({
   name: 'createPost',
   reducers: {
     addPostImgs(state, action: PayloadAction<{ url: string }>) {
-      // const existingPhoto = state.allPostImages.find((img) => img.url === action.payload.url);
-
-      // if (!existingPhoto) {
       const imgDataToSave: CreatePostImgProps = {
         aspect: { text: '1:1', value: 1 },
         buferUrl: '',
@@ -35,7 +32,6 @@ const slice = createSlice({
       };
 
       state.allPostImages.unshift(imgDataToSave);
-      // }
     },
     deletePhoto(state, action: PayloadAction<{ id: string }>) {
       state.allPostImages = state.allPostImages.filter((img) => img.id !== action.payload.id);
@@ -91,8 +87,6 @@ const slice = createSlice({
         };
       }>
     ) {
-      console.log('Оппа');
-
       const { imgIndex, transformedImage } = action.payload;
       const index = state.allPostImages.findIndex((img) => img.id === transformedImage.id);
 
@@ -133,7 +127,6 @@ const slice = createSlice({
         }
       });
     },
-    //   );
     updateUrlAndBuferWithCropped(
       state,
       action: PayloadAction<{ croppedAreaPx: CroppedAreaPx; id: string; url: string | undefined }[]>
