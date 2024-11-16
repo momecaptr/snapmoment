@@ -5,7 +5,6 @@ import Outlinebell from '@/../public/assets/components/Outlinebell';
 import { DropDownContent } from '@/entities/userNotifications/DropDownContent';
 import {
   fetchNotifications,
-  fetchNotificationsForCounter,
   notificationActions,
   notificationSelectors
 } from '@/entities/userNotifications/api/notificationSlice';
@@ -29,19 +28,15 @@ const UserNotifications = () => {
   const isNoticesFetching = useAppSelector(notificationSelectors.getIsFetching);
   const isOpen = useAppSelector(notificationSelectors.getIsOpen);
   const notices = useAppSelector(notificationSelectors.getNotifications);
-  const unReadCount = useAppSelector(notificationSelectors.getUnReadCount);
-  //const totalCount = useAppSelector(notificationSelectors.getTotalCount);
+  const unReadCount = useAppSelector(notificationSelectors.getNotReadCount);
 
   const isNoticesExists = notices.length > 0;
 
   // Первоначальная загрузка уведомлений и количества непрочитанных
   useEffect(() => {
     dispatch(fetchNotifications({ cursor: cursorId, pageSize: START_NOTICES_COUNT }));
-    dispatch(fetchNotificationsForCounter({}));
 
-    return () => {
-      //dispatch(notificationActions.unMount());
-    };
+    return () => {};
   }, []);
 
   //Подключение к сокету и просолучение события NOTIFICATION

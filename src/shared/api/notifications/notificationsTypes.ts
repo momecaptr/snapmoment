@@ -7,6 +7,7 @@ export interface INotificationItem {
 
 export interface NotificationsResponse {
   items: INotificationItem[];
+  notReadCount: number;
   pageSize: number;
   totalCount: number;
 }
