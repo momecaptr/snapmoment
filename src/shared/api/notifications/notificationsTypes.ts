@@ -14,7 +14,6 @@ export interface NotificationsResponse {
 
 export interface NotificationsArgs {
   cursor?: null | number;
-  isRead?: boolean | null;
   pageSize?: null | number;
   sortBy?: null | string;
   sortDirection?: null | string;

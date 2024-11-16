@@ -11,7 +11,6 @@ interface NotificationsState {
   error: null | string;
   isFetching: boolean;
   isOpen: boolean;
-  //unReadCount: number;
   notReadCount: number;
   notifications: INotificationItem[];
   totalCount: number;
@@ -22,7 +21,6 @@ const initialState: NotificationsState = {
   error: null,
   isFetching: false,
   isOpen: false,
-  //unReadCount: 0
   notReadCount: 0,
   notifications: [],
   totalCount: 0
@@ -33,12 +31,12 @@ export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
   async (args: NotificationsArgs, ThunkAPI) => {
     const { rejectWithValue } = ThunkAPI;
-    const { cursor = null, isRead = false, pageSize, sortBy = 'notifyAt', sortDirection = 'desc' } = args;
+    const { cursor = null, pageSize, sortBy = 'notifyAt', sortDirection = 'desc' } = args;
     const ACCESS_TOKEN = localStorage.getItem('accessToken');
 
     try {
       const response = await axios.get<NotificationsResponse>(
-        `https://inctagram.work/api/v1/notifications/${cursor}?pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}&isRead=${isRead}`,
+        `https://inctagram.work/api/v1/notifications/${cursor}?pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}`,
         {
           headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`
@@ -109,6 +107,7 @@ const slice = createSlice({
         state.totalCount = action.payload.totalCount;
         state.isFetching = false;
         state.cursorId = action.payload.items[action.payload.items.length - 1]?.id;
+
         state.notReadCount = action.payload.notReadCount;
       })
       .addCase(fetchNotifications.rejected, (state, action) => {
