@@ -11,9 +11,10 @@ interface NotificationsState {
   error: null | string;
   isFetching: boolean;
   isOpen: boolean;
+  //unReadCount: number;
+  notReadCount: number;
   notifications: INotificationItem[];
   totalCount: number;
-  unReadCount: number;
 }
 
 const initialState: NotificationsState = {
@@ -21,9 +22,10 @@ const initialState: NotificationsState = {
   error: null,
   isFetching: false,
   isOpen: false,
+  //unReadCount: 0
+  notReadCount: 0,
   notifications: [],
-  totalCount: 0,
-  unReadCount: 0
+  totalCount: 0
 };
 
 // Thunk для загрузки уведомлений
@@ -31,37 +33,12 @@ export const fetchNotifications = createAsyncThunk(
   'notifications/fetchNotifications',
   async (args: NotificationsArgs, ThunkAPI) => {
     const { rejectWithValue } = ThunkAPI;
-    const { cursor = null, pageSize, sortBy = 'notifyAt', sortDirection = 'desc' } = args;
+    const { cursor = null, isRead = false, pageSize, sortBy = 'notifyAt', sortDirection = 'desc' } = args;
     const ACCESS_TOKEN = localStorage.getItem('accessToken');
 
     try {
       const response = await axios.get<NotificationsResponse>(
-        `https://inctagram.work/api/v1/notifications/${cursor}?pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`
-          }
-        }
-      );
-
-      return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-// Thunk для загрузки уведомлений для счетчика
-export const fetchNotificationsForCounter = createAsyncThunk(
-  'notifications/fetchNotificationsForCounter',
-  async (args: NotificationsArgs, ThunkAPI) => {
-    const { rejectWithValue } = ThunkAPI;
-    const { cursor = null, pageSize, sortBy = 'notifyAt', sortDirection = 'desc' } = args;
-    const ACCESS_TOKEN = localStorage.getItem('accessToken');
-
-    try {
-      const response = await axios.get<NotificationsResponse>(
-        `https://inctagram.work/api/v1/notifications/${cursor}?pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}`,
+        `https://inctagram.work/api/v1/notifications/${cursor}?pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}&isRead=${isRead}`,
         {
           headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`
@@ -132,25 +109,11 @@ const slice = createSlice({
         state.totalCount = action.payload.totalCount;
         state.isFetching = false;
         state.cursorId = action.payload.items[action.payload.items.length - 1]?.id;
+        state.notReadCount = action.payload.notReadCount;
       })
       .addCase(fetchNotifications.rejected, (state, action) => {
         state.isFetching = false;
         state.error = action.payload as string;
-      })
-      .addCase(fetchNotificationsForCounter.pending, (state) => {
-        state.isFetching = true;
-      })
-      .addCase(fetchNotificationsForCounter.fulfilled, (state, action) => {
-        state.isFetching = false;
-        if (action.payload?.items.length > 0) {
-          state.unReadCount = action.payload.items.filter((notification) => !notification.isRead).length;
-        } else {
-          state.unReadCount = 0; // если массив пустой, устанавливаем счетчик в 0
-        }
-      })
-      .addCase(fetchNotificationsForCounter.rejected, (state, action) => {
-        state.error = action.payload as string;
-        state.isFetching = false;
       })
       .addCase(deleteNotification.pending, (state) => {
         state.isFetching = true;
@@ -182,7 +145,7 @@ const slice = createSlice({
 
         // Обновляем состояние с новым массивом уведомлений
         state.notifications = updatedNotifications;
-        state.unReadCount -= readIds.size;
+        state.notReadCount -= readIds.size;
       })
       .addCase(markNotificationsAsRead.rejected, (state, action) => {
         state.error = action.payload as string;
@@ -197,12 +160,6 @@ const slice = createSlice({
     },
     changeDropDownState: (state, action: PayloadAction<{ isOpen: boolean }>) => {
       state.isOpen = action.payload.isOpen;
-    },
-    unMount: (state) => {
-      state.notifications = [];
-      state.totalCount = 0;
-      state.unReadCount = 0;
-      state.cursorId = null;
     }
   },
   selectors: {
@@ -210,10 +167,9 @@ const slice = createSlice({
     getHasMore: (state) => state.notifications.length < state.totalCount,
     getIsFetching: (state) => state.isFetching,
     getIsOpen: (state) => state.isOpen,
+    getNotReadCount: (state) => state.notReadCount,
     getNotifications: (state) => state.notifications,
-    getReadNotifications: (state) => state.unReadCount,
-    getTotalCount: (state) => state.totalCount,
-    getUnReadCount: (state) => state.unReadCount
+    getTotalCount: (state) => state.totalCount
   }
 });
 

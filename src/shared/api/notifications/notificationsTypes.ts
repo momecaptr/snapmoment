@@ -7,12 +7,14 @@ export interface INotificationItem {
 
 export interface NotificationsResponse {
   items: INotificationItem[];
+  notReadCount: number;
   pageSize: number;
   totalCount: number;
 }
 
 export interface NotificationsArgs {
   cursor?: null | number;
+  isRead?: boolean | null;
   pageSize?: null | number;
   sortBy?: null | string;
   sortDirection?: null | string;
