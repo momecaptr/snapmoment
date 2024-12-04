@@ -29,7 +29,7 @@ export const Profile = ({ postsUser, user }: Props) => {
 
   const router = useRouter();
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
-  const postId = Number(router.query.id);
+  const postId = Number(router.query.postId);
   const { query, ...path } = router;
 
   useEffect(() => {
@@ -45,6 +45,8 @@ export const Profile = ({ postsUser, user }: Props) => {
     if (postId) {
       // Копируем все существующие query-параметры, кроме id
       const { id, ...newQuery } = router.query; // Исключаем id из query
+
+      console.log({ asda: router.query, newQuery });
 
       // Приводим postId к строке перед добавлением в query
       newQuery.postId = String(postId);
