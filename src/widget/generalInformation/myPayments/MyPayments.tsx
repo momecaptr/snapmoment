@@ -13,6 +13,7 @@ export const MyPayments = () => {
   type OmitIdProps<T> = {
     [K in keyof T as K extends `${infer Prefix}Id` ? never : K]: T[K];
   };
+  // а
 
   // Создаем тип, на основе одного объекта из форматированного для таблицы массива
   // type MyPaymentsTableDataSingleObjType = (typeof myPaymentsTableData)[0];
