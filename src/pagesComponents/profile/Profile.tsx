@@ -26,7 +26,7 @@ export const Profile = ({ postsUser, user }: Props) => {
   const { query, ...path } = router;
 
   useEffect(() => {
-    if (postId && !isOpen) {
+    if (router.isReady && !isOpen && postId && postsUser?.items.find((post) => post.id === postId)) {
       setOpen(true);
     }
   }, [postId]); // Добавляем router.isReady в зависимости
