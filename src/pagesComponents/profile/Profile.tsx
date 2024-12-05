@@ -17,15 +17,8 @@ interface Props {
 }
 
 export const Profile = ({ postsUser, user }: Props) => {
-  // const { data } = useGetPersonalInformationUserQuery();
   const { data: me } = useMeQuery();
   const [pickedId, setPickedId] = useState<number | undefined>();
-
-  // const { data: publicPostsByUserId } = useGetPublicPostsUserQuery({ userId: user?.id! }, { skip: !user?.id });
-  // const { data: postsByUserName } = useGetPostsByUserNameQuery(
-  //   { userName: user?.userName || '' },
-  //   { skip: !user?.userName }
-  // );
 
   const router = useRouter();
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
@@ -33,17 +26,18 @@ export const Profile = ({ postsUser, user }: Props) => {
   const { query, ...path } = router;
 
   useEffect(() => {
-    if (postId && !isOpen) {
+    if (router.isReady && !isOpen && postId && postsUser?.items.find((post) => post.id === postId)) {
       setOpen(true);
     }
-  }, [postId]);
+  }, [postId]); // Добавляем router.isReady в зависимости
 
   const showPostModalHandler = (isOpen: boolean, postId?: number) => {
     setOpen(isOpen);
 
     // Тут такая долгая цепь для того, чтобы если были другие query, поверх не записывались новые.
     if (postId) {
-      // Копируем все существующие query-параметры, кроме id
+      // Копируем все существующие query-параметры, кроме id. По идее его там быть не должно, но какого-то черта (Если вывести в консоль) то мы его увидим.
+      // И этот id -- это id пользователя. Он нам не нужен
       const { id, ...newQuery } = router.query; // Исключаем id из query
 
       console.log({ asda: router.query, newQuery });
@@ -55,7 +49,7 @@ export const Profile = ({ postsUser, user }: Props) => {
       router.push(
         {
           pathname: router.asPath.split('?')[0], // Оставляем текущий путь
-          query: newQuery // Используем обновленный query без id
+          query: newQuery // Используем обновленный query без id пользователя
         },
         undefined,
         { shallow: true } // Shallow routing, чтобы не перезагружать страницу
@@ -70,7 +64,11 @@ export const Profile = ({ postsUser, user }: Props) => {
   return (
     <div className={s.container}>
       {isOpen && (
-        <PostModal pathOnClose={`/profile/${user.id}`} postId={pickedId!} showPostModalHandler={showPostModalHandler} />
+        <PostModal
+          pathOnClose={`/profile/${user.id}`}
+          postId={pickedId || postId}
+          showPostModalHandler={showPostModalHandler}
+        />
       )}
       <Wrapper className={s.wrapper}>
         <div className={s.box}>
