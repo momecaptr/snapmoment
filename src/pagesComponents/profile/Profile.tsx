@@ -78,7 +78,6 @@ export const Profile = ({ postsUser, user }: Props) => {
             </div>
             <div className={s.personInfo}>
               <div className={s.nameAndButton}>
-                {/*<Typography variant={'regular_text_16'}>{user?.userName || data?.userName}</Typography>*/}
                 <Typography variant={'regular_text_16'}>{user?.userName}</Typography>
                 {me?.userId === user?.id && (
                   <Link className={s.button} href={'/profile/generalinfo'}>
@@ -101,7 +100,6 @@ export const Profile = ({ postsUser, user }: Props) => {
                 </div>
               </div>
               <div className={s.profileInformation}>
-                {/*<Typography variant={'regular_text_14'}>{user?.aboutMe || data?.aboutMe}</Typography>*/}
                 <Typography variant={'regular_text_14'}>{user?.aboutMe}</Typography>
               </div>
             </div>

@@ -2,22 +2,32 @@ import * as React from 'react';
 import { useState } from 'react';
 
 import Block from '@/../public/assets/components/Block';
-import avatarMock from '@/../public/avatar-mock.jpg';
+import mockImg from '@/../public/epicpen_6ymMwEsBEI.png';
 import { Author } from '@/entities';
 import { TimeAgo, ToggleDescription } from '@/features';
 import { Item } from '@/shared/api/public/publicTypes';
-import { Button, Typography } from '@/shared/ui';
+import { Button, PhotosSwiper, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
-import Image from 'next/image';
 
 import s from './UserCard.module.scss';
 
 type Props = {
+  isSwiperComplexRef?: boolean;
   post: Item;
   showPostModalHandler: (isOpen: boolean, postId?: number) => void;
 };
 
-export const UserCard = ({ post, showPostModalHandler }: Props) => {
+/**
+ * Тут магическое свойство isSwiperComplexRef -- если передадим true, то для серверного рендера ref будет считаться через Math, а не по url.
+ * Если isSwiperComplexRef = false, то ref будет определяться по url картинок в посте.
+ * Я не знаю почему, но если ref для Swiper определяется только по url (довольно уникально), то возникают проблемы отображения буллетов в swiperPagination (точки внизу свайпера, которые определяют на какой фотке сейчас находимся)
+ * Поэтому решено через вот этот флаг. И так работает.
+ * @param isSwiperComplexRef -- определяем как будет вычисляться ref для каждого слайдера постов (потому что этот компонент в рендере постов тоже участвует. НЕ ТОЛЬКО В МОДАЛКАХ)
+ * @param post
+ * @param showPostModalHandler
+ * @constructor
+ */
+export const UserCard = ({ isSwiperComplexRef, post, showPostModalHandler }: Props) => {
   const [isShowText, setIsShowText] = useState(false);
 
   const toggleShowText = () => setIsShowText(!isShowText);
@@ -27,13 +37,7 @@ export const UserCard = ({ post, showPostModalHandler }: Props) => {
   return (
     <div className={s.card}>
       <div className={s.photo} onClick={() => showPostModalHandler(true, post.id)}>
-        <Image
-          alt={'post photos'}
-          height={100}
-          src={post.images[lastIndex]?.url || avatarMock}
-          width={100}
-          unoptimized
-        />
+        <PhotosSwiper isSwiperComplexRef={isSwiperComplexRef} mockImg={mockImg.src} sliders={post.images} />
       </div>
 
       <div className={clsx(s.content, isShowText && s.expanded)}>

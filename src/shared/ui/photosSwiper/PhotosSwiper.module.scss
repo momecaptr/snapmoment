@@ -16,8 +16,6 @@
 
       font-size: 18px;
       text-align: center;
-
-      // background: var(--dark-300);
     }
   }
 
@@ -92,10 +90,11 @@
     padding-inline: 8px;
 
     background-color: var(--dark-300);
-    border-radius: 2px;
+    border-radius: 10px;
   }
 
-  span {
+  // Классы для точек пагинации
+  .paginationBullet {
     cursor: pointer;
 
     width: 8px;
@@ -103,9 +102,10 @@
 
     opacity: 1;
     background: var(--light-100);
+    border-radius: 50%;
+  }
 
-    &.active {
-      background: var(--accent-500);
-    }
+  .paginationBulletActive {
+    background: var(--accent-500);
   }
 }
