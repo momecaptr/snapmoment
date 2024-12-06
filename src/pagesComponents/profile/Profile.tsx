@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useMeQuery } from '@/shared/api/auth/authApi';
 import { GetPostsResponse, GetPublicUserProfileResponse } from '@/shared/api/public/publicTypes';
 import { ModalKey, useModal } from '@/shared/lib';
-import { PhotoProfile, Typography, Wrapper } from '@/shared/ui';
+import { PhotoProfile, PhotosSwiper, Typography, Wrapper } from '@/shared/ui';
 import { PostModal } from '@/widget';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -24,6 +24,7 @@ export const Profile = ({ postsUser, user }: Props) => {
   const { isOpen, setOpen } = useModal(ModalKey.ViewPhoto);
   const postId = Number(router.query.postId);
   const { query, ...path } = router;
+  const divRef = useRef(null);
 
   useEffect(() => {
     if (router.isReady && !isOpen && postId && postsUser?.items.find((post) => post.id === postId)) {
@@ -56,6 +57,10 @@ export const Profile = ({ postsUser, user }: Props) => {
       );
     }
   };
+
+  useEffect(() => {
+    console.log({ ref: divRef.current });
+  }, [divRef]);
 
   if (!user) {
     return <>НИХРЕНА НЕТ</>;
@@ -109,14 +114,16 @@ export const Profile = ({ postsUser, user }: Props) => {
               return (
                 <div className={s.postWrapper} key={post.id}>
                   {post.images && post.images.length > 0 ? (
-                    <img
+                    <div
                       onClick={() => {
                         setPickedId(post.id);
                         showPostModalHandler(true, post.id);
                       }}
-                      alt={'post'}
-                      src={post.images[0].url}
-                    />
+                      ref={divRef}
+                      style={{ height: '100%', width: '100%' }}
+                    >
+                      <PhotosSwiper className={s.usersPostPhotosSwiper} classNameImage={s.img} sliders={post.images} />
+                    </div>
                   ) : (
                     <div>No image available</div> // Здесь можно разместить заглушку или текст
                   )}
