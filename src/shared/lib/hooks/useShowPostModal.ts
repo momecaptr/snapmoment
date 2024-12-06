@@ -11,6 +11,8 @@ export const useShowPostModal = () => {
   const oldPath = oldPathRef.current;
   const { pathname, query: oldQuery } = router;
 
+  console.log({ oldQuery, pathname });
+
   useEffect(() => {
     if (postId && !isOpen) {
       setOpen(true);

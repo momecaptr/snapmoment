@@ -24,7 +24,7 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
         <div className={s.cards}>
           {posts?.map((post) => (
             <Fragment key={post.id}>
-              <UserCard post={post} showPostModalHandler={showPostModalHandler} />
+              <UserCard post={post} showPostModalHandler={showPostModalHandler} isSwiperComplexRef />
             </Fragment>
           ))}
         </div>
