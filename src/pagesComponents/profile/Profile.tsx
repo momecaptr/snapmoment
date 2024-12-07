@@ -122,7 +122,12 @@ export const Profile = ({ postsUser, user }: Props) => {
                       ref={divRef}
                       style={{ height: '100%', width: '100%' }}
                     >
-                      <PhotosSwiper className={s.usersPostPhotosSwiper} classNameImage={s.img} sliders={post.images} />
+                      <PhotosSwiper
+                        className={s.usersPostPhotosSwiper}
+                        classNameImage={s.img}
+                        sliders={post.images}
+                        isSwiperComplexRef
+                      />
                     </div>
                   ) : (
                     <div>No image available</div> // Здесь можно разместить заглушку или текст
