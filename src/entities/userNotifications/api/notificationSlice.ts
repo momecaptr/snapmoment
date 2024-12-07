@@ -32,7 +32,7 @@ export const fetchNotifications = createAsyncThunk(
   async (args: NotificationsArgs, ThunkAPI) => {
     const { rejectWithValue } = ThunkAPI;
     const { cursor = null, pageSize, sortBy = 'notifyAt', sortDirection = 'desc' } = args;
-    const ACCESS_TOKEN = localStorage.getItem('accessToken');
+    const ACCESS_TOKEN = JSON.parse(localStorage.getItem('accessToken') as string);
 
     try {
       const response = await axios.get<NotificationsResponse>(
@@ -55,7 +55,7 @@ export const fetchNotifications = createAsyncThunk(
 export const markNotificationsAsRead = createAsyncThunk(
   'notifications/markAsRead',
   async (ids: number[], { rejectWithValue }) => {
-    const ACCESS_TOKEN = localStorage.getItem('accessToken');
+    const ACCESS_TOKEN = JSON.parse(localStorage.getItem('accessToken') as string);
 
     try {
       await axios.put(
@@ -77,7 +77,7 @@ export const markNotificationsAsRead = createAsyncThunk(
 export const deleteNotification = createAsyncThunk(
   'notifications/deleteNotification',
   async (id: number, { rejectWithValue }) => {
-    const ACCESS_TOKEN = localStorage.getItem('accessToken');
+    const ACCESS_TOKEN = JSON.parse(localStorage.getItem('accessToken') as string);
 
     try {
       await axios.delete(`https://inctagram.work/api/v1/notifications/${id}`, {

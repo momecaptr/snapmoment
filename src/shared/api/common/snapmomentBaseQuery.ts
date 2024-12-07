@@ -8,14 +8,14 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
   prepareHeaders: (headers) => {
     const token = (typeof window !== 'undefined' && localStorage.getItem('accessToken')) || null;
+    const parsedToken = token ? JSON.parse(token) : null;
 
-    // console.log({ token });
     if (headers.get('Authorization')) {
       return headers;
     }
 
     if (token) {
-      headers.set('Authorization', `Bearer ${token}`);
+      headers.set('Authorization', `Bearer ${parsedToken}`);
     }
     // headers.set('Authorization', `Bearer ${token}`);
 
@@ -32,7 +32,7 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
     await mutex.waitForUnlock();
     let result = await baseQuery(args, api, extraOptions);
 
-    if (result?.error?.status === 401) {
+    if (result?.meta?.response?.status === 401) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
 
@@ -47,15 +47,11 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
               extraOptions
             )) as any;
 
-            console.log(refreshResult);
-
             const refreshResultParsed = RefreshTokenResponseSchema.parse(refreshResult.data);
-            // const refreshResultParsedMeta = RefreshTokenResponseSchemaMeta.parse(refreshResult.meta)
 
             if (refreshResult.meta.response.status === 200) {
               localStorage.setItem('accessToken', refreshResultParsed.accessToken);
               result = await baseQuery(args, api, extraOptions);
-              console.log(args);
             }
           }
         } finally {
