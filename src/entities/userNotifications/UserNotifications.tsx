@@ -19,7 +19,7 @@ const SOCKET_URL = 'https://inctagram.work';
 const START_NOTICES_COUNT = 5;
 
 const UserNotifications = () => {
-  const ACCESS_TOKEN = JSON.parse(localStorage.getItem('accessToken') as string);
+  const ACCESS_TOKEN = localStorage.getItem('accessToken');
   const socketRef = useRef<Socket | null>(null);
   const dispatch = useAppDispatch();
 

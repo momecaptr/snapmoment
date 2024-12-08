@@ -8,16 +8,14 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
   prepareHeaders: (headers) => {
     const token = (typeof window !== 'undefined' && localStorage.getItem('accessToken')) || null;
-    const parsedToken = token ? JSON.parse(token) : null;
 
     if (headers.get('Authorization')) {
       return headers;
     }
 
     if (token) {
-      headers.set('Authorization', `Bearer ${parsedToken}`);
+      headers.set('Authorization', `Bearer ${token}`);
     }
-    // headers.set('Authorization', `Bearer ${token}`);
 
     return headers;
   }
@@ -50,7 +48,7 @@ export const baseQueryWithReauth: BaseQueryFn<FetchArgs | string, unknown, Fetch
             const refreshResultParsed = RefreshTokenResponseSchema.parse(refreshResult.data);
 
             if (refreshResult.meta.response.status === 200) {
-              localStorage.setItem('accessToken', refreshResultParsed.accessToken);
+              localStorage.setItem('accessToken', refreshResult.data.accessToken);
               result = await baseQuery(args, api, extraOptions);
             }
           }
