@@ -5,10 +5,12 @@ export const deviceApi = snapmomentAPI.injectEndpoints({
   endpoints: (builder) => ({
     deleteSessionDevice: builder.mutation<void, DeviceTypeArgs>({
       invalidatesTags: ['Device'],
-      query: (data) => ({
-        method: 'DELETE',
-        url: `/v1/sessions/${data}`
-      })
+      query: (data) => {
+        return {
+          method: 'DELETE',
+          url: `/v1/sessions/${data.deviceId}`
+        };
+      }
     }),
     deleteTerminateDevice: builder.mutation<void, void>({
       invalidatesTags: ['Device'],
