@@ -81,8 +81,7 @@ export const authApi = snapmomentAPI.injectEndpoints({
         localStorage.removeItem('accessToken');
         dispatch(authApi.util.resetApiState());
       },
-      query: (body) => ({
-        body,
+      query: () => ({
         method: 'POST',
         url: 'v1/auth/logout'
       })

@@ -28,7 +28,6 @@ type MainLinksProps = {
 
 type LinksValue =
   | ''
-  // | 'create'
   | 'favorites'
   | 'home'
   | 'logout'
@@ -59,37 +58,12 @@ export const SideBar = (props: Props) => {
 
   const mainLinks: MainLinksProps[] = [
     { IconComponent: Home, name: 'Home', path: '/home', value: 'home' },
-    // { IconComponent: PlusSquare, name: 'Create', path: '/auth/create', value: 'create' },
     { IconComponent: Person, name: 'My Profile', path: `/profile/${me?.userId}`, value: 'profile' },
     { IconComponent: MessageCircle, name: 'Messenger', path: '/message', value: 'message' },
     { IconComponent: SearchOutline, name: 'Search', path: '/search', value: 'search' },
     { IconComponent: TrendingUp, name: 'Statistics', path: '/statistics', value: 'statistics' },
     { IconComponent: Bookmark, name: 'Favorites', path: '/favorites', value: 'favorites' }
   ];
-
-  // const pseudoPromise = () => {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       const random = Math.random();
-  //
-  //       if (random > 0.5) {
-  //         resolve('Success data');
-  //       } else {
-  //         reject('Error data');
-  //       }
-  //     }, 1000);
-  //   });
-  // };
-  //
-  // const handleClick = () => {
-  //   const promise = pseudoPromise();
-  //
-  //   showPromiseToast(promise, {
-  //     error: 'Error occurred',
-  //     loading: 'loading...',
-  //     success: 'Success'
-  //   });
-  // };
 
   return (
     <div className={s.container}>
@@ -105,7 +79,6 @@ export const SideBar = (props: Props) => {
             </Typography>
           </Link>
         ))}
-        {/*<button onClick={handleClick}>СПИПИП</button>*/}
         <Button className={s.btn} onClick={openCreatePostModalHandler} variant={'text'}>
           <PlusSquare className={s.icon} />
           <Typography as={'span'} className={s.btnText} variant={'medium_text_14'}>

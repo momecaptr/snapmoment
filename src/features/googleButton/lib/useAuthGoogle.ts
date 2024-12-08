@@ -18,7 +18,7 @@ export const useAuthGoogle = () => {
         const resGoogleOAuth = await authMeGoogle({ code: codeResponse.code });
         const accessToken = resGoogleOAuth.data?.accessToken;
 
-        localStorage.setItem('accessToken', JSON.stringify(accessToken));
+        localStorage.setItem('accessToken', String(accessToken));
         // Расшифровываем токен и получаем данные пользователя
         const decodedToken = jwtDecode<{ userId: string }>(accessToken ? accessToken : '');
 
