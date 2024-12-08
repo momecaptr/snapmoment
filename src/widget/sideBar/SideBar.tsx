@@ -107,11 +107,17 @@ export const SideBar = (props: Props) => {
             logout()
               .then(() => {
                 console.log({ adas: accessToken });
+                // localStorage.removeItem('accessToken')
                 router.push('/auth/sign-in');
               })
               .catch((e) => {
                 console.log(e);
               });
+            // logout()
+            //   .unwrap()
+            //   .then(() => {
+            //     router.push('/auth/sign-in');
+            //   })
           }}
           className={s.btn}
           variant={'text'}
