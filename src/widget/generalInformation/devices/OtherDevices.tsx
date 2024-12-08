@@ -29,6 +29,8 @@ const OtherDevices = () => {
       deleteSessionDevice({ deviceId: e.deviceId } as DeviceTypeArgs);
     };
 
+    console.log('etwtwet', typeof e.deviceId, 'sdfsd', e.deviceId);
+
     return (
       <div className={s.otherDeviceBox} key={e.deviceId}>
         <div className={s.iconAndDeviceInfo}>

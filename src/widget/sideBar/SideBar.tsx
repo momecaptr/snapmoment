@@ -46,6 +46,45 @@ type MainLinksName =
 type Props = ComponentProps<'div'>;
 export const SideBar = (props: Props) => {
   const [logout] = useLogoutMutation();
+
+  const accessToken = (typeof window !== 'undefined' && localStorage.getItem('accessToken')) || null;
+
+  // ! Это для axios, вместо RTKQ, но для Yandex все также не работает
+  // console.log({ accessToken });
+  // const logout = () =>
+  //   axios.post(
+  //     'https://inctagram.work/api/v1/auth/logout',
+  //     {}, // Тело запроса (оставлено пустым, так как нет данных для передачи)
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`
+  //       },
+  //       withCredentials: true // Для отправки cookies
+  //     }
+  //   );
+
+  const logoutHandler = async () => {
+    // ! это для Yandex, чтобы не через RTKQ
+    // logout()
+    //   .then(() => {
+    //     console.log({ adas: accessToken });
+    //     // localStorage.removeItem('accessToken')
+    //     router.push('/auth/sign-in');
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
+    try {
+      await logout()
+        .unwrap()
+        .then(() => {
+          router.push('/auth/sign-in');
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
   const { data: me } = useMeQuery();
   const router = useRouter();
@@ -85,17 +124,7 @@ export const SideBar = (props: Props) => {
             Create
           </Typography>
         </Button>
-        <Button
-          onClick={(e) => {
-            logout()
-              .unwrap()
-              .then(() => {
-                router.push('/auth/sign-in');
-              });
-          }}
-          className={s.btn}
-          variant={'text'}
-        >
+        <Button className={s.btn} onClick={logoutHandler} variant={'text'}>
           <LogOutOutline className={s.icon} />
           Log out
         </Button>
