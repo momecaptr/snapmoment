@@ -9,6 +9,8 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers) => {
     const token = (typeof window !== 'undefined' && localStorage.getItem('accessToken')) || null;
 
+    console.log({ token });
+
     if (headers.get('Authorization')) {
       return headers;
     }

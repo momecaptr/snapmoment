@@ -8,9 +8,10 @@ import Person from '@/../public/assets/components/Person';
 import PlusSquare from '@/../public/assets/components/PlusSquare';
 import SearchOutline from '@/../public/assets/components/SearchOutline';
 import TrendingUp from '@/../public/assets/components/TrendingUp';
-import { useLogoutMutation, useMeQuery } from '@/shared/api/auth/authApi';
+import { useMeQuery } from '@/shared/api/auth/authApi';
 import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Typography } from '@/shared/ui';
+import axios from 'axios';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -45,7 +46,23 @@ type MainLinksName =
 
 type Props = ComponentProps<'div'>;
 export const SideBar = (props: Props) => {
-  const [logout] = useLogoutMutation();
+  // const [logout] = useLogoutMutation();
+
+  const accessToken = (typeof window !== 'undefined' && localStorage.getItem('accessToken')) || null;
+
+  console.log({ accessToken });
+  const logout = () =>
+    axios.post(
+      'https://inctagram.work/api/v1/auth/logout',
+      {}, // Тело запроса (оставлено пустым, так как нет данных для передачи)
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+        withCredentials: true // Для отправки cookies
+      }
+    );
+
   const [activeIcon, setActiveIcon] = useState<LinksValue>('');
   const { data: me } = useMeQuery();
   const router = useRouter();
@@ -88,9 +105,12 @@ export const SideBar = (props: Props) => {
         <Button
           onClick={(e) => {
             logout()
-              .unwrap()
               .then(() => {
+                console.log({ adas: accessToken });
                 router.push('/auth/sign-in');
+              })
+              .catch((e) => {
+                console.log(e);
               });
           }}
           className={s.btn}
