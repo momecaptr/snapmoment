@@ -76,7 +76,7 @@ export const postsApi = snapmomentAPI.injectEndpoints({
       })
     }),
     updateUsersPost: builder.mutation<void, UpdateUserPostArgs>({
-      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile'],
+      invalidatesTags: ['PostsByUserName', 'publicPost', 'UserProfile', 'PublicPosts'],
       query: ({ description, postId }) => ({
         body: { description },
         method: 'PUT',

@@ -97,9 +97,11 @@ export const AccountManagement = () => {
     }
 
     try {
+      const { host, protocol } = typeof window !== 'undefined' ? window.location : { host: '', protocol: '' };
       const response = await sendPayment({
         amount: 0,
-        baseUrl: 'http://localhost:3000/profile/generalinfo',
+        // baseUrl: 'http://localhost:3000/profile/generalinfo',
+        baseUrl: `${protocol}//${host}/profile/generalinfo`,
         paymentType,
         typeSubscription: savedPaymentSubscription
       });

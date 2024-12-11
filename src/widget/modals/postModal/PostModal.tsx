@@ -11,8 +11,8 @@ import {
   useGetPostLikesQuery,
   useUpdateUsersPostMutation
 } from '@/shared/api/posts/postsApi';
-import { useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
-import { ModalKey, useCustomToast, useModal } from '@/shared/lib';
+import { publicApi, useGetPostByIdQuery, useGetPostCommentsByPostIdQuery } from '@/shared/api/public/publicApi';
+import { ModalKey, useAppDispatch, useCustomToast, useModal } from '@/shared/lib';
 import { Button, Modal, PhotosSwiper, PostModalBurgerDropDown } from '@/shared/ui';
 import { useRouter } from 'next/router';
 
@@ -51,6 +51,7 @@ export const PostModal = (props: Props) => {
   const router = useRouter();
 
   //const { data: me } = useMeQuery();
+  const dispatch = useAppDispatch();
   const { data: postData, refetch } = useGetPostByIdQuery({ postId: postId }, { skip: !postId });
   const { data: postComments } = useGetPostCommentsByPostIdQuery({ postId: postId || null });
   const { data: postLikes } = useGetPostLikesQuery({ postId: postId || null });
@@ -89,6 +90,12 @@ export const PostModal = (props: Props) => {
       : router.push('/', undefined, { shallow: true });
   };
 
+  // // * Функция закрытия модалки удаления поста
+  // const closeDeleteModalHandler = () => {
+  //   showPostModalHandler(false)
+  //   setIsDeleteModalOpen(false);
+  // };
+
   // * Функия удаления поста
   const deletePostHandler = async () => {
     if (!postData) {
@@ -109,10 +116,17 @@ export const PostModal = (props: Props) => {
         await Promise.all(deleteImagePromises);
       }
 
+      // Сброс кэша для обновления данных
+      dispatch(publicApi.util.invalidateTags(['PublicPostsByUserName', 'PostsByUserName']));
+
       // Уведомление об успешном удалении
       showToast({ message: 'Post deleted successfully', type: 'success' });
 
-      closeModalHandler();
+      showPostModalHandler(false);
+
+      setIsDeleteModalOpen(false);
+
+      pathOnClose ? router.replace(pathOnClose) : router.replace('/');
     } catch (error) {
       // Уведомление об ошибке при удалении
       showToast({ message: `Error occurred while deleting post: ${error}`, type: 'error' });
