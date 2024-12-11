@@ -26,7 +26,6 @@ export const publicApi = snapmomentAPI.injectEndpoints({
     }),
 
     getPublicPosts: builder.query<GetPostsResponse, GetPostsArgs>({
-      providesTags: ['PublicPosts'],
       query: ({ endCursorPostId = null, pageSize }) => ({
         params: {
           pageSize,
@@ -37,7 +36,6 @@ export const publicApi = snapmomentAPI.injectEndpoints({
       })
     }),
     getPublicPostsUser: builder.query<GetPostsResponse, GetPublicPostsUserArgs>({
-      providesTags: ['PublicPostsByUserName'],
       query: ({ endCursorPostId, pageSize, userId }) => ({
         params: {
           pageSize,

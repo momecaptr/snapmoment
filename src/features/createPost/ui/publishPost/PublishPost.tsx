@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector, useCustomToast } from '@/shared/lib';
 import { FormTextfield, FormTextfieldArea, Typography } from '@/shared/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { z } from 'zod';
 
 import s from './PublishPost.module.scss';
@@ -66,6 +67,7 @@ export const PublishPost = (props: Props) => {
   } = props;
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const allPostImages = useAppSelector(createPostSelectors.allPostImages);
   const { showToast } = useCustomToast();
   const { refreshPostCreationData } = useRefreshPostCreationData();
@@ -125,9 +127,14 @@ export const PublishPost = (props: Props) => {
 
       await publishPostDescription({ childrenMetadata, description: data.description as string });
 
+      // Сброс кэша для обновления данных
+      dispatch(publicApi.util.invalidateTags(['PublicPosts', 'PublicPostsByUserName', 'PostsByUserName']));
+
       refresh();
 
       showToast({ message: 'Post successfully published', type: 'success' });
+
+      router.reload();
     } catch (error) {
       showToast({ message: `Error occurred while publishing post: ${error}`, type: 'error' });
     } finally {

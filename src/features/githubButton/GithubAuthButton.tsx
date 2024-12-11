@@ -8,7 +8,9 @@ export const GithubAuthButton = () => {
   // Старый способ
   // const loginHandler = () => window.location.assign('https://inctagram.work/api/v1/auth/github/login');
 
-  const redirectUrl = 'http://localhost:3000/github';
+  const { host, protocol } = window.location;
+  // const redirectUrl = 'http://localhost:3000/github';
+  const redirectUrl = `${protocol}//${host}/github`;
   const loginHandler = () => window.location.assign(`https://inctagram.work/api/v1/auth/github/login?${redirectUrl}`);
 
   return (
