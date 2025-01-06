@@ -1,8 +1,8 @@
 export interface INotificationItem {
+  createdAt: string;
   id: number;
   isRead: boolean;
   message: string;
-  notifyAt: string;
 }
 
 export interface NotificationsResponse {
