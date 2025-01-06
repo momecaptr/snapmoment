@@ -5,6 +5,7 @@ import Close from '@/../public/assets/components/Close';
 import { deleteNotification } from '@/entities/userNotifications/api/notificationSlice';
 import { INotificationItem } from '@/shared/api/notifications/notificationsTypes';
 import { useAppDispatch } from '@/shared/lib';
+import { DT, DV } from '@/shared/lib/helpers';
 import { Button, Typography } from '@/shared/ui';
 import clsx from 'clsx';
 
@@ -16,12 +17,19 @@ type Props = {
 };
 
 const NotificationItem = (props: Props) => {
+  const dispatch = useAppDispatch();
+
   const {
     isReadNotice,
-    notice: { id, message, notifyAt }
+    notice: { createdAt, id, message }
   } = props;
-  const notifyDate = new Date(notifyAt);
-  const dispatch = useAppDispatch();
+
+  if (!DV.isValid(message) || !DV.isValid(id)) {
+    return null;
+  }
+
+  /*const notifyDate = new Date(notifyAt);*/
+
   const handleRemoveNotice = () => {
     dispatch(deleteNotification(id));
   };
@@ -44,12 +52,11 @@ const NotificationItem = (props: Props) => {
         )}
         {isReadNotice && <div className={s.readedNotice}></div>}
       </div>
-
       <Typography className={clsx(s.message, isReadNotice && s.isRead)} variant={'regular_text_14'}>
         {message}
       </Typography>
       <Typography className={s.time} variant={'small_text'}>
-        <ReactTimeAgo date={notifyDate} locale={'en-US'} />
+        {DV.isValid(createdAt) && <ReactTimeAgo date={DT.toDate(createdAt)} locale={'en-US'} />}
       </Typography>
     </div>
   );

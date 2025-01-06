@@ -9,6 +9,7 @@ import {
   notificationSelectors
 } from '@/entities/userNotifications/api/notificationSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/lib';
+import { DV } from '@/shared/lib/helpers';
 import { CustomDropdownItem, CustomDropdownWrapper, Typography } from '@/shared/ui';
 import { clsx } from 'clsx';
 import { Socket, io } from 'socket.io-client';
@@ -30,13 +31,9 @@ const UserNotifications = () => {
   const notices = useAppSelector(notificationSelectors.getNotifications);
   const unReadCount = useAppSelector(notificationSelectors.getNotReadCount);
 
-  const isNoticesExists = notices.length > 0;
-
   // Первоначальная загрузка уведомлений и количества непрочитанных
   useEffect(() => {
     dispatch(fetchNotifications({ cursor: cursorId, pageSize: START_NOTICES_COUNT }));
-
-    return () => {};
   }, []);
 
   //Подключение к сокету и просолучение события NOTIFICATION
@@ -90,7 +87,7 @@ const UserNotifications = () => {
         <DropDownContent
           cursorId={cursorId}
           hasNoMoreNotices={hasNoMoreNotices}
-          isNoticesExists={isNoticesExists}
+          isNoticesExists={DV.isValidArray(notices)}
           isNoticesFetching={isNoticesFetching}
           notices={notices}
         />
